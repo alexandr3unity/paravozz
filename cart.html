@@ -122,6 +122,42 @@
                 paymentDate
             }));
 
+            // Формируем текст сообщения
+            let message = `Новый заказ!\n\nНомер заказа: ${orderId}\nДата: ${paymentDate}\n\nТовары в заказе:`;
+            cart.forEach(item => {
+                message += `\n- ${item.name} (x${item.quantity}) - ${item.price * item.quantity} руб.`;
+            });
+            message += `\n\nИтого: ${totalAmount} руб.`;
+
+            // Отправляем сообщение в Telegram
+            const token = '7791735203:AAFC1TzcCpkgjrvFASLyG5Vhw6X-gVEoHLg'; // Замените на свой API токен
+            const chatId = '771803609'; // Замените на ваш chat ID
+            const url = `https://api.telegram.org/bot${token}/sendMessage`;
+
+            const data = {
+                chat_id: chatId,
+                text: message
+            };
+
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.ok) {
+                    console.log('Сообщение отправлено в Telegram!');
+                } else {
+                    console.log('Ошибка при отправке сообщения в Telegram:', data);
+                }
+            })
+            .catch(error => {
+                console.log('Ошибка при отправке запроса в Telegram:', error);
+            });
+
             // Переходим на страницу успешной оплаты
             window.location.href = 'https://alexandr3unity.github.io/paravozz/payment_success';
         }
