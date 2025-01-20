@@ -6,6 +6,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
+    
+    .categories {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin: 20px 0;
+        gap: 10px;
+    }
+
+    .category {
+        flex: 1 0 calc(25% - 20px);
+        max-width: calc(25% - 20px);
+        height: 130px;
+        position: relative;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .category:hover {
+        transform: scale(1.05);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .category .category-text {
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-weight: bold;
+    }
+
+    @media (max-width: 768px) {
+        .category {
+            flex: 1 0 calc(50% - 20px);
+            max-width: calc(50% - 20px);
+        }
+    }
+
+    @media (max-width: 480px) {
+        .category {
+            flex: 1 0 100%;
+            max-width: 100%;
+        }
+    }
+
         body {
             margin: 0;
             font-family: Arial, sans-serif;
@@ -232,33 +284,30 @@
         <button class="carousel-button next" onclick="moveCarousel(1)">❯</button>
     </div>
 
-    <section class="categories">
-        <a href="https://alexandr3unity.github.io/paravozz/liquids">
-            <div class="category" style="background-image: url('imej/jidkost.jpg'); background-size: cover; background-position: center; color: white; height: 130px;">
-                <div class="category-text">Жидкости</div>
-            </div>
-        </a>
+   <section class="categories">
+    <div class="category" data-link="https://alexandr3unity.github.io/paravozz/liquids" data-image="imej/jidkost.jpg" data-text="Жидкости"></div>
+    <div class="category" data-link="https://alexandr3unity.github.io/paravozz/devices" data-image="imej/ustr.jpg" data-text="Устройства"></div>
+    <div class="category" data-link="snus.html" data-image="imej/snus.jpg" data-text="Снюс"></div>
+    <div class="category" data-link="accessories.html" data-image="imej/ras.jpg" data-text="Расходники"></div>
+</section>
 
-        <a href="https://alexandr3unity.github.io/paravozz/devices">
-            <div class="category" style="background-image: url('imej/ustr.jpg'); background-size: cover; background-position: center; color: white; height: 130px;">
-                <div class="category-text">Устройства</div>
-            </div>
-        </a>
+    <script>
+    const categories = document.querySelectorAll('.category');
 
-        <div class="category">
-            <a href="snus.html" target="_blank">
-                <img src="imej/snus.jpg" alt="Снюс">
-                <div class="category-text">Снюс</div>
-            </a>
-        </div>
+    categories.forEach(category => {
+        const link = category.dataset.link;
+        const image = category.dataset.image;
+        const text = category.dataset.text;
 
-        <div class="category">
-            <a href="accessories.html" target="_blank">
-                <img src="imej/ras.jpg" alt="Расходники">
-                <div class="category-text">Расходники</div>
-            </a>
-        </div>
-    </section>
+        category.style.backgroundImage = `url(${image})`;
+        category.style.backgroundSize = 'cover';
+        category.style.backgroundPosition = 'center';
+
+        category.innerHTML = `<a href="${link}" target="_blank">
+                                <div class="category-text">${text}</div>
+                              </a>`;
+    });
+</script>
 
     <!-- Кнопка корзины -->
     <a href="https://alexandr3unity.github.io/paravozz/cart">
