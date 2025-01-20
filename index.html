@@ -166,102 +166,100 @@
             border-radius: 50%;
             font-size: 1.5em;
             border: 2px solid #fff;
-            cursor: pointer
-            transitionbackground-color 0.3s,
-        }
-
-        .cart-button:hover {
-            background-color: #45a049;
-            transform: scale(1.1);
-        }
-
-        /* Стиль для кнопки перехода на страницу устройств */
-        .device-button {
-            margin: 20px;
-            padding: 10px 20px;
-            font-size: 1.2em;
-            background-color: #2196F3;
-            color: white;
-            border: none;
-            border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s;
         }
 
-        .device-button:hover {
-            background-color: #1976D2;
+        .cart-button:hover {
+            background-color: #45a049;
         }
     </style>
 </head>
 <body>
-    <div class="header">Добро пожаловать в наш магазин!</div>
 
-    <div class="search-container">
-        <input type="text" class="search-input" placeholder="Поиск...">
-        <button class="search-icon" onclick="toggleSearch()">🔍</button>
+    <header>
+        <div class="header">King Vape</div>
+        <div class="search-container">
+            <input type="text" class="search-input" placeholder="Поиск...">
+            <button class="search-icon" onclick="toggleSearch()">🔍</button>
+        </div>
+    </header>
+
+    <div class="profile">
+        <img src="static/123.jpg" alt="Профиль" class="profile-icon">
+        <span class="nickname">Ваш Никнейм</span>
     </div>
 
     <div class="carousel">
-        <button class="carousel-button prev" onclick="moveCarousel(-1)">❮</button>
-        <div class="carousel-inner">
-            <div class="carousel-item">Товар 1</div>
-            <div class="carousel-item">Товар 2</div>
-            <div class="carousel-item">Товар 3</div>
-            <div class="carousel-item">Товар 4</div>
+        <div class="carousel-inner" id="carouselInner">
+            <div class="carousel-item">🎉 Мы открылись! Специальные предложения на все товары!</div>
+            <div class="carousel-item">🚚 Новая поставка! Не пропустите новые жидкости и устройства!</div>
+            <div class="carousel-item">🔥 Скидки до 30% на избранные товары! Успейте купить!</div>
+            <div class="carousel-item">⚡ Новая поставка энергетиков! Попробуйте наши новинки!</div>
+            <div class="carousel-item">🍃 Новая поставка снюса! Огромный выбор вкусов!</div>
+            <div class="carousel-item">📍 Открытие новой точки! Ждем вас по новому адресу!</div>
+            <div class="carousel-item">📍 Новая коллекция ароматов</div>
+            <div class="carousel-item">📍 Скидки на популярные модели</div>
+            <div class="carousel-item">Обновление законодательства: "Будьте в курсе! </div>
         </div>
+        <button class="carousel-button prev" onclick="moveCarousel(-1)">❮</button>
         <button class="carousel-button next" onclick="moveCarousel(1)">❯</button>
     </div>
 
-    <div class="categories">
+    <section class="categories">
+        <a href="{{ url_for('liquids') }}">
+            <div class="category">
+                <img src="{{ url_for('static', filename='liquid-icon.png') }}" alt="Жидкости">
+                <div>Жидкости</div>
+            </div>
+        </a>
+        
+        <a href="{{ url_for('devices') }}">
+            <div class="category">
+                <img src="{{ url_for('static', filename='device-icon.png') }}" alt="Устройства">
+                <div>Устройства</div>
+            </div>
+            <script>
+                document.getElementById("deviceButton").onclick = function() {
+                    // Здесь укажите URL страницы с устройствами
+                    window.location.href = "https://example.com/devices"; // Замените на нужный URL
+                };
+            </script>
+        </a>
         <div class="category">
-            <img src="category1.jpg" alt="Категория 1">
-            <div class="category-text">Категория 1</div>
+            <a href="snus.html" target="_blank">
+                <img src="snus-icon.png" alt="Снюс">
+                <div class="category-text">Снюс</div>
+            </a>
         </div>
         <div class="category">
-            <img src="category2.jpg" alt="Категория 2">
-            <div class="category-text">Категория 2</div>
+            <a href="accessories.html" target="_blank">
+                <img src="accessories-icon.png" alt="Расходники">
+                <div class="category-text">Расходники</div>
+            </a>
         </div>
-        <div class="category">
-            <img src="category3.jpg" alt="Категория 3">
-            <div class="category-text">Категория 3</div>
-        </div>
-        <div class="category">
-            <img src="category4.jpg" alt="Категория 4">
-            <div class="category-text">Категория 4</div>
-        </div>
-    </div>
+    </section>
 
-    <div class="profile">
-        <img src="profile.jpg" alt="Профиль" class="profile-icon">
-        <span>Имя пользователя</span>
-    </div>
-
-    <button class="device-button" onclick="window.location.href='devices.html'">Перейти к устройствам</button>
-
-    <button class="cart-button" onclick="window.location.href='cart.html'">🛒</button>
+    <!-- Кнопка корзины -->
+    <a href="{{ url_for('cart') }}">
+        <button class="cart-button">🛒</button>
+    </a>
 
     <script>
         let currentIndex = 0;
+        const itemsToShow = 2;
 
         function moveCarousel(direction) {
             const items = document.querySelectorAll('.carousel-item');
-            const totalItems = items.length;
-            currentIndex = (currentIndex + direction + totalItems) % totalItems;
-            const carouselInner = document.querySelector('.carousel-inner');
-            const offset = -currentIndex * 100 / totalItems;
-            carouselInner.style.transform = `translateX(${offset}%)`;
+            currentIndex = (currentIndex + direction + items.length) % items.length;
+            const offset = -(currentIndex * (100 / itemsToShow));
+            document.getElementById('carouselInner').style.transform = `translateX(${offset}%)`;
         }
 
         function toggleSearch() {
-            const searchInput = document.querySelector('.search-input');
-            searchInput.classList.toggle('active');
-            if (searchInput.classList.contains('active')) {
-                searchInput.focus();
-            }
+            document.querySelector('.search-container').classList.toggle('active');
         }
     </script>
+
 </body>
 </html>
-
-
-
