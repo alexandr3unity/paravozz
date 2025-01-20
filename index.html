@@ -6,7 +6,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
-        body.dark-theme {
+        /* Кнопка переключения темы */
+    .theme-toggle {
+        position: fixed;
+        top: 20px;
+        left: 20px; /* Размещаем кнопку слева */
+        background-color: #4CAF50;
+        color: white;
+        border-radius: 50%;
+        font-size: 3em; /* Увеличиваем размер кнопки */
+        padding: 15px;
+        cursor: pointer;
+        z-index: 1000;
+        border: none;
+        transition: background-color 0.3s;
+    }
+
+    .theme-toggle:hover {
+        background-color: #45a049;
+    }
+
+    /* Темная тема */
+    body.dark-theme {
         background: #333;
         color: white;
     }
@@ -22,7 +43,6 @@
     .carousel-item {
         background-color: #555; /* Фон карусели */
     }
-
         .categories {
             display: flex;
             flex-wrap: nowrap; /* Горизонтальное расположение элементов */
