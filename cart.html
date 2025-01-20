@@ -6,6 +6,25 @@
     <title>Корзина</title>
     <style>
         /* Ваши стили здесь */
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .remove-button, .clear-cart-button, .pay-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .remove-button { background-color: #e74c3c; }
+        .clear-cart-button { background-color: #ff9800; }
+        .pay-button { background-color: #007bff; }
+        .remove-button:hover { background-color: #c0392b; }
+        .clear-cart-button:hover { background-color: #f57c00; }
+        .pay-button:hover { background-color: #0056b3; }
     </style>
 </head>
 <body>
@@ -17,17 +36,20 @@
             <p><strong>Цена:</strong> 1000 руб.</p>
             <p><strong>Количество:</strong>
                 <div class="quantity-controls">
-                    <form method="GET" action="#">
+                    <form method="POST" action="index.php">
+                        <input type="hidden" name="action" value="increase">
                         <button type="submit">+</button>
                     </form>
                     <span>1</span>
-                    <form method="GET" action="#">
+                    <form method="POST" action="index.php">
+                        <input type="hidden" name="action" value="decrease">
                         <button type="submit">-</button>
                     </form>
                 </div>
             </p>
             <p><strong>Сумма:</strong> 1000 руб.</p>
-            <form method="GET" action="#">
+            <form method="POST" action="index.php">
+                <input type="hidden" name="action" value="remove">
                 <button type="submit" class="remove-button">Удалить</button>
             </form>
         </div>
@@ -35,12 +57,12 @@
 
     <p><strong>Итого:</strong> 1000 руб.</p>
 
-    <form method="GET" action="#">
+    <form method="POST" action="index.php">
+        <input type="hidden" name="action" value="clear">
         <button type="submit" class="clear-cart-button">Очистить корзину</button>
     </form>
     
-    <form method="GET" action="#">
-        <button type="submit" class="pay-button">Перейти к оплате</button>
-    </form>
-</body>
-</html>
+    <form method="POST" action="index.php">
+        <input type="hidden" name="action
+
+Найти еще
