@@ -6,6 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
+        body.dark-theme {
+        background: #333;
+        color: white;
+    }
+
+    .header, .button, .category-text {
+        color: white; /* Цвет шрифта для темной темы */
+    }
+
+    .category {
+        background-color: #444; /* Цвет фона для категорий в темной теме */
+    }
+
+    .carousel-item {
+        background-color: #555; /* Фон карусели */
+    }
+
         .categories {
             display: flex;
             flex-wrap: nowrap; /* Горизонтальное расположение элементов */
@@ -235,6 +252,8 @@
         </a>
     </div>
 
+    <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+
     <div class="carousel">
         <div class="carousel-inner" id="carouselInner">
             <div class="carousel-item">🎉 Мы открылись! Специальные предложения на все товары!</div>
@@ -306,6 +325,12 @@
                 searchContainer.classList.remove('active');
             }
         });
+
+
+         function toggleTheme() {
+        document.body.classList.toggle('dark-theme');
+    }
+        
     </script>
 </body>
 
