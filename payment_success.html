@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Оплата успешна</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            text-align: center;
+            padding: 30px;
+        }
+
+        .receipt {
+            background-color: #fff;
+            border: 2px dashed #28a745;
+            border-radius: 10px;
+            width: 300px;
+            margin: 0 auto;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #28a745;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 18px;
+            color: #333;
+        }
+
+        .details {
+            margin-top: 30px;
+            font-size: 16px;
+            text-align: left;
+            margin-bottom: 30px;
+        }
+
+        .details strong {
+            color: #333;
+        }
+
+        .products-list {
+            margin-top: 20px;
+            text-align: left;
+            font-size: 16px;
+        }
+
+        .product-item {
+            margin-bottom: 10px;
+        }
+
+        .product-item span {
+            display: inline-block;
+            width: 150px;
+        }
+
+        .total {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 30px;
+            font-size: 16px;
+        }
+
+        .button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="receipt">
+        <h1>Чек оплаты</h1>
+        <p>Ваш заказ успешно оплачен!</p>
+        
+        <div class="details">
+            <p><strong>Дата:</strong> {{ payment_date }}</p>
+            <p><strong>Номер заказа:</strong> {{ order_id }}</p>
+        </div>
+
+        <div class="products-list">
+            <h3>Товары в заказе:</h3>
+            {% for item in cart %}
+                <div class="product-item">
+                    <span><strong>{{ item.name }}</strong></span>
+                    <span>{{ item.price }} руб. x {{ item.quantity }}</span>
+                    <span><strong>{{ item.price * item.quantity }} руб.</strong></span>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="total">
+            <p><strong>Итого: {{ total_amount }} руб.</strong></p>
+        </div>
+
+        <a href="{{ url_for('home') }}" class="button">Вернуться на главную страницу</a>
+    </div>
+</body>
+</html>

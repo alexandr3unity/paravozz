@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Оформление оплаты</title>
+</head>
+<body>
+    <h1>Оформление оплаты</h1>
+    <p><strong>Итого:</strong> {{ total_sum }} руб.</p>
+    
+    <form action="{{ url_for('process_payment') }}" method="POST">
+        <button type="submit">Оплатить</button>
+    </form>
+
+    <a href="{{ url_for('cart') }}">Назад в корзину</a>
+</body>
+</html>

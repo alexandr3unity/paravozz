@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Жидкости</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        /* Градиентный фон для всей страницы */
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background: linear-gradient(to right, #6a11cb, #2575fc); /* Градиент от фиолетового к синему */
+            color: white; /* Цвет текста */
+            font-family: Arial, sans-serif; /* Шрифт */
+        }
+
+        header {
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            margin: 0; /* Убираем отступы у заголовка */
+        }
+
+        /* Стили для subcategory */
+        .subcategory {
+            border: 1px solid #ccc; /* Рамка вокруг каждой категории */
+            border-radius: 8px; /* Закругление углов рамки */
+            padding: 10px; /* Отступ внутри рамки */
+            margin: 10px; /* Отступ между категориями */
+            text-align: center; /* Центрирование текста */
+            transition: box-shadow 0.3s, transform 0.3s; /* Плавный переход для эффекта при наведении */
+            background-color: rgba(255, 255, 255, 0.8); /* Полупрозрачный белый фон для категорий */
+            cursor: pointer; /* Курсор указывает на интерактивность */
+        }
+
+        .subcategory:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Эффект тени при наведении */
+            transform: translateY(-2px); /* Легкий подъем при наведении */
+        }
+
+        img {
+            max-width: 100%; /* Адаптивное изображение */
+            height: auto; /* Автоматическая высота */
+            border-radius: 5px; /* Закругление углов изображений */
+        }
+
+        .subcategories {
+            display: flex; /* Используем flex для выравнивания */
+            flex-wrap: wrap; /* Позволяем категориям переноситься на новую строку */
+            justify-content: center; /* Центрируем категории */
+            padding: 20px; /* Добавляем отступы вокруг категорий */
+        }
+
+        .back-button {
+            background-color: #4CAF50; /* Зеленый цвет */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.2em;
+            margin-top: 20px; /* Отступ сверху */
+        }
+
+        .back-button:hover {
+            background-color: #45a049; /* Темный оттенок при наведении */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Жидкости</h1>
+    </header>
+   
+
+    <button onclick="window.history.back()" class="back-button">Назад</button>
+
+    <section class="subcategories">
+        <a href="{{ url_for('nicotine_liquids') }}" aria-label="Никотиновые жидкости">
+            <div class="subcategory">
+                <img src="{{ url_for('static', filename='images/nicotine_liquids.png') }}" alt="Никотиновые жидкости">
+                <div>Никотиновые жидкости</div>
+            </div>
+        </a>
+
+        <a href="{{ url_for('non_nicotine_liquids') }}" aria-label="Безникотиновые жидкости">
+            <div class="subcategory">
+                <img src="{{ url_for('static', filename='non-nicotine-liquids-icon.png') }}" alt="Безникотиновые жидкости">
+                <div>Безникотиновые жидкости</div>
+            </div>
+        </a>
+
+        <a href="{{ url_for('premium_liquids') }}" aria-label="Премиум жидкости">
+            <div class="subcategory">
+                <img src="{{ url_for('static', filename='premium-liquids-icon.png') }}" alt="Премиум жидкости">
+                <div>Премиум жидкости</div>
+            </div>
+        </a>
+
+        <!-- Новые категории -->
+        <a href="{{ url_for('flavored_liquids') }}" aria-label="Жидкости с ароматизаторами">
+            <div class="subcategory">
+                <img src="{{ url_for('static', filename='flavored-liquids-icon.png') }}" alt="Жидкости с ароматизаторами">
+                <div>Жидкости с ароматизаторами</div>
+            </div>
+        </a>
+
+        <a href="{{ url_for('organic_liquids') }}" aria-label="Органические жидкости">
+            <div class="subcategory">
+                <img src="{{ url_for('static', filename='organic-liquids-icon.png') }}" alt="Органические жидкости">
+                <div>Органические жидкости</div>
+            </div>
+        </a>
+       
+    </section>
+</body>
+</html>

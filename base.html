@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Никотиновые жидкости</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        /* Прежние стили... */
+
+        /* Стили для корзины */
+        .cart {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50%;
+            font-size: 1.5em;
+            cursor: pointer;
+        }
+
+        .cart-count {
+            background-color: red;
+            color: white;
+            border-radius: 50%;
+            padding: 3px 8px;
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            font-size: 1em;
+        }
+
+        /* Модальное окно */
+        .modal {
+            display: none; /* Скрыто по умолчанию */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 400px;
+            max-height: 80%;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        .modal-footer {
+            text-align: right;
+            margin-top: 10px;
+        }
+
+        .close {
+            cursor: pointer;
+            font-size: 1.2em;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <!-- Корзина -->
+    <div id="cart" class="cart">
+        🛒
+        <span id="cart-count" class="cart-count">0</span>
+    </div>
+
+    <!-- Модальное окно с товарами -->
+    <div id="cart-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                Корзина
+                <span id="close-modal" class="close">&times;</span>
+            </div>
+            <div id="cart-items" class="modal-body">
+                <!-- Товары в корзине будут отображаться здесь -->
+                <p>Корзина пуста.</p>
+            </div>
+            <div class="modal-footer">
+                <button onclick="closeModal()">Закрыть</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Основной контент страницы -->
+    {% block content %}{% endblock %}
+
+    <script>
+        let cart = [];
+
+        // Функция для обновления количества в корзине
+        function updateCart() {
+            const cartCount = document.getElementById('cart-count');
+            cartCount.textContent = cart.length;
+            updateCartItems();
+        }
+
+        // Функция для добавления товара в корзину
+        function addToCart(event) {
+            const button = event.target;
+            const id = button.getAttribute('data-id');
+            const name = button.getAttribute('data-name');
+            const price = button.getAttribute('data-price');
+            const quantity = button.getAttribute('data-quantity');
+
+            const product = {
+                id,
+                name,
+                price,
+                quantity
+            };
+
+            cart.push(product);
+            updateCart();
+        }
+
+        // Функция для обновления содержимого корзины в модальном окне
+        function updateCartItems() {
+            const cartItemsContainer = document.getElementById('cart-items');
+            cartItemsContainer.innerHTML = ''; // Очищаем содержимое
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<p>Корзина пуста.</p>';
+            } else {
+                cart.forEach(product => {
+                    const productElement = document.createElement('div');
+                    productElement.innerHTML = `${product.name} - ${product.price} руб. (x${product.quantity})`;
+                    cartItemsContainer.appendChild(productElement);
+                });
+            }
+        }
+
+        // Функция для открытия модального окна
+        function openModal() {
+            const modal = document.getElementById('cart-modal');
+            modal.style.display = 'flex';
+        }
+
+        // Функция для закрытия модального окна
+        function closeModal() {
+            const modal = document.getElementById('cart-modal');
+            modal.style.display = 'none';
+        }
+
+        // Назначаем обработчик для кнопки "Добавить в корзину"
+        const addButtons = document.querySelectorAll('.add-to-cart');
+        addButtons.forEach(button => {
+            button.addEventListener('click', addToCart);
+        });
+
+        // Назначаем обработчик для иконки корзины
+        document.getElementById('cart').addEventListener('click', openModal);
+
+        // Назначаем обработчик для закрытия модального окна
+        document.getElementById('close-modal').addEventListener('click', closeModal);
+
+        // Инициализация
+        updateCart();
+    </script>
+</body>
+</html>
