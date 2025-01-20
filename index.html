@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="ru">
 
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
- 
-<body>
-
- <style>
+    <style>
         body {
             margin: 0;
             font-family: Arial, sans-serif;
@@ -86,8 +84,13 @@
             font-size: 1.5em;
         }
 
-        .carousel-button.prev { left: 10px; }
-        .carousel-button.next { right: 10px; }
+        .carousel-button.prev {
+            left: 10px;
+        }
+
+        .carousel-button.next {
+            right: 10px;
+        }
 
         .categories {
             display: flex;
@@ -108,19 +111,13 @@
             border-radius: 10px;
         }
 
-        .category img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
         .category .category-text {
             position: absolute;
             top: 10px;
             left: 50%;
             transform: translateX(-50%);
-            font-size: 1.2em;
-            color: white;
+            font-size: 0.8em;
+            color: rgba(255, 255, 255, 0.7);
             font-weight: bold;
             background-color: rgba(0, 0, 0, 0.5);
             padding: 5px 10px;
@@ -176,71 +173,10 @@
         .cart-button:hover {
             background-color: #45a049;
         }
-         body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background: linear-gradient(to right, #abc258, #0d824f);
-        }
-
-        .header {
-            font-size: 2em;
-            margin: 20px 0;
-        }
-
-        .categories {
-            display: flex;
-            justify-content: space-around;
-            margin: 30px 0;
-        }
-
-        .category {
-            width: 130px;
-            height: 130px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            border-radius: 10px;
-        }
-
-        .category .category-text {
-            position: absolute;
-            top: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 1.2em;
-            color: white;
-            font-weight: bold;
-            background-color: rgba(0, 0, 0, 0.5);
-            padding: 5px 10px;
-            border-radius: 5px;
-        }
     </style>
-    
+</head>
 
-
-       <script>
-        // Функция для загрузки данных профиля из localStorage
-        window.onload = function() {
-            const name = localStorage.getItem('name');
-            const profilePic = localStorage.getItem('profilePic');
-            
-            // Если данные о никнейме существуют, отображаем их
-            if (name) {
-                document.getElementById('nickname').textContent = name;
-            }
-            
-            // Если существует фото профиля, обновляем изображение
-            if (profilePic) {
-                document.getElementById('profile-icon').src = profilePic;
-            }
-        };
-    </script>
-
+<body>
     <header>
         <div class="header">King Vape</div>
         <div class="search-container">
@@ -250,10 +186,10 @@
     </header>
 
     <div class="profile">
-    <a href="https://alexandr3unity.github.io/paravozz/profil">
-        <img id="profile-icon" src="default-profile.jpg" alt="Профиль" class="profile-icon">
-        <span id="nickname">Ваш Никнейм</span>
-    </a>
+        <a href="https://alexandr3unity.github.io/paravozz/profil">
+            <img id="profile-icon" src="default-profile.jpg" alt="Профиль" class="profile-icon">
+            <span id="nickname">Ваш Никнейм</span>
+        </a>
     </div>
 
     <div class="carousel">
@@ -266,14 +202,14 @@
             <div class="carousel-item">📍 Открытие новой точки! Ждем вас по новому адресу!</div>
             <div class="carousel-item">📍 Новая коллекция ароматов</div>
             <div class="carousel-item">📍 Скидки на популярные модели</div>
-            <div class="carousel-item">Обновление законодательства: "Будьте в курсе! </div>
+            <div class="carousel-item">Обновление законодательства: "Будьте в курсе!</div>
         </div>
         <button class="carousel-button prev" onclick="moveCarousel(-1)">❮</button>
         <button class="carousel-button next" onclick="moveCarousel(1)">❯</button>
     </div>
 
     <section class="categories">
-              <a href="https://alexandr3unity.github.io/paravozz/liquids">
+        <a href="https://alexandr3unity.github.io/paravozz/liquids">
             <div class="category" style="background-image: url('imej/jidkost.jpg'); background-size: cover; background-position: center; color: white; height: 130px;">
                 <div class="category-text">Жидкости</div>
             </div>
@@ -285,30 +221,26 @@
                 <div class="category-text">Устройства</div>
             </div>
         </a>
-        
-            <div class="category">
-                <a href="snus.html" target="_blank">
-                    <img src="snus-icon.png" alt="Снюс">
-                    <div class="category-text">Снюс</div>
-                </a>
-            </div>
-            
-            <div class="category">
-                <a href="accessories.html" target="_blank">
-                    <img src="accessories-icon.png" alt="Расходники">
-                    <div class="category-text">Расходники</div>
-                </a>
-            </div>
-        </section>
-        
+
+        <div class="category">
+            <a href="snus.html" target="_blank">
+                <img src="snus-icon.png" alt="Снюс">
+                <div class="category-text">Снюс</div>
+            </a>
+        </div>
+
+        <div class="category">
+            <a href="accessories.html" target="_blank">
+                <img src="accessories-icon.png" alt="Расходники">
+                <div class="category-text">Расходники</div>
+            </a>
+        </div>
     </section>
 
     <!-- Кнопка корзины -->
-    <a href="https://alexandr3unity.github.io/paravozz/cart" >
+    <a href="https://alexandr3unity.github.io/paravozz/cart">
         <button class="cart-button">🛒</button>
     </a>
-    
-
 
     <script>
         let currentIndex = 0;
@@ -324,6 +256,11 @@
         function toggleSearch() {
             document.querySelector('.search-container').classList.toggle('active');
         }
+
+        // Функция для автоматического перелистывания
+        setInterval(() => {
+            moveCarousel(1);
+        }, 5000); // Автоматический переход через 5 секунд
     </script>
 </body>
 
