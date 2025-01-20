@@ -14,8 +14,8 @@
 
     <p><strong>Итого:</strong> <span id="total-price">0</span> руб.</p>
 
-    <form method="POST" action="#">
-        <button type="button" class="pay-button">Перейти к оплате</button>
+    <form method="POST" action="payment.html">
+        <button type="button" class="pay-button" onclick="checkout()">Перейти к оплате</button>
     </form>
 
     <script>
@@ -70,6 +70,25 @@
             cart = cart.filter(item => item.name !== name); // Удаляем товар из корзины
             localStorage.setItem('cart', JSON.stringify(cart));
             loadCart(); // Перезагружаем корзину
+        }
+
+        // Функция обработки оформления заказа (сохранение данных в localStorage)
+        function checkout() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const totalAmount = cart.reduce((total, item) => total + item.price * item.quantity, 0);
+            const orderId = Math.floor(Math.random() * 1000000); // Генерация случайного номера заказа
+            const paymentDate = new Date().toLocaleDateString();
+
+            // Сохраняем данные заказа в localStorage
+            localStorage.setItem('payment', JSON.stringify({
+                cart,
+                totalAmount,
+                orderId,
+                paymentDate
+            }));
+
+            // Переходим на страницу успешной оплаты
+            window.location.href = 'payment.html';
         }
 
         // Инициализация
