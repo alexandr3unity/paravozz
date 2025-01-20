@@ -1,9 +1,11 @@
-<head>
+<!DOCTYPE html>
+<html lang="ru">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-  
-</head>
+ 
+<body>
 
  <style>
         body {
@@ -202,12 +204,12 @@
         </div>
     </header>
 
-  <div class="profile">
+    <div class="profile">
     <a href="https://alexandr3unity.github.io/paravozz/profil">
-        <img src="static/123.jpg" alt="Профиль" class="profile-icon">
-        <span class="nickname">Ваш Никнейм</span>
+        <img id="profile-icon" src="default-profile.jpg" alt="Профиль" class="profile-icon">
+        <span id="nickname">Ваш Никнейм</span>
     </a>
-</div>
+    </div>
 
     <div class="carousel">
         <div class="carousel-inner" id="carouselInner">
@@ -278,6 +280,6 @@
             document.querySelector('.search-container').classList.toggle('active');
         }
     </script>
-
 </body>
+
 </html>
