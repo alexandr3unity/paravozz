@@ -94,13 +94,15 @@
 
         .categories {
             display: flex;
-            flex-wrap: wrap;
+            flex-wrap: nowrap; /* Горизонтальное расположение элементов */
             justify-content: center;
             margin: 30px 0;
+            overflow-x: auto; /* Добавим горизонтальную прокрутку, если не помещаются */
         }
 
         .category {
-            width: 130px;
+            flex: 1 0 20%; /* Категории могут быть растянуты или сжаты в пределах 20% */
+            max-width: 150px;
             height: 130px;
             display: flex;
             align-items: center;
@@ -111,6 +113,7 @@
             overflow: hidden;
             border-radius: 10px;
             margin: 10px;
+            transition: all 0.3s ease;
         }
 
         .category .category-text {
@@ -185,16 +188,9 @@
 
         /* Адаптация для мобильных устройств */
         @media (max-width: 768px) {
-            .categories {
-                justify-content: space-around;
-                flex-direction: column; /* Элементы в столбик */
-                align-items: center;
-            }
-
             .category {
-                width: 80%;
-                height: 120px;
-                margin-bottom: 20px; /* Расстояние между категориями */
+                flex: 1 0 40%; /* Категории занимают 40% ширины на маленьких экранах */
+                max-width: 120px;
             }
 
             .header {
@@ -251,14 +247,14 @@
 
         <div class="category">
             <a href="snus.html" target="_blank">
-                <img src="snus-icon.png" alt="Снюс">
+                <img src="imej/snus.jpg" alt="Снюс">
                 <div class="category-text">Снюс</div>
             </a>
         </div>
 
         <div class="category">
             <a href="accessories.html" target="_blank">
-                <img src="accessories-icon.png" alt="Расходники">
+                <img src="imej/ras.jpg" alt="Расходники">
                 <div class="category-text">Расходники</div>
             </a>
         </div>
