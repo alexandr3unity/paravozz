@@ -5,6 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Корзина</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Стили для кнопок */
+        .button {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            text-align: center;
+            cursor: pointer;
+            border-radius: 5px;
+            border: none;
+            margin-top: 10px;
+        }
+
+        /* Стили для кнопки оплаты */
+        .pay-button {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .pay-button:hover {
+            background-color: #218838;
+        }
+
+        /* Стили для кнопки возврата к покупкам */
+        .return-button {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .return-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
     <h1>Ваша корзина</h1>
@@ -14,10 +47,11 @@
 
     <p><strong>Итого:</strong> <span id="total-price">0</span> руб.</p>
 
-    <button type="button" class="pay-button" onclick="checkout()">Перейти к оплате</button>
+    <!-- Кнопка оплаты -->
+    <button type="button" class="pay-button button" onclick="checkout()">Перейти к оплате</button>
 
     <!-- Кнопка возврата к покупкам -->
-    <button type="button" class="return-button" onclick="window.location.href='https://alexandr3unity.github.io/paravozz/'">Возврат к покупкам</button>
+    <button type="button" class="return-button button" onclick="window.location.href='https://alexandr3unity.github.io/paravozz/'">Возврат к покупкам</button>
 
     <script>
         // Функция для загрузки корзины
