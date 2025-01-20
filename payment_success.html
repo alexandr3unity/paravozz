@@ -87,28 +87,48 @@
     <div class="receipt">
         <h1>Чек оплаты</h1>
         <p>Ваш заказ успешно оплачен!</p>
-        
+
         <div class="details">
-            <p><strong>Дата:</strong> {{ payment_date }}</p>
-            <p><strong>Номер заказа:</strong> {{ order_id }}</p>
+            <p><strong>Дата:</strong> <span id="payment-date"></span></p>
+            <p><strong>Номер заказа:</strong> <span id="order-id"></span></p>
         </div>
 
         <div class="products-list">
             <h3>Товары в заказе:</h3>
-            {% for item in cart %}
-                <div class="product-item">
-                    <span><strong>{{ item.name }}</strong></span>
-                    <span>{{ item.price }} руб. x {{ item.quantity }}</span>
-                    <span><strong>{{ item.price * item.quantity }} руб.</strong></span>
-                </div>
-            {% endfor %}
+            <div id="products-list"></div>
         </div>
 
         <div class="total">
-            <p><strong>Итого: {{ total_amount }} руб.</strong></p>
+            <p><strong>Итого: <span id="total-amount"></span> руб.</strong></p>
         </div>
 
-        <a href="{{ url_for('home') }}" class="button">Вернуться на главную страницу</a>
+        <a href="index.html" class="button">Вернуться на главную страницу</a>
     </div>
+
+    <script>
+        // Функция для отображения данных об оплате
+        function displayReceipt() {
+            const paymentData = JSON.parse(localStorage.getItem('payment'));
+            if (paymentData) {
+                document.getElementById('payment-date').textContent = paymentData.paymentDate;
+                document.getElementById('order-id').textContent = paymentData.orderId;
+                document.getElementById('total-amount').textContent = paymentData.totalAmount;
+
+                const productsList = document.getElementById('products-list');
+                paymentData.cart.forEach(item => {
+                    productsList.innerHTML += `
+                        <div class="product-item">
+                            <span><strong>${item.name}</strong></span>
+                            <span>${item.price} руб. x ${item.quantity}</span>
+                            <span><strong>${item.price * item.quantity} руб.</strong></span>
+                        </div>
+                    `;
+                });
+            }
+        }
+
+        // Инициализация
+        displayReceipt();
+    </script>
 </body>
 </html>
