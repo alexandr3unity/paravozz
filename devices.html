@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Жидкости</title>
+    <style>
+        .back-button {
+            background-color: #b5ccb6; /* Зеленый цвет */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.2em;
+            margin-top: 20px; /* Отступ сверху */
+            position: absolute;
+            left: 20px; /* Расположим кнопку слева */
+            top: 20px; /* Расположим кнопку чуть ниже верха страницы */
+        }
+
+        .back-button:hover {
+            background-color: #45a049; /* Темный оттенок при наведении */
+        }
+
+        /* Добавьте стиль, аналогичный тому, что в главной странице */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: linear-gradient(to right, #83ec66, #1aa166);
+        }
+
+        .header {
+            font-size: 2em;
+            margin: 20px 0;
+        }
+
+        .products {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .product {
+            width: 200px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .product img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">Устройства</div>
+    <button onclick="window.history.back()" class="back-button">Назад</button>
+
+    <!-- Список товаров -->
+    <div class="products">
+        <div class="product">
+            <img src="liquid-product1.jpg" alt="устройства 1">
+        </div>
+        <div class="product">
+            <img src="liquid-product2.jpg" alt="устройства 2">
+        </div>
+        <div class="product">
+            <img src="liquid-product3.jpg" alt="Устройства 3">
+        </div>
+        <div class="product">
+            <img src="liquid-product4.jpg" alt="устройства 4">
+        </div>
+    </div>
+
+
+</body>
+</html>
