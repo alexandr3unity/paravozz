@@ -283,6 +283,19 @@ button:hover {
         }
 
 
+.liquid-category {
+    background-image: url('imej/jidkost.jpg'); /* Путь к вашему изображению */
+    background-size: cover; /* Заставляет изображение заполнять весь элемент */
+    background-position: center; /* Центрирует изображение */
+    color: white; /* Цвет текста, чтобы он был виден на фоне */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px; /* Если хотите, чтобы углы были закруглены */
+    height: 130px; /* Убедитесь, что высота соответствует высоте категории */
+}
+
+
 
 
 
