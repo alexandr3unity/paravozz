@@ -7,120 +7,174 @@
   
 </head>
 
-  <style>
-        .quantity-controls {
-            display: flex;
-            align-items: center;
-            gap: 10px;  /* Расстояние между кнопками */
-        }
-
-        .quantity-controls form {
-            margin: 0; /* Убираем отступы у форм */
-        }
-
-        .quantity-controls button {
-            font-size: 1.5em;
-            width: 35px;
-            height: 35px;
-            padding: 0;
-        }
-
+ <style>
         body {
+            margin: 0;
             font-family: Arial, sans-serif;
             text-align: center;
-            background-color: #f4f4f4;
+            background: linear-gradient(to right, #abc258, #0d824f);
         }
 
-        h1 {
-            color: #2d4684;
+        .header {
+            font-size: 2em;
+            margin: 20px 0;
         }
 
-        a {
+        .search-container {
+            display: flex;
+            justify-content: flex-end;
+            position: relative;
+            margin: 20px;
+        }
+
+        .search-input {
+            display: none;
+            transition: width 0.3s ease;
+            padding: 5px;
+            width: 200px;
+            position: absolute;
+            right: 40px;
+            top: 0;
+        }
+
+        .search-icon {
+            cursor: pointer;
+            font-size: 1.5em;
+            background: none;
+            border: none;
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+
+        .active .search-input {
             display: inline-block;
-            margin-top: 20px;
-            padding: 10px 20px;
-            color: #28a745;
-            text-decoration: none;
-            border: 1px solid #28a745;
+        }
+
+        .carousel {
+            position: relative;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+
+        .carousel-inner {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .carousel-item {
+            min-width: 25%;
+            padding: 10px;
+            background-color: #f4f4f4;
+            border: 1px solid #ccc;
+            margin-right: 10px;
+            border-radius: 8px;
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .carousel-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.7);
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            font-size: 1.5em;
+        }
+
+        .carousel-button.prev { left: 10px; }
+        .carousel-button.next { right: 10px; }
+
+        .categories {
+            display: flex;
+            justify-content: space-around;
+            margin: 30px 0;
+        }
+
+        .category {
+            width: 130px;
+            height: 130px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+
+        .category img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .category .category-text {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.2em;
+            color: white;
+            font-weight: bold;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 5px 10px;
             border-radius: 5px;
         }
 
-        a:hover {
-            background-color: #28a745;
-            color: white;
-        }
-
-        .cart-container {
+        .profile {
             display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-top: 20px;
+            justify-content: flex-start;
             align-items: center;
+            margin-left: 20px;
         }
 
-        .cart-item {
-            background-color: #fff;
+        .profile-icon {
+            max-width: 50px;
+            max-height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 10px;
+        }
+
+        .button {
+            margin: 20px;
             padding: 10px 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            width: 80%;
-            max-width: 900px;
-            text-align: left;
-            transition: transform 0.2s ease-in-out;
-            font-size: 1em;
-        }
-
-        .cart-item:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        button {
-            background-color: #28a745;
+            font-size: 1.2em;
+            background-color: #4CAF50;
             color: white;
-            padding: 8px 16px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
-            font-size: 1.1em;
+            transition: background-color 0.3s;
         }
 
-        button:hover {
-            background-color: #218838;
+        .button:hover {
+            background-color: #45a049;
         }
 
-        .remove-button {
-            background-color: #e74c3c;
+        /* Стиль для кнопки корзины */
+        .cart-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 50%;
+            font-size: 1.5em;
+            border: 2px solid #fff;
+            cursor: pointer;
+            transition: background-color 0.3s;
         }
 
-        .remove-button:hover {
-            background-color: #c0392b;
-        }
-
-        .clear-cart-button {
-            background-color: #ff9800;
-            margin-top: 20px;
-        }
-
-        .clear-cart-button:hover {
-            background-color: #f57c00;
-        }
-
-        .pay-button {
-            background-color: #007bff;
-            margin-top: 20px;
-            padding: 12px 25px;
-        }
-
-        .pay-button:hover {
-            background-color: #0056b3;
-        }
-
-        p {
-            font-size: 1.2em;
-            color: #333;
-            margin-top: 20px;
+        .cart-button:hover {
+            background-color: #45a049;
         }
     </style>
 
