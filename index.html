@@ -1,10 +1,12 @@
-<!DOCTYPE html>
-<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Магазин</title>
-    <style>
+    <title>Настройки профиля</title>
+    <!-- Подключаем Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
         body {
             margin: 0;
             font-family: Arial, sans-serif;
@@ -176,6 +178,34 @@
     </style>
 </head>
 <body>
+
+     <div class="profile-header">
+        <i class="fas fa-user" id="profile-icon" onclick="toggleProfileSettings()"></i>
+        <span>Настройки профиля</span>
+    </div>
+
+    <div class="profile-settings-container">
+        <form id="profile-form">
+            <!-- Поля формы -->
+        </form>
+    </div>
+
+    <script>
+        // Функция для изменения стиля иконки профиля
+        function toggleProfileSettings() {
+            const icon = document.getElementById('profile-icon');
+            const container = document.querySelector('.profile-settings-container');
+            
+            // Переключение класса 'active' для иконки
+            icon.classList.toggle('active');
+            
+            // Показываем или скрываем настройки профиля
+            container.style.display = container.style.display === 'block' ? 'none' : 'block';
+        }
+
+        // Инициализация: по умолчанию контейнер настроек скрыт
+        document.querySelector('.profile-settings-container').style.display = 'none';
+    </script>
 
     <header>
         <div class="header">King Vape</div>
