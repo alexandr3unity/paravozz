@@ -264,6 +264,24 @@
     <a href="https://alexandr3unity.github.io/paravozz/cart" >
         <button class="cart-button">🛒</button>
     </a>
+        <script>
+        // Функция для загрузки данных профиля из localStorage
+        window.onload = function() {
+            const name = localStorage.getItem('name');
+            const profilePic = localStorage.getItem('profilePic');
+            
+            // Если данные о никнейме существуют, отображаем их
+            if (name) {
+                document.getElementById('nickname').textContent = name;
+            }
+            
+            // Если существует фото профиля, обновляем изображение
+            if (profilePic) {
+                document.getElementById('profile-icon').src = profilePic;
+            }
+        };
+    </script>
+
 
     <script>
         let currentIndex = 0;
