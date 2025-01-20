@@ -40,76 +40,20 @@
             const password = document.getElementById('password').value;
             const profilePic = document.getElementById('profile-pic').files[0];
 
-            // Здесь вы можете добавить логику для сохранения данных (например, через API или localStorage)
-            console.log('Имя:', name);
-            console.log('Email:', email);
-            console.log('Пароль:', password);
+            // Сохраняем данные в localStorage
+            localStorage.setItem('name', name);
+            localStorage.setItem('email', email);
+            localStorage.setItem('password', password);
+
             if (profilePic) {
-                console.log('Фото профиля:', profilePic.name);
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    localStorage.setItem('profilePic', event.target.result);
+                };
+                reader.readAsDataURL(profilePic); // Сохраняем фото как Data URL
             }
 
-            // После сохранения данных вы можете уведомить пользователя
-            alert('Данные профиля сохранены!');
-        });
-
-        // Функция для возврата на предыдущую страницу
-        function goBack() {
-            window.history.back();
-        }
-    </script>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Настройки профиля</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div class="profile-settings-container">
-        <h1>Настройки профиля</h1>
-
-        <form id="profile-form">
-            <label for="name">Имя:</label>
-            <input type="text" id="name" name="name" placeholder="Введите ваше имя" required><br><br>
-
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" placeholder="Введите ваш email" required><br><br>
-
-            <label for="password">Пароль:</label>
-            <input type="password" id="password" name="password" placeholder="Введите новый пароль"><br><br>
-
-            <label for="profile-pic">Фото профиля:</label>
-            <input type="file" id="profile-pic" name="profile-pic"><br><br>
-
-            <button type="submit">Сохранить изменения</button>
-        </form>
-
-        <button onclick="goBack()">Назад</button>
-    </div>
-
-    <script>
-        // Функция для обработки отправки формы
-        document.getElementById('profile-form').addEventListener('submit', function(event) {
-            event.preventDefault(); // Предотвращаем отправку формы
-
-            // Получаем значения из формы
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            const profilePic = document.getElementById('profile-pic').files[0];
-
-            // Здесь вы можете добавить логику для сохранения данных (например, через API или localStorage)
-            console.log('Имя:', name);
-            console.log('Email:', email);
-            console.log('Пароль:', password);
-            if (profilePic) {
-                console.log('Фото профиля:', profilePic.name);
-            }
-
-            // После сохранения данных вы можете уведомить пользователя
+            // После сохранения данных уведомляем пользователя
             alert('Данные профиля сохранены!');
         });
 
