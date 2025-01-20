@@ -124,7 +124,7 @@
     <div class="header">Никотиновые жидкости</div>
     
     <div class="cart">
-        <a href="{{ url_for('cart') }}">
+        <a href="https://alexandr3unity.github.io/paravozz/cart">
             Корзина
             <span id="cart-count" class="cart-count">{{ session.get('cart', []) | length }}</span>
         </a>
@@ -132,121 +132,7 @@
     
     <section class="products">
         <!-- Товары -->
-        <section class="products">
-            <!-- Товары -->
-            <div class="product">
-                <img src="{{ url_for('static', filename='nicotine-liquid1.jpg') }}" alt="Жидкость 1">
-                <div class="product-info">
-                    <div>Жидкость 1</div>
-                    <div class="price">Цена: 14 руб.</div>
-                    <div class="quantity">Количество: 10 шт.</div>
-                    <form method="POST" action="{{ url_for('add_to_cart', id=1, name='Жидкость 1', price=14, quantity=10) }}">
-                        <button type="submit">Добавить в корзину</button>
-                    </form>
-                </div>
-            </div>
-            <div class="product">
-                <img src="{{ url_for('static', filename='nicotine-liquid2.jpg') }}" alt="Жидкость 2">
-                <div class="product-info">
-                    <div>Жидкость 2</div>
-                    <div class="price">Цена: 15 руб.</div>
-                    <div class="quantity">Количество: 8 шт.</div>
-                    <form method="POST" action="{{ url_for('add_to_cart', id=2, name='Жидкость 2', price=15, quantity=8) }}">
-                        <button type="submit">Добавить в корзину</button>
-                    </form>
-                </div>
-            </div>
-            <div class="product">
-                <img src="{{ url_for('static', filename='nicotine-liquid3.jpg') }}" alt="Жидкость 3">
-                <div class="product-info">
-                    <div>Жидкость 3</div>
-                    <div class="price">Цена: 16 руб.</div>
-                    <div class="quantity">Количество: 12 шт.</div>
-                    <form method="POST" action="{{ url_for('add_to_cart', id=3, name='Жидкость 3', price=16, quantity=12) }}">
-                        <button type="submit">Добавить в корзину</button>
-                    </form>
-                </div>
-            </div>
-            <div class="product">
-                <img src="{{ url_for('static', filename='nicotine-liquid4.jpg') }}" alt="Жидкость 4">
-                <div class="product-info">
-                    <div>Жидкость 4</div>
-                    <div class="price">Цена: 18 руб.</div>
-                    <div class="quantity">Количество: 5 шт.</div>
-                    <form method="POST" action="{{ url_for('add_to_cart', id=4, name='Жидкость 4', price=18, quantity=5) }}">
-                        <button type="submit">Добавить в корзину</button>
-                    </form>
-                </div>
-            </div>
-            <div class="product">
-                <img src="{{ url_for('static', filename='nicotine-liquid5.jpg') }}" alt="Жидкость 5">
-                <div class="product-info">
-                    <div>Жидкость 5</div>
-                    <div class="price">Цена: 20 руб.</div>
-                    <div class="quantity">Количество: 6 шт.</div>
-                    <form method="POST" action="{{ url_for('add_to_cart', id=5, name='Жидкость 5', price=20, quantity=6) }}">
-                        <button type="submit">Добавить в корзину</button>
-                    </form>
-                </div>
-            </div>
-            <div class="product">
-                <img src="{{ url_for('static', filename='nicotine-liquid6.jpg') }}" alt="Жидкость 6">
-                <div class="product-info">
-                    <div>Жидкость 6</div>
-                    <div class="price">Цена: 22 руб.</div>
-                    <div class="quantity">Количество: 7 шт.</div>
-                    <form method="POST" action="{{ url_for('add_to_cart', id=6, name='Жидкость 6', price=22, quantity=7) }}">
-                        <button type="submit">Добавить в корзину</button>
-                    </form>
-                </div>
-            </div>
-            <div class="product">
-                <img src="{{ url_for('static', filename='nicotine-liquid7.jpg') }}" alt="Жидкость 7">
-                <div class="product-info">
-                    <div>Жидкость 7</div>
-                    <div class="price">Цена: 24 руб.</div>
-                    <div class="quantity">Количество: 9 шт.</div>
-                    <form method="POST" action="{{ url_for('add_to_cart', id=7, name='Жидкость 7', price=24, quantity=9) }}">
-                        <button type="submit">Добавить в корзину</button>
-                    </form>
-                </div>
-            </div>
-            <div class="product">
-                <img src="{{ url_for('static', filename='nicotine-liquid8.jpg') }}" alt="Жидкость 8">
-                <div class="product-info">
-                    <div>Жидкость 8</div>
-                    <div class="price">Цена: 26 руб.</div>
-                    <div class="quantity">Количество: 4 шт.</div>
-                    <form method="POST" action="{{ url_for('add_to_cart', id=8, name='Жидкость 8', price=26, quantity=4) }}">
-                        <button type="submit">Добавить в корзину</button>
-                    </form>
-                </div>
-            </div>
-            <div class="product">
-                <img src="{{ url_for('static', filename='nicotine-liquid9.jpg') }}" alt="Жидкость 9">
-                <div class="product-info">
-                    <div>Жидкость 9</div>
-                    <div class="price">Цена: 28 руб.</div>
-                    <div class="quantity">Количество: 3 шт.</div>
-                    <form method="POST" action="{{ url_for('add_to_cart', id=9, name='Жидкость 9', price=28, quantity=3) }}">
-                        <button type="submit">Добавить в корзину</button>
-                    </form>
-                </div>
-            </div>
-            <div class="product">
-                <img src="{{ url_for('static', filename='nicotine-liquid10.jpg') }}" alt="Жидкость 10">
-                <div class="product-info">
-                    <div>Жидкость 10</div>
-                    <div class="price">Цена: 30 руб.</div>
-                    <div class="quantity">Количество: 2 шт.</div>
-                    <form method="POST" action="{{ url_for('add_to_cart', id=10, name='Жидкость 10', price=30, quantity=2) }}">
-                        <button type="submit">Добавить в корзину</button>
-                    </form>
-                </div>
-            </div>
-        </section>
-        
-        
+       
         <div class="product">
             <img src="{{ url_for('static', filename='nicotine-liquid1.jpg') }}" alt="Жидкость 1">
             <div class="product-info">
@@ -258,39 +144,7 @@
                 </form>
             </div>
         </div>
-        <div class="product">
-            <img src="{{ url_for('static', filename='nicotine-liquid1.jpg') }}" alt="Жидвапап">
-            <div class="product-info">
-                <div>Жидкость 1</div>
-                <div class="price">Цена: 14 руб.</div>
-                <div class="quantity">Количество: 10 шт.</div>
-                <form method="POST" action="{{ url_for('add_to_cart', id=5, name='Жидкость 123', price=14, quantity=10) }}">
-                    <button type="submit">Добавить в корзину</button>
-                </form>
-            </div>
-        </div>
-        <div class="product">
-            <img src="{{ url_for('static', filename='nicotine-liquid1.jpg') }}" alt="Жидкость 1">
-            <div class="product-info">
-                <div>Жидкость 1</div>
-                <div class="price">Цена: 14 руб.</div>
-                <div class="quantity">Количество: 10 шт.</div>
-                <form method="POST" action="{{ url_for('add_to_cart', id=2, name='Жидкость 1', price=14, quantity=10) }}">
-                    <button type="submit">Добавить в корзину</button>
-                </form>
-            </div>
-        </div>
-        <div class="product">
-            <img src="{{ url_for('static', filename='nicotine-liquid1.jpg') }}" alt="Жидкость 1">
-            <div class="product-info">
-                <div>Жидкость 1</div>
-                <div class="price">Цена: 14 руб.</div>
-                <div class="quantity">Количество: 10 шт.</div>
-                <form method="POST" action="{{ url_for('add_to_cart', id=1, name='Жидкость 1', price=14, quantity=10) }}">
-                    <button type="submit">Добавить в корзину</button>
-                </form>
-            </div>
-        </div>
+        
         <!-- Другие товары... -->
     </section>
 
@@ -298,7 +152,7 @@
         // Функция для обновления количества товаров в корзине
         function updateCart() {
             const cartCount = document.getElementById('cart-count');
-            href="https://alexandr3unity.github.io/paravozz/cart"
+            const cartLength = {{ session.get('cart', []) | length }};
             cartCount.textContent = cartLength;}
 
         // Инициализация
