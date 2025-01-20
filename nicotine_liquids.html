@@ -25,7 +25,7 @@
                 <div>Жидкость 1</div>
                 <div class="price">Цена: 14 руб.</div>
                 <div class="quantity">Количество: 10 шт.</div>
-                <button class="add-to-cart" onclick="addToCart('Жидкость 1', 14, 10)">Добавить в корзину</button>
+                <button class="add-to-cart" onclick="addToCart('Жидкость 1', 14)">Добавить в корзину</button>
             </div>
         </div>
         
@@ -38,14 +38,18 @@
             document.getElementById('cart-count').textContent = cart.length;
         }
 
-        function addToCart(name, price, quantity) {
+        function addToCart(name, price) {
             const cart = JSON.parse(localStorage.getItem('cart')) || [];
             const itemIndex = cart.findIndex(item => item.name === name);
+
             if (itemIndex > -1) {
-                cart[itemIndex].quantity += quantity; // Если товар уже в корзине, увеличиваем количество
+                // Если товар уже есть в корзине, увеличиваем его количество на 1
+                cart[itemIndex].quantity += 1;
             } else {
-                cart.push({ name, price, quantity }); // Добавляем новый товар
+                // Добавляем товар с количеством 1
+                cart.push({ name, price, quantity: 1 });
             }
+
             localStorage.setItem('cart', JSON.stringify(cart));
             updateCartCount(); // Обновляем количество товаров в корзине
         }
