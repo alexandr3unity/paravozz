@@ -14,9 +14,7 @@
 
     <p><strong>Итого:</strong> <span id="total-price">0</span> руб.</p>
 
-    <form method="POST" action="payment.html">
-        <button type="button" class="pay-button" onclick="checkout()">Перейти к оплате</button>
-    </form>
+    <button type="button" class="pay-button" onclick="checkout()">Перейти к оплате</button>
 
     <script>
         // Функция для загрузки корзины
@@ -88,7 +86,7 @@
             }));
 
             // Переходим на страницу успешной оплаты
-          <a href="https://alexandr3unity.github.io/paravozz/payment_success"> 
+            window.location.href = 'https://alexandr3unity.github.io/paravozz/payment_success';
         }
 
         // Инициализация
