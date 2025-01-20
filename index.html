@@ -6,57 +6,68 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
-    
-    .categories {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        margin: 20px 0;
-        gap: 10px;
-    }
+        .categories {
+            display: flex;
+            flex-wrap: nowrap; /* Горизонтальное расположение элементов */
+            justify-content: center;
+            margin: 30px 0;
+            overflow-x: auto; /* Добавим горизонтальную прокрутку, если не помещаются */
+        }
 
-    .category {
-        flex: 1 0 calc(25% - 20px);
-        max-width: calc(25% - 20px);
-        height: 130px;
-        position: relative;
-        border-radius: 10px;
-        overflow: hidden;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        cursor: pointer;
-        transition: transform 0.3s, box-shadow 0.3s;
-    }
-
-    .category:hover {
-        transform: scale(1.05);
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-    }
+        .category {
+            flex: 1 0 20%; /* Категории могут быть растянуты или сжаты в пределах 20% */
+            max-width: 150px;
+            height: 130px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            margin: 10px;
+            transition: all 0.3s ease;
+        }
 
         .category .category-text {
-        position: absolute;
-      
-        left: 50%;
-        transform: translateX(-50%);
-       
-        color: white;
-        padding: 5px 10px;
-        font-weight: bold;
-        
-    }
-
-    @media (max-width: 768px) {
-        .category {
-            flex: 1 0 calc(50% - 20px);
-            max-width: calc(50% - 20px);
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.8em;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: bold;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 5px 10px;
+            border-radius: 5px;
         }
-    }
 
-    @media (max-width: 480px) {
-        .category {
-            flex: 1 0 100%;
+        .category img {
             max-width: 100%;
+            max-height: 100%;
+            object-fit: cover; /* Сохранение пропорций изображения */
+            border-radius: 10px; /* Сглаживаем углы изображения */
         }
-    }
+
+        /* Новые стили для ссылки */
+        .category a {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none; /* Убираем подчеркивание текста */
+            color: transparent; /* Делаем текст прозрачным */
+            background-color: transparent; /* Делаем фон прозрачным */
+        }
+
+        .category a:hover .category-text {
+            color: white; /* Изменяем цвет текста при наведении */
+        }
 
         body {
             margin: 0;
@@ -142,50 +153,6 @@
 
         .carousel-button.next {
             right: 10px;
-        }
-
-        .categories {
-            display: flex;
-            flex-wrap: nowrap; /* Горизонтальное расположение элементов */
-            justify-content: center;
-            margin: 30px 0;
-            overflow-x: auto; /* Добавим горизонтальную прокрутку, если не помещаются */
-        }
-
-        .category {
-            flex: 1 0 20%; /* Категории могут быть растянуты или сжаты в пределах 20% */
-            max-width: 150px;
-            height: 130px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            border-radius: 10px;
-            margin: 10px;
-            transition: all 0.3s ease;
-        }
-
-        .category .category-text {
-            position: absolute;
-            top: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 0.8em;
-            color: rgba(255, 255, 255, 0.7);
-            font-weight: bold;
-            background-color: rgba(0, 0, 0, 0.5);
-            padding: 5px 10px;
-            border-radius: 5px;
-        }
-
-        .category img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: cover; /* Сохранение пропорций изображения */
-            border-radius: 10px; /* Сглаживаем углы изображения */
         }
 
         .profile {
@@ -284,30 +251,30 @@
         <button class="carousel-button next" onclick="moveCarousel(1)">❯</button>
     </div>
 
-   <section class="categories">
-    <div class="category" data-link="https://alexandr3unity.github.io/paravozz/liquids" data-image="imej/jidkost.jpg" data-text="Жидкости"></div>
-    <div class="category" data-link="https://alexandr3unity.github.io/paravozz/devices" data-image="imej/ustr.jpg" data-text="Устройства"></div>
-    <div class="category" data-link="snus.html" data-image="imej/snus.jpg" data-text="Снюс"></div>
-    <div class="category" data-link="accessories.html" data-image="imej/ras.jpg" data-text="Расходники"></div>
-</section>
+    <section class="categories">
+        <div class="category" data-link="https://alexandr3unity.github.io/paravozz/liquids" data-image="imej/jidkost.jpg" data-text="Жидкости"></div>
+        <div class="category" data-link="https://alexandr3unity.github.io/paravozz/devices" data-image="imej/ustr.jpg" data-text="Устройства"></div>
+        <div class="category" data-link="snus.html" data-image="imej/snus.jpg" data-text="Снюс"></div>
+        <div class="category" data-link="accessories.html" data-image="imej/ras.jpg" data-text="Расходники"></div>
+    </section>
 
     <script>
-    const categories = document.querySelectorAll('.category');
+        const categories = document.querySelectorAll('.category');
 
-    categories.forEach(category => {
-        const link = category.dataset.link;
-        const image = category.dataset.image;
-        const text = category.dataset.text;
+        categories.forEach(category => {
+            const link = category.dataset.link;
+            const image = category.dataset.image;
+            const text = category.dataset.text;
 
-        category.style.backgroundImage = `url(${image})`;
-        category.style.backgroundSize = 'cover';
-        category.style.backgroundPosition = 'center';
+            category.style.backgroundImage = `url(${image})`;
+            category.style.backgroundSize = 'cover';
+            category.style.backgroundPosition = 'center';
 
-        category.innerHTML = `<a href="${link}" target="_blank">
-                                <div class="category-text">${text}</div>
-                              </a>`;
-    });
-</script>
+            category.innerHTML = `<a href="${link}" target="_blank">
+                                    <div class="category-text">${text}</div>
+                                  </a>`;
+        });
+    </script>
 
     <!-- Кнопка корзины -->
     <a href="https://alexandr3unity.github.io/paravozz/cart">
@@ -325,15 +292,23 @@
             document.getElementById('carouselInner').style.transform = `translateX(${offset}%)`;
         }
 
-        function toggleSearch() {
-            document.querySelector('.search-container').classList.toggle('active');
+               function toggleSearch() {
+            const searchContainer = document.querySelector('.search-container');
+            searchContainer.classList.toggle('active');
+            const searchInput = document.querySelector('.search-input');
+            searchInput.focus();
         }
 
-        // Функция для автоматического перелистывания
-        setInterval(() => {
-            moveCarousel(1);
-        }, 5000); // Автоматический переход через 5 секунд
+        // Закрытие поисковой строки при клике вне области
+        document.addEventListener('click', function(event) {
+            const searchContainer = document.querySelector('.search-container');
+            if (!searchContainer.contains(event.target)) {
+                searchContainer.classList.remove('active');
+            }
+        });
     </script>
 </body>
 
 </html>
+
+
