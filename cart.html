@@ -4,122 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Корзина</title>
-    <link rel="stylesheet" href="style.css"> <!-- Замените на путь к вашему CSS -->
     <style>
-        .quantity-controls {
-            display: flex;
-            align-items: center;
-            gap: 10px;  /* Расстояние между кнопками */
-        }
-
-        .quantity-controls form {
-            margin: 0; /* Убираем отступы у форм */
-        }
-
-        .quantity-controls button {
-            font-size: 1.5em;
-            width: 35px;
-            height: 35px;
-            padding: 0;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #f4f4f4;
-        }
-
-        h1 {
-            color: #2d4684;
-        }
-
-        a {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 10px 20px;
-            color: #28a745;
-            text-decoration: none;
-            border: 1px solid #28a745;
-            border-radius: 5px;
-        }
-
-        a:hover {
-            background-color: #28a745;
-            color: white;
-        }
-
-        .cart-container {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-top: 20px;
-            align-items: center;
-        }
-
-        .cart-item {
-            background-color: #fff;
-            padding: 10px 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            width: 80%;
-            max-width: 900px;
-            text-align: left;
-            transition: transform 0.2s ease-in-out;
-            font-size: 1em;
-        }
-
-        .cart-item:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        button {
-            background-color: #28a745;
-            color: white;
-            padding: 8px 16px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            font-size: 1.1em;
-        }
-
-        button:hover {
-            background-color: #218838;
-        }
-
-        .remove-button {
-            background-color: #e74c3c;
-        }
-
-        .remove-button:hover {
-            background-color: #c0392b;
-        }
-
-        .clear-cart-button {
-            background-color: #ff9800;
-            margin-top: 20px;
-        }
-
-        .clear-cart-button:hover {
-            background-color: #f57c00;
-        }
-
-        .pay-button {
-            background-color: #007bff;
-            margin-top: 20px;
-            padding: 12px 25px;
-        }
-
-        .pay-button:hover {
-            background-color: #0056b3;
-        }
-
-        p {
-            font-size: 1.2em;
-            color: #333;
-            margin-top: 20px;
-        }
+        /* Ваши стили здесь */
     </style>
 </head>
 <body>
@@ -131,34 +17,30 @@
             <p><strong>Цена:</strong> 1000 руб.</p>
             <p><strong>Количество:</strong>
                 <div class="quantity-controls">
-                    <form method="POST" action="#">
+                    <form method="GET" action="#">
                         <button type="submit">+</button>
                     </form>
                     <span>1</span>
-                    <form method="POST" action="#">
+                    <form method="GET" action="#">
                         <button type="submit">-</button>
                     </form>
                 </div>
             </p>
             <p><strong>Сумма:</strong> 1000 руб.</p>
-            <form method="POST" action="#">
+            <form method="GET" action="#">
                 <button type="submit" class="remove-button">Удалить</button>
             </form>
         </div>
-        <!-- Вы можете добавить дополнительные товары аналогичным образом -->
     </div>
 
     <p><strong>Итого:</strong> 1000 руб.</p>
 
-    <form method="POST" action="#">
+    <form method="GET" action="#">
         <button type="submit" class="clear-cart-button">Очистить корзину</button>
     </form>
     
-    <form method="POST" action="#">
+    <form method="GET" action="#">
         <button type="submit" class="pay-button">Перейти к оплате</button>
     </form>
-</div>
-
 </body>
 </html>
-
