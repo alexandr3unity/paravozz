@@ -207,31 +207,36 @@
     </div>
 
     <section class="categories">
-        <a href="{{ url_for('liquids') }}">
-            <div class="category">
-                <img src="{{ url_for('static', filename='liquid-icon.png') }}" alt="Жидкости">
-                <div>Жидкости</div>
-            </div>
-        </a>
+        <section class="categories">
+            <a href="https://alexandr3unity.github.io/paravozz/liquid" target="_blank">
+                <div class="category">
+                    <img src="{{ url_for('static', filename='liquid-icon.png') }}" alt="Жидкости">
+                    <div>Жидкости</div>
+                </div>
+            </a>
+            
+            <a href="https://alexandr3unity.github.io/paravozz/devices" target="_blank">
+                <div class="category">
+                    <img src="{{ url_for('static', filename='device-icon.png') }}" alt="Устройства">
+                    <div>Устройства</div>
+                </div>
+            </a>
         
-          <a href="https://alexandr3unity.github.io/paravozz/devices" target="_blank">
-        <div class="category">
-            <img src="{{ url_for('static', filename='device-icon.png') }}" alt="Устройства">
-            <div>Устройства</div>
-        </div>
-    </a>
-        <div class="category">
-            <a href="snus.html" target="_blank">
-                <img src="snus-icon.png" alt="Снюс">
-                <div class="category-text">Снюс</div>
-            </a>
-        </div>
-        <div class="category">
-            <a href="accessories.html" target="_blank">
-                <img src="accessories-icon.png" alt="Расходники">
-                <div class="category-text">Расходники</div>
-            </a>
-        </div>
+            <div class="category">
+                <a href="snus.html" target="_blank">
+                    <img src="snus-icon.png" alt="Снюс">
+                    <div class="category-text">Снюс</div>
+                </a>
+            </div>
+            
+            <div class="category">
+                <a href="accessories.html" target="_blank">
+                    <img src="accessories-icon.png" alt="Расходники">
+                    <div class="category-text">Расходники</div>
+                </a>
+            </div>
+        </section>
+        
     </section>
 
     <!-- Кнопка корзины -->
