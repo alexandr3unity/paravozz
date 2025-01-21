@@ -30,17 +30,19 @@
         }
 
         /* Стили для рамки подкатегорий */
-         .subcategory-container {
-            border: 2px solid #232323; /* Серый цвет рамки */
-            border-radius: 8px;
-            margin: 10px; /* Отступы 10 пикселей */
-            text-align: left; /* Выравнивание текста влево */
-            background-color: rgba(35, 35, 35, 0.8);
-            width: calc(100% - 20px); /* Ширина на 20px меньше полной ширины для отступов */
-            box-sizing: border-box; /* Учитываем рамку и отступы в ширине */
-            display: flex; /* Используем Flexbox для выравнивания */
-            align-items: center; /* Вертикальное выравнивание по центру */
-        }
+.subcategory-container {
+    border: 2px solid #232323; /* Серый цвет рамки */
+    border-radius: 8px;
+    margin: 10px; /* Отступы 10 пикселей */
+    text-align: center; /* Центрируем текст */
+    background-color: rgba(35, 35, 35, 0.8);
+    width: calc(100% - 20px); /* Ширина на 20px меньше полной ширины для отступов */
+    box-sizing: border-box; /* Учитываем рамку и отступы в ширине */
+    display: flex; /* Используем Flexbox для выравнивания */
+    flex-direction: column; /* Вертикальная ориентация */
+    align-items: center; /* Центрируем подкатегории */
+    padding: 20px; /* Внутренние отступы */
+}
 
         .subcategory {
             border: none; /* Убираем рамку у подкатегорий */
@@ -50,12 +52,13 @@
             flex-grow: 1; /* Позволяем тексту занимать оставшееся пространство */
         }
 
-        .subcategory img {
-            width: 40%; /* Ширина изображения 20% от рамки */
-            height: auto; /* Автоматическая высота для сохранения пропорций */
-            margin: 0; /* Убираем отступы */
-            padding: 0; /* Убираем внутренние отступы */
-        }
+       .subcategory img {
+    width: 80%; /* Ширина изображения 80% от рамки */
+    height: auto; /* Автоматическая высота для сохранения пропорций */
+    margin: 0; /* Убираем отступы */
+    padding: 0; /* Убираем внутренние отступы */
+    border-radius: 5px; /* Закругление углов изображения */
+}
 
         .subcategory:hover {
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -82,22 +85,20 @@
         }
 
         .subcategory-title {
-            text-align: center;
-            font-weight: bold;
-            color: white;
-            margin-top: 10px;
-        }
+    font-weight: bold;
+    color: white;
+    margin-top: 10px;
+    font-size: 1.5em; /* Увеличен размер шрифта заголовка */
+}
 
         .subcategory-description {
-            text-align: center;
-            margin-top: 10px;
-            color: rgba(255, 255, 255, 0.7); /* Полу-прозрачный текст */
-        }
-
-        .subcategory:hover {
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            transform: translateY(-2px);
-        }
+    color: rgba(255, 255, 255, 0.7); /* Полу-прозрачный текст */
+    margin-top: 5px; /* Уменьшен отступ сверху */
+}
+      .subcategory:hover {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Увеличена тень при наведении */
+    transform: translateY(-5px); /* Увеличен эффект поднятия */
+}
 
         .subcategories {
             display: flex;
