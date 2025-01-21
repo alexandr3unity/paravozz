@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <style>
         /* Градиентный фон для всей страницы */
- body {
+        body {
             margin: 0;
             font-family: Arial, sans-serif;
             text-align: center;
@@ -48,7 +48,8 @@
             cursor: pointer;
             flex-grow: 1;
             display: flex;
-            align-items: center;
+            flex-direction: column; /* Устанавливаем вертикальную ориентацию */
+            align-items: center; /* Центрируем содержимое по горизонтали */
         }
 
         .subcategory img {
@@ -59,8 +60,8 @@
         }
 
         .subcategory-info {
-            margin-left: 10px;
-            text-align: left;
+            text-align: center; /* Центрируем текст */
+            margin-top: 10px; /* Отступ сверху */
         }
 
         .subcategory-title {
@@ -112,8 +113,10 @@
             <div class="subcategory-container">
                 <div class="subcategory">
                     <img src="imej/PODONKI-last-hap.jpg" alt="Описание изображения">
- <div class="subcategory-title">Безникотиновые жидкости</div>
+                    <div class="subcategory-info">
+                        <div class="subcategory-title">Никотиновые жидкости</div>
                         <div class="subcategory-description">60MG 50/50 PG/VG</div>
+                    </div>
                 </div>
             </div>
         </a>
@@ -121,6 +124,10 @@
             <div class="subcategory-container">
                 <div class="subcategory">
                     <img src="imej/PODONK-IANARHIA.jpg" alt="Безникотиновые жидкости">
+                    <div class="subcategory-info">
+                        <div class="subcategory-title">Безникотиновые жидкости</div>
+                        <div class="subcategory-description">60MG 50/50 PG/VG</div>
+                    </div>
                 </div>
             </div>
         </a>
@@ -128,24 +135,36 @@
             <div class="subcategory-container">
                 <div class="subcategory">
                     <img src="imej/PODONKI-ALFA-VAPE.jpg" alt="Премиум жидкости">
+                    <div class="subcategory-info">
+                        <div class="subcategory-title">Премиум жидкости</div>
+                        <div class="subcategory-description">60MG 50/50 PG/VG</div>
+                    </div>
                 </div>
             </div>
         </a>
-          <a href="https://alexandr3unity.github.io/paravozz/premium_liquids" aria-label="Премиум жидкости">
+        <a href="https://alexandr3unity.github.io/paravozz/premium_liquids" aria-label="Премиум жидкости">
             <div class="subcategory-container">
                 <div class="subcategory">
                     <img src="imej/PODONKI-ISTERIKA.jpg" alt="Премиум жидкости">
+                    <div class="subcategory-info">
+                        <div class="subcategory-title">Премиум жидкости</div>
+                        <div class="subcategory-description">60MG 50/50 PG/VG</div>
+                    </div>
                 </div>
             </div>
         </a>
-          <a href="https://alexandr3unity.github.io/paravozz/premium_liquids" aria-label="Премиум жидкости">
+        <a href="https://alexandr3unity.github.io/paravozz/premium_liquids" aria-label="Премиум жидкости">
             <div class="subcategory-container">
                 <div class="subcategory">
                     <img src="imej/PODONKI-MALASIAN.jpg" alt="Премиум жидкости">
+                    <div class="subcategory-info">
+                        <div class="subcategory-title">Премиум жидкости</div>
+                        <div class="subcategory-description">60MG 50/50 PG/VG</div>
+                    </div>
                 </div>
             </div>
         </a>
-          <a href="https://alexandr3unity.github.io/paravozz/premium_liquids" aria-label="Премиум жидкости">
+        <a href="https://alexandr3unity.github.io/paravozz/premium_liquids" aria-label="Премиум жидкости">
             <div class="subcategory-container">
                 <div class="subcategory">
                     <img src="imej/PODONKI-VINTAJE.jpg" alt="Премиум жидкости">
