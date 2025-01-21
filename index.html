@@ -292,27 +292,39 @@
                                   </a>`;
         });
 
-        let currentIndex = 0;
-        const itemsToShow = 2;
-        const carouselInner = document.getElementById('carouselInner');
-        let startX = 0;
+      let currentIndex = 0;
+const itemsToShow = 2;
 
-        carouselInner.addEventListener('touchstart', (e) => {
-            startX = e.touches[0].pageX;
-        });
+function moveCarousel(direction) {
+    const items = document.querySelectorAll('.carousel-item');
+    currentIndex = (currentIndex + direction + items.length) % items.length;
+    const offset = -(currentIndex * (100 / itemsToShow));
+    document.getElementById('carouselInner').style.transform = `translateX(${offset}%)`;
+}
 
-        carouselInner.addEventListener('touchmove', (e) => {
-            e.preventDefault();
-        });
+// Функция для автоперелистывания карусели
+function autoMoveCarousel() {
+    moveCarousel(1);  // Перелистываем на один элемент вперед
+}
 
-        carouselInner.addEventListener('touchend', (e) => {
-            const endX = e.changedTouches[0].pageX;
-            if (startX > endX + 50) {
-                moveCarousel(1); // Свайп влево
-            } else if (startX < endX - 50) {
-                moveCarousel(-1); // Свайп вправо
-            }
-        });
+// Автоматическое перелистывание карусели каждые 5 секунд
+setInterval(autoMoveCarousel, 5000);
+
+// Слушаем события жестов
+let touchStartX = 0;
+
+document.querySelector('.carousel').addEventListener('touchstart', function(event) {
+    touchStartX = event.touches[0].clientX;
+});
+
+document.querySelector('.carousel').addEventListener('touchend', function(event) {
+    const touchEndX = event.changedTouches[0].clientX;
+    if (touchStartX > touchEndX) {
+        moveCarousel(1);  // Смахивание влево
+    } else {
+        moveCarousel(-1);  // Смахивание вправо
+    }
+});
 
         function moveCarousel(direction) {
             const items = document.querySelectorAll('.carousel-item');
