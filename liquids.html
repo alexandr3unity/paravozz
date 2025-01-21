@@ -49,25 +49,26 @@
         }
 
         /* Стили для рамки подкатегорий */
-         .subcategory-container {
-            border: 2px solid #232323; /* Серый цвет рамки */
-            border-radius: 8px;
-            margin: 10px; /* Отступы 10 пикселей */
-            text-align: left; /* Выравнивание текста влево */
-            background-color: rgba(35, 35, 35, 0.8);
-            width: calc(100% - 20px); /* Ширина на 20px меньше полной ширины для отступов */
-            box-sizing: border-box; /* Учитываем рамку и отступы в ширине */
-            display: flex; /* Используем Flexbox для выравнивания */
-            align-items: center; /* Вертикальное выравнивание по центру */
-        }
+      .subcategory {
+    border: none; /* Убираем рамку у подкатегорий */
+    padding: 10px;
+    transition: box-shadow 0.3s, transform 0.3s;
+    cursor: pointer;
+    flex-grow: 1; /* Позволяем тексту занимать оставшееся пространство */
+    display: flex; /* Используем Flexbox для выравнивания */
+    align-items: center; /* Вертикальное выравнивание по центру */
+}
 
-        .subcategory {
-            border: none; /* Убираем рамку у подкатегорий */
-            padding: 10px;
-            transition: box-shadow 0.3s, transform 0.3s;
-            cursor: pointer;
-            flex-grow: 1; /* Позволяем тексту занимать оставшееся пространство */
-        }
+.subcategory-title,
+.subcategory-description {
+    margin-left: 10px; /* Отступ слева от изображения */
+}
+
+/* Добавим дополнительный стиль для текста */
+.subcategory-title {
+    margin-top: -10px; /* Поднимаем текст на 10 пикселей выше */
+}
+
 
         .subcategory img {
             width: 40%; /* Ширина изображения 20% от рамки */
