@@ -11,9 +11,9 @@
             margin: 0;
             padding: 0;
             height: 100vh;
-            background: linear-gradient(to right, #6a11cb, #2575fc); /* Градиент от фиолетового к синему */
-            color: white; /* Цвет текста */
-            font-family: Arial, sans-serif; /* Шрифт */
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: white;
+            font-family: Arial, sans-serif;
         }
 
         header {
@@ -22,52 +22,59 @@
         }
 
         h1 {
-            margin: 0; /* Убираем отступы у заголовка */
+            margin: 0;
         }
 
-        /* Стили для subcategory */
+        /* Стили для рамки подкатегорий */
+        .subcategory-container {
+            border: 2px solid #808080; /* Серый цвет рамки */
+            border-radius: 8px;
+            padding: 10px;
+            margin: 10px 20px; /* Отступы по вертикали и горизонтали */
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.8);
+            width: calc(100% - 40px); /* Ширина на 40px меньше полной ширины для отступов */
+            box-sizing: border-box; /* Учитываем рамку и отступы в ширине */
+        }
+
         .subcategory {
-            border: 1px solid #ccc; /* Рамка вокруг каждой категории */
-            border-radius: 8px; /* Закругление углов рамки */
-            padding: 10px; /* Отступ внутри рамки */
-            margin: 10px; /* Отступ между категориями */
-            text-align: center; /* Центрирование текста */
-            transition: box-shadow 0.3s, transform 0.3s; /* Плавный переход для эффекта при наведении */
-            background-color: rgba(255, 255, 255, 0.8); /* Полупрозрачный белый фон для категорий */
-            cursor: pointer; /* Курсор указывает на интерактивность */
+            border: none; /* Убираем рамку у подкатегорий */
+            padding: 10px;
+            transition: box-shadow 0.3s, transform 0.3s;
+            cursor: pointer;
         }
 
         .subcategory:hover {
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Эффект тени при наведении */
-            transform: translateY(-2px); /* Легкий подъем при наведении */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transform: translateY(-2px);
         }
 
         img {
-            max-width: 100%; /* Адаптивное изображение */
-            height: auto; /* Автоматическая высота */
-            border-radius: 5px; /* Закругление углов изображений */
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
         }
 
         .subcategories {
-            display: flex; /* Используем flex для выравнивания */
-            flex-wrap: wrap; /* Позволяем категориям переноситься на новую строку */
-            justify-content: center; /* Центрируем категории */
-            padding: 20px; /* Добавляем отступы вокруг категорий */
+            display: flex;
+            flex-direction: column; /* Устанавливаем вертикальную ориентацию */
+            align-items: center; /* Центрируем подкатегории по горизонтали */
+            padding: 20px;
         }
 
         .back-button {
-            background-color: #4CAF50; /* Зеленый цвет */
+            background-color: #4CAF50;
             color: white;
             padding: 10px 20px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             font-size: 1.2em;
-            margin-top: 20px; /* Отступ сверху */
+            margin-top: 20px;
         }
 
         .back-button:hover {
-            background-color: #45a049; /* Темный оттенок при наведении */
+            background-color: #45a049;
         }
     </style>
 </head>
@@ -79,40 +86,29 @@
     <button onclick="window.location.href='https://alexandr3unity.github.io/paravozz/';" class="back-button">Назад</button>
 
     <section class="subcategories">
-      <a href="https://alexandr3unity.github.io/paravozz/nicotine_liquids" aria-label="Никотиновые жидкости">
-    <div class="subcategory">
-        <img src="imej/PODONKI-last-hap.jpg" alt="Описание изображения">
-        <div>Никотиновые жидкости</div>
-    </div>
-     </a>
+        <a href="https://alexandr3unity.github.io/paravozz/nicotine_liquids" aria-label="Никотиновые жидкости">
+            <div class="subcategory-container">
+                <div class="subcategory">
+                    <img src="imej/PODONKI-last-hap.jpg" alt="Описание изображения">
+                    <div>Никотиновые жидкости</div>
+                </div>
+            </div>
+        </a>
         <a href="https://alexandr3unity.github.io/paravozz/non_nicotine_liquids" aria-label="Безникотиновые жидкости">
-            <div class="subcategory">
-                <img src="{{ url_for('static', filename='non-nicotine-liquids-icon.png') }}" alt="Безникотиновые жидкости">
-                <div>Безникотиновые жидкости</div>
+            <div class="subcategory-container">
+                <div class="subcategory">
+                    <img src="{{ url_for('static', filename='non-nicotine-liquids-icon.png') }}" alt="Безникотиновые жидкости">
+                    <div>Безникотиновые жидкости</div>
+                </div>
             </div>
         </a>
-
         <a href="https://alexandr3unity.github.io/paravozz/premium_liquids" aria-label="Премиум жидкости">
-            <div class="subcategory">
-                <img src="{{ url_for('static', filename='premium-liquids-icon.png') }}" alt="Премиум жидкости">
-                <div>Премиум жидкости</div>
+            <div class="subcategory-container">
+                <div class="subcategory">
+                    <img src="{{ url_for('static', filename='premium-liquids-icon.png') }}" alt="Премиум жидкости">
+                    <div>Премиум жидкости</div>
+                </div>
             </div>
-        </a>
-
-        <!-- Новые категории -->
-        <a href="https://alexandr3unity.github.io/paravozz/flavored_liquids" aria-label="Жидкости с ароматизаторами">
-            <div class="subcategory">
-                <img src="{{ url_for('static', filename='flavored-liquids-icon.png') }}" alt="Жидкости с ароматизаторами">
-                <div>Жидкости с ароматизаторами</div>
-            </div>
-        </a>
-
-        <a href="https://alexandr3unity.github.io/paravozz/organic_liquids" aria-label="Органические жидкости">
-            <div class="subcategory">
-                <img src="{{ url_for('static', filename='organic-liquids-icon.png') }}" alt="Органические жидкости">
-                <div>Органические жидкости</div>
-            </div>
-        </a>
        
     </section>
 </body>
