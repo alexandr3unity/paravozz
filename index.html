@@ -98,18 +98,40 @@
             transition: transform 0.5s ease;
         }
 
-        .carousel-item {
-            min-width: 25%;
-            padding: 10px;
-            background-color: #f4f4f4;
-            border: 1px solid #ccc;
-            margin-right: 10px;
-            border-radius: 8px;
-            height: 150px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+       .carousel-item {
+    min-width: 25%;
+    padding: 10px;
+    background-color: rgba(244, 244, 244, 0.8); /* Полупрозрачный фон для текста */
+    border: 1px solid #ccc;
+    margin-right: 10px;
+    border-radius: 8px;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative; /* Для абсолютного позиционирования текста */
+    overflow: hidden; /* Скрыть переполнение */
+}
+
+.carousel-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('путь/к/вашему/изображению.jpg'); /* Укажите путь к вашему изображению */
+    background-size: cover;
+    background-position: center;
+    opacity: 0.5; /* Прозрачность фона */
+    z-index: 0; /* Поместить за текст */
+}
+
+.carousel-item > div {
+    position: relative; /* Для позиционирования текста над фоном */
+    z-index: 1; /* Поместить текст поверх фона */
+}
+
 
         .profile {
             display: flex;
