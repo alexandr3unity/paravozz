@@ -7,17 +7,17 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <style>
         /* Градиентный фон для всей страницы */
-         body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-image: url('imej/fon.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            height: 100vh;
-            width: 100vw;
-        }
+ body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        text-align: center;
+        background-image: url('imej/fon.jpg');
+        background-size: auto; /* Change to auto for repeating */
+        background-position: center;
+        background-repeat: repeat; /* Allow the background to repeat */
+        min-height: 100vh; /* Use min-height instead of height */
+        width: 100vw;
+    }
 
         header {
             text-align: center;
