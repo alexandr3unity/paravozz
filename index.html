@@ -228,6 +228,12 @@
                 font-size: 1.2em;
             }
         }
+
+             #profile-icon {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+        }
     </style>
 </head>
 
@@ -333,6 +339,43 @@
         function toggleTheme() {
             document.body.classList.toggle('dark-theme');
         }
+
+    <h1>Профиль пользователя</h1>
+    <img id="profile-icon" src="" alt="Фото профиля" />
+    <div id="nickname"></div>
+        document.addEventListener('DOMContentLoaded', function() {
+            const botToken = '<YOUR_BOT_TOKEN>'; // Замените на ваш токен бота
+
+            // Получение данных пользователя из Telegram
+            fetch(`https://api.telegram.org/bot${botToken}/getUpdates`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.ok && data.result.length > 0) {
+                        const user = data.result[0].message.from; // Получаем первого пользователя
+                        document.getElementById('nickname').innerText = `${user.first_name} ${user.last_name}`;
+
+                        // Получение фото профиля
+                        fetch(`https://api.telegram.org/bot${botToken}/getUser ProfilePhotos?user_id=${user.id}`)
+                            .then(response => response.json())
+                            .then(photoData => {
+                                if (photoData.ok && photoData.result.total_count > 0) {
+                                    const photoFileId = photoData.result.photos[0][0].file_id; // Получаем ID первой фотографии
+                                    fetch(`https://api.telegram.org/bot${botToken}/getFile?file_id=${photoFileId}`)
+                                        .then(response => response.json())
+                                        .then(fileData => {
+                                            const photoUrl = `https://api.telegram.org/file/bot${botToken}/${fileData.result.file_path}`;
+                                            document.getElementById('profile-icon').src = photoUrl; // Устанавливаем фото профиля
+                                        });
+                                } else {
+                                    console.log('Нет фото профиля');
+                                }
+                            });
+                    }
+                })
+                .catch(error => console.error('Ошибка:', error));
+        });
+   
+
     </script>
 
 </body>
