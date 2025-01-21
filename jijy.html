@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Пример страницы</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            text-align: center;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        select, button {
+            margin-top: 20px;
+            padding: 10px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Добро пожаловать в наш магазин!</h1>
+    <img src="https://via.placeholder.com/300" alt="Пример изображения">
+    
+    <h2>Выберите размер:</h2>
+    <select id="sizeSelect">
+        <option value="small">Маленький</option>
+        <option value="medium">Средний</option>
+        <option value="large">Большой</option>
+    </select>
+    
+    <br>
+    <button id="addToCartButton">Добавить в корзину</button>
+</div>
+
+<script>
+    document.getElementById('addToCartButton').addEventListener('click', function() {
+        const selectedSize = document.getElementById('sizeSelect').value;
+        alert('Товар добавлен в корзину! Размер: ' + selectedSize);
+    });
+</script>
+
+</body>
+</html>
+
