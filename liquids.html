@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <style>
         /* Градиентный фон для всей страницы */
-       body {
+     body {
             margin: 0;
             font-family: Arial, sans-serif;
             text-align: center;
@@ -32,10 +32,10 @@
         .subcategory-container {
             border: 2px solid #232323; /* Серый цвет рамки */
             border-radius: 8px;
-            margin: 30px 20px; /* Отступы по вертикали и горизонтали */
+            margin: 10px; /* Отступы 10 пикселей */
             text-align: left; /* Выравнивание текста влево */
             background-color: rgba(35, 35, 35, 0.8);
-            width: calc(100% - 10px); /* Ширина на 30px меньше полной ширины для отступов */
+            width: calc(100% - 20px); /* Ширина на 20px меньше полной ширины для отступов */
             box-sizing: border-box; /* Учитываем рамку и отступы в ширине */
             display: flex; /* Используем Flexbox для выравнивания */
             align-items: center; /* Вертикальное выравнивание по центру */
@@ -82,6 +82,7 @@
         .back-button:hover {
             background-color: #45a049;
         }
+        
         
     </style>
 </head>
