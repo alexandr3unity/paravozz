@@ -3,85 +3,171 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Жидкости</title>
+    <title>Устройства</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <style>
+
+        /* Градиентный фон для всей страницы */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-image: url('imej/fon.jpg');
+            background-size: auto;
+            background-position: center;
+            background-repeat: repeat;
+            min-height: 100vh;
+            width: 100vw;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        /* Стили для рамки подкатегорий */
+         .subcategory-container {
+            border: 2px solid #232323; /* Серый цвет рамки */
+            border-radius: 8px;
+            margin: 10px; /* Отступы 10 пикселей */
+            text-align: left; /* Выравнивание текста влево */
+            background-color: rgba(35, 35, 35, 0.8);
+            width: calc(100% - 20px); /* Ширина на 20px меньше полной ширины для отступов */
+            box-sizing: border-box; /* Учитываем рамку и отступы в ширине */
+            display: flex; /* Используем Flexbox для выравнивания */
+            align-items: center; /* Вертикальное выравнивание по центру */
+        }
+
+        .subcategory {
+            border: none; /* Убираем рамку у подкатегорий */
+            padding: 10px;
+            transition: box-shadow 0.3s, transform 0.3s;
+            cursor: pointer;
+            flex-grow: 1; /* Позволяем тексту занимать оставшееся пространство */
+        }
+
+        .subcategory img {
+            width: 40%; /* Ширина изображения 20% от рамки */
+            height: auto; /* Автоматическая высота для сохранения пропорций */
+            margin: 0; /* Убираем отступы */
+            padding: 0; /* Убираем внутренние отступы */
+        }
+
+        .subcategory:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .subcategories {
+            display: flex;
+            flex-direction: column; /* Устанавливаем вертикальную ориентацию */
+            align-items: center; /* Центрируем подкатегории по горизонтали */
+            padding: 20px;
+        }
+
+          .subcategory img {
+            width: 45%;
+            height: auto;
+            margin: 0;
+            padding: 0;
+        }
+
+        .subcategory-info {
+            text-align: center; /* Центрируем текст */
+            margin-top: 10px; /* Отступ сверху */
+        }
+
+        .subcategory-title {
+            text-align: center;
+            font-weight: bold;
+            color: white;
+            margin-top: 10px;
+        }
+
+        .subcategory-description {
+            text-align: center;
+            margin-top: 10px;
+            color: rgba(255, 255, 255, 0.7); /* Полу-прозрачный текст */
+        }
+
+        .subcategory:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .subcategories {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
         .back-button {
-            background-color: #b5ccb6; /* Зеленый цвет */
+            background-color: #4CAF50;
             color: white;
             padding: 10px 20px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             font-size: 1.2em;
-            margin-top: 20px; /* Отступ сверху */
-            position: absolute;
-            left: 20px; /* Расположим кнопку слева */
-            top: 20px; /* Расположим кнопку чуть ниже верха страницы */
+            margin-top: 20px;
         }
 
         .back-button:hover {
-            background-color: #45a049; /* Темный оттенок при наведении */
-        }
-
-        /* Добавьте стиль, аналогичный тому, что в главной странице */
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background: linear-gradient(to right, #83ec66, #1aa166);
-        }
-
-        .header {
-            font-size: 2em;
-            margin: 20px 0;
-        }
-
-        .products {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 30px;
-        }
-
-        .product {
-            width: 200px;
-            background: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-
-        .product img {
-            width: 100%;
-            height: 150px;
-            object-fit: cover;
-            border-radius: 10px;
+            background-color: #45a049;
         }
     </style>
 </head>
 <body>
+    <header>
+        <h1>Жидкости</h1>
+    </header>
 
-    <div class="header">Устройства</div>
-      <button onclick="window.location.href='https://alexandr3unity.github.io/paravozz/';" class="back-button">Назад</button>
+    <button onclick="window.location.href='https://alexandr3unity.github.io/paravozz/';" class="back-button">Назад</button>
 
-    <!-- Список товаров -->
-    <div class="products">
-        <div class="product">
-            <img src="liquid-product1.jpg" alt="устройства 1">
-        </div>
-        <div class="product">
-            <img src="liquid-product2.jpg" alt="устройства 2">
-        </div>
-        <div class="product">
-            <img src="liquid-product3.jpg" alt="Устройства 3">
-        </div>
-        <div class="product">
-            <img src="liquid-product4.jpg" alt="устройства 4">
+    <section class="subcategories">
+<a href="https://alexandr3unity.github.io/paravozz/nicotine_liquids" aria-label="Никотиновые жидкости">
+    <div class="subcategory-container">
+        <div class="subcategory">
+            <img src="imej/boost-3.jpg" alt="Описание изображения">
+                <div class="subcategory-title">GEEKVAPE Aegis Boost 3</div>
+                <div class="subcategory-description">60MG 50/50 PG/VG</div>     
         </div>
     </div>
-
-
+</a>
+        <a href="https://alexandr3unity.github.io/paravozz/non_nicotine_liquids" aria-label="Безникотиновые жидкости">
+            <div class="subcategory-container">
+                <div class="subcategory">
+                    <img src="imej/vmate-pro.jpg" alt="Безникотиновые жидкости">
+                        <div class="subcategory-title">VOOPOO VMATE Pro</div>
+                        <div class="subcategory-description">60MG 50/50 PG/VG</div>
+                    </div>
+                </div>
+            </div>
+        </a>
+        <a href="https://alexandr3unity.github.io/paravozz/premium_liquids" aria-label="Премиум жидкости">
+            <div class="subcategory-container">
+                <div class="subcategory">
+                    <img src="imej/xros4.jpg" alt="Премиум жидкости">
+                        <div class="subcategory-title">Vaporesso XROS 4</div>
+                        <div class="subcategory-description">60MG 50/50 PG/VG</div>
+                    </div>
+                </div>
+            </div>
+        </a><a href="https://alexandr3unity.github.io/paravozz/premium_liquids" aria-label="Премиум жидкости">
+            <div class="subcategory-container">
+                <div class="subcategory">
+                    <img src="imej/xros4mini.jpg" alt="Премиум жидкости">
+                        <div class="subcategory-title">Vaporesso XROS 4 Mini</div>
+                        <div class="subcategory-description">60MG 50/50 PG/VG</div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </section>
 </body>
 </html>
