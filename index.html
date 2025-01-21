@@ -38,127 +38,18 @@
             color: white;
         }
 
-        .category {
-            background-color: #444;
+        /* Основные стили для body */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-image: url('imej/fon.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            width: 100vw;
         }
-
-        .carousel-item {
-            background-color: #555;
-        }
-.categories {
-    display: flex;
-    flex-wrap: wrap; /* Позволяет элементам переноситься на новую строку */
-    justify-content: center; /* Центрирует содержимое */
-    margin: 30px 0;
-}
-
-.category {
-    flex: 1 0 30%; /* Устанавливаем ширину категории в 30% */
-    max-width: 200px; /* Максимальная ширина категории */
-    height: 130px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    border-radius: 10px;
-    margin: 10px;
-    transition: all 0.3s ease;
-}
-
-@media (max-width: 768px) {
-    .category {
-        flex: 1 0 45%; /* Ширина категории для меньших экранов (45%) */
-        max-width: 150px; /* Максимальная ширина для меньших экранов */
-    }
-}
-
-@media (max-width: 480px) {
-    .category {
-        flex: 1 0 100%; /* Ширина категории для мобильных устройств (100%) */
-        max-width: none; /* Убираем максимальную ширину для мобильных устройств */
-    }
-}
-
-
-
-        .categories {
-            display: flex;
-            flex-wrap: nowrap;
-            justify-content: center;
-            margin: 30px 0;
-            overflow-x: auto;
-        }
-
-        .category {
-            flex: 1 0 20%;
-            max-width: 150px;
-            height: 130px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            border-radius: 10px;
-            margin: 10px;
-            transition: all 0.3s ease;
-        }
-
-        .category .category-text {
-            position: absolute;
-            top: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 0.8em;
-            color: rgba(255, 255, 255, 0.7);
-            font-weight: bold;
-            background-color: rgba(0, 0, 0, 0.5);
-            padding: 5px 10px;
-            border-radius: 5px;
-        }
-
-        .category img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: cover;
-            border-radius: 10px;
-        }
-
-        .category a {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            color: transparent;
-            background-color: transparent;
-        }
-
-        .category a:hover .category-text {
-            color: white;
-        }
-
-       body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    text-align: center;
-    background-image: url('imej/fon.jpg'); /* Указываем фоновое изображение */
-    background-size: cover; /* Обеспечиваем, что изображение покрывает весь фон */
-    background-position: center; /* Центрируем изображение */
-    background-repeat: no-repeat; /* Запрещаем повторение изображения */
-    height: 100vh; /* Устанавливаем высоту body на 100% высоты окна */
-    width: 100vw; /* Устанавливаем ширину body на 100% ширины окна */
-}
-
-
 
         .header {
             font-size: 2em;
@@ -269,14 +160,76 @@
             background-color: #45a049;
         }
 
-        @media (max-width: 768px) {
-            .category {
-                flex: 1 0 40%;
-                max-width: 120px;
-            }
+        /* Стили для категорий */
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            grid-auto-rows: 130px;
+            gap: 10px;
+            justify-items: center;
+            margin: 30px 0;
+        }
 
+        .category {
+            background-color: #444;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .category .category-text {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.8em;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: bold;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        .category img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .category a {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: transparent;
+            background-color: transparent;
+        }
+
+        .category a:hover .category-text {
+            color: white;
+        }
+
+        @media (max-width: 768px) {
             .header {
                 font-size: 1.5em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                font-size: 1.2em;
             }
         }
     </style>
@@ -312,15 +265,14 @@
         </div>
     </div>
 
-   <section class="categories">
-    <div class="category" data-link="https://alexandr3unity.github.io/paravozz/liquids" data-image="imej/jidkost.jpg" data-text="Жидкости"></div>
-    <div class="category" data-link="https://alexandr3unity.github.io/paravozz/devices" data-image="imej/ustr.jpg" data-text="Устройства"></div>
-    <div class="category" data-link="snus.html" data-image="imej/snus.jpg" data-text="Снюс"></div>
-    <div class="category" data-link="accessories.html" data-image="imej/ras.jpg" data-text="Расходники"></div>
-    <div class="category" data-link="energy-drinks.html" data-image="imej/energy.jpg" data-text="Энергетики"></div> <!-- Новая категория -->
-    <div class="category" data-link="disposable.html" data-image="imej/disposable.jpg" data-text="Одноразки"></div> <!-- Новая категория -->
-</section>
-
+    <section class="categories">
+        <div class="category" data-link="https://alexandr3unity.github.io/paravozz/liquids" data-image="imej/jidkost.jpg" data-text="Жидкости"></div>
+        <div class="category" data-link="https://alexandr3unity.github.io/paravozz/devices" data-image="imej/ustr.jpg" data-text="Устройства"></div>
+        <div class="category" data-link="snus.html" data-image="imej/snus.jpg" data-text="Снюс"></div>
+        <div class="category" data-link="accessories.html" data-image="imej/ras.jpg" data-text="Расходники"></div>
+        <div class="category" data-link="energy-drinks.html" data-image="imej/energy.jpg" data-text="Энергетики"></div>
+        <div class="category" data-link="disposable.html" data-image="imej/disposable.jpg" data-text="Одноразки"></div>
+    </section>
 
     <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
 
@@ -340,46 +292,36 @@
                                   </a>`;
         });
 
-      let currentIndex = 0;
-const itemsToShow = 2;
-
-function moveCarousel(direction) {
-    const items = document.querySelectorAll('.carousel-item');
-    currentIndex = (currentIndex + direction + items.length) % items.length;
-    const offset = -(currentIndex * (100 / itemsToShow));
-    document.getElementById('carouselInner').style.transform = `translateX(${offset}%)`;
-}
-
-// Функция для автоперелистывания карусели
-function autoMoveCarousel() {
-    moveCarousel(1);  // Перелистываем на один элемент вперед
-}
-
-// Автоматическое перелистывание карусели каждые 5 секунд
-setInterval(autoMoveCarousel, 5000);
-
-// Слушаем события жестов
-let touchStartX = 0;
-
-document.querySelector('.carousel').addEventListener('touchstart', function(event) {
-    touchStartX = event.touches[0].clientX;
-});
-
-document.querySelector('.carousel').addEventListener('touchend', function(event) {
-    const touchEndX = event.changedTouches[0].clientX;
-    if (touchStartX > touchEndX) {
-        moveCarousel(1);  // Смахивание влево
-    } else {
-        moveCarousel(-1);  // Смахивание вправо
-    }
-});
+        let currentIndex = 0;
+        const itemsToShow = 2;
 
         function moveCarousel(direction) {
             const items = document.querySelectorAll('.carousel-item');
             currentIndex = (currentIndex + direction + items.length) % items.length;
             const offset = -(currentIndex * (100 / itemsToShow));
-            carouselInner.style.transform = `translateX(${offset}%)`;
+            document.getElementById('carouselInner').style.transform = `translateX(${offset}%)`;
         }
+
+        function autoMoveCarousel() {
+            moveCarousel(1);
+        }
+
+        setInterval(autoMoveCarousel, 5000);
+
+        let touchStartX = 0;
+
+        document.querySelector('.carousel').addEventListener('touchstart', function(event) {
+            touchStartX = event.touches[0].clientX;
+        });
+
+        document.querySelector('.carousel').addEventListener('touchend', function(event) {
+            const touchEndX = event.changedTouches[0].clientX;
+            if (touchStartX > touchEndX) {
+                moveCarousel(1);
+            } else {
+                moveCarousel(-1);
+            }
+        });
 
         function toggleSearch() {
             const searchContainer = document.querySelector('.search-container');
