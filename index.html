@@ -6,7 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
-        /* Кнопка переключения темы */
+        /* Основные стили */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-image: url('imej/fon.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        .header {
+            font-size: 2em;
+            margin: 20px 0;
+            color: white;
+        }
+
         .theme-toggle {
             position: fixed;
             top: 20px;
@@ -24,107 +42,6 @@
 
         .theme-toggle:hover {
             background-color: #45a049;
-        }
-
-        /* Темная тема */
-        body.dark-theme {
-            background: #333;
-            color: white;
-        }
-
-        .header,
-        .button,
-        .category-text {
-            color: white;
-        }
-
-        .category {
-            background-color: #444;
-        }
-
-        .carousel-item {
-            background-color: #555;
-        }
-
-        .categories {
-            display: flex;
-            flex-wrap: nowrap;
-            justify-content: center;
-            margin: 30px 0;
-            overflow-x: auto;
-        }
-
-        .category {
-            flex: 1 0 20%;
-            max-width: 150px;
-            height: 130px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            border-radius: 10px;
-            margin: 10px;
-            transition: all 0.3s ease;
-        }
-
-        .category .category-text {
-            position: absolute;
-            top: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 0.8em;
-            color: rgba(255, 255, 255, 0.7);
-            font-weight: bold;
-            background-color: rgba(0, 0, 0, 0.5);
-            padding: 5px 10px;
-            border-radius: 5px;
-        }
-
-        .category img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: cover;
-            border-radius: 10px;
-        }
-
-        .category a {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            color: transparent;
-            background-color: transparent;
-        }
-
-        .category a:hover .category-text {
-            color: white;
-        }
-
-       body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    text-align: center;
-    background-image: url('imej/fon.jpg'); /* Указываем фоновое изображение */
-    background-size: cover; /* Обеспечиваем, что изображение покрывает весь фон */
-    background-position: center; /* Центрируем изображение */
-    background-repeat: no-repeat; /* Запрещаем повторение изображения */
-    height: 100vh; /* Устанавливаем высоту body на 100% высоты окна */
-    width: 100vw; /* Устанавливаем ширину body на 100% ширины окна */
-}
-
-
-
-        .header {
-            font-size: 2em;
-            margin: 20px 0;
         }
 
         .search-container {
@@ -156,6 +73,44 @@
 
         .active .search-input {
             display: inline-block;
+        }
+
+        .categories {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 30px 0;
+        }
+
+        .category {
+            flex: 1 0 30%;
+            max-width: 200px;
+            height: 130px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            margin: 10px;
+            transition: all 0.3s ease;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .category .category-text {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.8em;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: bold;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 5px 10px;
+            border-radius: 5px;
         }
 
         .carousel {
@@ -213,33 +168,42 @@
             background-color: #45a049;
         }
 
-        .cart-button {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 10px 15px;
-            background-color: #4CAF50;
-            color: white;
-            border-radius: 50%;
-            font-size: 1.5em;
-            border: 2px solid #fff;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .cart-button:hover {
-            background-color: #45a049;
-        }
-
         @media (max-width: 768px) {
             .category {
-                flex: 1 0 40%;
-                max-width: 120px;
+                flex: 1 0 45%;
+                max-width: 150px;
             }
 
             .header {
                 font-size: 1.5em;
             }
+        }
+
+        @media (max-width: 480px) {
+            .category {
+                flex: 1 0 100%;
+                max-width: none;
+            }
+        }
+
+        /* Темная тема */
+        body.dark-theme {
+            background: #333;
+            color: white;
+        }
+
+        .header,
+        .button,
+        .category-text {
+            color: white;
+        }
+
+        .category {
+            background-color: #444;
+        }
+
+        .carousel-item {
+            background-color: #555;
         }
     </style>
 </head>
@@ -279,6 +243,8 @@
         <div class="category" data-link="https://alexandr3unity.github.io/paravozz/devices" data-image="imej/ustr.jpg" data-text="Устройства"></div>
         <div class="category" data-link="snus.html" data-image="imej/snus.jpg" data-text="Снюс"></div>
         <div class="category" data-link="accessories.html" data-image="imej/ras.jpg" data-text="Расходники"></div>
+        <div class="category" data-link="energy-drinks.html" data-image="imej/energy.jpg" data-text="Энергетики"></div>
+        <div class="category" data-link="disposable.html" data-image="imej/disposable.jpg" data-text="Одноразки"></div>
     </section>
 
     <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
@@ -291,54 +257,41 @@
             const text = category.dataset.text;
 
             category.style.backgroundImage = `url(${image})`;
-            category.style.backgroundSize = 'cover';
-            category.style.backgroundPosition = 'center';
-
             category.innerHTML = `<a href="${link}">
                                     <div class="category-text">${text}</div>
                                   </a>`;
         });
 
-      let currentIndex = 0;
-const itemsToShow = 2;
-
-function moveCarousel(direction) {
-    const items = document.querySelectorAll('.carousel-item');
-    currentIndex = (currentIndex + direction + items.length) % items.length;
-    const offset = -(currentIndex * (100 / itemsToShow));
-    document.getElementById('carouselInner').style.transform = `translateX(${offset}%)`;
-}
-
-// Функция для автоперелистывания карусели
-function autoMoveCarousel() {
-    moveCarousel(1);  // Перелистываем на один элемент вперед
-}
-
-// Автоматическое перелистывание карусели каждые 5 секунд
-setInterval(autoMoveCarousel, 5000);
-
-// Слушаем события жестов
-let touchStartX = 0;
-
-document.querySelector('.carousel').addEventListener('touchstart', function(event) {
-    touchStartX = event.touches[0].clientX;
-});
-
-document.querySelector('.carousel').addEventListener('touchend', function(event) {
-    const touchEndX = event.changedTouches[0].clientX;
-    if (touchStartX > touchEndX) {
-        moveCarousel(1);  // Смахивание влево
-    } else {
-        moveCarousel(-1);  // Смахивание вправо
-    }
-});
+        let currentIndex = 0;
+        const itemsToShow = 2;
 
         function moveCarousel(direction) {
             const items = document.querySelectorAll('.carousel-item');
             currentIndex = (currentIndex + direction + items.length) % items.length;
             const offset = -(currentIndex * (100 / itemsToShow));
-            carouselInner.style.transform = `translateX(${offset}%)`;
+            document.getElementById('carouselInner').style.transform = `translateX(${offset}%)`;
         }
+
+        function autoMoveCarousel() {
+            moveCarousel(1);
+        }
+
+        setInterval(autoMoveCarousel, 5000);
+
+        let touchStartX = 0;
+
+        document.querySelector('.carousel').addEventListener('touchstart', function (event) {
+            touchStartX = event.touches[0].clientX;
+        });
+
+        document.querySelector('.carousel').addEventListener('touchend', function (event) {
+            const touchEndX = event.changedTouches[0].clientX;
+            if (touchStartX > touchEndX) {
+                moveCarousel(1);
+            } else {
+                moveCarousel(-1);
+            }
+        });
 
         function toggleSearch() {
             const searchContainer = document.querySelector('.search-container');
@@ -347,7 +300,7 @@ document.querySelector('.carousel').addEventListener('touchend', function(event)
             searchInput.focus();
         }
 
-        document.addEventListener('click', function(event) {
+        document.addEventListener('click', function (event) {
             const searchContainer = document.querySelector('.search-container');
             if (!searchContainer.contains(event.target)) {
                 searchContainer.classList.remove('active');
@@ -358,7 +311,6 @@ document.querySelector('.carousel').addEventListener('touchend', function(event)
             document.body.classList.toggle('dark-theme');
         }
     </script>
-
 </body>
 
 </html>
