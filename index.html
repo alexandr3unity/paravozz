@@ -185,18 +185,19 @@
             background-position: center;
         }
 
-        .category .category-text {
-            position: absolute;
-            top: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 0.8em;
-            color: rgba(255, 255, 255, 0.7);
-            font-weight: bold;
-            background-color: rgba(0, 0, 0, 0.5);
-            padding: 5px 10px;
-            border-radius: 5px;
-        }
+       .category .category-text {
+    position: absolute;
+    bottom: 10px; /* Перемещаем текст вниз */
+    left: 10px; /* Перемещаем текст влево */
+    transform: translateX(0); /* Убираем горизонтальное смещение */
+    font-size: 0.27em; /* Уменьшаем размер шрифта */
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: bold;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
 
         .category a {
             position: absolute;
