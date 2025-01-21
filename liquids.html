@@ -78,14 +78,17 @@
 
         .subcategory-info {
             text-align: center; /* Центрируем текст */
-            margin-top: 0px; /* Отступ сверху */
-            margin-left: 30px;
+            margin-top: 10px; /* Отступ сверху */
         }
 
         .subcategory-title {
-            text-align: top;
-            font-weight: bold;
-            color: white;
+    position: absolute; /* Позиционируем относительно product-container */
+    top: 10px; /* Отступ сверху */
+    right: 10px; /* Отступ справа */
+    background-color: rgba(0, 0, 0, 0.7); /* Полу-прозрачный фон для рамки */
+    border-radius: 5px; /* Закругленные углы рамки */
+    padding: 10px; /* Отступы вокруг текста */
+    color: white; /* Цвет текста */
         }
 
         .subcategory-description {
