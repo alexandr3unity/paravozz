@@ -48,39 +48,39 @@
             margin: 0;
         }
 
-       .subcategory-container {
-    border: 2px solid #232323; /* Серый цвет рамки */
+      .subcategory-container {
+    border: 2px solid #232323; /* Цвет рамки */
     border-radius: 8px;
     margin: 10px; /* Отступы 10 пикселей */
     text-align: left; /* Выравнивание текста влево */
     background-color: rgba(35, 35, 35, 0.8);
     width: calc(100% - 20px); /* Ширина на 20px меньше полной ширины для отступов */
     box-sizing: border-box; /* Учитываем рамку и отступы в ширине */
-    display: flex; /* Используем Flexbox для выравнивания */
-    align-items: center; /* Вертикальное выравнивание по центру */
+    padding: 10px; /* Внутренние отступы */
+    position: relative; /* Устанавливаем относительное позиционирование */
 }
 
 .subcategory {
     border: none; /* Убираем рамку у подкатегорий */
-    padding: 10px;
-    transition: box-shadow 0.3s, transform 0.3s;
-    cursor: pointer;
-    flex-grow: 1; /* Позволяем тексту занимать оставшееся пространство */
+    padding: 0; /* Убираем внутренние отступы */
     display: flex; /* Используем Flexbox для выравнивания */
-    align-items: center; /* Вертикальное выравнивание по центру */
+    align-items: flex-start; /* Вертикальное выравнивание текста к верхней части */
 }
 
-.subcategory-title,
+.subcategory-title {
+    margin: 0; /* Убираем отступы */
+    position: absolute; /* Абсолютное позиционирование для заголовка */
+    top: 10px; /* Расположение заголовка от верхней части рамки */
+    left: 10px; /* Отступ слева от рамки */
+    background-color: rgba(35, 35, 35, 0.8); /* Фон для заголовка */
+    padding: 0 5px; /* Горизонтальные отступы для фона */
+    z-index: 1; /* Убедимся, что заголовок выше других элементов */
+}
+
 .subcategory-description {
+    margin-top: 25px; /* Отступ сверху для описания, чтобы не перекрывать заголовок */
     margin-left: 10px; /* Отступ слева от изображения */
 }
-
-/* Добавим дополнительный стиль для текста */
-.subcategory-title {
-    margin-top: -150px; /* Поднимаем текст на 10 пикселей выше */
-}
-
-
 
         .subcategory img {
             width: 40%; /* Ширина изображения 20% от рамки */
