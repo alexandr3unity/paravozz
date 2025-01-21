@@ -6,6 +6,25 @@
     <title>Жидкости</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <style>
+
+
+        .subcategory {
+    display: flex; /* Use flexbox for layout */
+    align-items: center; /* Center align items vertically */
+    padding: 10px; /* Add padding */
+}
+
+.subcategory img {
+    width: 40%; /* Width of the image */
+    height: auto; /* Keep aspect ratio */
+    margin-right: 20px; /* Space between image and text */
+}
+
+.subcategory-info {
+    text-align: left; /* Align text to the left */
+    margin-top: 0; /* Remove top margin */
+}
+
         /* Градиентный фон для всей страницы */
         body {
             margin: 0;
