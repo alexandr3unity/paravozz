@@ -8,21 +8,28 @@
     <style>
 
 
-        .subcategory {
-    display: flex; /* Use flexbox for layout */
-    align-items: center; /* Center align items vertically */
-    padding: 10px; /* Add padding */
+       .subcategory-info {
+    text-align: left; /* Выравнивание текста влево */
+    margin-bottom: 10px; /* Отступ снизу для разделения с изображением */
+}
+
+.subcategory-title {
+    font-weight: bold;
+    color: white;
+}
+
+.subcategory-description {
+    color: rgba(255, 255, 255, 0.7); /* Полу-прозрачный текст */
+}
+
+.subcategory {
+    display: flex; /* Используем Flexbox для выравнивания */
+    align-items: center; /* Вертикальное выравнивание по центру */
 }
 
 .subcategory img {
-    width: 40%; /* Width of the image */
-    height: auto; /* Keep aspect ratio */
-    margin-right: 20px; /* Space between image and text */
-}
-
-.subcategory-info {
-    text-align: left; /* Align text to the left */
-    margin-top: 0; /* Remove top margin */
+    width: 100%; /* Ширина изображения */
+    height: auto; /* Автоматическая высота для сохранения пропорций */
 }
 
         /* Градиентный фон для всей страницы */
