@@ -7,52 +7,55 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
         /* Кнопка переключения темы */
-    .theme-toggle {
-        position: fixed;
-        top: 20px;
-        left: 20px; /* Размещаем кнопку слева */
-        background-color: #4CAF50;
-        color: white;
-        border-radius: 50%;
-        font-size: 3em; /* Увеличиваем размер кнопки */
-        padding: 15px;
-        cursor: pointer;
-        z-index: 1000;
-        border: none;
-        transition: background-color 0.3s;
-    }
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 50%;
+            font-size: 3em;
+            padding: 15px;
+            cursor: pointer;
+            z-index: 1000;
+            border: none;
+            transition: background-color 0.3s;
+        }
 
-    .theme-toggle:hover {
-        background-color: #45a049;
-    }
+        .theme-toggle:hover {
+            background-color: #45a049;
+        }
 
-    /* Темная тема */
-    body.dark-theme {
-        background: #333;
-        color: white;
-    }
+        /* Темная тема */
+        body.dark-theme {
+            background: #333;
+            color: white;
+        }
 
-    .header, .button, .category-text {
-        color: white; /* Цвет шрифта для темной темы */
-    }
-
-    .category {
-        background-color: #444; /* Цвет фона для категорий в темной теме */
-    }
-
-    .carousel-item {
-        background-color: #555; /* Фон карусели */
-    }
-        .categories {
-            display: flex;
-            flex-wrap: nowrap; /* Горизонтальное расположение элементов */
-            justify-content: center;
-            margin: 30px 0;
-            overflow-x: auto; /* Добавим горизонтальную прокрутку, если не помещаются */
+        .header,
+        .button,
+        .category-text {
+            color: white;
         }
 
         .category {
-            flex: 1 0 20%; /* Категории могут быть растянуты или сжаты в пределах 20% */
+            background-color: #444;
+        }
+
+        .carousel-item {
+            background-color: #555;
+        }
+
+        .categories {
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: center;
+            margin: 30px 0;
+            overflow-x: auto;
+        }
+
+        .category {
+            flex: 1 0 20%;
             max-width: 150px;
             height: 130px;
             display: flex;
@@ -83,11 +86,10 @@
         .category img {
             max-width: 100%;
             max-height: 100%;
-            object-fit: cover; /* Сохранение пропорций изображения */
-            border-radius: 10px; /* Сглаживаем углы изображения */
+            object-fit: cover;
+            border-radius: 10px;
         }
 
-        /* Новые стили для ссылки */
         .category a {
             position: absolute;
             top: 0;
@@ -97,13 +99,13 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            text-decoration: none; /* Убираем подчеркивание текста */
-            color: transparent; /* Делаем текст прозрачным */
-            background-color: transparent; /* Делаем фон прозрачным */
+            text-decoration: none;
+            color: transparent;
+            background-color: transparent;
         }
 
         .category a:hover .category-text {
-            color: white; /* Изменяем цвет текста при наведении */
+            color: white;
         }
 
         body {
@@ -157,7 +159,7 @@
 
         .carousel-inner {
             display: flex;
-            transition: transform 0.5s ease; /* Плавное перемещение */
+            transition: transform 0.5s ease;
         }
 
         .carousel-item {
@@ -171,25 +173,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-        }
-
-        .carousel-button {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(255, 255, 255, 0.7);
-            border: none;
-            cursor: pointer;
-            padding: 10px;
-            font-size: 1.5em;
-        }
-
-        .carousel-button.prev {
-            left: 10px;
-        }
-
-        .carousel-button.next {
-            right: 10px;
         }
 
         .profile {
@@ -223,7 +206,6 @@
             background-color: #45a049;
         }
 
-        /* Стиль для кнопки корзины */
         .cart-button {
             position: fixed;
             top: 20px;
@@ -242,10 +224,9 @@
             background-color: #45a049;
         }
 
-        /* Адаптация для мобильных устройств */
         @media (max-width: 768px) {
             .category {
-                flex: 1 0 40%; /* Категории занимают 40% ширины на маленьких экранах */
+                flex: 1 0 40%;
                 max-width: 120px;
             }
 
@@ -272,9 +253,7 @@
         </a>
     </div>
 
-   
-
-    <div class="carousel">
+    <div class="carousel" id="carousel">
         <div class="carousel-inner" id="carouselInner">
             <div class="carousel-item">🎉 Мы открылись! Специальные предложения на все товары!</div>
             <div class="carousel-item">🚚 Новая поставка! Не пропустите новые жидкости и устройства!</div>
@@ -286,8 +265,6 @@
             <div class="carousel-item">📍 Скидки на популярные модели</div>
             <div class="carousel-item">Обновление законодательства: "Будьте в курсе!</div>
         </div>
-        <button class="carousel-button prev" onclick="moveCarousel(-1)">❮</button>
-        <button class="carousel-button next" onclick="moveCarousel(1)">❯</button>
     </div>
 
     <section class="categories">
@@ -297,12 +274,10 @@
         <div class="category" data-link="accessories.html" data-image="imej/ras.jpg" data-text="Расходники"></div>
     </section>
 
-
-     <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+    <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
 
     <script>
         const categories = document.querySelectorAll('.category');
-
         categories.forEach(category => {
             const link = category.dataset.link;
             const image = category.dataset.image;
@@ -316,32 +291,43 @@
                                     <div class="category-text">${text}</div>
                                   </a>`;
         });
-    </script>
 
-    <!-- Кнопка корзины -->
-    <a href="https://alexandr3unity.github.io/paravozz/cart">
-        <button class="cart-button">🛒</button>
-    </a>
-
-    <script>
         let currentIndex = 0;
         const itemsToShow = 2;
+        const carouselInner = document.getElementById('carouselInner');
+        let startX = 0;
+
+        carouselInner.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].pageX;
+        });
+
+        carouselInner.addEventListener('touchmove', (e) => {
+            e.preventDefault();
+        });
+
+        carouselInner.addEventListener('touchend', (e) => {
+            const endX = e.changedTouches[0].pageX;
+            if (startX > endX + 50) {
+                moveCarousel(1); // Свайп влево
+            } else if (startX < endX - 50) {
+                moveCarousel(-1); // Свайп вправо
+            }
+        });
 
         function moveCarousel(direction) {
             const items = document.querySelectorAll('.carousel-item');
             currentIndex = (currentIndex + direction + items.length) % items.length;
             const offset = -(currentIndex * (100 / itemsToShow));
-            document.getElementById('carouselInner').style.transform = `translateX(${offset}%)`;
+            carouselInner.style.transform = `translateX(${offset}%)`;
         }
 
-               function toggleSearch() {
+        function toggleSearch() {
             const searchContainer = document.querySelector('.search-container');
             searchContainer.classList.toggle('active');
             const searchInput = document.querySelector('.search-input');
             searchInput.focus();
         }
 
-        // Закрытие поисковой строки при клике вне области
         document.addEventListener('click', function(event) {
             const searchContainer = document.querySelector('.search-container');
             if (!searchContainer.contains(event.target)) {
@@ -349,14 +335,11 @@
             }
         });
 
-
-         function toggleTheme() {
-        document.body.classList.toggle('dark-theme');
-    }
-        
+        function toggleTheme() {
+            document.body.classList.toggle('dark-theme');
+        }
     </script>
+
 </body>
 
 </html>
-
-
