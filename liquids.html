@@ -59,11 +59,11 @@
     }
 
 .subcategory {
-    border: none; /* Убираем рамку у подкатегорий */
-    padding: 0; /* Убираем внутренние отступы */
-    display: flex; /* Используем Flexbox для выравнивания */
-    align-items: flex-start; /* Вертикальное выравнивание текста к верхней части */
+    display: flex; /* Используем Flexbox для выравнивания элементов по горизонтали */
+    align-items: center; /* Центрируем элементы по вертикали */
+    position: relative; /* Для последующего позиционирования цены */
 }
+
 
 .subcategory-title {
     margin: 0; /* Убираем отступы */
@@ -84,12 +84,11 @@
 }
 
 
-         .subcategory img {
-        width: 45%; /* Ширина изображения */
-        height: auto; /* Автоматическая высота для сохранения пропорций */
-        margin: 0 auto; /* Центрирование изображения */
-        display: block;
-    }
+        .subcategory img {
+    width: 45%; /* Ширина изображения */
+    height: auto; /* Автоматическая высота для сохранения пропорций */
+    margin-right: 20px; /* Отступ между изображением и ценой */
+}
 
         .subcategory:hover {
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -161,15 +160,12 @@
             margin-bottom: 1px; /* Отступ снизу для разделения с заголовком */
         }
 
- .subcategory-price {
+.subcategory-price {
     color: #fff; /* Цвет текста */
     font-size: 1.1em; /* Размер шрифта */
     padding: 5px 10px; /* Внутренние отступы */
     border-radius: 8px; /* Скругленные углы */
     background-color: rgba(0, 0, 0, 0.6); /* Полупрозрачный черный фон */
-    position: absolute; /* Абсолютное позиционирование */
-    bottom: 10px; /* Расположение внизу */
-    left: 10px; /* Расположение слева */
 }
         
     </style>
@@ -185,13 +181,13 @@
     <section class="subcategories">
      <a href="https://alexandr3unity.github.io/paravozz/nicotine_liquids" aria-label="Безникотиновые жидкости">
         <div class="subcategory-container">
-            <div class="subcategory">
-                <img src="imej/PODONKI-last-hap.jpg" alt="Безникотиновые жидкости">
-                <div class="subcategory-description">PODONKI-last-hap </div>
-                     <div class="subcategory-description">60MG 50/50 PG/VG</div>
-                   <div class="subcategory-price">15руб</div>
-            </div>
-        </div>
+       <div class="subcategory">
+         <div class="subcategory-price">15руб</div>
+           <img src="imej/PODONKI-last-hap.jpg" alt="Безникотиновые жидкости">
+           <div class="subcategory-description">PODONKI-last-hap</div>
+           <div class="subcategory-description">60MG 50/50 PG/VG</div>
+         </div>
+      </div>
     </a>
         <a href="https://alexandr3unity.github.io/paravozz/non_nicotine_liquids" aria-label="Безникотиновые жидкости">
             <div class="subcategory-container">
