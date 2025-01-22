@@ -59,9 +59,12 @@
     }
 
 .subcategory {
-    display: flex; /* Используем Flexbox для выравнивания элементов по горизонтали */
-    align-items: center; /* Центрируем элементы по вертикали */
-    position: relative; /* Для последующего позиционирования цены */
+    border: none; /* Убираем рамку у подкатегорий */
+    padding: 0; /* Убираем внутренние отступы */
+    display: flex; /* Используем Flexbox для выравнивания */
+    align-items: flex-start; /* Вертикальное выравнивание текста к верхней части */
+    justify-content: flex-start; /* Выравнивание по горизонтали */
+    position: relative; /* Для позиционирования внутри контейнера */
 }
 
 
@@ -166,6 +169,8 @@
     padding: 5px 10px; /* Внутренние отступы */
     border-radius: 8px; /* Скругленные углы */
     background-color: rgba(0, 0, 0, 0.6); /* Полупрозрачный черный фон */
+    margin-left: 10px; /* Отступ слева от изображения */
+    align-self: flex-end; /* Размещение внизу справа */
 }
         
     </style>
@@ -180,14 +185,14 @@
 
     <section class="subcategories">
      <a href="https://alexandr3unity.github.io/paravozz/nicotine_liquids" aria-label="Безникотиновые жидкости">
-        <div class="subcategory-container">
-       <div class="subcategory">
-         <div class="subcategory-price">15руб</div>
+       <div class="subcategory-container">
+         <div class="subcategory">
            <img src="imej/PODONKI-last-hap.jpg" alt="Безникотиновые жидкости">
-           <div class="subcategory-description">PODONKI-last-hap</div>
-           <div class="subcategory-description">60MG 50/50 PG/VG</div>
-         </div>
-      </div>
+             <div class="subcategory-description">PODONKI-last-hap</div>
+             <div class="subcategory-description">60MG 50/50 PG/VG</div>
+             <div class="subcategory-price">15руб</div>
+          </div>
+       </div>
     </a>
         <a href="https://alexandr3unity.github.io/paravozz/non_nicotine_liquids" aria-label="Безникотиновые жидкости">
             <div class="subcategory-container">
