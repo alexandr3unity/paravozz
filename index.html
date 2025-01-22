@@ -249,6 +249,36 @@
                 font-size: 1.2em;
             }
         }
+
+/* Панель с кнопками */
+.bottom-panel {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #4CAF50;
+    display: flex;
+    justify-content: space-around; /* Равномерное распределение кнопок */
+    padding: 10px 0;
+    z-index: 1000; /* Для обеспечения того, чтобы панель была сверху */
+}
+
+/* Стили для кнопок */
+.bottom-button {
+    background-color: #ffffff;
+    color: #4CAF50;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.2em;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.bottom-button:hover {
+    background-color: #45a049;
+    color: white;
+}
     </style>
 </head>
 
@@ -280,6 +310,14 @@
         <div class="category" data-link="energy-drinks.html" data-image="imej/energetik.jpg" data-text="Энергетики"></div>
         <div class="category" data-link="disposable.html" data-image="imej/odnorazki.jpg" data-text="Одноразки"></div>
     </section>
+
+    <div class="bottom-panel">
+          <button class="bottom-button">Кнопка 1</button>
+          <button class="bottom-button">Кнопка 2</button>
+          <button class="bottom-button">Кнопка 3</button>
+          <button class="bottom-button">Кнопка 4</button>
+          <button class="bottom-button">Кнопка 5</button>
+    </div>
 
     
 
