@@ -4,190 +4,139 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Никотиновые жидкости</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="style.css">
     <style>
-        /* Общие стили */
         body {
-            margin: 0;
             font-family: Arial, sans-serif;
-            text-align: center;
-            background: linear-gradient(to right, #2d4684, #1aa166);
         }
 
         .header {
-            font-size: 2em;
-            margin: 20px 0;
+            font-size: 24px;
+            margin-bottom: 20px;
         }
 
-        .back-button {
-            background-color: #b5ccb6; /* Зеленый цвет */
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1.2em;
-            margin-top: 20px; /* Отступ сверху */
-            position: absolute;
-            left: 20px; /* Расположим кнопку слева */
-            top: 20px; /* Расположим кнопку чуть ниже верха страницы */
-        }
-
-        .back-button:hover {
-            background-color: #45a049; /* Темный оттенок при наведении */
-        }
-
-        /* Стили для корзины */
         .cart {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background-color: #28a745;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 50%;
-            font-size: 1.5em;
-            cursor: pointer;
-        }
-
-        .cart-count {
-            background-color: red;
-            color: white;
-            border-radius: 50%;
-            padding: 3px 8px;
             position: absolute;
-            top: -5px;
-            right: -5px;
-            font-size: 1em;
+            top: 10px;
+            right: 10px;
         }
 
-        .products {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 30px;
-        }
-
-        .product {
-            width: 200px;
-            background: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Плавные анимации */
-        }
-
-        .product img {
+        .banner {
             width: 100%;
-            height: 150px;
-            object-fit: cover;
-            border-radius: 10px;
-            transition: transform 0.3s ease; /* Анимация для изображения */
+            max-height: 300px;
+            overflow: hidden;
+            margin-bottom: 20px;
         }
 
-        .product-info {
-            margin-top: 10px;
+        .banner img {
+            width: 100%;
+            height: auto;
         }
 
-        .price {
-            font-size: 1.1em;
-            color: #28a745; /* Зеленый цвет для цены */
+        .dropdown {
+            position: relative;
+            display: inline-block;
         }
 
-        .quantity {
-            font-size: 1em;
-            color: #dc3545; /* Красный цвет для количества */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            border: 1px solid #ccc;
+            z-index: 1;
         }
 
-        /* Эффекты при наведении */
-        .product:hover {
-            transform: scale(1.05); /* Увеличение карточки */
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Увеличение тени */
+        .dropdown:hover .dropdown-content {
+            display: block;
         }
 
-        .product:hover img {
-            transform: scale(1.1); /* Увеличение изображения при наведении */
+        .dropdown-content div {
+            margin: 5px 0;
         }
 
-        /* Эффекты при нажатии */
-        .product:active {
-            transform: scale(0.98); /* Уменьшение карточки при нажатии */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Обратно уменьшаем тень */
+        .dropdown-content button {
+            margin-left: 10px;
+            padding: 5px 10px;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
     <button onclick="window.history.back()" class="back-button">Назад</button>
-
     <div class="header">Никотиновые жидкости</div>
     
     <div class="cart">
-        <a href="{{ url_for('cart') }}">
+        <a href="cart.html">
             Корзина
-            <span id="cart-count" class="cart-count">{{ session.get('cart', []) | length }}</span>
+            <span id="cart-count" class="cart-count">0</span>
         </a>
     </div>
-    
-    <section class="products">
-        <!-- Товары -->
-        <div class="product">
-            <img src="{{ url_for('static', filename='nicotine-liquid1.jpg') }}" alt="Жидкость 1">
-            <div class="product-info">
-                <div>Жидкость 1</div>
-                <div class="price">Цена: 14 руб.</div>
-                <div class="quantity">Количество: 10 шт.</div>
-                <form method="POST" action="{{ url_for('add_to_cart', id=1, name='Жидкость 1', price=14, quantity=10) }}">
-                    <button type="submit">Добавить в корзину</button>
-                </form>
+
+    <!-- Фотография-баннер -->
+    <div class="banner">
+        <img src="imej/PODONKI-last-hap.jpg" alt="Фотография баннера">
+    </div>
+
+    <div class="dropdown">
+        <button>Товары</button>
+        <div class="dropdown-content">
+            <div>
+                Жидкость 1 - 14 руб.
+                <button onclick="addToCart('Жидкость 1', 14)">Добавить</button>
+            </div>
+            <div>
+                Жидкость 2 - 20 руб.
+                <button onclick="addToCart('Жидкость 2', 20)">Добавить</button>
+            </div>
+            <div>
+                Жидкость 3 - 25 руб.
+                <button onclick="addToCart('Жидкость 3', 25)">Добавить</button>
+            </div>
+            <div>
+                Жидкость 4 - 30 руб.
+                <button onclick="addToCart('Жидкость 4', 30)">Добавить</button>
+            </div>
+            <div>
+                Жидкость 5 - 18 руб.
+                <button onclick="addToCart('Жидкость 5', 18)">Добавить</button>
+            </div>
+            <div>
+                Жидкость 6 - 22 руб.
+                <button onclick="addToCart('Жидкость 6', 22)">Добавить</button>
+            </div>
+            <div>
+                Жидкость 7 - 28 руб.
+                <button onclick="addToCart('Жидкость 7', 28)">Добавить</button>
             </div>
         </div>
-        <div class="product">
-            <img src="{{ url_for('static', filename='nicotine-liquid1.jpg') }}" alt="Жидкость 1">
-            <div class="product-info">
-                <div>Жидкость 1</div>
-                <div class="price">Цена: 14 руб.</div>
-                <div class="quantity">Количество: 10 шт.</div>
-                <form method="POST" action="{{ url_for('add_to_cart', id=1, name='Жидкость 1', price=14, quantity=19) }}">
-                    <button type="submit">Добавить в корзину</button>
-                </form>
-            </div>
-        </div>
-        <div class="product">
-            <img src="{{ url_for('static', filename='nicotine-liquid1.jpg') }}" alt="Жидкость 1">
-            <div class="product-info">
-                <div>Жидкость 1</div>
-                <div class="price">Цена: 14 руб.</div>
-                <div class="quantity">Количество: 10 шт.</div>
-                <form method="POST" action="{{ url_for('add_to_cart', id=1, name='Жидкость 1', price=14, quantity=10) }}">
-                    <button type="submit">Добавить в корзину</button>
-                </form>
-            </div>
-        </div>
-        <div class="product">
-            <img src="{{ url_for('static', filename='nicotine-liquid1.jpg') }}" alt="Жидкость 4">
-            <div class="product-info">
-                <div>Жидкость 1</div>
-                <div class="price">Цена: 14 руб.</div>
-                <div class="quantity">Количество: 10 шт.</div>
-                <form method="POST" action="{{ url_for('add_to_cart', id=2, name='Жидкость 3', price=14, quantity=10) }}">
-                    <button type="submit">Добавить в корзину</button>
-                </form>
-            </div>
-        </div>
-        <!-- Другие товары... -->
-    </section>
+    </div>
 
     <script>
-        // Функция для обновления количества товаров в корзине
-        function updateCart() {
-            const cartCount = document.getElementById('cart-count');
-            const cartLength = {{ session.get('cart', []) | length }};
-            cartCount.textContent = cartLength;}
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            document.getElementById('cart-count').textContent = cart.length;
+        }
+
+        function addToCart(name, price) {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const itemIndex = cart.findIndex(item => item.name === name);
+
+            if (itemIndex > -1) {
+                // Если товар уже есть в корзине, увеличиваем его количество на 1
+                cart[itemIndex].quantity += 1;
+            } else {
+                // Добавляем товар с количеством 1
+                cart.push({ name, price, quantity: 1 });
+            }
+
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount(); // Обновляем количество товаров в корзине
+        }
 
         // Инициализация
-        updateCart();
+        updateCartCount();
     </script>
 </body>
 </html>
