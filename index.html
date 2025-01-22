@@ -251,7 +251,7 @@
         }
 
 /* Панель с кнопками */
-   .bottom-panel {
+  .bottom-panel {
         position: fixed;
         bottom: 0;
         left: 0;
@@ -259,7 +259,7 @@
         background-color: #808080; /* Серый фон */
         display: flex;
         justify-content: space-around;
-        padding: 5px 0; /* Меньше отступа для панели */
+        padding: 10px 0; /* Увеличен отступ панели */
         z-index: 1000;
     }
 
@@ -271,13 +271,13 @@
         color: #808080; /* Цвет текста кнопок под фон */
         border: none;
         border-radius: 5px;
-        padding: 5px 10px; /* Меньше отступов для кнопок */
-        font-size: 0.8em; /* Меньше размер шрифта */
+        padding: 10px 15px; /* Увеличены отступы для кнопок, чтобы они были выше */
+        font-size: 0.8em;
         cursor: pointer;
         transition: background-color 0.3s ease;
         display: flex;
         justify-content: center; /* Центрируем иконки внутри кнопки */
-        align-items: center; 
+        align-items: center;
         background-color: transparent; /* Убираем белый фон */
     }
 
@@ -287,8 +287,8 @@
     }
 
     .bottom-panel button img {
-        width: 20px; /* Размер иконки */
-        height: 20px;
+        width: 25px; /* Увеличены иконки */
+        height: 25px;
     }
     </style>
 </head>
