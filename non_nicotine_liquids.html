@@ -196,12 +196,7 @@
 
     <div class="header">Никотиновые жидкости</div>
     
-    <div class="cart">
-        <a href="{{ url_for('cart') }}">
-            Корзина
-            <span id="cart-count" class="cart-count">{{ session.get('cart', []) | length }}</span>
-        </a>
-    </div>
+    
     
     <!-- Выпадающее меню для товаров -->
     <div class="dropdown">
