@@ -251,16 +251,26 @@
         }
 
 /* Панель с кнопками */
-     .bottom-panel {
+       .bottom-panel {
         position: fixed;
         bottom: 0;
         left: 0;
         width: 100%;
         background-color: #4CAF50;
         display: flex;
-        justify-content: space-around;
+        justify-content: space-between;
         padding: 10px 0;
         z-index: 1000;
+    }
+
+    .bottom-panel .center-btn {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .bottom-panel a {
+        text-decoration: none;
     }
 
     .bottom-panel button {
@@ -269,7 +279,7 @@
         border: none;
         border-radius: 5px;
         padding: 8px 15px;
-        font-size: 0.9em; /* Уменьшаем размер шрифта */
+        font-size: 0.9em;
         cursor: pointer;
         transition: background-color 0.3s ease;
     }
@@ -280,7 +290,7 @@
     }
 
     .bottom-panel button i {
-        font-size: 1.2em; /* Уменьшаем размер иконок */
+        font-size: 1.2em;
     }
     </style>
 </head>
@@ -314,12 +324,13 @@
         <div class="category" data-link="disposable.html" data-image="imej/odnorazki.jpg" data-text="Одноразки"></div>
     </section>
 
-   <div class="bottom-panel">
-    <button><i class="fas fa-search"></i> Поиск</button>
-    <button><i class="fas fa-cogs"></i> Настройки</button>
-    <button class="center-btn"></i> Главная</button>
-    <button><i class="fas fa-user"></i> Профиль</button>
-    <button><i class="fas fa-shopping-cart"></i> Корзина</button>
+   
+<div class="bottom-panel">
+    <a href="search.html"><button><i class="fas fa-search"></i> Поиск</button></a>
+    <a href="settings.html"><button><i class="fas fa-cogs"></i> Настройки</button></a>
+    <a href="index.html" class="center-btn"><button><i class="fas fa-home"></i> Главная</button></a>
+    <a href="profile.html"><button><i class="fas fa-user"></i> Профиль</button></a>
+    <a href="cart.html"><button><i class="fas fa-shopping-cart"></i> Корзина</button></a>
 </div>
     
 
