@@ -251,22 +251,16 @@
         }
 
 /* Панель с кнопками */
-       .bottom-panel {
+   .bottom-panel {
         position: fixed;
         bottom: 0;
         left: 0;
         width: 100%;
         background-color: #4CAF50;
         display: flex;
-        justify-content: space-between;
+        justify-content: space-around;
         padding: 10px 0;
         z-index: 1000;
-    }
-
-    .bottom-panel .center-btn {
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
     }
 
     .bottom-panel a {
@@ -328,7 +322,7 @@
 <div class="bottom-panel">
     <a href="search.html"><button><i class="fas fa-search"></i> Поиск</button></a>
     <a href="settings.html"><button><i class="fas fa-cogs"></i> Настройки</button></a>
-    <a href="index.html"><button><i class="center-btn"></i> Главная</button></a>
+     <a href="home.html"><button><i class="fas fa-home"></i> Главная</button></a>
     <a href="profile.html"><button><i class="fas fa-user"></i> Профиль</button></a>
     <a href="cart.html"><button><i class="fas fa-shopping-cart"></i> Корзина</button></a>
 </div>
