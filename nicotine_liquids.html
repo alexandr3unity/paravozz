@@ -36,15 +36,19 @@
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Тень для рамки */
     }
 
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #f9f9f9;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-            padding: 10px;
-            border: 1px solid #ccc;
-            z-index: 1;
-        }
+         .dropdown-content {
+        display: none; /* По умолчанию меню скрыто */
+        position: absolute;
+        background-color: #f9f9f9;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        padding: 10px;
+        border: 1px solid #ccc;
+        z-index: 1;
+    }
+
+    .dropdown-content.show {
+        display: block; /* Показать меню */
+    }
 
         .dropdown:hover .dropdown-content {
             display: block;
@@ -77,39 +81,39 @@
         <img src="imej/PODONKI-last-hap.jpg" alt="Фотография баннера">
     </div>
 
-    <div class="dropdown">
-        <button>Товары</button>
-        <div class="dropdown-content">
-            <div>
-                Жидксеампиртьвсмиость 1 - 14 руб.
-                <button onclick="addToCart('Жидкокчвсампнисть 1', 14)">Добавить</button>
-            </div>
-            <div>
-                Жидкость 2 - 20 руб.
-                <button onclick="addToCart('Жидкость 2', 20)">Добавить</button>
-            </div>
-            <div>
-                Жидкость 3 - 25 руб.
-                <button onclick="addToCart('Жидкость 3', 25)">Добавить</button>
-            </div>
-            <div>
-                Жидкость 4 - 30 руб.
-                <button onclick="addToCart('Жидкость 4', 30)">Добавить</button>
-            </div>
-            <div>
-                Жидкость 5 - 18 руб.
-                <button onclick="addToCart('Жидкость 5', 18)">Добавить</button>
-            </div>
-            <div>
-                Жидкость 6 - 22 руб.
-                <button onclick="addToCart('Жидкость 6', 22)">Добавить</button>
-            </div>
-            <div>
-                Жидкость 7 - 28 руб.
-                <button onclick="addToCart('Жидкость 7', 28)">Добавить</button>
-            </div>
+  <div class="dropdown">
+    <button id="dropdown-button">Товары</button>
+    <div id="dropdown-content" class="dropdown-content">
+        <div>
+            Жидкость 1 - 14 руб.
+            <button onclick="addToCart('Жидкость 1', 14)">Добавить</button>
+        </div>
+        <div>
+            Жидкость 2 - 20 руб.
+            <button onclick="addToCart('Жидкость 2', 20)">Добавить</button>
+        </div>
+        <div>
+            Жидкость 3 - 25 руб.
+            <button onclick="addToCart('Жидкость 3', 25)">Добавить</button>
+        </div>
+        <div>
+            Жидкость 4 - 30 руб.
+            <button onclick="addToCart('Жидкость 4', 30)">Добавить</button>
+        </div>
+        <div>
+            Жидкость 5 - 18 руб.
+            <button onclick="addToCart('Жидкость 5', 18)">Добавить</button>
+        </div>
+        <div>
+            Жидкость 6 - 22 руб.
+            <button onclick="addToCart('Жидкость 6', 22)">Добавить</button>
+        </div>
+        <div>
+            Жидкость 7 - 28 руб.
+            <button onclick="addToCart('Жидкость 7', 28)">Добавить</button>
         </div>
     </div>
+</div>
     <div class="product-description">
     <h2>Описание товара</h2>
     <p>
