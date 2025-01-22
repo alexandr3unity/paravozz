@@ -61,12 +61,12 @@
         }
 
        /* Панель с кнопками */
- .bottom-panel {
+  .bottom-panel {
         position: fixed;
         bottom: 0;
         left: 0;
         width: 100%;
-        background-color: #4CAF50;
+        background-color: #808080; /* Серый фон */
         display: flex;
         justify-content: space-between;
         padding: 10px 0;
@@ -84,23 +84,26 @@
     }
 
     .bottom-panel button {
-        background-color: #fff;
-        color: #4CAF50;
+        background-color: #d3d3d3; /* Светлый серый фон для кнопок */
+        color: #333; /* Темный текст */
         border: none;
         border-radius: 5px;
-        padding: 8px 15px;
-        font-size: 0.9em;
+        padding: 8px 12px; /* Уменьшенный padding */
+        font-size: 0.8em; /* Уменьшенный размер шрифта */
+        width: 90px; /* Ограниченная ширина */
+        height: 40px; /* Ограниченная высота */
         cursor: pointer;
         transition: background-color 0.3s ease;
+        text-align: center;
     }
 
     .bottom-panel button:hover {
-        background-color: #45a049;
+        background-color: #a9a9a9; /* Темный серый при наведении */
         color: white;
     }
 
     .bottom-panel button i {
-        font-size: 1.2em;
+        font-size: 1em; /* Уменьшенный размер иконок */
     }
     </style>
 </head>
