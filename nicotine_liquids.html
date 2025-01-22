@@ -21,18 +21,18 @@
             right: 10px;
         }
 
-        .banner {
-            width: 100%;
-            max-height: 300px;
-            overflow: hidden;
-            margin-bottom: 20px;
-        }
+         .banner {
+        width: 100vw; /* Занимает всю ширину экрана */
+        height: 100vh; /* Занимает всю высоту экрана */
+        overflow: hidden;
+        margin: 0; /* Убираем отступы */
+    }
 
-        .banner img {
-            width: 100%;
-            height: auto;
-        }
-
+    .banner img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Масштабируем изображение, чтобы оно заполнило баннер */
+    }
         .dropdown {
             position: relative;
             display: inline-block;
