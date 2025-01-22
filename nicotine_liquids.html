@@ -6,101 +6,43 @@
     <title>Никотиновые жидкости</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-
-        .header {
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
-
-        .cart {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-        }
-
-        .banner {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-        }
-
-        .banner img {
+        .bottom-panel {
+            position: fixed;
+            bottom: 0;
+            left: 0;
             width: 100%;
-            max-width: 600px;
-            height: auto;
-            border: 5px solid #ccc;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            background-color: #808080; /* Серый фон */
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            z-index: 1000;
         }
 
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #f9f9f9;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-            padding: 10px;
-            border: 1px solid #ccc;
-            z-index: 1;
-        }
-
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-
-        .dropdown-content div {
-            margin: 5px 0;
-        }
-
-        .dropdown-content button {
-            margin-left: 10px;
-            padding: 5px 10px;
+        .bottom-panel button {
+            color: #808080;
+            border: none;
+            border-radius: 5px;
+            padding: 0; /* Убираем отступы */
+            font-size: 0; /* Убираем размер текста */
             cursor: pointer;
+            transition: background-color 0.3s ease;
+            display: flex;
+            justify-content: center; /* Центрируем иконки внутри кнопки */
+            align-items: center;
+            background-color: transparent; /* Убираем белый фон */
+            width: 35px; /* Ширина кнопки под иконку */
+            height: 35px; /* Высота кнопки под иконку */
         }
 
-       /* Панель с кнопками */
-    /* Панель с кнопками */
- .bottom-panel {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        background-color: #808080; /* Серый фон */
-        display: flex;
-        justify-content: space-around;
-        padding: 10px 0; /* Увеличен отступ панели */
-        z-index: 1000;
-    }
+        .bottom-panel button:hover {
+            background-color: #666666; /* Темнее серый для hover */
+            color: white;
+        }
 
- 
-
-    .bottom-panel button {
-        color: #808080; /* Цвет текста кнопок под фон */
-        border: none;
-        border-radius: 5px;
-        padding: 10px 15px; /* Увеличены отступы для кнопок, чтобы они были выше */
-        font-size: 0.8em;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-        display: flex;
-        justify-content: center; /* Центрируем иконки внутри кнопки */
-        align-items: center;
-        background-color: transparent; /* Убираем белый фон */
-    }
-
-    .bottom-panel button:hover {
-        background-color: #666666; /* Темнее серый для hover */
-        color: white;
-    }
-
-    .bottom-panel button img {
-        width: 40px; /* Увеличены иконки */
-        height: 40px;
-    }
-    
-   
+        .bottom-panel button img {
+            width: 25px; /* Размер иконок */
+            height: 25px; /* Размер иконок */
+        }
     </style>
 </head>
 <body>
@@ -128,42 +70,39 @@
         </div>
     </div>
 
-          <div class="bottom-panel">
-    <a href="home.html">
-        <button>
-            <img src="imej/Ico/discount.png" > 
-        </button>
-    </a>
-    <a href="search.html">
-        <button>
-              <img src="imej/Ico/about-us.png" > 
-        </button>
-    </a>
-    <a href="index.html">
-        <button>
-            <img src="imej/Ico/home.png" > 
-        </button>
-    </a>
-    <a href="cart.html">
-        <button>
-            <img src="imej/Ico/cart.png" >
-        </button>
-    </a>
-    <a href="cart.html">
-        <button>
-            <img src="imej/Ico/star.png" > 
-        </button>
-    </a>
-          </div>
-    
+    <div class="bottom-panel">
+        <a href="home.html">
+            <button>
+                <img src="imej/Ico/discount.png" > 
+            </button>
+        </a>
+        <a href="search.html">
+            <button>
+                <img src="imej/Ico/about-us.png" > 
+            </button>
+        </a>
+        <a href="index.html">
+            <button>
+                <img src="imej/Ico/home.png" > 
+            </button>
+        </a>
+        <a href="cart.html">
+            <button>
+                <img src="imej/Ico/cart.png" >
+            </button>
+        </a>
+        <a href="cart.html">
+            <button>
+                <img src="imej/Ico/star.png" > 
+            </button>
+        </a>
+    </div>
 
     <div class="product-description">
         <h2>Описание товара</h2>
         <p>Никотиновые жидкости — это высококачественные продукты для вейпинга, созданные из тщательно отобранных ингредиентов. Они обеспечивают насыщенный вкус и гладкое ощущение при использовании.</p>
         <p>Доступные вкусы включают: фруктовые, мятные, десертные и табачные ароматы. Жидкости подходят для различных типов устройств. Каждая упаковка содержит 30 мл жидкости с разным уровнем содержания никотина (0, 3, 6 мг/мл).</p>
     </div>
-
-    
 
     <script>
         const dropdownButton = document.getElementById('dropdown-button');
