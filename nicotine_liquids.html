@@ -28,15 +28,18 @@
         margin: 0; /* Убираем отступы */
     }
 
-    .banner img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover; /* Масштабируем изображение, чтобы оно заполнило баннер */
+    .banner {
+        width: 100%; /* Занимает всю ширину экрана */
+        max-height: 150px; /* Ограничиваем высоту баннера */
+        overflow: hidden;
+        margin-bottom: 20px;
     }
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
+
+    .banner img {
+        width: 100%; /* Изображение адаптируется по ширине блока */
+        height: auto; /* Сохраняет пропорции */
+        object-fit: cover; /* Заполняет блок, если пропорции не совпадают */
+    }
 
         .dropdown-content {
             display: none;
