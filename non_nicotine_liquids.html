@@ -22,20 +22,18 @@
         }
 
         .banner {
-            width: 100%;
-            max-height: 300px;
-            overflow: hidden;
+            display: flex;
+            justify-content: center;
             margin-bottom: 20px;
         }
 
         .banner img {
             width: 100%;
+            max-width: 600px;
             height: auto;
-        }
-
-        .dropdown {
-            position: relative;
-            display: inline-block;
+            border: 5px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
         .dropdown-content {
@@ -61,6 +59,48 @@
             padding: 5px 10px;
             cursor: pointer;
         }
+
+       /* Панель с кнопками */
+    /* Панель с кнопками */
+ .bottom-panel {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: #808080; /* Серый фон */
+        display: flex;
+        justify-content: space-around;
+        padding: 10px 0; /* Увеличен отступ панели */
+        z-index: 1000;
+    }
+
+ 
+
+    .bottom-panel button {
+        color: #808080; /* Цвет текста кнопок под фон */
+        border: none;
+        border-radius: 5px;
+        padding: 10px 15px; /* Увеличены отступы для кнопок, чтобы они были выше */
+        font-size: 0.8em;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        display: flex;
+        justify-content: center; /* Центрируем иконки внутри кнопки */
+        align-items: center;
+        background-color: transparent; /* Убираем белый фон */
+    }
+
+    .bottom-panel button:hover {
+        background-color: #666666; /* Темнее серый для hover */
+        color: white;
+    }
+
+    .bottom-panel button img {
+        width: 40px; /* Увеличены иконки */
+        height: 40px;
+    }
+    
+   
     </style>
 </head>
 <body>
@@ -68,52 +108,77 @@
     <div class="header">Никотиновые жидкости</div>
     
     <div class="cart">
-        <a href="cart.html">
-            Корзина
-            <span id="cart-count" class="cart-count">0</span>
-        </a>
+        <a href="cart.html">Корзина <span id="cart-count" class="cart-count">0</span></a>
     </div>
 
-    <!-- Фотография-баннер -->
     <div class="banner">
-        <img src="banner.jpg" alt="Фотография баннера">
+        <img src="imej/PODONKI-last-hap.jpg" alt="Фотография баннера">
     </div>
 
     <div class="dropdown">
-        <button>Товары</button>
-        <div class="dropdown-content">
-            <div>
-                Жидкость 1 - 14 руб.
-                <button onclick="addToCart('Жидкость 1', 14)">Добавить</button>
-            </div>
-            <div>
-                Жидкость 2 - 20 руб.
-                <button onclick="addToCart('Жидкость 2', 20)">Добавить</button>
-            </div>
-            <div>
-                Жидкость 3 - 25 руб.
-                <button onclick="addToCart('Жидкость 3', 25)">Добавить</button>
-            </div>
-            <div>
-                Жидкость 4 - 30 руб.
-                <button onclick="addToCart('Жидкость 4', 30)">Добавить</button>
-            </div>
-            <div>
-                Жидкость 5 - 18 руб.
-                <button onclick="addToCart('Жидкость 5', 18)">Добавить</button>
-            </div>
-            <div>
-                Жидкость 6 - 22 руб.
-                <button onclick="addToCart('Жидкость 6', 22)">Добавить</button>
-            </div>
-            <div>
-                Жидкость 7 - 28 руб.
-                <button onclick="addToCart('Жидкость 7', 28)">Добавить</button>
-            </div>
+        <button id="dropdown-button">Товары</button>
+        <div id="dropdown-content" class="dropdown-content">
+            <div>Жидкость 1 - 14 руб. <button onclick="addToCart('Жидкость 1', 14)">Добавить</button></div>
+            <div>Жидкость 2 - 20 руб. <button onclick="addToCart('Жидкость 2', 20)">Добавить</button></div>
+            <div>Жидкость 3 - 25 руб. <button onclick="addToCart('Жидкость 3', 25)">Добавить</button></div>
+            <div>Жидкость 4 - 30 руб. <button onclick="addToCart('Жидкость 4', 30)">Добавить</button></div>
+            <div>Жидкость 5 - 18 руб. <button onclick="addToCart('Жидкость 5', 18)">Добавить</button></div>
+            <div>Жидкость 6 - 22 руб. <button onclick="addToCart('Жидкость 6', 22)">Добавить</button></div>
+            <div>Жидкость 7 - 28 руб. <button onclick="addToCart('Жидкость 7', 28)">Добавить</button></div>
         </div>
     </div>
 
+          <div class="bottom-panel">
+    <a href="home.html">
+        <button>
+            <img src="imej/Ico/discount.png" > 
+        </button>
+    </a>
+    <a href="search.html">
+        <button>
+              <img src="imej/Ico/about-us.png" > 
+        </button>
+    </a>
+    <a href="index.html">
+        <button>
+            <img src="imej/Ico/home.png" > 
+        </button>
+    </a>
+    <a href="cart.html">
+        <button>
+            <img src="imej/Ico/cart.png" >
+        </button>
+    </a>
+    <a href="cart.html">
+        <button>
+            <img src="imej/Ico/star.png" > 
+        </button>
+    </a>
+          </div>
+    
+
+    <div class="product-description">
+        <h2>Описание товара</h2>
+        <p>Никотиновые жидкости — это высококачественные продукты для вейпинга, созданные из тщательно отобранных ингредиентов. Они обеспечивают насыщенный вкус и гладкое ощущение при использовании.</p>
+        <p>Доступные вкусы включают: фруктовые, мятные, десертные и табачные ароматы. Жидкости подходят для различных типов устройств. Каждая упаковка содержит 30 мл жидкости с разным уровнем содержания никотина (0, 3, 6 мг/мл).</p>
+    </div>
+
+    
+
     <script>
+        const dropdownButton = document.getElementById('dropdown-button');
+        const dropdownContent = document.getElementById('dropdown-content');
+
+        dropdownButton.addEventListener('click', () => {
+            dropdownContent.classList.toggle('show');
+        });
+
+        document.addEventListener('click', (event) => {
+            if (!dropdownButton.contains(event.target) && !dropdownContent.contains(event.target)) {
+                dropdownContent.classList.remove('show');
+            }
+        });
+
         function updateCartCount() {
             const cart = JSON.parse(localStorage.getItem('cart')) || [];
             document.getElementById('cart-count').textContent = cart.length;
@@ -124,19 +189,17 @@
             const itemIndex = cart.findIndex(item => item.name === name);
 
             if (itemIndex > -1) {
-                // Если товар уже есть в корзине, увеличиваем его количество на 1
                 cart[itemIndex].quantity += 1;
             } else {
-                // Добавляем товар с количеством 1
                 cart.push({ name, price, quantity: 1 });
             }
 
             localStorage.setItem('cart', JSON.stringify(cart));
-            updateCartCount(); // Обновляем количество товаров в корзине
+            updateCartCount();
         }
 
-        // Инициализация
         updateCartCount();
     </script>
 </body>
 </html>
+
