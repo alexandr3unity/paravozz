@@ -68,15 +68,9 @@
         width: 100%;
         background-color: #808080; /* Серый фон */
         display: flex;
-        justify-content: space-between;
-        padding: 10px 0;
+        justify-content: space-around;
+        padding: 10px 0; /* Увеличен отступ панели */
         z-index: 1000;
-    }
-
-    .bottom-panel .center-btn {
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
     }
 
     .bottom-panel a {
@@ -84,26 +78,27 @@
     }
 
     .bottom-panel button {
-        background-color: #d3d3d3; /* Светлый серый фон для кнопок */
-        color: #333; /* Темный текст */
+        color: #808080; /* Цвет текста кнопок под фон */
         border: none;
         border-radius: 5px;
-        padding: 8px 12px; /* Уменьшенный padding */
-        font-size: 0.8em; /* Уменьшенный размер шрифта */
-        width: 90px; /* Ограниченная ширина */
-        height: 40px; /* Ограниченная высота */
+        padding: 10px 15px; /* Увеличены отступы для кнопок, чтобы они были выше */
+        font-size: 0.8em;
         cursor: pointer;
         transition: background-color 0.3s ease;
-        text-align: center;
+        display: flex;
+        justify-content: center; /* Центрируем иконки внутри кнопки */
+        align-items: center;
+        background-color: transparent; /* Убираем белый фон */
     }
 
     .bottom-panel button:hover {
-        background-color: #a9a9a9; /* Темный серый при наведении */
+        background-color: #666666; /* Темнее серый для hover */
         color: white;
     }
 
-    .bottom-panel button i {
-        font-size: 1em; /* Уменьшенный размер иконок */
+    .bottom-panel button img {
+        width: 25px; /* Увеличены иконки */
+        height: 25px;
     }
     </style>
 </head>
