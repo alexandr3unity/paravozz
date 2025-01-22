@@ -3,330 +3,211 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Жидкости</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Никотиновые жидкости</title>
+    <link rel="stylesheet" href="style.css">
     <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .header {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .cart {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        .banner {
+            width: 100%;
+            max-height: 300px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .banner img {
+            width: 100%;
+            height: auto;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            border: 1px solid #ccc;
+            z-index: 1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content div {
+            margin: 5px 0;
+        }
+
+        .dropdown-content button {
+            margin-left: 10px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
 
         /* Панель с кнопками */
-   .bottom-panel {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        background-color: #808080; /* Серый фон */
-        display: flex;
-        justify-content: space-around;
-        padding: 10px 0; /* Увеличен отступ панели */
-        z-index: 1000;
-    }
-
-    .bottom-panel a {
-        text-decoration: none;
-    }
-
-    .bottom-panel button {
-        color: #808080; /* Цвет текста кнопок под фон */
-        border: none;
-        border-radius: 5px;
-        padding: 10px 15px; /* Увеличены отступы для кнопок, чтобы они были выше */
-        font-size: 0.8em;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-        display: flex;
-        justify-content: center; /* Центрируем иконки внутри кнопки */
-        align-items: center;
-        background-color: transparent; /* Убираем белый фон */
-    }
-
-    .bottom-panel button:hover {
-        background-color: #666666; /* Темнее серый для hover */
-        color: white;
-    }
-
-    .bottom-panel button img {
-        width: 25px; /* Увеличены иконки */
-        height: 25px;
-    }
-
-
-        
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-image: url('imej/fon.jpg');
-            background-size: auto;
-            background-position: center;
-            background-repeat: repeat;
-            min-height: 100vh;
-            width: 100vw;
+        .bottom-panel {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #808080; /* Серый фон */
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0; /* Увеличен отступ панели */
+            z-index: 1000;
         }
 
-        header {
-            padding: 20px;
+        .bottom-panel a {
+            text-decoration: none;
         }
 
-        .logo {
-            width: auto;
-            max-height: 200px;
-            margin-bottom: 1px;
-        }
-
-        .back-button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
+        .bottom-panel button {
+            color: #808080; /* Цвет текста кнопок под фон */
             border: none;
             border-radius: 5px;
+            padding: 10px 15px; /* Увеличены отступы для кнопок, чтобы они были выше */
+            font-size: 0.8em;
             cursor: pointer;
-            font-size: 1.2em;
-            margin-top: 20px;
-        }
-
-        .back-button:hover {
-            background-color: #45a049;
-        }
-
-        .subcategory-container {
-            border: 2px solid #232323;
-            border-radius: 8px;
-            margin: 10px;
-            text-align: center;
-            background-color: rgba(35, 35, 35, 0.8);
-            padding: 10px;
+            transition: background-color 0.3s ease;
             display: flex;
-            flex-direction: column;
+            justify-content: center; /* Центрируем иконки внутри кнопки */
             align-items: center;
-            position: relative;
+            background-color: transparent; /* Убираем белый фон */
         }
 
-        .subcategory {
-            display: flex;
-            align-items: flex-start;
-            justify-content: flex-start;
-            padding: 10px;
-        }
-
-        .subcategory img {
-            width: 45%;
-            height: auto;
-            margin-right: 10px;
-        }
-
-        .subcategory-description {
-            margin-top: 10px;
-            color: rgba(255, 255, 255, 0.9);
-        }
-
-        .subcategory-price {
-            color: #fff;
-            font-size: 1.1em;
-            padding: 5px 10px;
-            border-radius: 8px;
-            background-color: rgba(0, 0, 0, 0.6);
-            align-self: flex-end;
-        }
-
-        .subcategory:hover {
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            transform: translateY(-2px);
-        }
-
-        .subcategories {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .subcategory-title {
-            text-align: center;
-            font-weight: bold;
+        .bottom-panel button:hover {
+            background-color: #666666; /* Темнее серый для hover */
             color: white;
-            margin-top: 10px;
         }
 
-        .subcategory-description {
-            text-align: center;
-            margin-top: 10px;
-            color: rgba(255, 255, 255, 0.7);
+        .bottom-panel button img {
+            width: 25px; /* Увеличены иконки */
+            height: 25px;
         }
+        
     </style>
 </head>
-
-    
-    <header>
-        <img src="imej/jidkostt.png" alt="Логотип" class="logo">
-    </header>
-
-    <button onclick="window.location.href='https://alexandr3unity.github.io/paravozz/';" class="back-button">Назад</button>
-
-    <section class="subcategories">
-       <a href="https://alexandr3unity.github.io/paravozz/nicotine_liquids" aria-label="Безникотиновые жидкости">
-       <div class="subcategory-container">
-         <div class="subcategory">
-           <img src="imej/PODONKI-last-hap.jpg" alt="Безникотиновые жидкости">
-             <div class="subcategory-description">PODONKI-last-hap</div>
-             <div class="subcategory-description">60MG 50/50 PG/VG</div>
-             <div class="subcategory-price">15руб</div>
-          </div>
-       </div>
-    </a>
-        <a href="https://alexandr3unity.github.io/paravozz/non_nicotine_liquids" aria-label="Безникотиновые жидкости">
-            <div class="subcategory-container">
-                <div class="subcategory">
-                    <img src="imej/PODONK-IANARHIA.jpg" alt="Безникотиновые жидкости">
-                         <div class="subcategory-description">PODONK-IANARHIA </div>
-                        <div class="subcategory-description">60MG 50/50 PG/VG</div>
-                    </div>
-                </div>
-            </div>
-        </a>
-        <a href="https://alexandr3unity.github.io/paravozz/premium_liquids" aria-label="Премиум жидкости">
-            <div class="subcategory-container">
-                <div class="subcategory">
-                    <img src="imej/PODONKI-ALFA-VAPE.jpg" alt="Премиум жидкости">
-                       <div class="subcategory-description">PODONKI-ALFA-VAPE</div>
-                        <div class="subcategory-description">60MG 50/50 PG/VG</div>
-                    </div>
-                </div>
-            </div>
-        </a>
-        <a href="https://alexandr3unity.github.io/paravozz/premium_liquids" aria-label="Премиум жидкости">
-            <div class="subcategory-container">
-                <div class="subcategory">
-                    <img src="imej/PODONKI-ISTERIKA.jpg" alt="Премиум жидкости">
-                        <div class="subcategory-description">PODONKI-ISTERIKA</div>
-                        <div class="subcategory-description">60MG 50/50 PG/VG</div>
-                    </div>
-                </div>
-            </div>
-        </a>
-        <a href="https://alexandr3unity.github.io/paravozz/premium_liquids" aria-label="Премиум жидкости">
-            <div class="subcategory-container">
-                <div class="subcategory">
-                    <img src="imej/PODONKI-MALASIAN.jpg" alt="Премиум жидкости">
-                        <div class="subcategory-description">PODONKI-MALASIAN</div>
-                        <div class="subcategory-description">60MG 50/50 PG/VG</div>
-                    </div>
-                </div>
-            </div>
-        </a>
-        <a href="https://alexandr3unity.github.io/paravozz/premium_liquids" aria-label="Премиум жидкости">
-            <div class="subcategory-container">
-                <div class="subcategory">
-                    <img src="imej/PODONKI-VINTAJE.jpg" alt="Премиум жидкости">
-                    <div class="subcategory-description">PODONKI-VINTAJE</div>
-                        <div class="subcategory-description">60MG 50/50 PG/VG</div>
-                </div>
-            </div>
-        </a>
-          <a href="https://alexandr3unity.github.io/paravozz/premium_liquids" aria-label="Премиум жидкости">
-            <div class="subcategory-container">
-                <div class="subcategory">
-                    <img src="imej/PODONKIV1.jpg" alt="Премиум жидкости">
-                    <div class="subcategory-description">PODONKIV1</div>
-                        <div class="subcategory-description">60MG 50/50 PG/VG</div>
-                </div>
-            </div>
-        </a>
-          <a href="https://alexandr3unity.github.io/paravozz/premium_liquids" aria-label="Премиум жидкости">
-            <div class="subcategory-container">
-                <div class="subcategory">
-                    <img src="imej/PODONKIV2.jpg" alt="Премиум жидкости">
-                    <div class="subcategory-description">PODONKIV2</div>
-                        <div class="subcategory-description">60MG 50/50 PG/VG</div>
-                </div>
-            </div>
-        </a>
-          <a href="https://alexandr3unity.github.io/paravozz/premium_liquids" aria-label="Премиум жидкости">
-            <div class="subcategory-container">
-                <div class="subcategory">
-                    <img src="imej/R&M-BAD-TRIP.jpg" alt="Премиум жидкости">
-                    <div class="subcategory-description">R&M-BAD-TRIP</div>
-                        <div class="subcategory-description">60MG 50/50 PG/VG</div>
-                </div>
-            </div>
-        </a>
-          <a href="https://alexandr3unity.github.io/paravozz/premium_liquids" aria-label="Премиум жидкости">
-            <div class="subcategory-container">
-                <div class="subcategory">
-                    <img src="imej/R&M-BT-ACID.jpg" alt="Премиум жидкости">
-                    <div class="subcategory-description">R&M-BT-ACID</div>
-                        <div class="subcategory-description">60MG 50/50 PG/VG</div>
-                </div>
-            </div>
-        </a>
-          <a href="https://alexandr3unity.github.io/paravozz/premium_liquids" aria-label="Премиум жидкости">
-            <div class="subcategory-container">
-                <div class="subcategory">
-                    <img src="imej/R&M-BT-ICE.jpg" alt="Премиум жидкости">
-                    <div class="subcategory-description">R&M-BT-ICE</div>
-                        <div class="subcategory-description">60MG 50/50 PG/VG</div>
-                </div>
-            </div>
-        </a>
-          <a href="https://alexandr3unity.github.io/paravozz/premium_liquids" aria-label="Премиум жидкости">
-            <div class="subcategory-container">
-                <div class="subcategory">
-                    <img src="imej/CATSWILL.jpg" alt="Премиум жидкости">
-                    <div class="subcategory-description">CATSWILL</div>
-                        <div class="subcategory-description">60MG 50/50 PG/VG</div>
-                </div>
-            </div>
-        </a>
-          <a href="https://alexandr3unity.github.io/paravozz/premium_liquids" aria-label="Премиум жидкости">
-            <div class="subcategory-container">
-                <div class="subcategory">
-                    <img src="imej/BLOOD.jpg" alt="Премиум жидкости">
-                    <div class="subcategory-description">BLOOD</div>
-                        <div class="subcategory-description">60MG 50/50 PG/VG</div>
-                </div>
-            </div>
-        </a>
-          <a href="https://alexandr3unity.github.io/paravozz/premium_liquids" aria-label="Премиум жидкости">
-            <div class="subcategory-container">
-                <div class="subcategory">
-                    <img src="imej/NICE-SHOT.jpg" alt="Премиум жидкости">
-                    <div class="subcategory-description">NICE-SHOT</div>
-                        <div class="subcategory-description">60MG 50/50 PG/VG</div>
-                </div>
-            </div>
-        </a>
-
-
-
-
-
-        <div class="bottom-panel">
-    <a href="home.html">
-        <button>
-            <img src="imej/Ico/discount.png" > 
-        </button>
-    </a>
-    <a href="search.html">
-        <button>
-              <img src="imej/Ico/about-us.png" > 
-        </button>
-    </a>
-    <a href="index.html">
-        <button>
-            <img src="imej/Ico/home.png" > 
-        </button>
-    </a>
-    <a href="cart.html">
-        <button>
-            <img src="imej/Ico/cart.png" >
-        </button>
-    </a>
-    <a href="cart.html">
-        <button>
-            <img src="imej/Ico/star.png" > 
-        </button>
-    </a>
 <body>
+    <button onclick="window.history.back()" class="back-button">Назад</button>
+    <div class="header">Никотиновые жидкости</div>
+    
+    <div class="cart">
+        <a href="cart.html">
+            Корзина
+            <span id="cart-count" class="cart-count">0</span>
+        </a>
+    </div>
 
-        <!-- Подобные блоки для остальных товаров -->
-    </section>
+    <!-- Фотография-баннер -->
+    <div class="banner">
+        <img src="imej/PODONKI-last-hap.jpg" alt="Фотография баннера">
+    </div>
+
+    <div class="dropdown">
+        <button>Товары</button>
+        <div class="dropdown-content">
+            <div>
+                Жидкость 1 - 14 руб.
+                <button onclick="addToCart('Жидкость 1', 14)">Добавить</button>
+            </div>
+            <div>
+                Жидкость 2 - 20 руб.
+                <button onclick="addToCart('Жидкость 2', 20)">Добавить</button>
+            </div>
+            <div>
+                Жидкость 3 - 25 руб.
+                <button onclick="addToCart('Жидкость 3', 25)">Добавить</button>
+            </div>
+            <div>
+                Жидкость 4 - 30 руб.
+                <button onclick="addToCart('Жидкость 4', 30)">Добавить</button>
+            </div>
+            <div>
+                Жидкость 5 - 18 руб.
+                <button onclick="addToCart('Жидкость 5', 18)">Добавить</button>
+            </div>
+            <div>
+                Жидкость 6 - 22 руб.
+                <button onclick="addToCart('Жидкость 6', 22)">Добавить</button>
+            </div>
+            <div>
+                Жидкость 7 - 28 руб.
+                <button onclick="addToCart('Жидкость 7', 28)">Добавить</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Панель с кнопками -->
+    <div class="bottom-panel">
+        <a href="home.html">
+            <button>
+                <img src="imej/Ico/discount.png"> 
+            </button>
+        </a>
+        <a href="search.html">
+            <button>
+                <img src="imej/Ico/about-us.png"> 
+            </button>
+        </a>
+        <a href="index.html">
+            <button>
+                <img src="imej/Ico/home.png"> 
+            </button>
+        </a>
+        <a href="cart.html">
+            <button>
+                <img src="imej/Ico/cart.png">
+            </button>
+        </a>
+        <a href="cart.html">
+            <button>
+                <img src="imej/Ico/star.png"> 
+            </button>
+        </a>
+    </div>
+
+    <script>
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            document.getElementById('cart-count').textContent = cart.length;
+        }
+
+        function addToCart(name, price) {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const itemIndex = cart.findIndex(item => item.name === name);
+
+            if (itemIndex > -1) {
+                // Если товар уже есть в корзине, увеличиваем его количество на 1
+                cart[itemIndex].quantity += 1;
+            } else {
+                // Добавляем товар с количеством 1
+                cart.push({ name, price, quantity: 1 });
+            }
+
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount(); // Обновляем количество товаров в корзине
+        }
+
+        // Инициализация
+        updateCartCount();
+    </script>
 </body>
 </html>
