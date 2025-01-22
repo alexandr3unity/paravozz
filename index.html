@@ -251,7 +251,7 @@
         }
 
 /* Панель с кнопками */
-   .bottom-panel {
+ .bottom-panel {
         position: fixed;
         bottom: 0;
         left: 0;
@@ -276,6 +276,8 @@
         font-size: 0.9em;
         cursor: pointer;
         transition: background-color 0.3s ease;
+        display: flex;
+        align-items: center; /* Для выравнивания текста и иконки */
     }
 
     .bottom-panel button:hover {
@@ -283,8 +285,10 @@
         color: white;
     }
 
-    .bottom-panel button i {
-        font-size: 1.2em;
+    .bottom-panel button img {
+        width: 20px; /* Размер иконки */
+        height: 20px;
+        margin-right: 8px; /* Отступ между иконкой и текстом */
     }
     </style>
 </head>
@@ -318,14 +322,33 @@
         <div class="category" data-link="disposable.html" data-image="imej/odnorazki.jpg" data-text="Одноразки"></div>
     </section>
 
-   
+ /* кнопки  */
 <div class="bottom-panel">
-    <a href="search.html"><button></i> Поиск</button></a>
-    <a href="settings.html"><button></i> Настройки</button></a>
-     <a href="https://alexandr3unity.github.io/paravozz/"><button></i> Главная</button></a>
-    <a href="profile.html"><button></i> Профиль</button></a>
-    <a href="https://alexandr3unity.github.io/paravozz/cart"><button></i> Корзина</button></a>
-</div>
+    <a href="home.html">
+        <button>
+            <img src="your-icon-home.png" alt="Главная"> Главная
+        </button>
+    </a>
+    <a href="search.html">
+        <button>
+            <img src="your-icon-search.png" alt="Поиск"> Поиск
+        </button>
+    </a>
+    <a href="settings.html">
+        <button>
+            <img src="your-icon-settings.png" alt="Настройки"> Настройки
+        </button>
+    </a>
+    <a href="profile.html">
+        <button>
+            <img src="your-icon-profile.png" alt="Профиль"> Профиль
+        </button>
+    </a>
+    <a href="cart.html">
+        <button>
+            <img src="your-icon-cart.png" alt="Корзина"> Корзина
+        </button>
+    </a>
     
 
     <script>
