@@ -116,6 +116,56 @@
             transform: scale(0.98); /* Уменьшение карточки при нажатии */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Обратно уменьшаем тень */
         }
+
+
+
+          /* Панель с кнопками */
+.bottom-panel {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #808080; /* Серый фон */
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0; /* Увеличен отступ панели */
+    z-index: 1000;
+}
+
+.bottom-panel a {
+    text-decoration: none;
+}
+
+.bottom-panel button {
+    color: #808080; /* Цвет текста кнопок под фон */
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px; /* Увеличены отступы для кнопок, чтобы они были выше */
+    font-size: 0.8em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: flex;
+    justify-content: center; /* Центрируем иконки внутри кнопки */
+    align-items: center;
+    background-color: transparent; /* Убираем белый фон */
+}
+
+.bottom-panel button:hover {
+    background-color: #666666; /* Темнее серый для hover */
+    color: white;
+}
+
+.bottom-panel button img {
+    width: 25px; /* Увеличены иконки */
+    height: 25px;
+}
+
+
+
+
+
+
+        
     </style>
 </head>
 <body>
@@ -178,6 +228,37 @@
         </div>
         <!-- Другие товары... -->
     </section>
+
+
+
+    <div class="bottom-panel">
+    <a href="home.html">
+        <button>
+            <img src="imej/Ico/discount.png"> 
+        </button>
+    </a>
+    <a href="search.html">
+        <button>
+              <img src="imej/Ico/about-us.png"> 
+        </button>
+    </a>
+    <a href="index.html">
+        <button>
+            <img src="imej/Ico/home.png"> 
+        </button>
+    </a>
+    <a href="cart.html">
+        <button>
+            <img src="imej/Ico/cart.png">
+        </button>
+    </a>
+    <a href="cart.html">
+        <button>
+            <img src="imej/Ico/star.png"> 
+        </button>
+    </a>
+</div>
+
 
     <script>
         // Функция для обновления количества товаров в корзине
