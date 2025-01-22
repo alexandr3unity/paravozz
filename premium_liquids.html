@@ -19,25 +19,41 @@
             margin: 20px 0;
         }
 
+        /* Стили для баннера */
+        .banner {
+            width: 100%;
+            max-width: 1200px;
+            margin: 20px auto; /* Центрируем баннер */
+            padding: 10px;
+            border: 5px solid #28a745; /* Зеленая рамка */
+            border-radius: 10px; /* Скругленные углы */
+            background-color: #fff; /* Белый фон для рамки */
+        }
+
+        .banner img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px; /* Скругленные углы изображения */
+        }
+
         .back-button {
-            background-color: #b5ccb6; /* Зеленый цвет */
+            background-color: #b5ccb6;
             color: white;
             padding: 10px 20px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             font-size: 1.2em;
-            margin-top: 20px; /* Отступ сверху */
+            margin-top: 20px;
             position: absolute;
-            left: 20px; /* Расположим кнопку слева */
-            top: 20px; /* Расположим кнопку чуть ниже верха страницы */
+            left: 20px;
+            top: 20px;
         }
 
         .back-button:hover {
-            background-color: #45a049; /* Темный оттенок при наведении */
+            background-color: #45a049;
         }
 
-        /* Стили для корзины */
         .cart {
             position: fixed;
             top: 20px;
@@ -76,7 +92,7 @@
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Плавные анимации */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .product img {
@@ -84,7 +100,7 @@
             height: 150px;
             object-fit: cover;
             border-radius: 10px;
-            transition: transform 0.3s ease; /* Анимация для изображения */
+            transition: transform 0.3s ease;
         }
 
         .product-info {
@@ -93,85 +109,78 @@
 
         .price {
             font-size: 1.1em;
-            color: #28a745; /* Зеленый цвет для цены */
+            color: #28a745;
         }
 
         .quantity {
             font-size: 1em;
-            color: #dc3545; /* Красный цвет для количества */
+            color: #dc3545;
         }
 
-        /* Эффекты при наведении */
         .product:hover {
-            transform: scale(1.05); /* Увеличение карточки */
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Увеличение тени */
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         }
 
         .product:hover img {
-            transform: scale(1.1); /* Увеличение изображения при наведении */
+            transform: scale(1.1);
         }
 
-        /* Эффекты при нажатии */
         .product:active {
-            transform: scale(0.98); /* Уменьшение карточки при нажатии */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Обратно уменьшаем тень */
+            transform: scale(0.98);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
+        .bottom-panel {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #808080;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            z-index: 1000;
+        }
 
+        .bottom-panel a {
+            text-decoration: none;
+        }
 
-          /* Панель с кнопками */
-.bottom-panel {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background-color: #808080; /* Серый фон */
-    display: flex;
-    justify-content: space-around;
-    padding: 10px 0; /* Увеличен отступ панели */
-    z-index: 1000;
-}
+        .bottom-panel button {
+            color: #808080;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            font-size: 0.8em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: transparent;
+        }
 
-.bottom-panel a {
-    text-decoration: none;
-}
+        .bottom-panel button:hover {
+            background-color: #666666;
+            color: white;
+        }
 
-.bottom-panel button {
-    color: #808080; /* Цвет текста кнопок под фон */
-    border: none;
-    border-radius: 5px;
-    padding: 10px 15px; /* Увеличены отступы для кнопок, чтобы они были выше */
-    font-size: 0.8em;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    display: flex;
-    justify-content: center; /* Центрируем иконки внутри кнопки */
-    align-items: center;
-    background-color: transparent; /* Убираем белый фон */
-}
-
-.bottom-panel button:hover {
-    background-color: #666666; /* Темнее серый для hover */
-    color: white;
-}
-
-.bottom-panel button img {
-    width: 25px; /* Увеличены иконки */
-    height: 25px;
-}
-
-
-
-
-
-
-        
+        .bottom-panel button img {
+            width: 25px;
+            height: 25px;
+        }
     </style>
 </head>
 <body>
     <button onclick="window.history.back()" class="back-button">Назад</button>
 
     <div class="header">Никотиновые жидкости</div>
+    
+    <!-- Баннер с изображением -->
+    <div class="banner">
+        <img src="{{ url_for('static', filename='imej/PODONKI-last-hap.jpg') }}" alt="Баннер">
+    </div>
     
     <div class="cart">
         <a href="{{ url_for('cart') }}">
@@ -193,79 +202,44 @@
                 </form>
             </div>
         </div>
-        <div class="product">
-            <img src="{{ url_for('static', filename='nicotine-liquid1.jpg') }}" alt="Жидкость 1">
-            <div class="product-info">
-                <div>Жидкость 1</div>
-                <div class="price">Цена: 14 руб.</div>
-                <div class="quantity">Количество: 10 шт.</div>
-                <form method="POST" action="{{ url_for('add_to_cart', id=1, name='Жидкость 1', price=14, quantity=10) }}">
-                    <button type="submit">Добавить в корзину</button>
-                </form>
-            </div>
-        </div>
-        <div class="product">
-            <img src="{{ url_for('static', filename='nicotine-liquid1.jpg') }}" alt="Жидкость 1">
-            <div class="product-info">
-                <div>Жидкость 1</div>
-                <div class="price">Цена: 14 руб.</div>
-                <div class="quantity">Количество: 10 шт.</div>
-                <form method="POST" action="{{ url_for('add_to_cart', id=1, name='Жидкость 1', price=14, quantity=10) }}">
-                    <button type="submit">Добавить в корзину</button>
-                </form>
-            </div>
-        </div>
-        <div class="product">
-            <img src="{{ url_for('static', filename='nicotine-liquid1.jpg') }}" alt="Жидкость 1">
-            <div class="product-info">
-                <div>Жидкость 1</div>
-                <div class="price">Цена: 14 руб.</div>
-                <div class="quantity">Количество: 10 шт.</div>
-                <form method="POST" action="{{ url_for('add_to_cart', id=1, name='Жидкость 1', price=14, quantity=10) }}">
-                    <button type="submit">Добавить в корзину</button>
-                </form>
-            </div>
-        </div>
-        <!-- Другие товары... -->
+        <!-- Остальные товары... -->
     </section>
 
-
-
     <div class="bottom-panel">
-    <a href="home.html">
-        <button>
-            <img src="imej/Ico/discount.png"> 
-        </button>
-    </a>
-    <a href="search.html">
-        <button>
-              <img src="imej/Ico/about-us.png"> 
-        </button>
-    </a>
-    <a href="index.html">
-        <button>
-            <img src="imej/Ico/home.png"> 
-        </button>
-    </a>
-    <a href="cart.html">
-        <button>
-            <img src="imej/Ico/cart.png">
-        </button>
-    </a>
-    <a href="cart.html">
-        <button>
-            <img src="imej/Ico/star.png"> 
-        </button>
-    </a>
-</div>
-
+        <a href="home.html">
+            <button>
+                <img src="imej/Ico/discount.png"> 
+            </button>
+        </a>
+        <a href="search.html">
+            <button>
+                <img src="imej/Ico/about-us.png"> 
+            </button>
+        </a>
+        <a href="index.html">
+            <button>
+                <img src="imej/Ico/home.png"> 
+            </button>
+        </a>
+        <a href="cart.html">
+            <button>
+                <img src="imej/Ico/cart.png">
+            </button>
+        </a>
+        <a href="cart.html">
+            <button>
+                <img src="imej/Ico/star.png"> 
+            </button>
+        </a>
+    </div>
 
     <script>
         // Функция для обновления количества товаров в корзине
         function updateCart() {
             const cartCount = document.getElementById('cart-count');
             const cartLength = {{ session.get('cart', []) | length }};
-            cartCount.textContent = cartLength;}
+            cartCount.textContent = cartLength;
+        }
 
         // Инициализация
         updateCart();
