@@ -3,246 +3,132 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Никотиновые жидкости</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Оплата успешна</title>
     <style>
-        /* Общие стили */
         body {
-            margin: 0;
             font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
             text-align: center;
-            background: linear-gradient(to right, #2d4684, #1aa166);
+            padding: 30px;
         }
 
-        .header {
-            font-size: 2em;
-            margin: 20px 0;
+        .receipt {
+            background-color: #fff;
+            border: 2px dashed #28a745;
+            border-radius: 10px;
+            width: 300px;
+            margin: 0 auto;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
-        /* Стили для баннера */
-        .banner {
-            width: 100%;
-            max-width: 1200px;
-            margin: 20px auto; /* Центрируем баннер */
-            padding: 10px;
-            border: 5px solid #28a745; /* Зеленая рамка */
-            border-radius: 10px; /* Скругленные углы */
-            background-color: #fff; /* Белый фон для рамки */
+        h1 {
+            color: #28a745;
+            font-size: 24px;
+            margin-bottom: 20px;
         }
 
-        .banner img {
-            width: 100%;
-            height: auto;
-            border-radius: 5px; /* Скругленные углы изображения */
+        p {
+            font-size: 18px;
+            color: #333;
         }
 
-        .back-button {
-            background-color: #b5ccb6;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1.2em;
+        .details {
+            margin-top: 30px;
+            font-size: 16px;
+            text-align: left;
+            margin-bottom: 30px;
+        }
+
+        .details strong {
+            color: #333;
+        }
+
+        .products-list {
             margin-top: 20px;
-            position: absolute;
-            left: 20px;
-            top: 20px;
+            text-align: left;
+            font-size: 16px;
         }
 
-        .back-button:hover {
-            background-color: #45a049;
+        .product-item {
+            margin-bottom: 10px;
         }
 
-        .cart {
-            position: fixed;
-            top: 20px;
-            right: 20px;
+        .product-item span {
+            display: inline-block;
+            width: 150px;
+        }
+
+        .total {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
             background-color: #28a745;
             color: white;
-            padding: 10px 20px;
-            border-radius: 50%;
-            font-size: 1.5em;
-            cursor: pointer;
-        }
-
-        .cart-count {
-            background-color: red;
-            color: white;
-            border-radius: 50%;
-            padding: 3px 8px;
-            position: absolute;
-            top: -5px;
-            right: -5px;
-            font-size: 1em;
-        }
-
-        .products {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 30px;
-        }
-
-        .product {
-            width: 200px;
-            background: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .product img {
-            width: 100%;
-            height: 150px;
-            object-fit: cover;
-            border-radius: 10px;
-            transition: transform 0.3s ease;
-        }
-
-        .product-info {
-            margin-top: 10px;
-        }
-
-        .price {
-            font-size: 1.1em;
-            color: #28a745;
-        }
-
-        .quantity {
-            font-size: 1em;
-            color: #dc3545;
-        }
-
-        .product:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        }
-
-        .product:hover img {
-            transform: scale(1.1);
-        }
-
-        .product:active {
-            transform: scale(0.98);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .bottom-panel {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: #808080;
-            display: flex;
-            justify-content: space-around;
-            padding: 10px 0;
-            z-index: 1000;
-        }
-
-        .bottom-panel a {
             text-decoration: none;
-        }
-
-        .bottom-panel button {
-            color: #808080;
-            border: none;
             border-radius: 5px;
-            padding: 10px 15px;
-            font-size: 0.8em;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: transparent;
+            margin-top: 30px;
+            font-size: 16px;
         }
 
-        .bottom-panel button:hover {
-            background-color: #666666;
-            color: white;
-        }
-
-        .bottom-panel button img {
-            width: 25px;
-            height: 25px;
+        .button:hover {
+            background-color: #218838;
         }
     </style>
 </head>
 <body>
-    <button onclick="window.history.back()" class="back-button">Назад</button>
+    <div class="receipt">
+        <h1>Чек оплаты</h1>
+        <p>Ваш заказ успешно оплачен!</p>
 
-    <div class="header">Никотиновые жидкости</div>
-    
-    <!-- Баннер с изображением -->
-    <div class="banner">
-        <img src="{{ url_for('static', filename='imej/PODONKI-last-hap.jpg') }}" alt="Баннер">
-    </div>
-    
-    <div class="cart">
-        <a href="{{ url_for('cart') }}">
-            Корзина
-            <span id="cart-count" class="cart-count">{{ session.get('cart', []) | length }}</span>
-        </a>
-    </div>
-    
-    <section class="products">
-        <!-- Товары -->
-        <div class="product">
-            <img src="{{ url_for('static', filename='nicotine-liquid1.jpg') }}" alt="Жидкость 1">
-            <div class="product-info">
-                <div>Жидкость 1</div>
-                <div class="price">Цена: 14 руб.</div>
-                <div class="quantity">Количество: 10 шт.</div>
-                <form method="POST" action="{{ url_for('add_to_cart', id=1, name='Жидкость 1', price=14, quantity=10) }}">
-                    <button type="submit">Добавить в корзину</button>
-                </form>
-            </div>
+        <div class="details">
+            <p><strong>Дата:</strong> <span id="payment-date"></span></p>
+            <p><strong>Номер заказа:</strong> <span id="order-id"></span></p>
         </div>
-        <!-- Остальные товары... -->
-    </section>
 
-    <div class="bottom-panel">
-        <a href="home.html">
-            <button>
-                <img src="imej/Ico/discount.png"> 
-            </button>
-        </a>
-        <a href="search.html">
-            <button>
-                <img src="imej/Ico/about-us.png"> 
-            </button>
-        </a>
-        <a href="index.html">
-            <button>
-                <img src="imej/Ico/home.png"> 
-            </button>
-        </a>
-        <a href="cart.html">
-            <button>
-                <img src="imej/Ico/cart.png">
-            </button>
-        </a>
-        <a href="cart.html">
-            <button>
-                <img src="imej/Ico/star.png"> 
-            </button>
-        </a>
+        <div class="products-list">
+            <h3>Товары в заказе:</h3>
+            <div id="products-list"></div>
+        </div>
+
+        <div class="total">
+            <p><strong>Итого: <span id="total-amount"></span> руб.</strong></p>
+        </div>
+
+        <a href="index.html" class="button">Вернуться на главную страницу</a>
     </div>
 
     <script>
-        // Функция для обновления количества товаров в корзине
-        function updateCart() {
-            const cartCount = document.getElementById('cart-count');
-            const cartLength = {{ session.get('cart', []) | length }};
-            cartCount.textContent = cartLength;
+        // Функция для отображения данных об оплате
+        function displayReceipt() {
+            const paymentData = JSON.parse(localStorage.getItem('payment'));
+            if (paymentData) {
+                document.getElementById('payment-date').textContent = paymentData.paymentDate;
+                document.getElementById('order-id').textContent = paymentData.orderId;
+                document.getElementById('total-amount').textContent = paymentData.totalAmount;
+
+                const productsList = document.getElementById('products-list');
+                paymentData.cart.forEach(item => {
+                    productsList.innerHTML += `
+                        <div class="product-item">
+                            <span><strong>${item.name}</strong></span>
+                            <span>${item.price} руб. x ${item.quantity}</span>
+                            <span><strong>${item.price * item.quantity} руб.</strong></span>
+                        </div>
+                    `;
+                });
+            }
         }
 
         // Инициализация
-        updateCart();
+        displayReceipt();
     </script>
 </body>
 </html>
