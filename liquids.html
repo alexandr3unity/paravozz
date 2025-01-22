@@ -42,11 +42,7 @@
             padding: 20px;
         }
 
-       .subcategory-price {
-    color: #fff;
-    font-size: 1.1em;
-    margin-top: 5px;
-}
+      
 
       .subcategory-container {
     border: 2px solid #232323; /* Цвет рамки */
@@ -160,8 +156,19 @@
         .logo {
             width: auto; /* Максимальная ширина логотипа */
             max-height: 200px; /* Автоматическая высота для сохранения пропорций */
-            margin-bottom: 10px; /* Отступ снизу для разделения с заголовком */
+            margin-bottom: 1px; /* Отступ снизу для разделения с заголовком */
         }
+
+    .subcategory-price {
+        color: #fff; /* Цвет текста */
+        font-size: 1.1em; /* Размер шрифта */
+        margin-top: 5px; /* Отступ сверху */
+        padding: 5px 10px; /* Внутренние отступы */
+        border: 2px solid #fff; /* Белая рамка */
+        border-radius: 8px; /* Скругленные углы */
+        display: inline-block; /* Минимизируем размер рамки */
+        background-color: rgba(0, 0, 0, 0.6); /* Полупрозрачный черный фон */
+    }
         
     </style>
 </head>
@@ -174,13 +181,13 @@
     <button onclick="window.location.href='https://alexandr3unity.github.io/paravozz/';" class="back-button">Назад</button>
 
     <section class="subcategories">
-    <a href="https://alexandr3unity.github.io/paravozz/nicotine_liquids" aria-label="Безникотиновые жидкости">
+     <a href="https://alexandr3unity.github.io/paravozz/nicotine_liquids" aria-label="Безникотиновые жидкости">
         <div class="subcategory-container">
             <div class="subcategory">
                 <img src="imej/PODONKI-last-hap.jpg" alt="Безникотиновые жидкости">
                 <div class="subcategory-description">PODONKI-last-hap</div>
                 <div class="subcategory-description">60MG 50/50 PG/VG</div>
-                <div class="subcategory-price">Цена: 14 руб.</div>
+                <div class="subcategory-price">Цена: 14 руб.</div> <!-- Цена в рамке -->
             </div>
         </div>
     </a>
