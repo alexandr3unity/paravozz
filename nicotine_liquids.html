@@ -21,24 +21,19 @@
             right: 10px;
         }
 
-         .banner {
-        width: 100vw; /* Занимает всю ширину экрана */
-        height: 100vh; /* Занимает всю высоту экрана */
-        overflow: hidden;
-        margin: 0; /* Убираем отступы */
-    }
-
-    .banner {
-        width: 100%; /* Занимает всю ширину экрана */
-        max-height: 150px; /* Ограничиваем высоту баннера */
-        overflow: hidden;
+          .banner {
+        display: flex;
+        justify-content: center; /* Центрируем изображение по горизонтали */
         margin-bottom: 20px;
     }
 
     .banner img {
-        width: 100%; /* Изображение адаптируется по ширине блока */
-        height: auto; /* Сохраняет пропорции */
-        object-fit: cover; /* Заполняет блок, если пропорции не совпадают */
+        width: 100%; /* Изображение адаптируется по ширине */
+        max-width: 600px; /* Максимальная ширина изображения */
+        height: auto; /* Сохраняем пропорции */
+        border: 5px solid #ccc; /* Рамка вокруг изображения */
+        border-radius: 10px; /* Скругляем углы рамки */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Тень для рамки */
     }
 
         .dropdown-content {
