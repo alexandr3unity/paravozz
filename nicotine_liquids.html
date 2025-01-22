@@ -5,6 +5,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Никотиновые жидкости</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .header {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .cart {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            border: 1px solid #ccc;
+            z-index: 1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content div {
+            margin: 5px 0;
+        }
+
+        .dropdown-content button {
+            margin-left: 10px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
     <button onclick="window.history.back()" class="back-button">Назад</button>
@@ -16,88 +61,40 @@
             <span id="cart-count" class="cart-count">0</span>
         </a>
     </div>
-    
-    <section class="products">
-        <!-- Товары -->
-        <div class="product">
-            <img src="nicotine-liquid1.jpg" alt="Жидкость 1">
-            <div class="product-info">
-                <div>Жидкость 1</div>
-                <div class="price">Цена: 14 руб.</div>
-                <div class="quantity">Количество: 10 шт.</div>
-                <button class="add-to-cart" onclick="addToCart('Жидкость 1', 14)">Добавить в корзину</button>
+
+    <div class="dropdown">
+        <button>Товары</button>
+        <div class="dropdown-content">
+            <div>
+                Жидкость 1 - 14 руб.
+                <button onclick="addToCart('Жидкость 1', 14)">Добавить</button>
+            </div>
+            <div>
+                Жидкость 2 - 20 руб.
+                <button onclick="addToCart('Жидкость 2', 20)">Добавить</button>
+            </div>
+            <div>
+                Жидкость 3 - 25 руб.
+                <button onclick="addToCart('Жидкость 3', 25)">Добавить</button>
+            </div>
+            <div>
+                Жидкость 4 - 30 руб.
+                <button onclick="addToCart('Жидкость 4', 30)">Добавить</button>
+            </div>
+            <div>
+                Жидкость 5 - 18 руб.
+                <button onclick="addToCart('Жидкость 5', 18)">Добавить</button>
+            </div>
+            <div>
+                Жидкость 6 - 22 руб.
+                <button onclick="addToCart('Жидкость 6', 22)">Добавить</button>
+            </div>
+            <div>
+                Жидкость 7 - 28 руб.
+                <button onclick="addToCart('Жидкость 7', 28)">Добавить</button>
             </div>
         </div>
-
-        <div class="product">
-            <img src="nicotine-liquid1.jpg" alt="Жидкость 1">
-            <div class="product-info">
-                <div>Жидкость 1</div>
-                <div class="price">Цена: 14 руб.</div>
-                <div class="quantity">Количество: 10 шт.</div>
-                <button class="add-to-cart" onclick="addToCart('Жидкость 1', 14)">Добавить в корзину</button>
-            </div>
-        </div>
-
-        <div class="product">
-            <img src="nicotine-liquid2.jpg" alt="Жидкость 2">
-            <div class="product-info">
-                <div>Жидкость 2</div>
-                <div class="price">Цена: 20 руб.</div>
-                <div class="quantity">Количество: 15 шт.</div>
-                <button class="add-to-cart" onclick="addToCart('Жидкость 2', 20)">Добавить в корзину</button>
-            </div>
-        </div>
-
-        <div class="product">
-            <img src="nicotine-liquid3.jpg" alt="Жидкость 3">
-            <div class="product-info">
-                <div>Жидкость 3</div>
-                <div class="price">Цена: 25 руб.</div>
-                <div class="quantity">Количество: 12 шт.</div>
-                <button class="add-to-cart" onclick="addToCart('Жидкость 3', 25)">Добавить в корзину</button>
-            </div>
-        </div>
-
-        <div class="product">
-            <img src="nicotine-liquid4.jpg" alt="Жидкость 4">
-            <div class="product-info">
-                <div>Жидкость 4</div>
-                <div class="price">Цена: 30 руб.</div>
-                <div class="quantity">Количество: 8 шт.</div>
-                <button class="add-to-cart" onclick="addToCart('Жидкость 4', 30)">Добавить в корзину</button>
-            </div>
-        </div>
-
-        <div class="product">
-            <img src="nicotine-liquid5.jpg" alt="Жидкость 5">
-            <div class="product-info">
-                <div>Жидкость 5</div>
-                <div class="price">Цена: 18 руб.</div>
-                <div class="quantity">Количество: 20 шт.</div>
-                <button class="add-to-cart" onclick="addToCart('Жидкость 5', 18)">Добавить в корзину</button>
-            </div>
-        </div>
-
-        <div class="product">
-            <img src="nicotine-liquid6.jpg" alt="Жидкость 6">
-            <div class="product-info">
-                <div>Жидкость 6</div>
-                <div class="price">Цена: 22 руб.</div>
-                <div class="quantity">Количество: 5 шт.</div>
-                <button class="add-to-cart" onclick="addToCart('Жидкость 6', 22)">Добавить в корзину</button>
-            </div>
-        </div>
-
-        <div class="product">
-            <img src="nicotine-liquid7.jpg" alt="Жидкость 7">
-            <div class="product-info">
-                <div>Жидкость 7</div>
-                <div class="price">Цена: 28 руб.</div>
-                <div class="quantity">Количество: 10 шт.</div>
-                <button class="add-to-cart" onclick="addToCart('Жидкость 7', 28)">Добавить в корзину</button>
-        <!-- Другие товары... -->
-    </section>
+    </div>
 
     <script>
         function updateCartCount() {
