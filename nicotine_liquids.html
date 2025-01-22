@@ -127,6 +127,21 @@
 </div>
 
     <script>
+    const dropdownButton = document.getElementById('dropdown-button');
+    const dropdownContent = document.getElementById('dropdown-content');
+
+    dropdownButton.addEventListener('click', () => {
+        // Переключаем класс "show" для показа или скрытия меню
+        dropdownContent.classList.toggle('show');
+    });
+
+    // Дополнительно: Закрытие меню при клике вне его
+    document.addEventListener('click', (event) => {
+        if (!dropdownButton.contains(event.target) && !dropdownContent.contains(event.target)) {
+            dropdownContent.classList.remove('show');
+        }
+    });
+
         function updateCartCount() {
             const cart = JSON.parse(localStorage.getItem('cart')) || [];
             document.getElementById('cart-count').textContent = cart.length;
