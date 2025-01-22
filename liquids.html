@@ -6,6 +6,8 @@
     <title>Жидкости</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <style>
+
+        /* Градиентный фон для всей страницы */
         body {
             margin: 0;
             font-family: Arial, sans-serif;
@@ -16,16 +18,125 @@
             background-repeat: repeat;
             min-height: 100vh;
             width: 100vw;
-        }
 
-        header {
+
+             header {
+            text-align: center;
             padding: 20px;
         }
 
-        .logo {
-            width: auto;
-            max-height: 200px;
-            margin-bottom: 1px;
+        .header-container {
+            border: 2px solid #232323; /* Цвет рамки */
+            border-radius: 8px; /* Скругление углов */
+            padding: 10px; /* Внутренние отступы */
+            width: fit-content; /* Ширина по содержимому */
+            margin: 20px; /* Отступ от верхнего и левого краев */
+            text-align: left; /* Выравнивание текста влево */
+        }
+
+      
+        }
+
+        header {
+            text-align: center;
+            padding: 20px;
+        }
+
+      
+
+      .subcategory-container {
+        border: 2px solid #232323; /* Цвет рамки */
+        border-radius: 8px; /* Скругление углов */
+        margin: 10px; /* Отступы */
+        text-align: center; /* Центрируем текст */
+        background-color: rgba(35, 35, 35, 0.8); /* Фон рамки */
+        padding: 10px; /* Внутренние отступы */
+        box-sizing: border-box; /* Учитываем рамку и отступы в ширине */
+           display: flex; /* Включаем Flexbox */
+        flex-direction: column; /* Устанавливаем элементы по вертикали */
+        align-items: center; /* Выравнивание по горизонтали */
+        position: relative; /* Для позиционирования внутри контейнера */
+    }
+
+.subcategory {
+    display: flex; /* Используем Flexbox для выравнивания */
+    align-items: flex-start; /* Вертикальное выравнивание элементов */
+    justify-content: flex-start; /* Выравнивание по горизонтали */
+    padding: 10px; /* Отступы вокруг */
+}
+
+
+.subcategory-title {
+    margin: 0; /* Убираем отступы */
+    position: absolute; /* Абсолютное позиционирование для заголовка */
+    top: 10px; /* Расположение заголовка от верхней части рамки */
+    left: 10px; /* Отступ слева от рамки */
+    background-color: rgba(35, 35, 35, 0.8); /* Фон для заголовка */
+    padding: 0 5px; /* Горизонтальные отступы для фона */
+    z-index: 1; /* Убедимся, что заголовок выше других элементов */
+}
+
+ .subcategory-description {
+        margin-top: 10px; /* Отступ сверху */
+        color: rgba(255, 255, 255, 0.9); /* Цвет текста */
+    }
+.subcategory-description {
+    margin-top: 5px; /* Отступ сверху для разделения текстов */
+}
+
+.subcategory img {
+    width: 45%; /* Устанавливаем ширину изображения */
+    height: auto; /* Автоматическая высота для сохранения пропорций */
+    margin-right: 10px; /* Отступ справа от изображения */
+}
+
+        .subcategory:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .subcategories {
+            display: flex;
+            flex-direction: column; /* Устанавливаем вертикальную ориентацию */
+            align-items: center; /* Центрируем подкатегории по горизонтали */
+            padding: 20px;
+        }
+
+          .subcategory img {
+            width: 45%;
+            height: auto;
+            margin: 0;
+            padding: 0;
+        }
+
+        .subcategory-info {
+            text-align: center; /* Центрируем текст */
+            margin-top: 10px; /* Отступ сверху */
+        }
+
+        .subcategory-title {
+            text-align: center;
+            font-weight: bold;
+            color: white;
+            margin-top: 10px;
+        }
+
+        .subcategory-description {
+            text-align: center;
+            margin-top: 10px;
+            color: rgba(255, 255, 255, 0.7); /* Полу-прозрачный текст */
+        }
+
+        .subcategory:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .subcategories {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
         }
 
         .back-button {
@@ -43,81 +154,33 @@
             background-color: #45a049;
         }
 
-        .subcategory-container {
-            border: 2px solid #232323;
-            border-radius: 8px;
-            margin: 10px;
-            text-align: center;
-            background-color: rgba(35, 35, 35, 0.8);
-            padding: 10px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            position: relative;
+        .logo {
+            width: auto; /* Максимальная ширина логотипа */
+            max-height: 200px; /* Автоматическая высота для сохранения пропорций */
+            margin-bottom: 1px; /* Отступ снизу для разделения с заголовком */
         }
 
-        .subcategory {
-            display: flex;
-            align-items: flex-start;
-            justify-content: flex-start;
-            padding: 10px;
-        }
-
-        .subcategory img {
-            width: 45%;
-            height: auto;
-            margin-right: 10px;
-        }
-
-        .subcategory-description {
-            margin-top: 10px;
-            color: rgba(255, 255, 255, 0.9);
-        }
-
-        .subcategory-price {
-            color: #fff;
-            font-size: 1.1em;
-            padding: 5px 10px;
-            border-radius: 8px;
-            background-color: rgba(0, 0, 0, 0.6);
-            align-self: flex-end;
-        }
-
-        .subcategory:hover {
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            transform: translateY(-2px);
-        }
-
-        .subcategories {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .subcategory-title {
-            text-align: center;
-            font-weight: bold;
-            color: white;
-            margin-top: 10px;
-        }
-
-        .subcategory-description {
-            text-align: center;
-            margin-top: 10px;
-            color: rgba(255, 255, 255, 0.7);
-        }
+.subcategory-price {
+    color: #fff; /* Цвет текста */
+    font-size: 1.1em; /* Размер шрифта */
+    padding: 5px 10px; /* Внутренние отступы */
+    border-radius: 8px; /* Скругленные углы */
+    background-color: rgba(0, 0, 0, 0.6); /* Полупрозрачный черный фон */
+    align-self: flex-end; /* Размещение по нижнему краю */
+}
+        
     </style>
 </head>
 <body>
-    <header>
-        <img src="imej/jidkostt.png" alt="Логотип" class="logo">
+ <header>
+      <img src="imej/jidkostt.png" alt="Логотип" class="logo"> <!-- Логотип -->
+       
     </header>
 
     <button onclick="window.location.href='https://alexandr3unity.github.io/paravozz/';" class="back-button">Назад</button>
 
     <section class="subcategories">
-      <a href="https://alexandr3unity.github.io/paravozz/nicotine_liquids" aria-label="Безникотиновые жидкости">
+     <a href="https://alexandr3unity.github.io/paravozz/nicotine_liquids" aria-label="Безникотиновые жидкости">
        <div class="subcategory-container">
          <div class="subcategory">
            <img src="imej/PODONKI-last-hap.jpg" alt="Безникотиновые жидкости">
@@ -248,7 +311,6 @@
                 </div>
             </div>
         </a>
-  <!-- Подобные блоки для остальных товаров -->
     </section>
 </body>
 </html>
