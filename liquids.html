@@ -52,6 +52,10 @@
         background-color: rgba(35, 35, 35, 0.8); /* Фон рамки */
         padding: 10px; /* Внутренние отступы */
         box-sizing: border-box; /* Учитываем рамку и отступы в ширине */
+           display: flex; /* Включаем Flexbox */
+        flex-direction: column; /* Устанавливаем элементы по вертикали */
+        align-items: center; /* Выравнивание по горизонтали */
+        position: relative; /* Для позиционирования внутри контейнера */
     }
 
 .subcategory {
@@ -157,14 +161,15 @@
             margin-bottom: 1px; /* Отступ снизу для разделения с заголовком */
         }
 
-       .subcategory-price {
+     .subcategory-price {
         color: #fff; /* Цвет текста */
         font-size: 1.1em; /* Размер шрифта */
-        margin-top: 60px; /* Отступ сверху */
         padding: 5px 10px; /* Внутренние отступы */
         border-radius: 8px; /* Скругленные углы */
-        display: inline-block; /* Минимизируем размер блока */
         background-color: rgba(0, 0, 0, 0.6); /* Полупрозрачный черный фон */
+        position: absolute; /* Позволяет задавать точные координаты */
+        top: auto; /* Сброс верхнего положения */
+        left: auto; /* Сброс левого положения */
     }
         
     </style>
