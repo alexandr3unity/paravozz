@@ -162,6 +162,24 @@
         }
 
 
+
+
+        .product-name {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+
+
+
+
+
+        
+
+
     .banner {
     width: 82%; /* 100% - 9% слева - 9% справа = 82% */
     margin: 0 auto; /* Центрируем баннер */
@@ -193,6 +211,10 @@
     <div class="banner">
         <img src="imej/PODONKI-last-hap.jpg" alt="Фотография баннера">
     </div>
+</div>
+
+<div class="product-name" id="product-name">
+   PJDJNKI-LAST-HOP
 </div>
 
     <div class="dropdown">
@@ -280,6 +302,8 @@
         localStorage.setItem('cart', JSON.stringify(cart));
         updateCartCount(); // Обновляем количество товаров в корзине
     }
+
+      document.getElementById('product-name').textContent = `Выбран товар: ${name}`;
 
     // Функция для переключения состояния выпадающего меню
     function toggleDropdown() {
