@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="style.css">
     <style>
 
-         body {
+        body {
             margin: 0;
             font-family: Arial, sans-serif;
             text-align: center;
@@ -38,7 +38,7 @@
 
         .dropdown {
             position: relative;
-            display: block;
+            display: block; 
             width: 96%;
             margin: 0 auto;
             margin-top: 20px;
@@ -62,23 +62,21 @@
         }
 
         .dropdown-content {
-            display: none; /* Скрыто по умолчанию */
+            display: none;
             position: absolute;
             background-color: #f9f9f9;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
             padding: 10px;
             border: 1px solid #ccc;
             z-index: 1;
-            width: 100%; /* Ширина выпадающего меню равна ширине кнопки */
-            box-sizing: border-box;
         }
 
         .dropdown:hover .dropdown-content {
-            display: block; /* Показываем при наведении */
+            display: block;
         }
 
         .dropdown-content div {
-            display: flex; /* Выравнивание в строку */
+            display: flex;
             justify-content: space-between;
             align-items: center;
             margin: 5px 0;
@@ -108,7 +106,6 @@
             background-color: #666666;
         }
 
-        /* Панель с кнопками */
         .bottom-panel {
             position: fixed;
             bottom: 0;
@@ -157,6 +154,12 @@
             color: #333;
         }
 
+        .product-description {
+            font-size: 16px;
+            color: rgba(0, 0, 0, 0.5); /* Полупрозрачный цвет */
+            margin-bottom: 20px;
+        }
+
         .banner {
             width: 82%;
             margin: 0 auto;
@@ -191,35 +194,39 @@
         PJDJNKI-LAST-HOP
     </div>
 
+    <div class="product-description">
+        Выбор товара
+    </div>
+
     <div class="dropdown">
         <button onclick="toggleDropdown()">Товары</button>
         <div class="dropdown-content">
             <div>
-                <span>Жидкость 1 - 14 руб.</span>
+                Жидкость 1 - 14 руб.
                 <button onclick="addToCart('Жидкость 1', 14)">Добавить</button>
             </div>
             <div>
-                <span>Жидкость 2 - 20 руб.</span>
+                Жидкость 2 - 20 руб.
                 <button onclick="addToCart('Жидкость 2', 20)">Добавить</button>
             </div>
             <div>
-                <span>Жидкость 3 - 25 руб.</span>
+                Жидкость 3 - 25 руб.
                 <button onclick="addToCart('Жидкость 3', 25)">Добавить</button>
             </div>
             <div>
-                <span>Жидкость 4 - 30 руб.</span>
+                Жидкость 4 - 30 руб.
                 <button onclick="addToCart('Жидкость 4', 30)">Добавить</button>
             </div>
             <div>
-                <span>Жидкость 5 - 18 руб.</span>
+                Жидкость 5 - 18 руб.
                 <button onclick="addToCart('Жидкость 5', 18)">Добавить</button>
             </div>
             <div>
-                <span>Жидкость 6 - 22 руб.</span>
+                Жидкость 6 - 22 руб.
                 <button onclick="addToCart('Жидкость 6', 22)">Добавить</button>
             </div>
             <div>
-                <span>Жидкость 7 - 28 руб.</span>
+                Жидкость 7 - 28 руб.
                 <button onclick="addToCart('Жидкость 7', 28)">Добавить</button>
             </div>
         </div>
@@ -229,17 +236,17 @@
     <div class="bottom-panel">
         <a href="home.html">
             <button>
-                <img src="imej/Ico/discount.png"> 
+                <img src="imej/Ico/discount.png">
             </button>
         </a>
         <a href="search.html">
             <button>
-                <img src="imej/Ico/about-us.png"> 
+                <img src="imej/Ico/about-us.png">
             </button>
         </a>
         <a href="index.html">
             <button>
-                <img src="imej/Ico/home.png"> 
+                <img src="imej/Ico/home.png">
             </button>
         </a>
         <a href="cart.html">
@@ -249,7 +256,7 @@
         </a>
         <a href="cart.html">
             <button>
-                <img src="imej/Ico/star.png"> 
+                <img src="imej/Ico/star.png">
             </button>
         </a>
     </div>
