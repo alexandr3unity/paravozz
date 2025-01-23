@@ -78,26 +78,46 @@
         .dropdown:hover .dropdown-content {
             display: block;
         }
+.dropdown-content {
+    display: block; /* Устанавливаем блочный стиль для контейнера */
+    width: 96%; /* Совпадает с шириной кнопки "Товары" */
+    margin: 0 auto; /* Центрируем меню */
+    padding: 10px; /* Внутренние отступы для красоты */
+    background-color: #f9f9f9; /* Фон выпадающего меню */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Тень для меню */
+    border: 1px solid #ccc; /* Граница меню */
+    z-index: 1; /* Поверх других элементов */
+}
+
 .dropdown-content div {
-    display: flex; /* Используем Flexbox для выравнивания в строку */
-    justify-content: space-between; /* Распределяем элементы по краям */
+    display: flex; /* Flexbox для выравнивания */
+    justify-content: space-between; /* Разделяем текст и кнопку */
     align-items: center; /* Выравниваем по вертикали */
     margin: 5px 0; /* Отступ между строками */
+    height: 50px; /* Фиксированная высота строк */
+}
+
+.dropdown-content div span {
+    flex: 1; /* Растягиваем текст на всё доступное пространство */
+    text-align: left; /* Выравниваем текст по левому краю */
+    font-size: 1em; /* Размер шрифта для текста */
+    padding-right: 10px; /* Отступ между текстом и кнопкой */
 }
 
 .dropdown-content button {
-    margin: 0; /* Убираем отступы */
-    padding: 5px 10px; /* Внутренние отступы кнопки */
-    cursor: pointer; /* Курсор при наведении */
-    background-color: #808080; /* Серый фон кнопки */
-    color: white; /* Белый текст кнопки */
+    width: 100px; /* Фиксированная ширина кнопки */
+    padding: 10px; /* Внутренние отступы */
+    font-size: 0.9em; /* Размер текста */
     border: none; /* Убираем границы */
+    background-color: #808080; /* Серый фон */
+    color: white; /* Белый текст */
     border-radius: 5px; /* Скруглённые углы */
-    transition: background-color 0.3s ease; /* Плавный эффект при наведении */
+    cursor: pointer; /* Указатель при наведении */
+    transition: background-color 0.3s ease; /* Эффект при наведении */
 }
 
 .dropdown-content button:hover {
-    background-color: #666666; /* Темнее серый при наведении */
+    background-color: #666666; /* Более тёмный серый при наведении */
 }
 
         /* Панель с кнопками */
