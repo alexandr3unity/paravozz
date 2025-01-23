@@ -61,50 +61,48 @@
             background-color: #666666;
         }
 
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #f9f9f9;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-            padding: 10px;
-            border: 1px solid #ccc;
-            z-index: 1;
-        }
+      .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    border: 1px solid #ccc;
+    z-index: 1;
+    width: 100%; /* Сделаем ширину равной кнопке */
+}
 
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
+.dropdown:hover .dropdown-content {
+    display: block;
+}
 
-        .dropdown-content div {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin: 5px 0;
-            height: 50px;
-        }
+.dropdown-item {
+    display: flex; /* Используем flexbox для выравнивания в строку */
+    justify-content: space-between; /* Пространство между текстом и кнопкой */
+    align-items: center; /* Центрируем по вертикали */
+    margin-bottom: 10px; /* Отступы между элементами */
+}
 
-        .dropdown-content div span {
-            flex: 1;
-            text-align: left;
-            font-size: 1em;
-            padding-right: 10px;
-        }
+.dropdown-item span {
+    font-size: 1em;
+    color: black;
+}
 
-        .dropdown-content button {
-            width: 100px;
-            padding: 10px;
-            font-size: 0.9em;
-            border: none;
-            background-color: #808080;
-            color: white;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
+.dropdown-item button {
+    width: 100px; /* Фиксированная ширина кнопки */
+    padding: 5px; /* Уменьшаем отступы */
+    font-size: 0.9em;
+    border: none;
+    background-color: #808080;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
 
-        .dropdown-content button:hover {
-            background-color: #666666;
-        }
+.dropdown-item button:hover {
+    background-color: #666666;
+}
 
         .bottom-panel {
             position: fixed;
