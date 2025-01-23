@@ -112,19 +112,20 @@
         }
 
 
-      .banner-frame {
-    display: inline-block; /* Подгонка под содержимое */
-    border: 10px solid #444; /* Увеличенная толщина рамки и цвет */
-    border-radius: 15px; /* Больше скругление углов */
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5); /* Тень для дополнительного эффекта */
-    overflow: hidden; /* Скрывает части изображения за рамками */
-    width: 100%; /* Ширина под изображение */
+     .banner {
+    width: 100%; /* Растянуть на всю ширину */
+    height: auto; /* Высота подстраивается под изображение */
+    overflow: hidden; /* Скрыть лишнее, если выходит за рамки */
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center; /* Центрировать изображение по горизонтали */
+    align-items: center; /* Центрировать изображение по вертикали */
 }
 
-.banner-frame img {
-    display: block; /* Убираем лишние отступы */
-    width: 100%; /* Пропорциональная ширина */
-    height: auto; /* Сохраняем пропорции */
+.banner img {
+    width: 100%; /* Изображение растягивается по ширине контейнера */
+    height: auto; /* Сохраняются пропорции */
+    object-fit: contain; /* Вписать изображение в контейнер полностью */
 }
         
     </style>
@@ -137,7 +138,7 @@
 
     <!-- Фотография-баннер -->
    <div class="banner">
-    <div class="banner-frame">
+    <div class="banner">
         <img src="imej/PODONKI-last-hap.jpg" alt="Фотография баннера">
     </div>
 </div>
