@@ -196,7 +196,7 @@
 </div>
 
     <div class="dropdown">
-        <button>Товары</button>
+        <button onclick="toggleDropdown()">Товары</button>
      <div class="dropdown-content">
     <div>
         Жидкость 1 - 14 руб.
@@ -257,30 +257,38 @@
         </a>
     </div>
 
-    <script>
-        function updateCartCount() {
-            const cart = JSON.parse(localStorage.getItem('cart')) || [];
-            document.getElementById('cart-count').textContent = cart.length;
+  <script>
+    // Функция обновления количества товаров в корзине
+    function updateCartCount() {
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        document.getElementById('cart-count').textContent = cart.length;
+    }
+
+    // Функция добавления товара в корзину
+    function addToCart(name, price) {
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const itemIndex = cart.findIndex(item => item.name === name);
+
+        if (itemIndex > -1) {
+            // Если товар уже есть в корзине, увеличиваем его количество на 1
+            cart[itemIndex].quantity += 1;
+        } else {
+            // Добавляем товар с количеством 1
+            cart.push({ name, price, quantity: 1 });
         }
 
-        function addToCart(name, price) {
-            const cart = JSON.parse(localStorage.getItem('cart')) || [];
-            const itemIndex = cart.findIndex(item => item.name === name);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCartCount(); // Обновляем количество товаров в корзине
+    }
 
-            if (itemIndex > -1) {
-                // Если товар уже есть в корзине, увеличиваем его количество на 1
-                cart[itemIndex].quantity += 1;
-            } else {
-                // Добавляем товар с количеством 1
-                cart.push({ name, price, quantity: 1 });
-            }
+    // Функция для переключения состояния выпадающего меню
+    function toggleDropdown() {
+        const dropdownContent = document.querySelector('.dropdown-content');
+        dropdownContent.style.display = (dropdownContent.style.display === 'block') ? 'none' : 'block';
+    }
 
-            localStorage.setItem('cart', JSON.stringify(cart));
-            updateCartCount(); // Обновляем количество товаров в корзине
-        }
-
-        // Инициализация
-        updateCartCount();
-    </script>
+    // Инициализация
+    updateCartCount();
+</script>
 </body>
 </html>
