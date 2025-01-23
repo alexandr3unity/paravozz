@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Никотиновые жидкости</title>
+
     <link rel="stylesheet" href="style.css">
     <style>
 
@@ -112,20 +112,22 @@
         }
 
 
-     .banner {
-    width: 100%; /* Растянуть на всю ширину */
-    height: auto; /* Высота подстраивается под изображение */
-    overflow: hidden; /* Скрыть лишнее, если выходит за рамки */
-    margin-bottom: 20px;
+    .banner {
+    width: 82%; /* 100% - 9% слева - 9% справа = 82% */
+    margin: 0 auto; /* Центрируем баннер */
+    margin-top: 20px; /* Отступ сверху (если нужно) */
+    margin-bottom: 20px; /* Отступ снизу */
+    overflow: hidden; /* Обрезаем содержимое, выходящее за рамки */
     display: flex;
-    justify-content: center; /* Центрировать изображение по горизонтали */
-    align-items: center; /* Центрировать изображение по вертикали */
+    justify-content: center; /* Центрируем содержимое по горизонтали */
+    align-items: center; /* Центрируем содержимое по вертикали */
 }
 
 .banner img {
-    width: 100%; /* Изображение растягивается по ширине контейнера */
-    height: auto; /* Сохраняются пропорции */
-    object-fit: contain; /* Вписать изображение в контейнер полностью */
+    width: 100%; /* Изображение занимает ширину контейнера */
+    height: auto; /* Сохраняем пропорции изображения */
+    object-fit: contain; /* Изображение будет полностью видно */
+    display: block; /* Убираем лишние отступы */
 }
         
     </style>
