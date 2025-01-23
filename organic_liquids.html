@@ -39,12 +39,31 @@
             height: auto;
         }
 
-       .dropdown {
+      .dropdown {
     position: relative;
-    display: inline-block;
-    margin-top: 40px; /* Увеличенный отступ сверху */
-    text-align: center; /* Центрирование кнопки */
+    display: block; /* Растягиваем на всю ширину */
+    width: 96%; /* 100% - 2% слева - 2% справа = 96% */
+    margin: 0 auto; /* Центрируем с учётом отступов */
+    margin-top: 20px; /* Отступ сверху */
 }
+
+.dropdown button {
+    width: 100%; /* Кнопка занимает всю ширину контейнера */
+    padding: 10px 0; /* Отступы внутри кнопки */
+    font-size: 1.2em; /* Увеличиваем размер текста */
+    border: none; /* Убираем границы */
+    background-color: #808080; /* Серый фон */
+    color: white; /* Белый текст */
+    border-radius: 5px; /* Скруглённые углы */
+    cursor: pointer; /* Указатель при наведении */
+    box-sizing: border-box; /* Учитываем отступы и границы в ширине */
+    transition: background-color 0.3s ease; /* Эффект при наведении */
+}
+
+.dropdown button:hover {
+    background-color: #666666; /* Более тёмный серый при наведении */
+}
+
 
         .dropdown-content {
             display: none;
