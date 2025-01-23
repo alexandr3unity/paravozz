@@ -103,25 +103,15 @@
             background-color: transparent; /* Убираем белый фон */
         }
 
-      .banner {
-    display: flex; /* Для центрирования рамки */
-    justify-content: center; /* Горизонтальное выравнивание по центру */
-    margin: 20px 0; /* Отступы сверху и снизу */
-}
+        .bottom-panel button:hover {
+            background-color: #666666; /* Темнее серый для hover */
+            color: white;
+        }
 
-.banner-frame {
-    border: 5px solid #ccc; /* Цвет и толщина рамки */
-    border-radius: 10px; /* Скруглённые углы */
-    overflow: hidden; /* Скрыть части изображения за рамками */
-    width: 80%; /* Ширина рамки: 80% от ширины экрана */
-    max-width: 1200px; /* Ограничение максимальной ширины для больших экранов */
-}
-
-.banner-frame img {
-    display: block; /* Убирает лишние отступы */
-    width: 100%; /* Масштабирует изображение по ширине рамки */
-    height: auto; /* Сохраняет пропорции изображения */
-}
+        .bottom-panel button img {
+            width: 25px; /* Увеличены иконки */
+            height: 25px;
+        }
 
 
        .banner-frame {
@@ -132,7 +122,11 @@
     width: 100%; /* Растянуть на ширину изображения */
 }
 
-
+.banner-frame img {
+    display: block; /* Убирает лишние отступы */
+    width: 100%; /* Масштабирует изображение по ширине родителя */
+    height: auto; /* Сохраняет пропорции изображения */
+}
         
     </style>
 </head>
