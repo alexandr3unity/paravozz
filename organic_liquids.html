@@ -69,6 +69,8 @@
             padding: 10px;
             border: 1px solid #ccc;
             z-index: 1;
+            width: 100%; /* Ширина выпадающего меню равна ширине кнопки */
+            box-sizing: border-box;
         }
 
         .dropdown:hover .dropdown-content {
@@ -76,7 +78,7 @@
         }
 
         .dropdown-content div {
-            display: flex;
+            display: flex; /* Выравнивание в строку */
             justify-content: space-between;
             align-items: center;
             margin: 5px 0;
@@ -193,31 +195,31 @@
         <button onclick="toggleDropdown()">Товары</button>
         <div class="dropdown-content">
             <div>
-                Жидкость 1 - 14 руб.
+                <span>Жидкость 1 - 14 руб.</span>
                 <button onclick="addToCart('Жидкость 1', 14)">Добавить</button>
             </div>
             <div>
-                Жидкость 2 - 20 руб.
+                <span>Жидкость 2 - 20 руб.</span>
                 <button onclick="addToCart('Жидкость 2', 20)">Добавить</button>
             </div>
             <div>
-                Жидкость 3 - 25 руб.
+                <span>Жидкость 3 - 25 руб.</span>
                 <button onclick="addToCart('Жидкость 3', 25)">Добавить</button>
             </div>
             <div>
-                Жидкость 4 - 30 руб.
+                <span>Жидкость 4 - 30 руб.</span>
                 <button onclick="addToCart('Жидкость 4', 30)">Добавить</button>
             </div>
             <div>
-                Жидкость 5 - 18 руб.
+                <span>Жидкость 5 - 18 руб.</span>
                 <button onclick="addToCart('Жидкость 5', 18)">Добавить</button>
             </div>
             <div>
-                Жидкость 6 - 22 руб.
+                <span>Жидкость 6 - 22 руб.</span>
                 <button onclick="addToCart('Жидкость 6', 22)">Добавить</button>
             </div>
             <div>
-                Жидкость 7 - 28 руб.
+                <span>Жидкость 7 - 28 руб.</span>
                 <button onclick="addToCart('Жидкость 7', 28)">Добавить</button>
             </div>
         </div>
