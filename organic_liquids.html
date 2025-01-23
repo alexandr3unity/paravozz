@@ -102,6 +102,15 @@
             width: 25px; /* Увеличены иконки */
             height: 25px;
         }
+
+
+        .banner-frame {
+    border: 5px solid #ccc; /* Цвет и толщина рамки */
+    border-radius: 10px; /* Скруглённые углы */
+    overflow: hidden; /* Скрыть части изображения за рамками */
+    margin: 0 auto; /* Центрировать рамку */
+    max-width: 90%; /* Установить максимальную ширину для адаптивности */
+}
         
     </style>
 </head>
@@ -117,9 +126,11 @@
     </div>
 
     <!-- Фотография-баннер -->
-    <div class="banner">
+   <div class="banner">
+    <div class="banner-frame">
         <img src="imej/PODONKI-last-hap.jpg" alt="Фотография баннера">
     </div>
+</div>
 
     <div class="dropdown">
         <button>Товары</button>
