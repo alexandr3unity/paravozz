@@ -235,9 +235,8 @@ button:hover {
             display: inline-block;
             margin-top: 20px;
             padding: 10px 20px;
-            color: #28a745;
+            color: #808080;
             text-decoration: none;
-            border: 1px solid #28a745;
             border-radius: 5px;
         }
 
