@@ -25,11 +25,7 @@
             margin-bottom: 20px;
         }
 
-        .cart {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-        }
+      
 
         .banner {
             width: 100%;
@@ -43,10 +39,12 @@
             height: auto;
         }
 
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
+       .dropdown {
+    position: relative;
+    display: inline-block;
+    margin-top: 40px; /* Увеличенный отступ сверху */
+    text-align: center; /* Центрирование кнопки */
+}
 
         .dropdown-content {
             display: none;
@@ -135,12 +133,7 @@
     <button onclick="window.history.back()" class="back-button">Назад</button>
     <div class="header">Никотиновые жидкости</div>
     
-    <div class="cart">
-        <a href="cart.html">
-            Корзина
-            <span id="cart-count" class="cart-count">0</span>
-        </a>
-    </div>
+
 
     <!-- Фотография-баннер -->
    <div class="banner">
