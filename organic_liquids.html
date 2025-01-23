@@ -78,16 +78,27 @@
         .dropdown:hover .dropdown-content {
             display: block;
         }
+.dropdown-content div {
+    display: flex; /* Используем Flexbox для выравнивания в строку */
+    justify-content: space-between; /* Распределяем элементы по краям */
+    align-items: center; /* Выравниваем по вертикали */
+    margin: 5px 0; /* Отступ между строками */
+}
 
-        .dropdown-content div {
-            margin: 5px 0;
-        }
+.dropdown-content button {
+    margin: 0; /* Убираем отступы */
+    padding: 5px 10px; /* Внутренние отступы кнопки */
+    cursor: pointer; /* Курсор при наведении */
+    background-color: #808080; /* Серый фон кнопки */
+    color: white; /* Белый текст кнопки */
+    border: none; /* Убираем границы */
+    border-radius: 5px; /* Скруглённые углы */
+    transition: background-color 0.3s ease; /* Плавный эффект при наведении */
+}
 
-        .dropdown-content button {
-            margin-left: 10px;
-            padding: 5px 10px;
-            cursor: pointer;
-        }
+.dropdown-content button:hover {
+    background-color: #666666; /* Темнее серый при наведении */
+}
 
         /* Панель с кнопками */
         .bottom-panel {
@@ -153,7 +164,7 @@
 </head>
 <body>
     <button onclick="window.history.back()" class="back-button">Назад</button>
-    <div class="header">Никотиновые жидкости</div>
+
     
 
 
@@ -166,37 +177,36 @@
 
     <div class="dropdown">
         <button>Товары</button>
-        <div class="dropdown-content">
-            <div>
-                Жидкость 1 - 14 руб.
-                <button onclick="addToCart('Жидкость 1', 14)">Добавить</button>
-            </div>
-            <div>
-                Жидкость 2 - 20 руб.
-                <button onclick="addToCart('Жидкость 2', 20)">Добавить</button>
-            </div>
-            <div>
-                Жидкость 3 - 25 руб.
-                <button onclick="addToCart('Жидкость 3', 25)">Добавить</button>
-            </div>
-            <div>
-                Жидкость 4 - 30 руб.
-                <button onclick="addToCart('Жидкость 4', 30)">Добавить</button>
-            </div>
-            <div>
-                Жидкость 5 - 18 руб.
-                <button onclick="addToCart('Жидкость 5', 18)">Добавить</button>
-            </div>
-            <div>
-                Жидкость 6 - 22 руб.
-                <button onclick="addToCart('Жидкость 6', 22)">Добавить</button>
-            </div>
-            <div>
-                Жидкость 7 - 28 руб.
-                <button onclick="addToCart('Жидкость 7', 28)">Добавить</button>
-            </div>
-        </div>
+     <div class="dropdown-content">
+    <div>
+        Жидкость 1 - 14 руб.
+        <button onclick="addToCart('Жидкость 1', 14)">Добавить</button>
     </div>
+    <div>
+        Жидкость 2 - 20 руб.
+        <button onclick="addToCart('Жидкость 2', 20)">Добавить</button>
+    </div>
+    <div>
+        Жидкость 3 - 25 руб.
+        <button onclick="addToCart('Жидкость 3', 25)">Добавить</button>
+    </div>
+    <div>
+        Жидкость 4 - 30 руб.
+        <button onclick="addToCart('Жидкость 4', 30)">Добавить</button>
+    </div>
+    <div>
+        Жидкость 5 - 18 руб.
+        <button onclick="addToCart('Жидкость 5', 18)">Добавить</button>
+    </div>
+    <div>
+        Жидкость 6 - 22 руб.
+        <button onclick="addToCart('Жидкость 6', 22)">Добавить</button>
+    </div>
+    <div>
+        Жидкость 7 - 28 руб.
+        <button onclick="addToCart('Жидкость 7', 28)">Добавить</button>
+    </div>
+</div>
 
     <!-- Панель с кнопками -->
     <div class="bottom-panel">
