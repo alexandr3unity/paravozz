@@ -69,7 +69,7 @@
     padding: 10px;
     border: 1px solid #ccc;
     z-index: 1;
-    width: 100%; /* Сделаем ширину равной кнопке */
+    width: 100%; /* Ширина меню будет соответствовать кнопке "Товары" */
 }
 
 .dropdown:hover .dropdown-content {
@@ -77,8 +77,8 @@
 }
 
 .dropdown-item {
-    display: flex; /* Используем flexbox для выравнивания в строку */
-    justify-content: space-between; /* Пространство между текстом и кнопкой */
+    display: flex; /* Используем flexbox для размещения элементов в строку */
+    justify-content: space-between; /* Пространство между названием и кнопкой */
     align-items: center; /* Центрируем по вертикали */
     margin-bottom: 10px; /* Отступы между элементами */
 }
@@ -86,11 +86,12 @@
 .dropdown-item span {
     font-size: 1em;
     color: black;
+    flex-grow: 1; /* Текст растягивается на доступное пространство */
 }
 
 .dropdown-item button {
     width: 100px; /* Фиксированная ширина кнопки */
-    padding: 5px; /* Уменьшаем отступы */
+    padding: 5px; /* Отступы внутри кнопки */
     font-size: 0.9em;
     border: none;
     background-color: #808080;
