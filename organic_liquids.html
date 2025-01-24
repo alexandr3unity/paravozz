@@ -3,10 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <title>Добавление товара в корзину</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        body {
+        /* Стили пропущены для краткости */
+
+         body {
             margin: 0;
             font-family: Arial, sans-serif;
             text-align: center;
@@ -185,38 +187,31 @@
     <button onclick="window.history.back()" class="back-button">Назад</button>
 
     <div class="banner">
-        <div class="banner">
-            <img src="imej/PODONKI-last-hap.jpg" alt="Фотография баннера">
-        </div>
+        <img src="imej/PODONKI-last-hap.jpg" alt="Фотография баннера">
     </div>
 
-    <div class="product-name" id="product-name">
-        PJDJNKI-LAST-HOP
-    </div>
-
-    <div class="product-description">
-        Выбор товара
-    </div>
+    <div class="product-name" id="product-name">PJDJNKI-LAST-HOP</div>
+    <div class="product-description">Выбор товара</div>
 
     <div class="dropdown">
         <button onclick="toggleDropdown()">Товары</button>
         <div class="dropdown-content" id="product-list">
             <div class="dropdown-item">
-                <span onclick="addToCart('Жидкость 1', 14)">Жидкость 1 - 14 руб. (количество: <span id="count-1">10</span>)</span>
+                <span>Жидкость 1 - 14 руб. (количество: <span id="count-1">10</span>)</span>
                 <button onclick="purchaseProduct(1)">Купить</button>
             </div>
             <div class="dropdown-item">
-                <span onclick="addToCart('Жидкость 2', 20)">Жидкость 2 - 20 руб. (количество: <span id="count-2">8</span>)</span>
+                <span>Жидкость 2 - 20 руб. (количество: <span id="count-2">8</span>)</span>
                 <button onclick="purchaseProduct(2)">Купить</button>
             </div>
             <div class="dropdown-item">
-                <span onclick="addToCart('Жидкость 3', 25)">Жидкость 3 - 25 руб. (количество: <span id="count-3">5</span>)</span>
+                <span>Жидкость 3 - 25 руб. (количество: <span id="count-3">5</span>)</span>
                 <button onclick="purchaseProduct(3)">Купить</button>
             </div>
         </div>
     </div>
 
-    <div class="bottom-panel">
+      <div class="bottom-panel">
         <a href="home.html">
             <button>
                 <img src="imej/Ico/discount.png">
@@ -253,15 +248,15 @@
 
         function updateCartCount() {
             const cart = JSON.parse(localStorage.getItem('cart')) || [];
-            document.getElementById('cart-count')?.textContent = cart.length;
+            console.log(`Товаров в корзине: ${cart.length}`); // Отладочный вывод
         }
 
         function addToCart(name, price) {
             const cart = JSON.parse(localStorage.getItem('cart')) || [];
-            const itemIndex = cart.findIndex(item => item.name === name);
+            const existingItem = cart.find(item => item.name === name);
 
-            if (itemIndex > -1) {
-                cart[itemIndex].quantity += 1;
+            if (existingItem) {
+                existingItem.quantity += 1;
             } else {
                 cart.push({ name, price, quantity: 1 });
             }
@@ -272,7 +267,7 @@
 
         function purchaseProduct(id) {
             const product = products.find(p => p.id === id);
-            if (product.count > 0) {
+            if (product && product.count > 0) {
                 product.count -= 1;
                 document.getElementById(`count-${id}`).textContent = product.count;
                 addToCart(product.name, product.price);
@@ -282,8 +277,8 @@
         }
 
         function toggleDropdown() {
-            const dropdownContent = document.querySelector('.dropdown-content');
-            dropdownContent.style.display = (dropdownContent.style.display === 'block') ? 'none' : 'block';
+            const dropdown = document.getElementById('product-list');
+            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
         }
 
         updateCartCount();
