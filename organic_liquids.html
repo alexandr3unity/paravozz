@@ -187,11 +187,16 @@
 
 
 
-        .product-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
+        .dropdown-item button {
+    width: 10%; /* Устанавливаем ширину кнопки на 10% */
+    padding: 5px;
+    font-size: 0.9em;
+    border: none;
+    background-color: #808080;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 
@@ -264,19 +269,19 @@ async function loadProducts() {
     productList.innerHTML = '';
 
     rows.forEach(row => {
-        const columns = row.split(',');
+    const columns = row.split(',');
 
-        if (columns.length < 4) return;
+    if (columns.length < 4) return;
 
-        const [id, name, price, count] = columns;
+    const [id, name, price, count] = columns;
 
-        // Проверяем, содержит ли название товара "padonki-last-hop"
-       if (name.toLowerCase().includes('padonki-last-hop')) {
+    if (name.toLowerCase().includes('padonki-last-hop')) {
         const item = document.createElement('div');
         item.className = 'product-item'; // Применяем флекс-стили
 
         const productSpan = document.createElement('span');
         productSpan.textContent = `${name} - ${price} руб. `;
+        productSpan.style.flexGrow = 1; // Позволяем названию занимать оставшееся пространство
 
         const button = document.createElement('button');
         button.textContent = 'Купить';
@@ -285,9 +290,9 @@ async function loadProducts() {
         item.appendChild(productSpan);
         item.appendChild(button);
         productList.appendChild(item);
-        }
-    });
-}
+    }
+});
+
 
         function purchaseProduct(id, name, price) {
             const existingItem = cart.find(item => item.name === name);
