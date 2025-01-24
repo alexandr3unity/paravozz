@@ -6,7 +6,6 @@
 
     <link rel="stylesheet" href="style.css">
     <style>
-
         body {
             margin: 0;
             font-family: Arial, sans-serif;
@@ -61,49 +60,49 @@
             background-color: #666666;
         }
 
-      .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    padding: 10px;
-    border: 1px solid #ccc;
-    z-index: 1;
-    width: 100%; /* Ширина меню будет соответствовать кнопке "Товары" */
-}
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            border: 1px solid #ccc;
+            z-index: 1;
+            width: 100%;
+        }
 
-.dropdown:hover .dropdown-content {
-    display: block;
-}
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
 
-.dropdown-item {
-    display: flex; /* Используем flexbox для размещения элементов в строку */
-    justify-content: space-between; /* Пространство между названием и кнопкой */
-    align-items: center; /* Центрируем по вертикали */
-    margin-bottom: 10px; /* Отступы между элементами */
-}
+        .dropdown-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
 
-.dropdown-item span {
-    font-size: 1em;
-    color: black;
-    flex-grow: 1; /* Текст растягивается на доступное пространство */
-}
+        .dropdown-item span {
+            font-size: 1em;
+            color: black;
+            flex-grow: 1;
+        }
 
-.dropdown-item button {
-    width: 100px; /* Фиксированная ширина кнопки */
-    padding: 5px; /* Отступы внутри кнопки */
-    font-size: 0.9em;
-    border: none;
-    background-color: #808080;
-    color: white;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
+        .dropdown-item button {
+            width: 100px;
+            padding: 5px;
+            font-size: 0.9em;
+            border: none;
+            background-color: #808080;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
 
-.dropdown-item button:hover {
-    background-color: #666666;
-}
+        .dropdown-item button:hover {
+            background-color: #666666;
+        }
 
         .bottom-panel {
             position: fixed;
@@ -151,17 +150,17 @@
             margin-top: 20px;
             margin-bottom: 20px;
             color: white;
-            text-align: left; /* Смещаем влево */
-            margin-left: 5%; /* Добавляем отступ слева */
+            text-align: left;
+            margin-left: 5%;
         }
 
-       .product-description {
-    font-size: 16px;
-    color: rgba(255, 255, 255, 0.5); /* Полупрозрачный белый цвет */
-    margin-bottom: 20px;
-    text-align: left; /* Смещаем влево */
-    margin-left: 5%; /* Добавляем отступ слева */
-}
+        .product-description {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 20px;
+            text-align: left;
+            margin-left: 5%;
+        }
 
         .banner {
             width: 82%;
@@ -180,13 +179,11 @@
             object-fit: contain;
             display: block;
         }
-
     </style>
 </head>
 <body>
     <button onclick="window.history.back()" class="back-button">Назад</button>
 
-    <!-- Фотография-баннер -->
     <div class="banner">
         <div class="banner">
             <img src="imej/PODONKI-last-hap.jpg" alt="Фотография баннера">
@@ -203,39 +200,22 @@
 
     <div class="dropdown">
         <button onclick="toggleDropdown()">Товары</button>
-        <div class="dropdown-content">
-            <div>
-                Жидкость 1 - 14 руб.
-                <button onclick="addToCart('Жидкость 1', 14)">Добавить</button>
+        <div class="dropdown-content" id="product-list">
+            <div class="dropdown-item">
+                <span onclick="addToCart('Жидкость 1', 14)">Жидкость 1 - 14 руб. (количество: <span id="count-1">10</span>)</span>
+                <button onclick="purchaseProduct(1)">Купить</button>
             </div>
-            <div>
-                Жидкость 2 - 20 руб.
-                <button onclick="addToCart('Жидкость 2', 20)">Добавить</button>
+            <div class="dropdown-item">
+                <span onclick="addToCart('Жидкость 2', 20)">Жидкость 2 - 20 руб. (количество: <span id="count-2">8</span>)</span>
+                <button onclick="purchaseProduct(2)">Купить</button>
             </div>
-            <div>
-                Жидкость 3 - 25 руб.
-                <button onclick="addToCart('Жидкость 3', 25)">Добавить</button>
-            </div>
-            <div>
-                Жидкость 4 - 30 руб.
-                <button onclick="addToCart('Жидкость 4', 30)">Добавить</button>
-            </div>
-            <div>
-                Жидкость 5 - 18 руб.
-                <button onclick="addToCart('Жидкость 5', 18)">Добавить</button>
-            </div>
-            <div>
-                Жидкость 6 - 22 руб.
-                <button onclick="addToCart('Жидкость 6', 22)">Добавить</button>
-            </div>
-            <div>
-                Жидкость 7 - 28 руб.
-                <button onclick="addToCart('Жидкость 7', 28)">Добавить</button>
+            <div class="dropdown-item">
+                <span onclick="addToCart('Жидкость 3', 25)">Жидкость 3 - 25 руб. (количество: <span id="count-3">5</span>)</span>
+                <button onclick="purchaseProduct(3)">Купить</button>
             </div>
         </div>
     </div>
 
-    <!-- Панель с кнопками -->
     <div class="bottom-panel">
         <a href="home.html">
             <button>
@@ -265,36 +245,47 @@
     </div>
 
     <script>
-        // Функция обновления количества товаров в корзине
+        const products = [
+            { id: 1, name: 'Жидкость 1', price: 14, count: 10 },
+            { id: 2, name: 'Жидкость 2', price: 20, count: 8 },
+            { id: 3, name: 'Жидкость 3', price: 25, count: 5 }
+        ];
+
         function updateCartCount() {
             const cart = JSON.parse(localStorage.getItem('cart')) || [];
-            document.getElementById('cart-count').textContent = cart.length;
+            document.getElementById('cart-count')?.textContent = cart.length;
         }
 
-        // Функция добавления товара в корзину
         function addToCart(name, price) {
             const cart = JSON.parse(localStorage.getItem('cart')) || [];
             const itemIndex = cart.findIndex(item => item.name === name);
 
             if (itemIndex > -1) {
-                // Если товар уже есть в корзине, увеличиваем его количество на 1
                 cart[itemIndex].quantity += 1;
             } else {
-                // Добавляем товар с количеством 1
                 cart.push({ name, price, quantity: 1 });
             }
 
             localStorage.setItem('cart', JSON.stringify(cart));
-            updateCartCount(); // Обновляем количество товаров в корзине
+            updateCartCount();
         }
 
-        // Функция для переключения состояния выпадающего меню
+        function purchaseProduct(id) {
+            const product = products.find(p => p.id === id);
+            if (product.count > 0) {
+                product.count -= 1;
+                document.getElementById(`count-${id}`).textContent = product.count;
+                addToCart(product.name, product.price);
+            } else {
+                alert('Товар закончился!');
+            }
+        }
+
         function toggleDropdown() {
             const dropdownContent = document.querySelector('.dropdown-content');
             dropdownContent.style.display = (dropdownContent.style.display === 'block') ? 'none' : 'block';
         }
 
-        // Инициализация
         updateCartCount();
     </script>
 </body>
