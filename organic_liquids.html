@@ -64,14 +64,24 @@
 }
 
 .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    border: 1px solid #ccc;
-    z-index: 1;
-    width: 100%; /* Ширина выпадающего меню равна ширине кнопки */
-    left: 0px; /* Выравнивание по левому краю */
+    display: none; /* Скрываем выпадающую панель по умолчанию */
+    position: absolute; /* Позиционирование панели */
+    background-color: rgba(0, 0, 0, 0.7); /* Полупрозрачный черный цвет (70% непрозрачности) */
+    min-width: 160px; /* Минимальная ширина панели */
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2); /* Тень для панели */
+    z-index: 1; /* Устанавливаем порядок наложения */
+    border-radius: 5px; /* Скругление углов панели */
+}
+
+.dropdown-content a {
+    color: white; /* Цвет текста ссылок */
+    padding: 12px 16px; /* Отступы для ссылок */
+    text-decoration: none; /* Убираем подчеркивание */
+    display: block; /* Делаем ссылки блочными элементами */
+}
+
+.dropdown-content a:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* Полупрозрачный белый фон при наведении */
 }
 
 .dropdown:hover .dropdown-content {
