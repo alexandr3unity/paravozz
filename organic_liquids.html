@@ -250,29 +250,24 @@
     </div>
 
     <script>
-        // Список товаров с начальным количеством и ценой
         const products = [
             { id: 1, name: 'Жидкость 1', price: 14, count: 10 },
             { id: 2, name: 'Жидкость 2', price: 20, count: 8 },
             { id: 3, name: 'Жидкость 3', price: 25, count: 5 }
         ];
 
-        // Обновление отображения количества товаров в корзине
         function updateCartCount() {
             const cart = JSON.parse(localStorage.getItem('cart')) || [];
-            document.getElementById('cart-count')?.textContent = cart.length;
+            console.log(`Товаров в корзине: ${cart.length}`); // Отладочный вывод
         }
 
-        // Добавление товара в корзину
         function addToCart(name, price) {
             const cart = JSON.parse(localStorage.getItem('cart')) || [];
-            const itemIndex = cart.findIndex(item => item.name === name);
+            const existingItem = cart.find(item => item.name === name);
 
-            if (itemIndex > -1) {
-                // Увеличиваем количество, если товар уже есть в корзине
-                cart[itemIndex].quantity += 1;
+            if (existingItem) {
+                existingItem.quantity += 1;
             } else {
-                // Добавляем новый товар в корзину
                 cart.push({ name, price, quantity: 1 });
             }
 
@@ -280,20 +275,20 @@
             updateCartCount();
         }
 
-        // Покупка товара: уменьшение количества на складе и добавление в корзину
         function purchaseProduct(id) {
             const product = products.find(p => p.id === id);
-            if (product.count > 0) {
-                product.count -= 1; // Уменьшаем количество
-                document.getElementById(`count-${id}`).textContent = product.count; // Обновляем отображение
-                addToCart(product.name, product.price); // Добавляем в корзину
-
-                if (product.count === 0) {
-                    document.getElementById(`product-${id}`).classList.add('out-of-stock');
-                }
+            if (product && product.count > 0) {
+                product.count -= 1;
+                document.getElementById(`count-${id}`).textContent = product.count;
+                addToCart(product.name, product.price);
             } else {
                 alert('Товар закончился!');
             }
+        }
+
+        function toggleDropdown() {
+            const dropdown = document.getElementById('product-list');
+            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
         }
 
         // Переключение отображения выпадающего списка товаров
