@@ -205,18 +205,42 @@
 }
 
 
+.price-container {
+    display: flex; /* Используем Flexbox для выравнивания элементов в одну строку */
+    align-items: center; /* Центрируем элементы по вертикали */
+    margin: 20px 5% 20px 20px; /* Отступы для контейнера */
+}
+
+.price-container {
+    display: flex; /* Используем Flexbox для выравнивания элементов в одну строку */
+    align-items: center; /* Центрируем элементы по вертикали */
+    margin: 20px 5% 20px 20px; /* Отступы для контейнера */
+}
+
+.favorite-button {
+    padding: 10px 15px; /* Отступы для кнопки */
+    background-color: #6a0dad; /* Цвет фона кнопки */
+    color: white; /* Цвет текста кнопки */
+    border: none; /* Убираем рамку */
+    border-radius: 5px; /* Скругление углов кнопки */
+    cursor: pointer; /* Указатель при наведении */
+    font-size: 12px; /* Размер шрифта */
+    margin-right: 10px; /* Отступ справа для разделения с рамкой */
+    margin-left: 10px; /* Отступ слева от экрана */
+}
+
 .price {
     border: 1px solid #808080; /* Цвет рамки */
-    padding: 10px; /* Увеличен отступ внутри рамки для большей высоты */
-    margin: 20px 5% 20px 20px; /* Отступы остаются прежними */
+    padding: 10px; /* Отступ внутри рамки */
     text-align: center; /* Центрирование текста */
     color: white; /* Цвет текста */
     background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачный фон для рамки */
     border-radius: 5px; /* Скругление углов рамки */
-    font-size: 19px; /* Размер шрифта */
+    font-size: 12px; /* Размер шрифта */
     width: 30%; /* Установлена ширина рамки на 30% экрана */
     box-sizing: border-box; /* Учитываем отступы и границы в ширине */
 }
+
 
 
 
@@ -248,8 +272,11 @@
     </div>
 
 
+    <div class="price-container">
     <div class="price">
-    Цена: 15
+        Цена: 15
+    </div>
+    <button class="favorite-button">Добавить в избранное</button>
 </div>
 
 
