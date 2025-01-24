@@ -238,67 +238,60 @@
     </div>
 
     <script>
-         // Загрузка списка товаров из Google Таблицы
-        async function loadProducts() {
-            const response = await fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vRk6PlSuuov0g4Bk2UpibiWGtOPYO3QYL8xRK16VKnYKmt0EKWq8ZXjHb2oz8bGtiC-ZY8rQXf2yvVX/pub?output=csv');
-            const data = await response.text();
-            const rows = data.split('\n').slice(1); // Пропускаем заголовок
+       let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-            const productList = document.getElementById('product-list');
-            productList.innerHTML = '';
+    async function loadProducts() {
+        const response = await fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vRk6PlSuuov0g4Bk2UpibiWGtOPYO3QYL8xRK16VKnYKmt0EKWq8ZXjHb2oz8bGtiC-ZY8rQXf2yvVX/pub?output=csv');
+        const data = await response.text();
+        const rows = data.split('\n').slice(1);
 
-            rows.forEach(row => {
-                const columns = row.split(',');
+        const productList = document.getElementById('product-list');
+        productList.innerHTML = '';
 
-                if (columns.length < 4) return; // Пропускаем строки с недостаточными данными
+        rows.forEach(row => {
+            const columns = row.split(',');
 
-                const [id, name, price, count] = columns;
-                const item = document.createElement('div');
-                item.className = 'dropdown-item';
+            if (columns.length < 4) return;
 
-                const productSpan = document.createElement('span');
-                productSpan.id = `product-${id}`;
-                productSpan.textContent = `${name} - ${price} руб. (количество: ${count})`;
-                if (parseInt(count) === 0) {
-                    productSpan.classList.add('out-of-stock');
-                }
+            const [id, name, price, count] = columns;
+            const item = document.createElement('div');
+            item.className = 'dropdown-item';
 
-                const button = document.createElement('button');
-                button.textContent = 'Купить';
-                button.onclick = () => purchaseProduct(id, name, price);
+            const productSpan = document.createElement('span');
+            productSpan.id = `product-${id}`;
+            productSpan.textContent = `${name} - ${price} руб. (количество: ${count})`;
+            if (parseInt(count) === 0) {
+                productSpan.classList.add('out-of-stock');
+            }
 
-                item.appendChild(productSpan);
-                item.appendChild(button);
-                productList.appendChild(item);
-            });
+            const button = document.createElement('button');
+            button.textContent = 'Купить';
+            button.onclick = () => purchaseProduct(id, name, price);
+
+            item.appendChild(productSpan);
+            item.appendChild(button);
+            productList.appendChild(item);
+        });
+    }
+
+    function purchaseProduct(id, name, price) {
+        const existingItem = cart.find(item => item.name === name);
+        if (existingItem) {
+            existingItem.quantity += 1; // Increase quantity if already in cart
+        } else {
+            cart.push({ id, name, price: parseFloat(price), quantity: 1 }); // Add new item
         }
+        localStorage.setItem('cart', JSON.stringify(cart)); // Save cart to localStorage
+        alert(`Товар ${name} добавлен в корзину!`);
+    }
 
-        // Покупка товара
-        function purchaseProduct(id, name, price) {
-            cart.push({ id, name, price });
-            updateCart();
-            alert(`Товар с ID ${id} добавлен в корзину!`);
-        }
+    function toggleDropdown() {
+        const dropdown = document.getElementById('product-list');
+        dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+    }
 
-        // Обновление корзины
-        function updateCart() {
-            const cartItems = document.getElementById('cart-items');
-            cartItems.innerHTML = '';
-            cart.forEach(item => {
-                const li = document.createElement('li');
-                li.textContent = `${item.name} - ${item.price} руб.`;
-                cartItems.appendChild(li);
-            });
-        }
-
-        // Переключение отображения выпадающего списка товаров
-        function toggleDropdown() {
-            const dropdown = document.getElementById('product-list');
-            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
-        }
-
-        // Инициализация
-        loadProducts();
+    loadProducts();
+   
     </script>
 </body>
 </html>
