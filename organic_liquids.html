@@ -264,7 +264,7 @@
 
                 const productSpan = document.createElement('span');
                 productSpan.id = `product-${id}`;
-                productSpan.textContent = `${name} - ${price} руб. (количество: ${count})`;
+                productSpan.textContent = `${name} - ${price} руб. `;
                 if (parseInt(count) === 0) {
                     productSpan.classList.add('out-of-stock');
                 }
