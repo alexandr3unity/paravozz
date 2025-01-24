@@ -238,28 +238,30 @@
     </div>
 
     <script>
-        // Загрузка списка товаров с сервера
+          // Загрузка списка товаров из Google Таблицы
         async function loadProducts() {
-            const response = await fetch('/api/products');
-            const products = await response.json();
+            const response = await fetch('https://docs.google.com/spreadsheets/d/e/YOUR_SHEET_ID/pub?output=csv');
+            const data = await response.text();
+            const rows = data.split('\n').slice(1); // Пропускаем заголовок
 
             const productList = document.getElementById('product-list');
             productList.innerHTML = '';
 
-            products.forEach(product => {
+            rows.forEach(row => {
+                const [id, name, price, count] = row.split(',');
                 const item = document.createElement('div');
                 item.className = 'dropdown-item';
 
                 const productSpan = document.createElement('span');
-                productSpan.id = `product-${product.id}`;
-                productSpan.textContent = `${product.name} - ${product.price} руб. (количество: ${product.count})`;
-                if (product.count === 0) {
+                productSpan.id = `product-${id}`;
+                productSpan.textContent = `${name} - ${price} руб. (количество: ${count})`;
+                if (parseInt(count) === 0) {
                     productSpan.classList.add('out-of-stock');
                 }
 
                 const button = document.createElement('button');
                 button.textContent = 'Купить';
-                button.onclick = () => purchaseProduct(product.id);
+                button.onclick = () => purchaseProduct(id);
 
                 item.appendChild(productSpan);
                 item.appendChild(button);
@@ -269,12 +271,9 @@
 
         // Покупка товара
         async function purchaseProduct(id) {
-            const response = await fetch(`/api/purchase/${id}`, { method: 'POST' });
-            if (response.ok) {
-                loadProducts(); // Обновляем список товаров после покупки
-            } else {
-                alert('Ошибка при покупке товара');
-            }
+            // Здесь вы можете реализовать логику покупки
+            alert(`Товар с ID ${id} куплен!`);
+            loadProducts(); // Обновляем список товаров после покупки
         }
 
         // Переключение отображения выпадающего списка товаров
@@ -283,6 +282,8 @@
             dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
         }
 
+        // Инициализация
+        loadProducts();
         // Инициализация
         loadProducts();
     </script>
