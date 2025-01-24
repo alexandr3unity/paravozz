@@ -244,19 +244,13 @@
             const data = await response.text();
             const rows = data.split('\n').slice(1); // Пропускаем заголовок
 
-            console.log("Полученные строки:", rows); // Отладка
-
             const productList = document.getElementById('product-list');
             productList.innerHTML = '';
 
             rows.forEach(row => {
                 const columns = row.split(',');
-                console.log("Текущая строка:", columns); // Отладка
 
-                if (columns.length < 4) {
-                    console.warn("Недостаточно данных в строке:", row); // Предупреждение
-                    return; // Пропускаем строки с недостаточными данными
-                }
+                if (columns.length < 4) return; // Пропускаем строки с недостаточными данными
 
                 const [id, name, price, count] = columns;
                 const item = document.createElement('div');
@@ -264,14 +258,14 @@
 
                 const productSpan = document.createElement('span');
                 productSpan.id = `product-${id}`;
-                productSpan.textContent = `${name} - ${price} руб. `;
+                productSpan.textContent = `${name} - ${price} руб. (количество: ${count})`;
                 if (parseInt(count) === 0) {
                     productSpan.classList.add('out-of-stock');
                 }
 
                 const button = document.createElement('button');
                 button.textContent = 'Купить';
-                button.onclick = () => purchaseProduct(id);
+                button.onclick = () => purchaseProduct(id, name, price);
 
                 item.appendChild(productSpan);
                 item.appendChild(button);
@@ -279,43 +273,32 @@
             });
         }
 
-         function updateCartCount() {
-            const cart = JSON.parse(localStorage.getItem('cart')) || [];
-            console.log(`Товаров в корзине: ${cart.length}`); // Отладочный вывод
+        // Покупка товара
+        function purchaseProduct(id, name, price) {
+            cart.push({ id, name, price });
+            updateCart();
+            alert(`Товар с ID ${id} добавлен в корзину!`);
         }
 
-        function addToCart(name, price) {
-            const cart = JSON.parse(localStorage.getItem('cart')) || [];
-            const existingItem = cart.find(item => item.name === name);
-
-            if (existingItem) {
-                existingItem.quantity += 1;
-            } else {
-                cart.push({ name, price, quantity: 1 });
-            }
-
-            localStorage.setItem('cart', JSON.stringify(cart));
-            updateCartCount();
+        // Обновление корзины
+        function updateCart() {
+            const cartItems = document.getElementById('cart-items');
+            cartItems.innerHTML = '';
+            cart.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = `${item.name} - ${item.price} руб.`;
+                cartItems.appendChild(li);
+            });
         }
 
-        function purchaseProduct(id) {
-            const product = products.find(p => p.id === id);
-            if (product && product.count > 0) {
-                product.count -= 1;
-                document.getElementById(`count-${id}`).textContent = product.count;
-                addToCart(product.name, product.price);
-            } else {
-                alert('Товар закончился!');
-            }
-        }
-
+        // Переключение отображения выпадающего списка товаров
         function toggleDropdown() {
             const dropdown = document.getElementById('product-list');
             dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
         }
 
-        updateCartCount();
-
+        // Инициализация
+        loadProducts();
     </script>
 </body>
 </html>
