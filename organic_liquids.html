@@ -152,12 +152,21 @@
         }
 
         .product-description {
-            font-size: 16px;
-            color: rgba(255, 255, 255, 0.5);
-            margin-bottom: 20px;
-            text-align: left;
-            margin-left: 5%;
-        }
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 20px;
+    text-align: left;
+    margin-left: 5%;
+    margin-top: 10px; /* Добавьте немного пространства сверху */
+    transition: max-height 0.3s ease, opacity 0.3s ease; /* Плавный переход */
+    max-height: 0; /* Скрыто по умолчанию */
+    overflow: hidden; /* Скрываем переполнение */
+    opacity: 0; /* Скрыто по умолчанию */
+}
+.product-description.visible {
+    max-height: 100px; /* Максимальная высота при видимости */
+    opacity: 1; /* Полная видимость */
+}
 
         .banner {
             width: 82%;
@@ -234,9 +243,9 @@
     </div>
 
 
-    <div class="product-description">
-    описание бля бля бял бял аовпири правишпалвпи алпрл врппрвпрвр плоа рпла рвплр ралврплаврпл грвалгпрвалрп ларпл рлпрвалпр валгп рлагврп лравпл рвлп ралпр вларплвар лрвал првалр лвар лр влапрвлагр п
-    </div>
+    <div class="product-description" id="product-description">
+    Выбор товасмав пвапавп авп вап вап вап вап вапвапва пварптрро п орпо рпор порп орп орпор попрорра
+</div>
 
     <div class="bottom-panel">
         <a href="home.html">
@@ -306,10 +315,18 @@ async function loadProducts() {
 
 function toggleDropdown() {
     const productList = document.getElementById('product-list');
-    dropdownOpen = !dropdownOpen; // Toggle the state
+    const productDescription = document.getElementById('product-description');
+    dropdownOpen = !dropdownOpen; // Переключаем состояние
 
-    // Show or hide the dropdown based on the state
+    // Показываем или скрываем выпадающее меню
     productList.style.display = dropdownOpen ? 'block' : 'none';
+
+    // Добавляем или убираем класс visible для описания товара
+    if (dropdownOpen) {
+        productDescription.classList.add('visible');
+    } else {
+        productDescription.classList.remove('visible');
+    }
 }
 
 function purchaseProduct(id, name, price) {
