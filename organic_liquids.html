@@ -269,13 +269,14 @@ async function loadProducts() {
     productList.innerHTML = '';
 
     rows.forEach(row => {
-    const columns = row.split(',');
+        const columns = row.split(',');
 
-    if (columns.length < 4) return;
+        if (columns.length < 4) return;
 
-    const [id, name, price, count] = columns;
+        const [id, name, price, count] = columns;
 
-    if (name.toLowerCase().includes('padonki-last-hop')) {
+        // Проверяем, содержит ли название товара "padonki-last-hop"
+         if (name.toLowerCase().includes('padonki-last-hop')) {
         const item = document.createElement('div');
         item.className = 'product-item'; // Применяем флекс-стили
 
@@ -290,8 +291,9 @@ async function loadProducts() {
         item.appendChild(productSpan);
         item.appendChild(button);
         productList.appendChild(item);
-    }
-});
+        }
+    });
+}
 
 
         function purchaseProduct(id, name, price) {
