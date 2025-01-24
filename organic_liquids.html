@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="style.css">
-    <style>
+    <style
+
+
+        
         body {
             margin: 0;
             font-family: Arial, sans-serif;
@@ -183,6 +186,20 @@
         .out-of-stock {
             opacity: 0.5;
         }
+
+
+
+        .product-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+
+
+
+        
     </style>
 </head>
 <body>
@@ -256,20 +273,20 @@ async function loadProducts() {
         const [id, name, price, count] = columns;
 
         // Проверяем, содержит ли название товара "padonki-last-hop"
-        if (name.toLowerCase().includes('padonki-last-hop')) {
-            const item = document.createElement('div');
-            item.className = 'product-item';
+       if (name.toLowerCase().includes('padonki-last-hop')) {
+        const item = document.createElement('div');
+        item.className = 'product-item'; // Применяем флекс-стили
 
-            const productSpan = document.createElement('span');
-            productSpan.textContent = `${name} - ${price} руб. `;
+        const productSpan = document.createElement('span');
+        productSpan.textContent = `${name} - ${price} руб. `;
 
-            const button = document.createElement('button');
-            button.textContent = 'Купить';
-            button.onclick = () => purchaseProduct(id, name, price);
+        const button = document.createElement('button');
+        button.textContent = 'Купить';
+        button.onclick = () => purchaseProduct(id, name, price);
 
-            item.appendChild(productSpan);
-            item.appendChild(button);
-            productList.appendChild(item);
+        item.appendChild(productSpan);
+        item.appendChild(button);
+        productList.appendChild(item);
         }
     });
 }
