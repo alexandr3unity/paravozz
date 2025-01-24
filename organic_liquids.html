@@ -205,19 +205,7 @@
     <div class="dropdown">
         <button onclick="toggleDropdown()">Товары</button>
         <div class="dropdown-content" id="product-list">
-            <!-- Render products dynamically -->
-            <div class="dropdown-item">
-                <span id="product-1" onclick="addToCart('Жидкость 1', 14)">Жидкость 1 - 14 руб. (количество: <span id="count-1">10</span>)</span>
-                <button onclick="purchaseProduct(1)">Купить</button>
-            </div>
-            <div class="dropdown-item">
-                <span id="product-2" onclick="addToCart('Жидкость 2', 20)">Жидкость 2 - 20 руб. (количество: <span id="count-2">8</span>)</span>
-                <button onclick="purchaseProduct(2)">Купить</button>
-            </div>
-            <div class="dropdown-item">
-                <span id="product-3" onclick="addToCart('Жидкость 3', 25)">Жидкость 3 - 25 руб. (количество: <span id="count-3">5</span>)</span>
-                <button onclick="purchaseProduct(3)">Купить</button>
-            </div>
+            <!-- Список товаров будет загружен динамически -->
         </div>
     </div>
 
@@ -250,45 +238,43 @@
     </div>
 
     <script>
-        const products = [
-            { id: 1, name: 'Жидкость 1', price: 14, count: 10 },
-            { id: 2, name: 'Жидкость 2', price: 20, count: 8 },
-            { id: 3, name: 'Жидкость 3', price: 25, count: 5 }
-        ];
+        // Загрузка списка товаров с сервера
+        async function loadProducts() {
+            const response = await fetch('/api/products');
+            const products = await response.json();
 
-        function updateCartCount() {
-            const cart = JSON.parse(localStorage.getItem('cart')) || [];
-            console.log(`Товаров в корзине: ${cart.length}`); // Отладочный вывод
+            const productList = document.getElementById('product-list');
+            productList.innerHTML = '';
+
+            products.forEach(product => {
+                const item = document.createElement('div');
+                item.className = 'dropdown-item';
+
+                const productSpan = document.createElement('span');
+                productSpan.id = `product-${product.id}`;
+                productSpan.textContent = `${product.name} - ${product.price} руб. (количество: ${product.count})`;
+                if (product.count === 0) {
+                    productSpan.classList.add('out-of-stock');
+                }
+
+                const button = document.createElement('button');
+                button.textContent = 'Купить';
+                button.onclick = () => purchaseProduct(product.id);
+
+                item.appendChild(productSpan);
+                item.appendChild(button);
+                productList.appendChild(item);
+            });
         }
 
-        function addToCart(name, price) {
-            const cart = JSON.parse(localStorage.getItem('cart')) || [];
-            const existingItem = cart.find(item => item.name === name);
-
-            if (existingItem) {
-                existingItem.quantity += 1;
+        // Покупка товара
+        async function purchaseProduct(id) {
+            const response = await fetch(`/api/purchase/${id}`, { method: 'POST' });
+            if (response.ok) {
+                loadProducts(); // Обновляем список товаров после покупки
             } else {
-                cart.push({ name, price, quantity: 1 });
+                alert('Ошибка при покупке товара');
             }
-
-            localStorage.setItem('cart', JSON.stringify(cart));
-            updateCartCount();
-        }
-
-        function purchaseProduct(id) {
-            const product = products.find(p => p.id === id);
-            if (product && product.count > 0) {
-                product.count -= 1;
-                document.getElementById(`count-${id}`).textContent = product.count;
-                addToCart(product.name, product.price);
-            } else {
-                alert('Товар закончился!');
-            }
-        }
-
-        function toggleDropdown() {
-            const dropdown = document.getElementById('product-list');
-            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
         }
 
         // Переключение отображения выпадающего списка товаров
@@ -297,7 +283,8 @@
             dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
         }
 
-        updateCartCount();
+        // Инициализация
+        loadProducts();
     </script>
 </body>
 </html>
