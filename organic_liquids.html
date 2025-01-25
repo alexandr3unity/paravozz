@@ -354,19 +354,19 @@ async function loadProducts() {
 
         if (columns.length < 4) return;
 
-        const [id, name, price, count] = columns;
+        const [id, name, price,] = columns;
 
         if (name.toLowerCase().includes('padonki-last-hop')) {
             const item = document.createElement('div');
             item.className = 'product-item';
 
             const productSpan = document.createElement('span');
-            productSpan.textContent = `${name} - ${price} руб. `;
+            productSpan.textContent = `${name}`;
             productSpan.style.flexGrow = 1;
 
             const button = document.createElement('button');
             button.textContent = 'Купить';
-            button.onclick = () => purchaseProduct(id, name, price);
+            button.onclick = () => purchaseProduct(id, name,);
 
             item.appendChild(productSpan);
             item.appendChild(button);
