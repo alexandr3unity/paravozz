@@ -66,13 +66,17 @@
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: rgba(249, 249, 249, 0.8); /* Semi-transparent background */
+    background-color: rgba(249, 249, 249, 0.8); /* Полупрозрачный фон */
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
     border: 1px solid #ccc;
     z-index: 1;
     width: 100%; /* Ширина выпадающего меню равна ширине кнопки */
+    max-width: 300px; /* Ограничение максимальной ширины */
+    max-height: 200px; /* Ограничение максимальной высоты */
+    overflow-y: auto; /* Прокрутка по вертикали, если содержимое превышает высоту */
     left: 0px; /* Выравнивание по левому краю */
 }
+
 
 .dropdown:hover .dropdown-content {
     display: block;
