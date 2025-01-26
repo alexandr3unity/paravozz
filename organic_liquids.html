@@ -364,7 +364,7 @@ async function loadProducts() {
                     const [id, name, price, group, quantity] = columns; // Получаем значения из колонок
 
                     // Проверка, что группа соответствует "группа 2" и количество больше 0
-                    if (group.trim() === 'группа 2' && parseInt(quantity.trim()) > 0) {
+                    if (group.trim() === '2' && parseInt(quantity.trim()) > 0) {
                         const item = document.createElement('div');
                         item.className = 'product-item';
 
