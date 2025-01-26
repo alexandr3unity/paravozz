@@ -351,11 +351,13 @@ async function loadProducts() {
     rows.forEach(row => {
         const columns = row.split(',');
 
+        // Ensure there are enough columns and check for quantity
         if (columns.length < 4) return;
 
-        const [id, name, price,] = columns;
+        const [id, name, price, quantity] = columns; // Assuming quantity is the fourth column
 
-        if (name.toLowerCase().includes('padonki-last-hop')) {
+        // Check if the quantity is 2 and the name includes 'padonki-last-hop'
+        if (quantity === '2' ) {
             const item = document.createElement('div');
             item.className = 'product-item';
 
@@ -365,7 +367,7 @@ async function loadProducts() {
 
             const button = document.createElement('button');
             button.textContent = 'Купить';
-            button.onclick = () => purchaseProduct(id, name,);
+            button.onclick = () => purchaseProduct(id, name, price);
 
             item.appendChild(productSpan);
             item.appendChild(button);
