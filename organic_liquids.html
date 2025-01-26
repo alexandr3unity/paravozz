@@ -358,12 +358,12 @@ async function loadProducts() {
             const columns = row.split(',');
 
             // Убедитесь, что достаточно колонок
-            if (columns.length < 4) return; // Проверяем, что есть минимум 4 колонки
+            if (columns.length < 5) return; // Проверяем, что есть минимум 5 колонок
 
-            const [id, name, price, group] = columns; // Получаем значения из колонок
+            const [id, name, price, group, quantity] = columns; // Получаем значения из колонок
 
-            // Проверка, что группа соответствует "группа 2"
-            if (group.trim() === 'группа 2') {
+            // Проверка, что группа соответствует "группа 2" и количество больше 0
+            if (group.trim() === 'группа 2' && parseInt(quantity.trim()) > 0) {
                 const item = document.createElement('div');
                 item.className = 'product-item';
 
@@ -384,6 +384,8 @@ async function loadProducts() {
         console.error('Error loading products:', error);
     }
 }
+
+
 
 
 
