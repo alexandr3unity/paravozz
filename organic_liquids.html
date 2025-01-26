@@ -358,17 +358,17 @@ async function loadProducts() {
             const columns = row.split(',');
 
             // Убедитесь, что достаточно колонок
-            if (columns.length < 4) return;
+            if (columns.length < 5) return; // Теперь проверяем, что есть минимум 5 колонок
 
-            const [id, name, price, quantity] = columns; // Предполагается, что количество - это четвертая колонка
+            const [id, name, price, group, quantity] = columns; // Добавлено количество как пятую колонку
 
-            // Проверка, что количество равно 2
-            if (quantity.trim() === '2') {
+            // Проверка, что группа соответствует нужному значению
+            if (group.trim() === '2') { // Замените 'нужное_значение' на нужное вам значение группы
                 const item = document.createElement('div');
                 item.className = 'product-item';
 
                 const productSpan = document.createElement('span');
-                productSpan.textContent = `${name}`;
+                productSpan.textContent = `${name} (Количество: ${quantity.trim()})`; // Отображаем количество
                 productSpan.style.flexGrow = 1;
 
                 const button = document.createElement('button');
@@ -384,6 +384,9 @@ async function loadProducts() {
         console.error('Error loading products:', error);
     }
 }
+
+Найти еще
+
 
 
 function toggleDropdown() {
