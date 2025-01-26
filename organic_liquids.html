@@ -368,7 +368,7 @@ async function loadProducts() {
                 item.className = 'product-item';
 
                 const productSpan = document.createElement('span');
-                productSpan.textContent = `${name} (Количество: ${quantity.trim()})`; // Отображаем количество
+                productSpan.textContent = `${name}`; // Отображаем количество
                 productSpan.style.flexGrow = 1;
 
                 const button = document.createElement('button');
