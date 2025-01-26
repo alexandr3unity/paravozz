@@ -358,17 +358,17 @@ async function loadProducts() {
             const columns = row.split(',');
 
             // Убедитесь, что достаточно колонок
-            if (columns.length < 5) return; // Теперь проверяем, что есть минимум 5 колонок
+            if (columns.length < 4) return; // Проверяем, что есть минимум 4 колонки
 
-            const [id, name, price, group, quantity] = columns; // Добавлено количество как пятую колонку
+            const [id, name, price, group] = columns; // Получаем значения из колонок
 
-            // Проверка, что группа соответствует нужному значению
-            if (group.trim() === '2') { // Замените 'нужное_значение' на нужное вам значение группы
+            // Проверка, что группа соответствует "группа 2"
+            if (group.trim() === 'группа 2') {
                 const item = document.createElement('div');
                 item.className = 'product-item';
 
                 const productSpan = document.createElement('span');
-                productSpan.textContent = `${name}`; // Отображаем количество
+                productSpan.textContent = name; // Отображаем только название товара
                 productSpan.style.flexGrow = 1;
 
                 const button = document.createElement('button');
@@ -385,7 +385,6 @@ async function loadProducts() {
     }
 }
 
-Найти еще
 
 
 
