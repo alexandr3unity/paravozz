@@ -410,24 +410,7 @@ async function loadProducts() {
 
 
 
-function toggleDropdown() {
-    const productList = document.getElementById('product-list');
-    dropdownOpen = !dropdownOpen; // Toggle the state
 
-    // Show or hide the dropdown based on the state
-    productList.style.display = dropdownOpen ? 'block' : 'none';
-}
-
-function purchaseProduct(id, name, price) {
-    const existingItem = cart.find(item => item.name === name);
-    if (existingItem) {
-        existingItem.quantity += 1;
-    } else {
-        cart.push({ id, name, price: parseFloat(price), quantity: 1 });
-    }
-    localStorage.setItem('cart', JSON.stringify(cart));
-    alert(`Товар ${name} добавлен в корзину!`);
-}
 
 loadProducts();
     </script>
