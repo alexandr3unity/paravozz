@@ -351,13 +351,13 @@ async function loadProducts() {
     rows.forEach(row => {
         const columns = row.split(',');
 
-        // Ensure there are enough columns and check for quantity
+        // Убедитесь, что достаточно колонок и проверка на количество
         if (columns.length < 4) return;
 
-        const [id, name, price, quantity] = columns; // Assuming quantity is the fourth column
+        const [id, name, price, quantity] = columns; // Предполагается, что количество - это четвертая колонка
 
-        // Check if the quantity is 2 and the name includes 'padonki-last-hop'
-        if (quantity === '2' ) {
+        // Проверка, что количество равно 2
+        if (quantity === '2') {
             const item = document.createElement('div');
             item.className = 'product-item';
 
@@ -375,6 +375,7 @@ async function loadProducts() {
         }
     });
 }
+
 
 function toggleDropdown() {
     const productList = document.getElementById('product-list');
