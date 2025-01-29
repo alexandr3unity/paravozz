@@ -296,7 +296,7 @@ async function loadProducts() {
             const columns = row.split(',');
             if (columns.length < 5) return;
             const [id, name, price, group, quantity] = columns;
-            if (group.trim() === '14' && parseInt(quantity.trim()) > 0) {
+            if (group.trim() === '5' && parseInt(quantity.trim()) > 0) {
                 const item = document.createElement('div');
                 item.className = 'product-item';
                 const productSpan = document.createElement('span');
