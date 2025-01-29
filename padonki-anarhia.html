@@ -277,8 +277,10 @@
         </a>
     </div>
     <script>
-  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+ let cart = JSON.parse(localStorage.getItem('cart')) || [];
 let isDropdownOpen = false; // Переменная для отслеживания состояния выпадающего меню
+
+document.getElementById('toggle-button').addEventListener('click', toggleDropdown);
 
 async function loadProducts() {
     try {
@@ -315,6 +317,9 @@ async function loadProducts() {
 
 function toggleDropdown() {
     const productList = document.getElementById('product-list');
+    if (!isDropdownOpen) {
+        loadProducts();
+    }
     isDropdownOpen = !isDropdownOpen; // Переключаем состояние
     productList.style.display = isDropdownOpen ? 'block' : 'none'; // Показываем или скрываем меню
 }
@@ -334,7 +339,8 @@ function purchaseProduct(id, name, price, availableQuantity) {
         alert(`Товар "${name}" добавлен в корзину.`);
     }
     localStorage.setItem('cart', JSON.stringify(cart));
-}// Загружаем товары при загрузке страницы
+}
+// Загружаем товары при загрузке страницы
         window.onload = loadProducts;
 loadProducts();
     </script>
