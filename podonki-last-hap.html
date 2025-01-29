@@ -338,41 +338,34 @@
     </div>
 
     <script>
-  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+let isDropdownOpen = false; // Переменная для отслеживания состояния выпадающего меню
+
+document.getElementById('toggle-button').addEventListener('click', toggleDropdown);
 
 async function loadProducts() {
     try {
         const response = await fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vRk6PlSuuov0g4Bk2UpibiWGtOPYO3QYL8xRK16VKnYKmt0EKWq8ZXjHb2oz8bGtiC-ZY8rQXf2yvVX/pub?output=csv');
-        
         if (!response.ok) {
             throw new Error('Сетевая ошибка: ответ не был успешным');
         }
-
         const data = await response.text();
         const rows = data.split('\n').slice(1);
-
         const productList = document.getElementById('product-list');
         productList.innerHTML = '';
-
         rows.forEach(row => {
             const columns = row.split(',');
-
             if (columns.length < 5) return;
-
             const [id, name, price, group, quantity] = columns;
-
             if (group.trim() === '2' && parseInt(quantity.trim()) > 0) {
                 const item = document.createElement('div');
                 item.className = 'product-item';
-
                 const productSpan = document.createElement('span');
                 productSpan.textContent = name;
                 productSpan.style.flexGrow = 1;
-
                 const button = document.createElement('button');
                 button.textContent = 'Купить';
                 button.onclick = () => purchaseProduct(id, name, price, parseInt(quantity.trim()));
-
                 item.appendChild(productSpan);
                 item.appendChild(button);
                 productList.appendChild(item);
@@ -383,10 +376,15 @@ async function loadProducts() {
     }
 }
 
+function toggleDropdown() {
+    const productList = document.getElementById('product-list');
+    isDropdownOpen = !isDropdownOpen; // Переключаем состояние
+    productList.style.display = isDropdownOpen ? 'block' : 'none'; // Показываем или скрываем меню
+}
+
 function purchaseProduct(id, name, price, availableQuantity) {
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
     const currentItemIndex = cart.findIndex(item => item.name === name);
-
     if (currentItemIndex > -1) {
         if (cart[currentItemIndex].quantity < availableQuantity) {
             cart[currentItemIndex].quantity += 1;
@@ -398,9 +396,9 @@ function purchaseProduct(id, name, price, availableQuantity) {
         cart.push({ name, price, quantity: 1 });
         alert(`Товар "${name}" добавлен в корзину.`);
     }
-
     localStorage.setItem('cart', JSON.stringify(cart));
 }
+
 
         // Загружаем товары при загрузке страницы
         window.onload = loadProducts;
