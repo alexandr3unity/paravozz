@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-image: url('imej/fon.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            width: 100vw;
+        }
+        .header {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .banner {
+            width: 100%;
+            max-height: 300px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        .banner img {
+            width: 100%;
+            height: auto;
+        }
+        .dropdown {
+    position: relative;
+    display: block; 
+    width: 85%; /* Ширина контейнера для кнопки и выпадающего меню */
+    margin: 0 auto;
+    margin-top: 20px;
+}
+.dropdown button {
+    width: 100%; /* Кнопка занимает 100% ширины контейнера */
+    padding: 10px 10px;
+    font-size: 14px;
+    border: none;
+    background-color: #808080;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: background-color 0.3s ease;
+    cursor: pointer; /* Указатель при наведении */  
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: rgba(249, 249, 249, 0.9); /* Полупрозрачный фон */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ccc;
+    z-index: 1;
+    width: 100%; /* Ширина выпадающего меню равна ширине кнопки */
+    max-width: 100%; /* Ограничение максимальной ширины */
+    max-height: 200px; /* Ограничение максимальной высоты */
+    overflow-y: auto; /* Прокрутка по вертикали, если содержимое превышает высоту */
+    left: 0px; /* Выравнивание по левому краю */
+    border-radius: 5px; /* Скругление углов выпадающего меню */
+}
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+        .dropdown-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+        .dropdown-item span {
+            font-size: 1em;
+            color: black;
+            flex-grow: 1;
+        }
+        .dropdown-item button {
+            width: 100px;
+            padding: 5px;
+            font-size: 0.9em;
+            border: none;
+            background-color: #808080;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .dropdown-item button:hover {
+            background-color: #666666;
+        }
+        .bottom-panel {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #808080;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            z-index: 1000;
+        }
+        .bottom-panel a {
+            text-decoration: none;
+        }
+        .bottom-panel button {
+            color: #808080;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            font-size: 0.8em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: transparent;
+        }
+        .bottom-panel button:hover {
+            background-color: #666666;
+            color: white;
+        }
+        .bottom-panel button img {
+            width: 25px;
+            height: 25px;
+        }
+        .product-name {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            color: white;
+            text-align: left;
+            margin-left: 5%;
+        }
+       .product-description {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.5);
+    margin-top: 20px; /* Добавлен отступ сверху */
+    margin-bottom: 20px; /* Отступ снизу */
+    text-align: left;
+    margin-left: 5%;
+}
+        .banner {
+            width: 82%;
+            margin: 0 auto;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .banner img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            display: block;
+        }
+        .out-of-stock {
+            opacity: 0.5;
+        }
+        .product-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+.product-item button {
+    width: 20%; /* Устанавливаем ширину кнопки на 10% */
+    max-width: 100px; /* Устанавливаем максимальную ширину кнопки (по желанию) */
+    padding: 5px;
+    font-size: 0.9em;
+    border: none;
+    background-color: #808080;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.price-container {
+    display: flex; /* Используем Flexbox для выравнивания элементов в одну строку */
+    align-items: center; /* Центрируем элементы по вертикали */
+    margin: 20px 5% 20px 20px; /* Отступы для контейнера */
+}
+.favorite-button {
+    padding: 10px; /* Отступы для кнопки */
+    color: white; /* Цвет текста кнопки */
+    background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачный фон для кнопки */
+    border: 1px solid #808080; /* Цвет рамки */
+    border-radius: 5px; /* Скругление углов кнопки */
+    cursor: pointer; /* Указатель при наведении */
+    font-size: 19px; /* Размер шрифта */
+    margin-left: auto; /* Отталкиваем кнопку к правому краю */
+}
+.price {
+    border: 1px solid #808080; /* Цвет рамки */
+    padding: 10px; /* Отступ внутри рамки */
+    text-align: center; /* Центрирование текста */
+    color: white; /* Цвет текста */
+    background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачный фон для рамки */
+    border-radius: 5px; /* Скругление углов рамки */
+    font-size: 19px; /* Размер шрифта */
+    width: 30%; /* Установлена ширина рамки на 30% экрана */
+    box-sizing: border-box; /* Учитываем отступы и границы в ширине */
+}
+        .back-button {
+    position: absolute; /* Позиционирование кнопки относительно ближайшего позиционированного элемента */
+    top: 20px; /* Расстояние от верхнего края */
+    left: 20px; /* Расстояние от левого края */
+    z-index: 1000; /* Убедитесь, что кнопка будет поверх других элементов */
+    background-color: rgba(128, 128, 128, 0.8); /* Полупрозрачный фон для кнопки */
+    color: white; /* Цвет текста */
+    border: none; /* Убираем рамку */
+    padding: 10px 15px; /* Отступы для кнопки */
+    border-radius: 5px; /* Скругление углов */
+    cursor: pointer; /* Указатель при наведении */
+    font-size: 16px; /* Размер шрифта */
+}        
+    </style>
+</head>
+<body>
+    <button onclick="window.history.back()" class="back-button">Назад</button>
+    <div class="banner">
+        <div class="banner">
+            <img src="imej/PODONK-IANARHIA.jpg" alt="Фотография баннера">
+        </div>
+    </div>
+    <div class="product-name" id="product-name">
+        R&M ACID
+    </div>
+    <div class="product-description">
+        Выбор товара
+    </div>
+    <div class="dropdown">
+        <button onclick="toggleDropdown()">Вкусы </button>
+        <div class="dropdown-content" id="product-list">
+            <!-- Список товаров будет загружен динамически -->
+        </div>
+    </div>
+    <div class="price-container">
+    <div class="price">
+        Цена: 15
+    </div>
+    <button class="favorite-button">Добавить в избранное</button>
+</div>
+    <div class="product-description">
+   Podonki anarhia — это жидкость для вейпинга, которая сочетает в себе уникальные вкусовые ноты и высокое качество ингредиентов. Она предлагает насыщенные и яркие ароматы, которые идеально подходят для любителей сладких и фруктовых сочетаний.
+    </div>
+    <div class="bottom-panel">
+        <a href="home.html">
+            <button>
+                <img src="imej/Ico/discount.png">
+            </button>
+        </a>
+        <a href="search.html">
+            <button>
+                <img src="imej/Ico/about-us.png">
+            </button>
+        </a>
+        <a href="index.html">
+            <button>
+                <img src="imej/Ico/home.png">
+            </button>
+        </a>
+        <a href="cart.html">
+            <button>
+                <img src="imej/Ico/cart.png">
+            </button>
+        </a>
+        <a href="cart.html">
+            <button>
+                <img src="imej/Ico/star.png">
+            </button>
+        </a>
+    </div>
+    <script>
+ let cart = JSON.parse(localStorage.getItem('cart')) || [];
+let isDropdownOpen = false; // Переменная для отслеживания состояния выпадающего меню
+
+document.getElementById('toggle-button').addEventListener('click', toggleDropdown);
+
+async function loadProducts() {
+    try {
+        const response = await fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vRk6PlSuuov0g4Bk2UpibiWGtOPYO3QYL8xRK16VKnYKmt0EKWq8ZXjHb2oz8bGtiC-ZY8rQXf2yvVX/pub?output=csv');
+        if (!response.ok) {
+            throw new Error('Сетевая ошибка: ответ не был успешным');
+        }
+        const data = await response.text();
+        const rows = data.split('\n').slice(1);
+        const productList = document.getElementById('product-list');
+        productList.innerHTML = '';
+        rows.forEach(row => {
+            const columns = row.split(',');
+            if (columns.length < 5) return;
+            const [id, name, price, group, quantity] = columns;
+            if (group.trim() === '12' && parseInt(quantity.trim()) > 0) {
+                const item = document.createElement('div');
+                item.className = 'product-item';
+                const productSpan = document.createElement('span');
+                productSpan.textContent = name;
+                productSpan.style.flexGrow = 1;
+                const button = document.createElement('button');
+                button.textContent = 'Купить';
+                button.onclick = () => purchaseProduct(id, name, price, parseInt(quantity.trim()));
+                item.appendChild(productSpan);
+                item.appendChild(button);
+                productList.appendChild(item);
+            }
+        });
+    } catch (error) {
+        console.error('Ошибка при загрузке товаров:', error);
+    }
+}
+
+function toggleDropdown() {
+    const productList = document.getElementById('product-list');
+    if (!isDropdownOpen) {
+        loadProducts();
+    }
+    isDropdownOpen = !isDropdownOpen; // Переключаем состояние
+    productList.style.display = isDropdownOpen ? 'block' : 'none'; // Показываем или скрываем меню
+}
+
+function purchaseProduct(id, name, price, availableQuantity) {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const currentItemIndex = cart.findIndex(item => item.name === name);
+    if (currentItemIndex > -1) {
+        if (cart[currentItemIndex].quantity < availableQuantity) {
+            cart[currentItemIndex].quantity += 1;
+            alert(`Товар "${name}" добавлен в корзину. Количество в корзине: ${cart[currentItemIndex].quantity}`);
+        } else {
+            alert(`Невозможно добавить "${name}". Доступное количество: ${availableQuantity}, в корзине: ${cart[currentItemIndex].quantity}`);
+        }
+    } else {
+        cart.push({ name, price, quantity: 1 });
+        alert(`Товар "${name}" добавлен в корзину.`);
+    }
+    localStorage.setItem('cart', JSON.stringify(cart));
+}
+// Загружаем товары при загрузке страницы
+        window.onload = loadProducts;
+loadProducts();
+    </script>
+</body>
+</html>
