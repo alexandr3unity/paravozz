@@ -195,42 +195,54 @@
 
         // Функция обработки оформления заказа (сохранение данных в localStorage)
         function checkout() {
-        const cart = JSON.parse(localStorage.getItem('cart')) || [];
-        if (cart.length === 0) {
-            alert("Корзина пуста!");
-            return;
-        }
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const totalAmount = cart.reduce((total, item) => total + item.price * item.quantity, 0);
+            const orderId = Math.floor(Math.random() * 1000000); // Генерация случайного номера заказа
+            const paymentDate = new Date().toLocaleDateString();
 
-        const orderId = Math.floor(Math.random() * 1000000); // Генерация случайного номера заказа
-        const paymentDate = new Date().toLocaleDateString();
+            // Сохраняем данные заказа в localStorage
+            localStorage.setItem('payment', JSON.stringify({
+                cart,
+                totalAmount,
+                orderId,
+                paymentDate
+            }));
 
-        // Формируем текст сообщения
-        let message = `🛒 Новый заказ!\n\n📅 Дата: ${paymentDate}\n🆔 Заказ №${orderId}\n\n📦 Товары:`;
-        cart.forEach(item => {
-            message += `\n- ${item.name} (x${item.quantity})`;
-        });
+            // Формируем текст сообщения
+            let message = `Новый заказ!\n\nНомер заказа: ${orderId}\nДата: ${paymentDate}\n\nТовары в заказе:`;
+            cart.forEach(item => {
+                message += `\n- ${item.name} (x${item.quantity}) - ${item.price * item.quantity} руб.`;
+            });
+            message += `\n\nИтого: ${totalAmount} руб.`;
 
-        // Телеграм данные
-        const token = '7791735203:AAFC1TzcCpkgjrvFASLyG5Vhw6X-gVEoHLg'; // Замените на свой токен
-        const chatId = '771803609'; // Замените на ваш chat ID
-        const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
+            // Отправляем сообщение в Telegram
+            const token = '7791735203:AAFC1TzcCpkgjrvFASLyG5Vhw6X-gVEoHLg'; // Замените на свой API токен
+            const chatId = '771803609'; // Замените на ваш chat ID
+            const url = `https://api.telegram.org/bot${token}/sendMessage`;
 
-        // Отправка запроса
-        fetch(url)
+            const data = {
+                chat_id: chatId,
+                text: message
+            };
+
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
             .then(response => response.json())
             .then(data => {
                 if (data.ok) {
-                    alert('✅ Заказ отправлен в Telegram!');
-                    window.location.href = 'https://alexandr3unity.github.io/paravozz/payment_success';
+                    console.log('Сообщение отправлено в Telegram!');
                 } else {
-                    alert('⚠ Ошибка отправки в Telegram!');
+                    console.log('Ошибка при отправке сообщения в Telegram:', data);
                 }
             })
             .catch(error => {
-                alert('❌ Ошибка соединения с Telegram!');
-                console.error(error);
+                console.log('Ошибка при отправке запроса в Telegram:', error);
             });
-    }
 
             // Переходим на страницу успешной оплаты
             window.location.href = 'https://alexandr3unity.github.io/paravozz/payment_success';
