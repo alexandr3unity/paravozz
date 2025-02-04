@@ -1,150 +1,165 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Оплата успешна</title>
-    <style>
-        body {
-            color: white;
-            font-family: Arial, sans-serif;
-            background-image: url('imej/fon.jpg');
-            background-size: auto;
-            background-position: center;
-            background-repeat: repeat;
-            text-align: center;
-            padding: 30px;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Оплата успешна</title>
+  <style>
+    body {
+      color: white;
+      font-family: Arial, sans-serif;
+      background-image: url('imej/fon.jpg');
+      background-size: auto;
+      background-position: center;
+      background-repeat: repeat;
+      text-align: center;
+      padding: 30px;
+    }
 
-        .receipt {
-            background-color: #fff;
-            border: 2px dashed #28a745;
-            border-radius: 10px;
-            width: 300px;
-            margin: 0 auto;
-            padding: 20px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
+    .receipt {
+      background-color: #fff;
+      border: 2px dashed #28a745;
+      border-radius: 10px;
+      width: 300px;
+      margin: 0 auto;
+      padding: 20px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
 
-        h1 {
-            color: #28a745;
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
+    h1 {
+      color: #28a745;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
 
-        p {
-            font-size: 18px;
-            color: #333;
-        }
+    p {
+      font-size: 18px;
+      color: #333;
+    }
 
-        .details {
-            margin-top: 30px;
-            font-size: 16px;
-            text-align: left;
-            margin-bottom: 30px;
-        }
+    .details {
+      margin-top: 30px;
+      font-size: 16px;
+      text-align: left;
+      margin-bottom: 30px;
+    }
 
-        .details strong {
-            color: #333;
-        }
+    .details strong {
+      color: #333;
+    }
 
-        .products-list {
-            margin-top: 20px;
-            text-align: left;
-            font-size: 16px;
-        }
+    .products-list {
+      margin-top: 20px;
+      text-align: left;
+      font-size: 16px;
+    }
 
-        .product-item {
-            margin-bottom: 10px;
-        }
+    .product-item {
+      margin-bottom: 10px;
+    }
 
-        .product-item span {
-            display: inline-block;
-            width: 150px;
-        }
-        
-        /* Новое правило для изменения цвета названия товара */
-        .product-item strong {
-            color: #000; /* Чёрный цвет для названия товара */
-        }
+    /* Новый блок для размещения названия и цены в одном ряду */
+    .product-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-        .total {
-            font-size: 20px;
-            font-weight: bold;
-            color: #333;
-            margin-top: 20px;
-            text-align: center;
-        }
+    /* Название товара делаем чёрным */
+    .product-info .name strong {
+      color: #000;
+    }
 
-        .button {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #28a745;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            margin-top: 30px;
-            font-size: 16px;
-        }
+    /* Блок с количеством и итоговой суммой оформляем аналогично */
+    .quantity-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 5px;
+    }
 
-        .button:hover {
-            background-color: #218838;
-        }
-    </style>
+    .total {
+      font-size: 20px;
+      font-weight: bold;
+      color: #333;
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #28a745;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      margin-top: 30px;
+      font-size: 16px;
+    }
+
+    .button:hover {
+      background-color: #218838;
+    }
+  </style>
 </head>
 <body>
-    <div class="receipt">
-        <h1>Чек оплаты</h1>
-        <p>Ваш заказ успешно оплачен!</p>
+  <div class="receipt">
+    <h1>Чек оплаты</h1>
+    <p>Ваш заказ успешно оплачен!</p>
 
-        <div class="details">
-            <p><strong>Дата:</strong> <span id="payment-date"></span></p>
-            <p><strong>Номер заказа:</strong> <span id="order-id"></span></p>
-        </div>
-
-        <div class="products-list">
-            <h3>Товары в заказе:</h3>
-            <div id="products-list"></div>
-        </div>
-
-        <div class="total">
-            <p><strong>Итого: <span id="total-amount"></span> руб.</strong></p>
-        </div>
-
-        <a href="index.html" class="button">Вернуться на главную страницу</a>
+    <div class="details">
+      <p><strong>Дата:</strong> <span id="payment-date"></span></p>
+      <p><strong>Номер заказа:</strong> <span id="order-id"></span></p>
     </div>
 
-    <script>
-        // Функция для отображения данных о платеже и товарах из заказа
-        function displayReceipt() {
-            // Получаем объект оплаты из localStorage
-            const paymentData = JSON.parse(localStorage.getItem('payment'));
-            if (paymentData) {
-                document.getElementById('payment-date').textContent = paymentData.paymentDate;
-                document.getElementById('order-id').textContent = paymentData.orderId;
-                document.getElementById('total-amount').textContent = paymentData.totalAmount;
+    <div class="products-list">
+      <h3>Товары в заказе:</h3>
+      <div id="products-list"></div>
+    </div>
 
-                const productsList = document.getElementById('products-list');
-                // Очищаем список перед добавлением товаров
-                productsList.innerHTML = '';
-                // Проходимся по каждому товару из массива cart
-                paymentData.cart.forEach(item => {
-                    productsList.innerHTML += `
-                        <div class="product-item">
-                            <span><strong>${item.name}</strong></span>
-                            <span>${item.price} руб. x ${item.quantity}</span>
-                            <span><strong>${item.price * item.quantity} руб.</strong></span>
-                        </div>
-                    `;
-                });
-            } else {
-                // Если данные об оплате не найдены, выводим сообщение
-                document.getElementById('products-list').innerHTML = '<p>Нет данных о заказе.</p>';
-            }
-        }
+    <div class="total">
+      <p><strong>Итого: <span id="total-amount"></span> руб.</strong></p>
+    </div>
 
-        // Инициализация чека
-        displayReceipt();
-    </script>
+    <a href="index.html" class="button">Вернуться на главную страницу</a>
+  </div>
+
+  <script>
+    // Функция для отображения данных о платеже и товарах из заказа
+    function displayReceipt() {
+      // Получаем объект оплаты из localStorage
+      const paymentData = JSON.parse(localStorage.getItem('payment'));
+      if (paymentData) {
+        document.getElementById('payment-date').textContent = paymentData.paymentDate;
+        document.getElementById('order-id').textContent = paymentData.orderId;
+        document.getElementById('total-amount').textContent = paymentData.totalAmount;
+
+        const productsList = document.getElementById('products-list');
+        // Очищаем список перед добавлением товаров
+        productsList.innerHTML = '';
+        // Для каждого товара из массива cart формируем новый макет
+        paymentData.cart.forEach(item => {
+          productsList.innerHTML += `
+            <div class="product-item">
+              <div class="product-info">
+                <span class="name"><strong>${item.name}</strong></span>
+                <span class="price">${item.price} руб.</span>
+              </div>
+              <div class="quantity-info">
+                <span>Кол-во: ${item.quantity}</span>
+                <span><strong>${item.price * item.quantity} руб.</strong></span>
+              </div>
+            </div>
+          `;
+        });
+      } else {
+        // Если данные об оплате не найдены, выводим сообщение
+        document.getElementById('products-list').innerHTML = '<p>Нет данных о заказе.</p>';
+      }
+    }
+
+    // Инициализация чека
+    displayReceipt();
+  </script>
 </body>
 </html>
