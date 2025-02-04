@@ -6,7 +6,7 @@
     <title>Оплата успешна</title>
     <style>
         body {
-            color:white;
+            color: white;
             font-family: Arial, sans-serif;
             background-image: url('imej/fon.jpg');
             background-size: auto;
@@ -110,8 +110,9 @@
     </div>
 
     <script>
-        // Функция для отображения данных об оплате
+        // Функция для отображения данных о платеже и товарах из заказа
         function displayReceipt() {
+            // Получаем объект оплаты из localStorage
             const paymentData = JSON.parse(localStorage.getItem('payment'));
             if (paymentData) {
                 document.getElementById('payment-date').textContent = paymentData.paymentDate;
@@ -119,6 +120,9 @@
                 document.getElementById('total-amount').textContent = paymentData.totalAmount;
 
                 const productsList = document.getElementById('products-list');
+                // Очищаем список перед добавлением товаров
+                productsList.innerHTML = '';
+                // Проходимся по каждому товару из массива cart
                 paymentData.cart.forEach(item => {
                     productsList.innerHTML += `
                         <div class="product-item">
@@ -128,10 +132,13 @@
                         </div>
                     `;
                 });
+            } else {
+                // Если данные об оплате не найдены, можно вывести сообщение или загрузить корзину
+                document.getElementById('products-list').innerHTML = '<p>Нет данных о заказе.</p>';
             }
         }
 
-        // Инициализация
+        // Инициализация чека
         displayReceipt();
     </script>
 </body>
