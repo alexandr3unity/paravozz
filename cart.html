@@ -235,6 +235,9 @@
                 console.log('Ошибка при отправке запроса в Telegram:', error);
             });
 
+            // Очистка корзины после успешной оплаты
+        localStorage.removeItem('cart');
+
             // Переходим на страницу успешной оплаты
             window.location.href = 'https://alexandr3unity.github.io/paravozz/payment_success';
         }
