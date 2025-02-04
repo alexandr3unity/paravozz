@@ -58,24 +58,20 @@
       margin-bottom: 10px;
     }
 
-    /* Блок для размещения названия и цены в одном ряду */
     .product-info {
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
 
-    /* Название товара делаем чёрным */
     .product-info .name strong {
       color: #000;
     }
     
-    /* Цена товара делаем чёрным */
     .product-info .price {
       color: #000;
     }
 
-    /* Блок с количеством и итоговой суммой */
     .quantity-info {
       display: flex;
       justify-content: space-between;
@@ -105,6 +101,12 @@
     .button:hover {
       background-color: #218838;
     }
+
+    .confirmation {
+      margin-top: 20px;
+      font-size: 16px;
+      color: #333;
+    }
   </style>
 </head>
 <body>
@@ -126,13 +128,13 @@
       <p><strong>Итого: <span id="total-amount"></span> руб.</strong></p>
     </div>
 
+    <p class="confirmation">Чтобы подтвердить заказ, сделайте скрин и отправьте его <a href="https://t.me/username" target="_blank">@username</a></p>
+
     <a href="index.html" class="button">Вернуться на главную страницу</a>
   </div>
 
   <script>
-    // Функция для отображения данных о платеже и товарах из заказа
     function displayReceipt() {
-      // Получаем объект оплаты из localStorage
       const paymentData = JSON.parse(localStorage.getItem('payment'));
       if (paymentData) {
         document.getElementById('payment-date').textContent = paymentData.paymentDate;
@@ -140,9 +142,7 @@
         document.getElementById('total-amount').textContent = paymentData.totalAmount;
 
         const productsList = document.getElementById('products-list');
-        // Очищаем список перед добавлением товаров
         productsList.innerHTML = '';
-        // Для каждого товара из массива cart формируем новый макет
         paymentData.cart.forEach(item => {
           productsList.innerHTML += `
             <div class="product-item">
@@ -158,12 +158,10 @@
           `;
         });
       } else {
-        // Если данные об оплате не найдены, выводим сообщение
         document.getElementById('products-list').innerHTML = '<p>Нет данных о заказе.</p>';
       }
     }
 
-    // Инициализация чека
     displayReceipt();
   </script>
 </body>
