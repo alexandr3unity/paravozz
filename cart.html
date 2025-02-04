@@ -86,6 +86,16 @@
         .return-button:hover {
             background-color: #0056b3;
         }
+
+        /* Стили для выпадающего меню */
+        .place-select {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            margin-top: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
     </style>
 </head>
 <body>
@@ -95,6 +105,15 @@
     </div>
 
     <p style="text-align: center"><strong>Итого:</strong> <span id="total-price">0</span> руб.</p>
+
+    <!-- Выпадающее меню для выбора места -->
+    <select class="place-select" id="place-select">
+        <option value="">Выберите место</option>
+        <option value="Место 1">Место 1</option>
+        <option value="Место 2">Место 2</option>
+        <option value="Место 3">Место 3</option>
+        <!-- Добавьте больше опций по мере необходимости -->
+    </select>
 
     <!-- Кнопка оплаты -->
     <button type="button" class="pay-button button" onclick="checkout()">Перейти к оплате</button>
@@ -186,6 +205,12 @@
 
         // Функция обработки оформления заказа (сохранение данных в localStorage)
         function checkout() {
+            const selectedPlace = document.getElementById('place-select').value;
+            if (!selectedPlace) {
+                alert('Пожалуйста, выберите место перед оформлением заказа.');
+                return;
+            }
+
             const cart = JSON.parse(localStorage.getItem('cart')) || [];
             const totalAmount = cart.reduce((total, item) => total + item.price * item.quantity, 0);
             const orderId = Math.floor(Math.random() * 1000000); // Генерация случайного номера заказа
@@ -196,11 +221,12 @@
                 cart,
                 totalAmount,
                 orderId,
-                paymentDate
+                paymentDate,
+                selectedPlace
             }));
 
             // Формируем текст сообщения
-            let message = `Новый заказ!\n\nНомер заказа: ${orderId}\nДата: ${paymentDate}\n\nТовары в заказе:`;
+            let message = `Новый заказ!\n\nНомер заказа: ${orderId}\nДата: ${paymentDate}\nМесто: ${selectedPlace}\n\nТовары в заказе:`;
             cart.forEach(item => {
                 message += `\n- ${item.name} (x${item.quantity}) - ${item.price * item.quantity} руб.`;
             });
@@ -236,7 +262,7 @@
             });
 
             // Очистка корзины после успешной оплаты
-        localStorage.removeItem('cart');
+            localStorage.removeItem('cart');
 
             // Переходим на страницу успешной оплаты
             window.location.href = 'https://alexandr3unity.github.io/paravozz/payment_success';
