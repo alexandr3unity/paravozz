@@ -243,6 +243,13 @@
                 return;
             }
             
+            // Расчёт общей суммы заказа
+            const totalAmount = cart.reduce((total, item) => total + item.price * item.quantity, 0);
+            if (totalAmount === 0) {
+                alert('Сумма заказа равна нулю. Добавьте товары, чтобы оформить заказ.');
+                return;
+            }
+            
             const selectedPlace = document.getElementById('place-select').value;
             const selectedTime = document.getElementById('time-select').value;
 
@@ -256,7 +263,6 @@
                 return;
             }
 
-            const totalAmount = cart.reduce((total, item) => total + item.price * item.quantity, 0);
             const orderId = Math.floor(Math.random() * 1000000);
             const paymentDate = new Date().toLocaleDateString();
 
