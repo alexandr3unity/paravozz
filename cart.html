@@ -263,6 +263,14 @@
                 return;
             }
 
+            // Получение данных пользователя из Telegram Web App (если доступно)
+            let userName = 'Неизвестный пользователь';
+            if (window.Telegram && Telegram.WebApp && Telegram.WebApp.initDataUnsafe && Telegram.WebApp.initDataUnsafe.user) {
+                const user = Telegram.WebApp.initDataUnsafe.user;
+                // Если есть username, то выводим его с символом @, иначе имя пользователя
+                userName = user.username ? '@' + user.username : user.first_name;
+            }
+
             const orderId = Math.floor(Math.random() * 1000000);
             const paymentDate = new Date().toLocaleDateString();
 
@@ -273,11 +281,12 @@
                 orderId,
                 paymentDate,
                 selectedPlace,
-                selectedTime
+                selectedTime,
+                userName
             }));
 
-            // Формирование сообщения для Telegram
-            let message = `Новый заказ!\n\nНомер: ${orderId}\nДата: ${paymentDate}\nМесто: ${selectedPlace}\nВремя: ${selectedTime}\n\nТовары:`;
+            // Формирование сообщения для Telegram с указанием пользователя
+            let message = `Новый заказ от ${userName}!\n\nНомер заказа: ${orderId}\nДата: ${paymentDate}\nМесто: ${selectedPlace}\nВремя: ${selectedTime}\n\nТовары:`;
             cart.forEach(item => {
                 message += `\n- ${item.name} (x${item.quantity}) - ${item.price * item.quantity} руб.`;
             });
