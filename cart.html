@@ -106,9 +106,6 @@
             border-radius: 5px;
             border: 1px solid #ccc;
         }
-
-
-        
     </style>
 </head>
 <body>
@@ -120,7 +117,7 @@
     <p style="text-align: center"><strong>Итого:</strong> <span id="total-price">0</span> руб.</p>
 
     <!-- Выбор места и времени -->
-     <select class="place-select" id="place-select" onchange="updateDeliveryOption()">
+    <select class="place-select" id="place-select" onchange="updateDeliveryOption()">
         <option value="">Выберите место</option>
         <option value="Трио">Трио</option>
         <option value="МАК">МАК</option>
@@ -169,8 +166,6 @@
     </div>
 
     <script>
-
-
         function updateDeliveryOption() {
             const placeSelect = document.getElementById('place-select');
             const timeSelect = document.getElementById('time-select');
@@ -184,6 +179,7 @@
                 addressInput.style.display = 'none';
             }
         }
+
         // Объект с доступным временем для мест
         const timeSlots = {
             "Трио": ["10:00", "12:00", "14:00", "16:00"],
@@ -264,70 +260,71 @@
         }
 
         // Оформление заказа
-       function checkout() {
-        const cart = JSON.parse(localStorage.getItem('cart')) || [];
-        
-        // Проверка на пустую корзину
-        if (cart.length === 0) {
-            alert('Ваша корзина пуста. Добавьте товары перед оформлением заказа.');
-            return;
-        }
-        
-        // Расчёт общей суммы заказа
-        const totalAmount = cart.reduce((total, item) => total + item.price * item.quantity, 0);
-        if (totalAmount === 0) {
-            alert('Сумма заказа равна нулю. Добавьте товары, чтобы оформить заказ.');
-            return;
-        }
-        
-        const selectedPlace = document.getElementById('place-select').value;
-        const selectedTime = document.getElementById('time-select').value;
-
-        if (!selectedPlace) {
-            alert('Пожалуйста, выберите место перед оформлением заказа.');
-            return;
-        }
-
-        if (!selectedTime) {
-            alert('Пожалуйста, выберите время доставки.');
-            return;
-        }
-
-        // Получение информации о пользователе Telegram
-        let username = 'не указан';
-        try {
-            if (window.Telegram && window.Telegram.WebApp) {
-                const user = window.Telegram.WebApp.initDataUnsafe.user;
-                if (user && user.username) {
-                    username = '@' + user.username;
-                } else if (user && (user.first_name || user.last_name)) {
-                    username = [user.first_name, user.last_name].filter(Boolean).join(' ');
-                }
+        function checkout() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            
+            // Проверка на пустую корзину
+            if (cart.length === 0) {
+                alert('Ваша корзина пуста. Добавьте товары перед оформлением заказа.');
+                return;
             }
-        } catch (e) {
-            console.error('Error getting Telegram user info:', e);
-        }
+            
+            // Расчёт общей суммы заказа
+            const totalAmount = cart.reduce((total, item) => total + item.price * item.quantity, 0);
+            if (totalAmount === 0) {
+                alert('Сумма заказа равна нулю. Добавьте товары, чтобы оформить заказ.');
+                return;
+            }
+            
+            const selectedPlace = document.getElementById('place-select').value;
+            const selectedTime = document.getElementById('time-select').value;
 
-        const orderId = Math.floor(Math.random() * 1000000);
-        const paymentDate = new Date().toLocaleDateString();
+            if (!selectedPlace) {
+                alert('Пожалуйста, выберите место перед оформлением заказа.');
+                return;
+            }
 
-        // Сохранение данных заказа
-        localStorage.setItem('payment', JSON.stringify({
-            cart,
-            totalAmount,
-            orderId,
-            paymentDate,
-            selectedPlace,
-            selectedTime,
-            username
-        }));
+            // Пропускаем проверку времени, если выбрана доставка
+            if (selectedPlace !== 'доставка' && !selectedTime) {
+                alert('Пожалуйста, выберите время доставки.');
+                return;
+            }
 
-        // Формирование сообщения для Telegram
-        let message = `Новый заказ!\n\nНомер: ${orderId}\nДата: ${paymentDate}\nПользователь: ${username}\nМесто: ${selectedPlace}\nВремя: ${selectedTime}\n\nТовары:`;
-        cart.forEach(item => {
-            message += `\n- ${item.name} (x${item.quantity}) - ${item.price * item.quantity} руб.`;
-        });
-        message += `\n\nИтого: ${totalAmount} руб.`;
+            // Получение информации о пользователе Telegram
+            let username = 'не указан';
+            try {
+                if (window.Telegram && window.Telegram.WebApp) {
+                    const user = window.Telegram.WebApp.initDataUnsafe.user;
+                    if (user && user.username) {
+                        username = '@' + user.username;
+                    } else if (user && (user.first_name || user.last_name)) {
+                        username = [user.first_name, user.last_name].filter(Boolean).join(' ');
+                    }
+                }
+            } catch (e) {
+                console.error('Error getting Telegram user info:', e);
+            }
+
+            const orderId = Math.floor(Math.random() * 1000000);
+            const paymentDate = new Date().toLocaleDateString();
+
+            // Сохранение данных заказа
+            localStorage.setItem('payment', JSON.stringify({
+                cart,
+                totalAmount,
+                orderId,
+                paymentDate,
+                selectedPlace,
+                selectedTime,
+                username
+            }));
+
+            // Формирование сообщения для Telegram
+            let message = `Новый заказ!\n\nНомер: ${orderId}\nДата: ${paymentDate}\nПользователь: ${username}\nМесто: ${selectedPlace}\nВремя: ${selectedTime}\n\nТовары:`;
+            cart.forEach(item => {
+                message += `\n- ${item.name} (x${item.quantity}) - ${item.price * item.quantity} руб.`;
+            });
+            message += `\n\nИтого: ${totalAmount} руб.`;
 
             // Отправка в Telegram
             const token = '7791735203:AAFC1TzcCpkgjrvFASLyG5Vhw6X-gVEoHLg';
