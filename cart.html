@@ -106,7 +106,7 @@
     <p style="text-align: center"><strong>Итого:</strong> <span id="total-price">0</span> руб.</p>
 
     <!-- Выбор места и времени -->
-    <select class="place-select" id="place-select" onchange="updateTimeSlots()">
+     <select class="place-select" id="place-select" onchange="updateDeliveryOption()">
         <option value="">Выберите место</option>
         <option value="Трио">Трио</option>
         <option value="МАК">МАК</option>
@@ -114,12 +114,13 @@
         <option value="зеленая гура">зеленая гура</option>
         <option value="ратуша">ратуша</option>
         <option value="пирамида">пирамида</option>
+        <option value="доставка">доставка</option>
     </select>
 
     <select class="time-select" id="time-select">
         <option value="">Сначала выберите место</option>
     </select>
-
+    <input type="text" id="address-input" class="address-input" placeholder="Введите адрес доставки">
     <!-- Кнопки оформления -->
     <button type="button" class="pay-button button" onclick="checkout()">Перейти к оплате</button>
     <button type="button" class="return-button button" onclick="window.location.href='https://alexandr3unity.github.io/paravozz/'">Возврат к покупкам</button>
@@ -154,6 +155,21 @@
     </div>
 
     <script>
+
+
+        function updateDeliveryOption() {
+            const placeSelect = document.getElementById('place-select');
+            const timeSelect = document.getElementById('time-select');
+            const addressInput = document.getElementById('address-input');
+            
+            if (placeSelect.value === 'доставка') {
+                timeSelect.style.display = 'none';
+                addressInput.style.display = 'block';
+            } else {
+                timeSelect.style.display = 'block';
+                addressInput.style.display = 'none';
+            }
+        }
         // Объект с доступным временем для мест
         const timeSlots = {
             "Трио": ["10:00", "12:00", "14:00", "16:00"],
