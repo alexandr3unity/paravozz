@@ -225,11 +225,11 @@
     <button onclick="window.history.back()" class="back-button">Назад</button>
     <div class="banner">
         <div class="banner">
-            <img src="imej/PODONK-IANARHIA.jpg" alt="Фотография баннера">
+            <img src="imej/PODONKI-PODGON.jpg" alt="Фотография баннера">
         </div>
     </div>
     <div class="product-name" id="product-name">
-        PODONKI VINTAGE
+     PODONKI-PODGON
     </div>
     <div class="product-description">
         Выбор товара
@@ -247,7 +247,7 @@
     <button class="favorite-button">Добавить в избранное</button>
 </div>
     <div class="product-description">
-   Podonki anarhia — это жидкость для вейпинга, которая сочетает в себе уникальные вкусовые ноты и высокое качество ингредиентов. Она предлагает насыщенные и яркие ароматы, которые идеально подходят для любителей сладких и фруктовых сочетаний.
+    "Падонки Падгон" — это юмористическая жидкость, вдохновленная интернет-культурой и сленгом. Название отсылает к популярному в Рунете стилю общения с намеренными ошибками и шутливым тоном.
     </div>
     <div class="bottom-panel">
         <a href="home.html">
@@ -296,7 +296,7 @@ async function loadProducts() {
             const columns = row.split(',');
             if (columns.length < 5) return;
             const [id, name, price, group, quantity] = columns;
-            if (group.trim() === '4' && parseInt(quantity.trim()) > 0) {
+            if (group.trim() === '11' && parseInt(quantity.trim()) > 0) {
                 const item = document.createElement('div');
                 item.className = 'product-item';
                 const productSpan = document.createElement('span');
