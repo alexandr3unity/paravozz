@@ -225,11 +225,11 @@
     <button onclick="window.history.back()" class="back-button">Назад</button>
     <div class="banner">
         <div class="banner">
-            <img src="imej/CATSWILL.jpg" alt="Фотография баннера">
+            <img src="imej/CATSWILL-MALASIAN.jpg" alt="Фотография баннера">
         </div>
     </div>
     <div class="product-name" id="product-name">
-        CATSWILL
+        CATSWILL-MALASIAN
     </div>
     <div class="product-description">
         Выбор товара
@@ -296,7 +296,7 @@ async function loadProducts() {
             const columns = row.split(',');
             if (columns.length < 5) return;
             const [id, name, price, group, quantity] = columns;
-            if (group.trim() === '12' && parseInt(quantity.trim()) > 0) {
+            if (group.trim() === '13' && parseInt(quantity.trim()) > 0) {
                 const item = document.createElement('div');
                 item.className = 'product-item';
                 const productSpan = document.createElement('span');
