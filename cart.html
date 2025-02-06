@@ -235,6 +235,14 @@
 
         // Оформление заказа
         function checkout() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            
+            // Проверка на пустую корзину
+            if (cart.length === 0) {
+                alert('Ваша корзина пуста. Добавьте товары перед оформлением заказа.');
+                return;
+            }
+            
             const selectedPlace = document.getElementById('place-select').value;
             const selectedTime = document.getElementById('time-select').value;
 
@@ -248,7 +256,6 @@
                 return;
             }
 
-            const cart = JSON.parse(localStorage.getItem('cart')) || [];
             const totalAmount = cart.reduce((total, item) => total + item.price * item.quantity, 0);
             const orderId = Math.floor(Math.random() * 1000000);
             const paymentDate = new Date().toLocaleDateString();
