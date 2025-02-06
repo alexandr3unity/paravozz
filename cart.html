@@ -234,10 +234,11 @@
         }
 
         // Оформление заказа
-        Telegram.WebApp.ready();
+         Telegram.WebApp.ready();
     
     function getUserData() {
         const tgUser = Telegram.WebApp.initDataUnsafe?.user;
+        console.log('Данные пользователя:', tgUser); // Логирование данных пользователя
         if (!tgUser) {
             alert('Ошибка: Не удалось получить данные пользователя Telegram.');
             return null;
@@ -271,6 +272,7 @@
         const orderId = Math.floor(Math.random() * 1000000);
         const paymentDate = new Date().toLocaleDateString();
         const username = tgUser.username ? `@${tgUser.username}` : (tgUser.first_name ? tgUser.first_name : 'Неизвестный пользователь');
+        console.log('Отправка заказа от:', username); // Логирование ника пользователя
 
         let message = `Новый заказ от ${username}\n\nНомер: ${orderId}\nДата: ${paymentDate}\nМесто: ${selectedPlace}\nВремя: ${selectedTime}\n\nТовары:`;
         cart.forEach(item => {
@@ -278,8 +280,8 @@
         });
         message += `\n\nИтого: ${totalAmount} руб.`;
 
-        const token = '7791735203:AAFC1TzcCpkgjrvFASLyG5Vhw6X-gVEoHLg';
-            const chatId = '771803609';
+        const token = 'YOUR_BOT_TOKEN';
+        const chatId = 'YOUR_CHAT_ID';
         fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
