@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Корзина</title>
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         body {
             color: white;
@@ -100,10 +99,13 @@
 </head>
 <body>
     <h1 style="text-align: center">Ваша корзина</h1>
-    <div class="cart-container"></div>
+    <div class="cart-container">
+        <!-- Корзина будет заполняться динамически -->
+    </div>
 
     <p style="text-align: center"><strong>Итого:</strong> <span id="total-price">0</span> руб.</p>
 
+    <!-- Выбор места и времени -->
     <select class="place-select" id="place-select" onchange="updateTimeSlots()">
         <option value="">Выберите место</option>
         <option value="Трио">Трио</option>
@@ -118,10 +120,41 @@
         <option value="">Сначала выберите место</option>
     </select>
 
+    <!-- Кнопки оформления -->
     <button type="button" class="pay-button button" onclick="checkout()">Перейти к оплате</button>
     <button type="button" class="return-button button" onclick="window.location.href='https://alexandr3unity.github.io/paravozz/'">Возврат к покупкам</button>
 
+    <!-- Нижняя панель -->
+    <div class="bottom-panel">
+        <a href="home.html">
+            <button>
+                <img src="imej/Ico/discount.png"> 
+            </button>
+        </a>
+        <a href="search.html">
+            <button>
+                <img src="imej/Ico/about-us.png"> 
+            </button>
+        </a>
+        <a href="index.html">
+            <button>
+                <img src="imej/Ico/home.png"> 
+            </button>
+        </a>
+        <a href="cart.html">
+            <button>
+                <img src="imej/Ico/cart.png">
+            </button>
+        </a>
+        <a href="cart.html">
+            <button>
+                <img src="imej/Ico/star.png"> 
+            </button>
+        </a>
+    </div>
+
     <script>
+        // Объект с доступным временем для мест
         const timeSlots = {
             "Трио": ["10:00", "12:00", "14:00", "16:00"],
             "МАК": ["11:00", "13:00", "15:00", "17:00"],
@@ -131,6 +164,7 @@
             "пирамида": ["09:30", "12:30", "17:00"]
         };
 
+        // Инициализация корзины
         function loadCart() {
             const cart = JSON.parse(localStorage.getItem('cart')) || [];
             const cartContainer = document.querySelector('.cart-container');
@@ -139,18 +173,24 @@
             cartContainer.innerHTML = '';
             cart.forEach(item => {
                 totalPrice += item.price * item.quantity;
-                cartContainer.innerHTML += `
+                cartContainer.innerHTML += 
                     <div class="cart-item">
                         <h2>${item.name}</h2>
                         <p><strong>Цена:</strong> ${item.price} руб.</p>
-                        <p><strong>Количество:</strong> ${item.quantity}</p>
+                        <p><strong>Количество:</strong>
+                            <button class="quantity-btn" onclick="changeQuantity('${item.name}', 'decrease')">-</button>
+                            <span>${item.quantity}</span>
+                            <button class="quantity-btn" onclick="changeQuantity('${item.name}', 'increase')">+</button>
+                        </p>
                         <p><strong>Сумма:</strong> ${item.price * item.quantity} руб.</p>
+                        <button onclick="removeFromCart('${item.name}')">Удалить</button>
                     </div>
-                `;
+                ;
             });
             document.getElementById('total-price').textContent = totalPrice;
         }
 
+        // Обновление временных слотов
         function updateTimeSlots() {
             const placeSelect = document.getElementById('place-select');
             const timeSelect = document.getElementById('time-select');
@@ -162,61 +202,118 @@
 
             if (selectedPlace && timeSlots[selectedPlace]) {
                 timeSlots[selectedPlace].forEach(time => {
-                    timeSelect.innerHTML += `<option value="${time}">${time}</option>`;
+                    timeSelect.innerHTML += <option value="${time}">${time}</option>;
                 });
                 timeSelect.disabled = false;
             }
         }
 
-        function checkout() {
-            const cart = JSON.parse(localStorage.getItem('cart')) || [];
-            if (cart.length === 0) {
-                alert('Ваша корзина пуста.');
-                return;
+        // Изменение количества товара
+        function changeQuantity(name, action) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const itemIndex = cart.findIndex(item => item.name === name);
+
+            if (itemIndex > -1) {
+                if (action === 'increase') {
+                    cart[itemIndex].quantity += 1;
+                } else if (action === 'decrease' && cart[itemIndex].quantity > 1) {
+                    cart[itemIndex].quantity -= 1;
+                }
             }
 
+            localStorage.setItem('cart', JSON.stringify(cart));
+            loadCart();
+        }
+
+        // Удаление товара
+        function removeFromCart(name) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart = cart.filter(item => item.name !== name);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            loadCart();
+        }
+
+        // Оформление заказа
+        function checkout() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            
+            // Проверка на пустую корзину
+            if (cart.length === 0) {
+                alert('Ваша корзина пуста. Добавьте товары перед оформлением заказа.');
+                return;
+            }
+            
+            // Расчёт общей суммы заказа
             const totalAmount = cart.reduce((total, item) => total + item.price * item.quantity, 0);
+            if (totalAmount === 0) {
+                alert('Сумма заказа равна нулю. Добавьте товары, чтобы оформить заказ.');
+                return;
+            }
+            
             const selectedPlace = document.getElementById('place-select').value;
             const selectedTime = document.getElementById('time-select').value;
 
-            if (!selectedPlace || !selectedTime) {
-                alert('Выберите место и время.');
+            if (!selectedPlace) {
+                alert('Пожалуйста, выберите место перед оформлением заказа.');
                 return;
             }
 
-            const tg = window.Telegram.WebApp;
-            const username = tg.initDataUnsafe?.user?.username || "Неизвестный пользователь";
+            if (!selectedTime) {
+                alert('Пожалуйста, выберите время доставки.');
+                return;
+            }
 
             const orderId = Math.floor(Math.random() * 1000000);
             const paymentDate = new Date().toLocaleDateString();
 
-            let message = `Новый заказ!\nНомер: ${orderId}\nДата: ${paymentDate}\nМесто: ${selectedPlace}\nВремя: ${selectedTime}\nОформил: @${username}\n\nТовары:`;
-            cart.forEach(item => {
-                message += `\n- ${item.name} (x${item.quantity}) - ${item.price * item.quantity} руб.`;
-            });
-            message += `\n\nИтого: ${totalAmount} руб.`;
+            // Сохранение данных заказа
+            localStorage.setItem('payment', JSON.stringify({
+                cart,
+                totalAmount,
+                orderId,
+                paymentDate,
+                selectedPlace,
+                selectedTime
+            }));
 
+            // Формирование сообщения для Telegram
+            let message = Новый заказ!\n\nНомер: ${orderId}\nДата: ${paymentDate}\nМесто: ${selectedPlace}\nВремя: ${selectedTime}\n\nТовары:;
+            cart.forEach(item => {
+                message += \n- ${item.name} (x${item.quantity}) - ${item.price * item.quantity} руб.;
+            });
+            message += \n\nИтого: ${totalAmount} руб.;
+
+            // Отправка в Telegram
             const token = '7791735203:AAFC1TzcCpkgjrvFASLyG5Vhw6X-gVEoHLg';
             const chatId = '771803609';
-            const url = 'https://api.telegram.org/bot${token}/sendMessage';
+            const url = https://api.telegram.org/bot${token}/sendMessage;
 
             fetch(url, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ chat_id: chatId, text: message })
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    chat_id: chatId,
+                    text: message
+                })
             })
             .then(response => response.json())
             .then(data => {
                 if (data.ok) {
                     localStorage.removeItem('cart');
-                    tg.close();
+                    window.location.href = 'https://alexandr3unity.github.io/paravozz/payment_success';
                 } else {
                     alert('Ошибка при оформлении заказа');
                 }
             })
-            .catch(error => alert('Ошибка: ' + error));
+            .catch(error => {
+                console.error('Ошибка:', error);
+                alert('Произошла ошибка при отправке заказа');
+            });
         }
 
+        // Инициализация при загрузке
         loadCart();
     </script>
 </body>
