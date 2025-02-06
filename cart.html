@@ -234,63 +234,70 @@
         }
 
         // Оформление заказа
-        function checkout() {
-            const cart = JSON.parse(localStorage.getItem('cart')) || [];
-            
-            // Проверка на пустую корзину
-            if (cart.length === 0) {
-                alert('Ваша корзина пуста. Добавьте товары перед оформлением заказа.');
-                return;
+       function checkout() {
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        
+        // Проверка на пустую корзину
+        if (cart.length === 0) {
+            alert('Ваша корзина пуста. Добавьте товары перед оформлением заказа.');
+            return;
+        }
+        
+        // Расчёт общей суммы заказа
+        const totalAmount = cart.reduce((total, item) => total + item.price * item.quantity, 0);
+        if (totalAmount === 0) {
+            alert('Сумма заказа равна нулю. Добавьте товары, чтобы оформить заказ.');
+            return;
+        }
+        
+        const selectedPlace = document.getElementById('place-select').value;
+        const selectedTime = document.getElementById('time-select').value;
+
+        if (!selectedPlace) {
+            alert('Пожалуйста, выберите место перед оформлением заказа.');
+            return;
+        }
+
+        if (!selectedTime) {
+            alert('Пожалуйста, выберите время доставки.');
+            return;
+        }
+
+        // Получение информации о пользователе Telegram
+        let username = 'не указан';
+        try {
+            if (window.Telegram && window.Telegram.WebApp) {
+                const user = window.Telegram.WebApp.initDataUnsafe.user;
+                if (user && user.username) {
+                    username = '@' + user.username;
+                } else if (user && (user.first_name || user.last_name)) {
+                    username = [user.first_name, user.last_name].filter(Boolean).join(' ');
+                }
             }
-            
-            // Расчёт общей суммы заказа
-            const totalAmount = cart.reduce((total, item) => total + item.price * item.quantity, 0);
-            if (totalAmount === 0) {
-                alert('Сумма заказа равна нулю. Добавьте товары, чтобы оформить заказ.');
-                return;
-            }
-            
-            const selectedPlace = document.getElementById('place-select').value;
-            const selectedTime = document.getElementById('time-select').value;
+        } catch (e) {
+            console.error('Error getting Telegram user info:', e);
+        }
 
-            if (!selectedPlace) {
-                alert('Пожалуйста, выберите место перед оформлением заказа.');
-                return;
-            }
+        const orderId = Math.floor(Math.random() * 1000000);
+        const paymentDate = new Date().toLocaleDateString();
 
-            if (!selectedTime) {
-                alert('Пожалуйста, выберите время доставки.');
-                return;
-            }
+        // Сохранение данных заказа
+        localStorage.setItem('payment', JSON.stringify({
+            cart,
+            totalAmount,
+            orderId,
+            paymentDate,
+            selectedPlace,
+            selectedTime,
+            username
+        }));
 
-            // Получение данных пользователя из Telegram Web App (если доступно)
-            let userName = 'Неизвестный пользователь';
-            if (window.Telegram && Telegram.WebApp && Telegram.WebApp.initDataUnsafe && Telegram.WebApp.initDataUnsafe.user) {
-                const user = Telegram.WebApp.initDataUnsafe.user;
-                // Если есть username, то выводим его с символом @, иначе имя пользователя
-                userName = user.username ? '@' + user.username : user.first_name;
-            }
-
-            const orderId = Math.floor(Math.random() * 1000000);
-            const paymentDate = new Date().toLocaleDateString();
-
-            // Сохранение данных заказа
-            localStorage.setItem('payment', JSON.stringify({
-                cart,
-                totalAmount,
-                orderId,
-                paymentDate,
-                selectedPlace,
-                selectedTime,
-                userName
-            }));
-
-            // Формирование сообщения для Telegram с указанием пользователя
-            let message = `Новый заказ от ${userName}!\n\nНомер заказа: ${orderId}\nДата: ${paymentDate}\nМесто: ${selectedPlace}\nВремя: ${selectedTime}\n\nТовары:`;
-            cart.forEach(item => {
-                message += `\n- ${item.name} (x${item.quantity}) - ${item.price * item.quantity} руб.`;
-            });
-            message += `\n\nИтого: ${totalAmount} руб.`;
+        // Формирование сообщения для Telegram
+        let message = `Новый заказ!\n\nНомер: ${orderId}\nДата: ${paymentDate}\nПользователь: ${username}\nМесто: ${selectedPlace}\nВремя: ${selectedTime}\n\nТовары:`;
+        cart.forEach(item => {
+            message += `\n- ${item.name} (x${item.quantity}) - ${item.price * item.quantity} руб.`;
+        });
+        message += `\n\nИтого: ${totalAmount} руб.`;
 
             // Отправка в Telegram
             const token = '7791735203:AAFC1TzcCpkgjrvFASLyG5Vhw6X-gVEoHLg';
