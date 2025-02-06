@@ -173,7 +173,7 @@
             cartContainer.innerHTML = '';
             cart.forEach(item => {
                 totalPrice += item.price * item.quantity;
-                cartContainer.innerHTML += 
+                cartContainer.innerHTML += `
                     <div class="cart-item">
                         <h2>${item.name}</h2>
                         <p><strong>Цена:</strong> ${item.price} руб.</p>
@@ -185,7 +185,7 @@
                         <p><strong>Сумма:</strong> ${item.price * item.quantity} руб.</p>
                         <button onclick="removeFromCart('${item.name}')">Удалить</button>
                     </div>
-                ;
+                `;
             });
             document.getElementById('total-price').textContent = totalPrice;
         }
@@ -202,7 +202,7 @@
 
             if (selectedPlace && timeSlots[selectedPlace]) {
                 timeSlots[selectedPlace].forEach(time => {
-                    timeSelect.innerHTML += <option value="${time}">${time}</option>;
+                    timeSelect.innerHTML += `<option value="${time}">${time}</option>`;
                 });
                 timeSelect.disabled = false;
             }
@@ -277,16 +277,16 @@
             }));
 
             // Формирование сообщения для Telegram
-            let message = Новый заказ!\n\nНомер: ${orderId}\nДата: ${paymentDate}\nМесто: ${selectedPlace}\nВремя: ${selectedTime}\n\nТовары:;
+            let message = `Новый заказ!\n\nНомер: ${orderId}\nДата: ${paymentDate}\nМесто: ${selectedPlace}\nВремя: ${selectedTime}\n\nТовары:`;
             cart.forEach(item => {
-                message += \n- ${item.name} (x${item.quantity}) - ${item.price * item.quantity} руб.;
+                message += `\n- ${item.name} (x${item.quantity}) - ${item.price * item.quantity} руб.`;
             });
-            message += \n\nИтого: ${totalAmount} руб.;
+            message += `\n\nИтого: ${totalAmount} руб.`;
 
             // Отправка в Telegram
             const token = '7791735203:AAFC1TzcCpkgjrvFASLyG5Vhw6X-gVEoHLg';
             const chatId = '771803609';
-            const url = https://api.telegram.org/bot${token}/sendMessage;
+            const url = `https://api.telegram.org/bot${token}/sendMessage`;
 
             fetch(url, {
                 method: 'POST',
