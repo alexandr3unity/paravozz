@@ -13,16 +13,15 @@
             background-repeat: repeat;
         }
 
-        /* Панель с кнопками */
         .bottom-panel {
             position: fixed;
             bottom: 0;
             left: 0;
             width: 100%;
-            background-color: #808080; /* Серый фон */
+            background-color: #808080;
             display: flex;
             justify-content: space-around;
-            padding: 10px 0; /* Увеличен отступ панели */
+            padding: 10px 0;
             z-index: 1000;
         }
 
@@ -31,30 +30,29 @@
         }
 
         .bottom-panel button {
-            color: #808080; /* Цвет текста кнопок под фон */
+            color: #808080;
             border: none;
             border-radius: 5px;
-            padding: 10px 15px; /* Увеличены отступы для кнопок, чтобы они были выше */
+            padding: 10px 15px;
             font-size: 0.8em;
             cursor: pointer;
             transition: background-color 0.3s ease;
             display: flex;
-            justify-content: center; /* Центрируем иконки внутри кнопки */
+            justify-content: center;
             align-items: center;
-            background-color: transparent; /* Убираем белый фон */
+            background-color: transparent;
         }
 
         .bottom-panel button:hover {
-            background-color: #666666; /* Темнее серый для hover */
+            background-color: #666666;
             color: white;
         }
 
         .bottom-panel button img {
-            width: 25px; /* Увеличены иконки */
+            width: 25px;
             height: 25px;
         }
 
-        /* Стили для кнопок */
         .button {
             width: 100%;
             padding: 10px;
@@ -66,7 +64,6 @@
             margin-top: 10px;
         }
 
-        /* Стили для кнопки оплаты */
         .pay-button {
             background-color: #28a745;
             color: white;
@@ -76,19 +73,17 @@
             background-color: #218838;
         }
 
-        /* Стили для кнопки возврата к покупкам */
         .return-button {
             background-color: #007bff;
             color: white;
-            margin-bottom: 80px; /* Отступ от нижнего края экрана */
+            margin-bottom: 80px;
         }
 
         .return-button:hover {
             background-color: #0056b3;
         }
 
-        /* Стили для выпадающего меню */
-        .place-select {
+        .place-select, .time-select {
             width: 100%;
             padding: 10px;
             font-size: 16px;
@@ -96,34 +91,40 @@
             border-radius: 5px;
             border: 1px solid #ccc;
         }
+
+        .time-select {
+            display: none;
+        }
     </style>
 </head>
 <body>
     <h1 style="text-align: center">Ваша корзина</h1>
     <div class="cart-container">
-        <!-- Корзина будет динамически заполняться с помощью JavaScript -->
+        <!-- Корзина будет заполняться динамически -->
     </div>
 
     <p style="text-align: center"><strong>Итого:</strong> <span id="total-price">0</span> руб.</p>
 
-    <!-- Выпадающее меню для выбора места -->
-    <select class="place-select" id="place-select">
+    <!-- Выбор места и времени -->
+    <select class="place-select" id="place-select" onchange="updateTimeSlots()">
         <option value="">Выберите место</option>
         <option value="Трио">Трио</option>
         <option value="МАК">МАК</option>
         <option value="грин">грин</option>
-         <option value="зеленая гура">зеленая гура</option>
-         <option value="ратуша">ратуша</option>
-         <option value="пирамида">пирамида</option>
-        <!-- Добавьте больше опций по мере необходимости -->
+        <option value="зеленая гура">зеленая гура</option>
+        <option value="ратуша">ратуша</option>
+        <option value="пирамида">пирамида</option>
     </select>
 
-    <!-- Кнопка оплаты -->
-    <button type="button" class="pay-button button" onclick="checkout()">Перейти к оплате</button>
+    <select class="time-select" id="time-select">
+        <option value="">Сначала выберите место</option>
+    </select>
 
-    <!-- Кнопка возврата к покупкам -->
+    <!-- Кнопки оформления -->
+    <button type="button" class="pay-button button" onclick="checkout()">Перейти к оплате</button>
     <button type="button" class="return-button button" onclick="window.location.href='https://alexandr3unity.github.io/paravozz/'">Возврат к покупкам</button>
 
+    <!-- Нижняя панель -->
     <div class="bottom-panel">
         <a href="home.html">
             <button>
@@ -153,14 +154,23 @@
     </div>
 
     <script>
-        // Функция для загрузки корзины
+        // Объект с доступным временем для мест
+        const timeSlots = {
+            "Трио": ["10:00", "12:00", "14:00", "16:00"],
+            "МАК": ["11:00", "13:00", "15:00", "17:00"],
+            "грин": ["09:00", "11:30", "14:30"],
+            "зеленая гура": ["10:30", "13:30", "16:30"],
+            "ратуша": ["08:00", "12:00", "15:00"],
+            "пирамида": ["09:30", "12:30", "17:00"]
+        };
+
+        // Инициализация корзины
         function loadCart() {
             const cart = JSON.parse(localStorage.getItem('cart')) || [];
             const cartContainer = document.querySelector('.cart-container');
             let totalPrice = 0;
 
-            cartContainer.innerHTML = ''; // Очищаем корзину перед рендерингом
-
+            cartContainer.innerHTML = '';
             cart.forEach(item => {
                 totalPrice += item.price * item.quantity;
                 cartContainer.innerHTML += `
@@ -177,11 +187,28 @@
                     </div>
                 `;
             });
-
             document.getElementById('total-price').textContent = totalPrice;
         }
 
-        // Функция для изменения количества товара в корзине
+        // Обновление временных слотов
+        function updateTimeSlots() {
+            const placeSelect = document.getElementById('place-select');
+            const timeSelect = document.getElementById('time-select');
+            const selectedPlace = placeSelect.value;
+
+            timeSelect.innerHTML = '<option value="">Выберите время</option>';
+            timeSelect.style.display = 'block';
+            timeSelect.disabled = true;
+
+            if (selectedPlace && timeSlots[selectedPlace]) {
+                timeSlots[selectedPlace].forEach(time => {
+                    timeSelect.innerHTML += `<option value="${time}">${time}</option>`;
+                });
+                timeSelect.disabled = false;
+            }
+        }
+
+        // Изменение количества товара
         function changeQuantity(name, action) {
             let cart = JSON.parse(localStorage.getItem('cart')) || [];
             const itemIndex = cart.findIndex(item => item.name === name);
@@ -194,84 +221,86 @@
                 }
             }
 
-            localStorage.setItem('cart', JSON.stringify(cart)); // Сохраняем изменения в localStorage
-            loadCart(); // Перезагружаем корзину для отображения актуальных данных
+            localStorage.setItem('cart', JSON.stringify(cart));
+            loadCart();
         }
 
-        // Функция для удаления товара из корзины
+        // Удаление товара
         function removeFromCart(name) {
             let cart = JSON.parse(localStorage.getItem('cart')) || [];
-            cart = cart.filter(item => item.name !== name); // Удаляем товар из корзины
+            cart = cart.filter(item => item.name !== name);
             localStorage.setItem('cart', JSON.stringify(cart));
-            loadCart(); // Перезагружаем корзину
+            loadCart();
         }
 
-        // Функция обработки оформления заказа (сохранение данных в localStorage)
+        // Оформление заказа
         function checkout() {
             const selectedPlace = document.getElementById('place-select').value;
+            const selectedTime = document.getElementById('time-select').value;
+
             if (!selectedPlace) {
                 alert('Пожалуйста, выберите место перед оформлением заказа.');
                 return;
             }
 
+            if (!selectedTime) {
+                alert('Пожалуйста, выберите время доставки.');
+                return;
+            }
+
             const cart = JSON.parse(localStorage.getItem('cart')) || [];
             const totalAmount = cart.reduce((total, item) => total + item.price * item.quantity, 0);
-            const orderId = Math.floor(Math.random() * 1000000); // Генерация случайного номера заказа
+            const orderId = Math.floor(Math.random() * 1000000);
             const paymentDate = new Date().toLocaleDateString();
 
-            // Сохраняем данные заказа в localStorage
+            // Сохранение данных заказа
             localStorage.setItem('payment', JSON.stringify({
                 cart,
                 totalAmount,
                 orderId,
                 paymentDate,
-                selectedPlace
+                selectedPlace,
+                selectedTime
             }));
 
-            // Формируем текст сообщения
-            let message = `Новый заказ!\n\nНомер заказа: ${orderId}\nДата: ${paymentDate}\nМесто: ${selectedPlace}\n\nТовары в заказе:`;
+            // Формирование сообщения для Telegram
+            let message = `Новый заказ!\n\nНомер: ${orderId}\nДата: ${paymentDate}\nМесто: ${selectedPlace}\nВремя: ${selectedTime}\n\nТовары:`;
             cart.forEach(item => {
                 message += `\n- ${item.name} (x${item.quantity}) - ${item.price * item.quantity} руб.`;
             });
             message += `\n\nИтого: ${totalAmount} руб.`;
 
-            // Отправляем сообщение в Telegram
-            const token = '7791735203:AAFC1TzcCpkgjrvFASLyG5Vhw6X-gVEoHLg'; // Замените на свой API токен
-            const chatId = '771803609'; // Замените на ваш chat ID
+            // Отправка в Telegram
+            const token = '7791735203:AAFC1TzcCpkgjrvFASLyG5Vhw6X-gVEoHLg';
+            const chatId = '771803609';
             const url = `https://api.telegram.org/bot${token}/sendMessage`;
-
-            const data = {
-                chat_id: chatId,
-                text: message
-            };
 
             fetch(url, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(data)
+                body: JSON.stringify({
+                    chat_id: chatId,
+                    text: message
+                })
             })
             .then(response => response.json())
             .then(data => {
                 if (data.ok) {
-                    console.log('Сообщение отправлено в Telegram!');
+                    localStorage.removeItem('cart');
+                    window.location.href = 'https://alexandr3unity.github.io/paravozz/payment_success';
                 } else {
-                    console.log('Ошибка при отправке сообщения в Telegram:', data);
+                    alert('Ошибка при оформлении заказа');
                 }
             })
             .catch(error => {
-                console.log('Ошибка при отправке запроса в Telegram:', error);
+                console.error('Ошибка:', error);
+                alert('Произошла ошибка при отправке заказа');
             });
-
-            // Очистка корзины после успешной оплаты
-            localStorage.removeItem('cart');
-
-            // Переходим на страницу успешной оплаты
-            window.location.href = 'https://alexandr3unity.github.io/paravozz/payment_success';
         }
 
-        // Инициализация
+        // Инициализация при загрузке
         loadCart();
     </script>
 </body>
