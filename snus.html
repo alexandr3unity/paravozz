@@ -6,7 +6,6 @@
     <title>Снюс</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <style>
-
         /* Панель с кнопками */
         .bottom-panel {
             position: fixed;
@@ -71,7 +70,7 @@
         }
 
         /* Стили для рамки подкатегорий */
-         .subcategory-container {
+        .subcategory-container {
             border: 2px solid #232323; /* Серый цвет рамки */
             border-radius: 8px;
             margin: 10px; /* Отступы 10 пикселей */
@@ -81,9 +80,10 @@
             box-sizing: border-box; /* Учитываем рамку и отступы в ширине */
             display: flex; /* Используем Flexbox для выравнивания */
             align-items: center; /* Вертикальное выравнивание по центру */
+            position: relative; /* Для позиционирования наложенного текста */
         }
 
-         .logo {
+        .logo {
             width: auto;
             max-height: 200px;
             margin-bottom: 1px;
@@ -95,13 +95,16 @@
             transition: box-shadow 0.3s, transform 0.3s;
             cursor: pointer;
             flex-grow: 1; /* Позволяем тексту занимать оставшееся пространство */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .subcategory img {
-            width: 40%; /* Ширина изображения 20% от рамки */
+            width: 45%; /* Ширина изображения */
             height: auto; /* Автоматическая высота для сохранения пропорций */
-            margin: 0; /* Убираем отступы */
-            padding: 0; /* Убираем внутренние отступы */
+            margin: 0;
+            padding: 0;
         }
 
         .subcategory:hover {
@@ -116,18 +119,6 @@
             padding: 20px;
         }
 
-          .subcategory img {
-            width: 45%;
-            height: auto;
-            margin: 0;
-            padding: 0;
-        }
-
-        .subcategory-info {
-            text-align: center; /* Центрируем текст */
-            margin-top: 10px; /* Отступ сверху */
-        }
-
         .subcategory-title {
             text-align: center;
             font-weight: bold;
@@ -139,18 +130,6 @@
             text-align: center;
             margin-top: 10px;
             color: rgba(255, 255, 255, 0.7); /* Полу-прозрачный текст */
-        }
-
-        .subcategory:hover {
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            transform: translateY(-2px);
-        }
-
-        .subcategories {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
         }
 
         .back-button {
@@ -167,6 +146,26 @@
         .back-button:hover {
             background-color: #45a049;
         }
+
+        /* Стили для размытия и наложенного текста */
+        .blurred .blur-content {
+            filter: blur(5px);
+            pointer-events: none; /* Отключаем взаимодействие с размытым содержимым */
+        }
+        .out-of-stock {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 1.2em;
+            font-weight: bold;
+            z-index: 2;
+            pointer-events: none;
+        }
     </style>
 </head>
 <body>
@@ -177,64 +176,72 @@
     <button onclick="window.location.href='https://alexandr3unity.github.io/paravozz/';" class="back-button">Назад</button>
 
     <section class="subcategories">
-<a href="https://alexandr3unity.github.io/paravozz/nicotine_liquids" aria-label="Никотиновые жидкости">
-    <div class="subcategory-container">
-        <div class="subcategory">
-            <img src="imej/RandM.jpg" alt="Описание изображения">
-                <div class="subcategory-title">FAFF RandM</div>
-                <div class="subcategory-description">60MG 50/50 PG/VG</div>     
-        </div>
-    </div>
-</a>
-        <a href="https://alexandr3unity.github.io/paravozz/non_nicotine_liquids" aria-label="Безникотиновые жидкости">
+        <!-- Каждая категория обёрнута в ссылку с классом blurred -->
+        <a href="https://alexandr3unity.github.io/paravozz/nicotine_liquids" aria-label="Никотиновые жидкости" class="blurred">
             <div class="subcategory-container">
-                <div class="subcategory">
-                    <img src="imej/ZUZU.jpg" alt="Безникотиновые жидкости">
+                <div class="blur-content">
+                    <div class="subcategory">
+                        <img src="imej/RandM.jpg" alt="Описание изображения">
+                        <div class="subcategory-title">FAFF RandM</div>
+                        <div class="subcategory-description">60MG 50/50 PG/VG</div>
+                    </div>
+                </div>
+                <div class="out-of-stock">Нет в наличии</div>
+            </div>
+        </a>
+        <a href="https://alexandr3unity.github.io/paravozz/non_nicotine_liquids" aria-label="Безникотиновые жидкости" class="blurred">
+            <div class="subcategory-container">
+                <div class="blur-content">
+                    <div class="subcategory">
+                        <img src="imej/ZUZU.jpg" alt="Безникотиновые жидкости">
                         <div class="subcategory-title">ZUZU</div>
                         <div class="subcategory-description">60MG 50/50 PG/VG</div>
                     </div>
                 </div>
+                <div class="out-of-stock">Нет в наличии</div>
             </div>
         </a>
-        <a href="https://alexandr3unity.github.io/paravozz/premium_liquids" aria-label="Премиум жидкости">
+        <a href="https://alexandr3unity.github.io/paravozz/premium_liquids" aria-label="Премиум жидкости" class="blurred">
             <div class="subcategory-container">
-                <div class="subcategory">
-                    <img src="imej/FAFF.jpg" alt="Премиум жидкости">
+                <div class="blur-content">
+                    <div class="subcategory">
+                        <img src="imej/FAFF.jpg" alt="Премиум жидкости">
                         <div class="subcategory-title">FAFF</div>
                         <div class="subcategory-description">60MG 50/50 PG/VG</div>
                     </div>
                 </div>
+                <div class="out-of-stock">Нет в наличии</div>
             </div>
         </a>
 
         <!-- Панель с кнопками -->
-    <div class="bottom-panel">
-        <a href="home.html">
-            <button>
-                <img src="imej/Ico/discount.png"> 
-            </button>
-        </a>
-        <a href="search.html">
-            <button>
-                <img src="imej/Ico/about-us.png"> 
-            </button>
-        </a>
-        <a href="index.html">
-            <button>
-                <img src="imej/Ico/home.png"> 
-            </button>
-        </a>
-        <a href="cart.html">
-            <button>
-                <img src="imej/Ico/cart.png">
-            </button>
-        </a>
-        <a href="cart.html">
-            <button>
-                <img src="imej/Ico/star.png"> 
-            </button>
-        </a>
-    </div>
+        <div class="bottom-panel">
+            <a href="home.html">
+                <button>
+                    <img src="imej/Ico/discount.png"> 
+                </button>
+            </a>
+            <a href="search.html">
+                <button>
+                    <img src="imej/Ico/about-us.png"> 
+                </button>
+            </a>
+            <a href="index.html">
+                <button>
+                    <img src="imej/Ico/home.png"> 
+                </button>
+            </a>
+            <a href="cart.html">
+                <button>
+                    <img src="imej/Ico/cart.png">
+                </button>
+            </a>
+            <a href="cart.html">
+                <button>
+                    <img src="imej/Ico/star.png"> 
+                </button>
+            </a>
+        </div>
     </section>
 </body>
 </html>
