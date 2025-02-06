@@ -3,71 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Корзина - FoodBot</title>
+    <title>Корзина</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
-        :root {
-            --tg-theme-bg-color: #ffffff;
-            --tg-theme-text-color: #000000;
-            --tg-theme-button-color: #50a8eb;
-            --tg-theme-button-text-color: #ffffff;
-        }
-
         body {
-            background-color: var(--tg-theme-bg-color);
-            color: var(--tg-theme-text-color);
-            font-family: system-ui, -apple-system, sans-serif;
-            padding: 20px;
-            margin: 0;
-            min-height: 100vh;
-        }
-
-        .cart-container {
-            margin-bottom: 100px;
-        }
-
-        .cart-item {
-            background: rgba(0,0,0,0.05);
-            border-radius: 12px;
-            padding: 15px;
-            margin-bottom: 15px;
-        }
-
-        .cart-item h2 {
-            margin: 0 0 10px 0;
-            font-size: 1.2em;
-        }
-
-        .quantity-btn {
-            background: var(--tg-theme-button-color);
-            color: var(--tg-theme-button-text-color);
-            border: none;
-            border-radius: 6px;
-            padding: 5px 10px;
-            margin: 0 5px;
-            font-size: 1.1em;
-        }
-
-        .place-select, .time-select {
-            width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            border: 1px solid rgba(0,0,0,0.1);
-            border-radius: 8px;
-            background: var(--tg-theme-bg-color);
-            color: var(--tg-theme-text-color);
-        }
-
-        .total-price {
-            position: fixed;
-            bottom: 140px;
-            left: 0;
-            width: 100%;
-            text-align: center;
-            font-size: 1.2em;
-            font-weight: bold;
-            padding: 15px;
-            background: var(--tg-theme-bg-color);
-            box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+            color: white;
+            background-image: url('imej/fon.jpg');
+            background-size: auto;
+            background-position: center;
+            background-repeat: repeat;
         }
 
         .bottom-panel {
@@ -75,192 +19,205 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            background: var(--tg-theme-bg-color);
+            background-color: #808080;
             display: flex;
             justify-content: space-around;
-            padding: 15px 0;
-            box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+            padding: 10px 0;
+            z-index: 1000;
+        }
+
+        .bottom-panel a {
+            text-decoration: none;
         }
 
         .bottom-panel button {
-            background: none;
+            color: #808080;
             border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            font-size: 0.8em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: transparent;
+        }
+
+        .bottom-panel button:hover {
+            background-color: #666666;
+            color: white;
+        }
+
+        .bottom-panel button img {
+            width: 25px;
+            height: 25px;
+        }
+
+        .button {
+            width: 100%;
             padding: 10px;
-            opacity: 0.7;
-            transition: opacity 0.2s;
+            font-size: 16px;
+            text-align: center;
+            cursor: pointer;
+            border-radius: 5px;
+            border: none;
+            margin-top: 10px;
         }
 
-        .bottom-panel button.active {
-            opacity: 1;
+        .pay-button {
+            background-color: #28a745;
+            color: white;
         }
 
-        .bottom-panel img {
-            width: 28px;
-            height: 28px;
+        .pay-button:hover {
+            background-color: #218838;
+        }
+
+        .return-button {
+            background-color: #007bff;
+            color: white;
+            margin-bottom: 80px;
+        }
+
+        .return-button:hover {
+            background-color: #0056b3;
+        }
+
+        .place-select, .time-select {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            margin-top: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .time-select {
+            display: none;
         }
     </style>
 </head>
 <body>
-    <h1>🛒 Ваша корзина</h1>
+    <h1 style="text-align: center">Ваша корзина</h1>
     <div class="cart-container"></div>
 
-    <div class="total-price">
-        Итого: <span id="total-price">0</span>₽
-    </div>
+    <p style="text-align: center"><strong>Итого:</strong> <span id="total-price">0</span> руб.</p>
 
-    <select class="place-select" id="place-select">
-        <option value="">Выберите место получения</option>
+    <select class="place-select" id="place-select" onchange="updateTimeSlots()">
+        <option value="">Выберите место</option>
         <option value="Трио">Трио</option>
         <option value="МАК">МАК</option>
-        <option value="Грин">Грин</option>
+        <option value="грин">грин</option>
+        <option value="зеленая гура">зеленая гура</option>
+        <option value="ратуша">ратуша</option>
+        <option value="пирамида">пирамида</option>
     </select>
 
-    <select class="time-select" id="time-select" disabled>
-        <option value="">Выберите время</option>
+    <select class="time-select" id="time-select">
+        <option value="">Сначала выберите место</option>
     </select>
 
-    <div class="bottom-panel">
-        <button onclick="window.Telegram.WebApp.close()">
-            <img src="https://img.icons8.com/ios/50/back--v1.png" alt="Назад">
-        </button>
-        <button onclick="location.reload()">
-            <img src="https://img.icons8.com/ios/50/refresh--v1.png" alt="Обновить">
-        </button>
-        <button class="active">
-            <img src="https://img.icons8.com/ios/50/shopping-cart--v1.png" alt="Корзина">
-        </button>
-    </div>
+    <button type="button" class="pay-button button" onclick="checkout()">Перейти к оплате</button>
+    <button type="button" class="return-button button" onclick="window.location.href='https://alexandr3unity.github.io/paravozz/'">Возврат к покупкам</button>
 
     <script>
         const timeSlots = {
             "Трио": ["10:00", "12:00", "14:00", "16:00"],
             "МАК": ["11:00", "13:00", "15:00", "17:00"],
-            "Грин": ["09:00", "11:30", "14:30"]
+            "грин": ["09:00", "11:30", "14:30"],
+            "зеленая гура": ["10:30", "13:30", "16:30"],
+            "ратуша": ["08:00", "12:00", "15:00"],
+            "пирамида": ["09:30", "12:30", "17:00"]
         };
-
-        // Инициализация приложения
-        document.addEventListener('DOMContentLoaded', () => {
-            if (window.Telegram && window.Telegram.WebApp) {
-                Telegram.WebApp.ready();
-                Telegram.WebApp.MainButton
-                    .setText(`Оплатить ${getTotalPrice()}₽`)
-                    .onClick(checkout)
-                    .show();
-            }
-            
-            loadCart();
-            setupEventListeners();
-        });
-
-        function setupEventListeners() {
-            document.getElementById('place-select').addEventListener('change', function() {
-                const timeSelect = document.getElementById('time-select');
-                timeSelect.innerHTML = '<option value="">Выберите время</option>';
-                
-                if (this.value && timeSlots[this.value]) {
-                    timeSlots[this.value].forEach(time => {
-                        timeSelect.innerHTML += `<option value="${time}">${time}</option>`;
-                    });
-                    timeSelect.disabled = false;
-                } else {
-                    timeSelect.disabled = true;
-                }
-            });
-        }
 
         function loadCart() {
             const cart = JSON.parse(localStorage.getItem('cart')) || [];
-            const container = document.querySelector('.cart-container');
-            container.innerHTML = '';
-            
+            const cartContainer = document.querySelector('.cart-container');
+            let totalPrice = 0;
+
+            cartContainer.innerHTML = '';
             cart.forEach(item => {
-                const itemElement = document.createElement('div');
-                itemElement.className = 'cart-item';
-                itemElement.innerHTML = `
-                    <h2>${item.name}</h2>
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <div>
-                            <button class="quantity-btn" onclick="changeQuantity('${item.name}', -1)">-</button>
-                            <span style="margin: 0 10px">${item.quantity}</span>
-                            <button class="quantity-btn" onclick="changeQuantity('${item.name}', 1)">+</button>
-                        </div>
-                        <div>${item.price * item.quantity}₽</div>
+                totalPrice += item.price * item.quantity;
+                cartContainer.innerHTML += `
+                    <div class="cart-item">
+                        <h2>${item.name}</h2>
+                        <p><strong>Цена:</strong> ${item.price} руб.</p>
+                        <p><strong>Количество:</strong> ${item.quantity}</p>
+                        <p><strong>Сумма:</strong> ${item.price * item.quantity} руб.</p>
                     </div>
                 `;
-                container.appendChild(itemElement);
             });
-
-            updateTotalPrice();
+            document.getElementById('total-price').textContent = totalPrice;
         }
 
-        function changeQuantity(name, delta) {
-            const cart = JSON.parse(localStorage.getItem('cart')) || [];
-            const item = cart.find(i => i.name === name);
-            
-            if (item) {
-                item.quantity += delta;
-                if (item.quantity < 1) item.quantity = 1;
-                localStorage.setItem('cart', JSON.stringify(cart));
-                loadCart();
-                
-                if (window.Telegram && window.Telegram.WebApp) {
-                    Telegram.WebApp.MainButton.setText(`Оплатить ${getTotalPrice()}₽`);
-                }
-            }
-        }
+        function updateTimeSlots() {
+            const placeSelect = document.getElementById('place-select');
+            const timeSelect = document.getElementById('time-select');
+            const selectedPlace = placeSelect.value;
 
-        function getTotalPrice() {
-            return JSON.parse(localStorage.getItem('cart') || '[]')
-                .reduce((sum, item) => sum + (item.price * item.quantity), 0);
-        }
+            timeSelect.innerHTML = '<option value="">Выберите время</option>';
+            timeSelect.style.display = 'block';
+            timeSelect.disabled = true;
 
-        function updateTotalPrice() {
-            document.getElementById('total-price').textContent = getTotalPrice();
-        }
-
-        async function checkout() {
-            const cart = JSON.parse(localStorage.getItem('cart'));
-            if (!cart?.length) return alert('Корзина пуста!');
-            
-            const place = document.getElementById('place-select').value;
-            const time = document.getElementById('time-select').value;
-            if (!place || !time) return alert('Заполните все поля!');
-
-            const user = window.Telegram?.WebApp?.initDataUnsafe?.user;
-            const orderData = {
-                user: {
-                    id: user?.id,
-                    name: [user?.first_name, user?.last_name].filter(Boolean).join(' '),
-                    username: user?.username
-                },
-                cart,
-                total: getTotalPrice(),
-                place,
-                time,
-                date: new Date().toLocaleString()
-            };
-
-            try {
-                const response = await fetch('https://your-bot-server.com/order', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': 'Bearer YOUR_BOT_TOKEN'
-                    },
-                    body: JSON.stringify(orderData)
+            if (selectedPlace && timeSlots[selectedPlace]) {
+                timeSlots[selectedPlace].forEach(time => {
+                    timeSelect.innerHTML += `<option value="${time}">${time}</option>`;
                 });
-
-                if (response.ok) {
-                    localStorage.removeItem('cart');
-                    Telegram.WebApp.close();
-                } else {
-                    alert('Ошибка оформления заказа!');
-                }
-            } catch (error) {
-                console.error('Ошибка:', error);
-                alert('Ошибка соединения!');
+                timeSelect.disabled = false;
             }
         }
+
+        function checkout() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            if (cart.length === 0) {
+                alert('Ваша корзина пуста.');
+                return;
+            }
+
+            const totalAmount = cart.reduce((total, item) => total + item.price * item.quantity, 0);
+            const selectedPlace = document.getElementById('place-select').value;
+            const selectedTime = document.getElementById('time-select').value;
+
+            if (!selectedPlace || !selectedTime) {
+                alert('Выберите место и время.');
+                return;
+            }
+
+            const tg = window.Telegram.WebApp;
+            const username = tg.initDataUnsafe?.user?.username || "Неизвестный пользователь";
+
+            const orderId = Math.floor(Math.random() * 1000000);
+            const paymentDate = new Date().toLocaleDateString();
+
+            let message = `Новый заказ!\nНомер: ${orderId}\nДата: ${paymentDate}\nМесто: ${selectedPlace}\nВремя: ${selectedTime}\nОформил: @${username}\n\nТовары:`;
+            cart.forEach(item => {
+                message += `\n- ${item.name} (x${item.quantity}) - ${item.price * item.quantity} руб.`;
+            });
+            message += `\n\nИтого: ${totalAmount} руб.`;
+
+            const token = 'YOUR_TELEGRAM_BOT_TOKEN';
+            const chatId = 'YOUR_CHAT_ID';
+            const url = `https://api.telegram.org/bot${token}/sendMessage`;
+
+            fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ chat_id: chatId, text: message })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.ok) {
+                    localStorage.removeItem('cart');
+                    tg.close();
+                } else {
+                    alert('Ошибка при оформлении заказа');
+                }
+            })
+            .catch(error => alert('Ошибка: ' + error));
+        }
+
+        loadCart();
     </script>
 </body>
 </html>
