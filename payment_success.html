@@ -118,6 +118,7 @@
       <p><strong>Дата:</strong> <span id="payment-date"></span></p>
       <p><strong>Номер заказа:</strong> <span id="order-id"></span></p>
       <p><strong>Место:</strong> <span id="selected-place"></span></p> <!-- Добавлено поле для места -->
+      <p><strong>Время доставки:</strong> <span id="selected-time"></span></p>
     </div>
 
     <div class="products-list">
@@ -142,6 +143,7 @@
         document.getElementById('order-id').textContent = paymentData.orderId;
         document.getElementById('total-amount').textContent = paymentData.totalAmount;
         document.getElementById('selected-place').textContent = paymentData.selectedPlace; // Отображаем выбранное место
+        document.getElementById('selected-time').textContent = paymentData.selectedTime;
 
         const productsList = document.getElementById('products-list');
         productsList.innerHTML = '';
