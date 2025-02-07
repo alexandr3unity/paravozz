@@ -358,44 +358,62 @@
         });
 
         let currentIndex = 0;
-        const items = document.querySelectorAll('.carousel-item');
-        const totalItems = items.length;
-        const carouselInner = document.getElementById('carouselInner');
-        const itemsToShow = 2;
+const items = document.querySelectorAll('.carousel-item');
+const totalItems = items.length;
+const carouselInner = document.getElementById('carouselInner');
+const itemsToShow = 2;
 
-        function moveCarousel(direction) {
-            currentIndex += direction;
+// Добавляем клон первого элемента в конец карусели
+const firstItemClone = items[0].cloneNode(true);
+carouselInner.appendChild(firstItemClone);
 
-            if (currentIndex >= totalItems) {
-                currentIndex = 0;  // Перезапускаем с первого элемента
-            } else if (currentIndex < 0) {
-                currentIndex = totalItems - 1;  // Если пролистали назад до первого, то идем к последнему
-            }
+function moveCarousel(direction) {
+    // Включаем анимацию перед перемещением
+    carouselInner.style.transition = 'transform 0.5s ease';
+    
+    currentIndex += direction;
+    
+    // Если достигли конца (клон первого элемента)
+    if (currentIndex >= totalItems) {
+        setTimeout(() => {
+            // Мгновенно переходим к началу без анимации
+            carouselInner.style.transition = 'none';
+            currentIndex = 0;
+            carouselInner.style.transform = `translateX(0%)`;
+        }, 500); // Ждем завершения анимации
+    } 
+    // Если ушли в отрицательный индекс
+    else if (currentIndex < 0) {
+        setTimeout(() => {
+            // Мгновенно переходим к концу
+            carouselInner.style.transition = 'none';
+            currentIndex = totalItems - 1;
+            carouselInner.style.transform = `translateX(-${(totalItems - 1) * 50}%)`;
+        }, 500);
+    } 
+    // Обычное перемещение
+    else {
+        const offset = -(currentIndex * (100 / itemsToShow));
+        carouselInner.style.transform = `translateX(${offset}%)`;
+    }
+}
 
-            const offset = -(currentIndex * (100 / itemsToShow));
-            carouselInner.style.transform = `translateX(${offset}%)`;
-        }
+// Автоматическая прокрутка
+function autoMoveCarousel() {
+    moveCarousel(1);
+}
 
-        function autoMoveCarousel() {
-            moveCarousel(1);
-        }
+setInterval(autoMoveCarousel, 5000);
 
-        setInterval(autoMoveCarousel, 5000);
-
-        let touchStartX = 0;
-
-        carouselInner.addEventListener('touchstart', function(event) {
-            touchStartX = event.touches[0].clientX;
-        });
-
-        carouselInner.addEventListener('touchend', function(event) {
-            const touchEndX = event.changedTouches[0].clientX;
-            if (touchStartX > touchEndX) {
-                moveCarousel(1);
-            } else {
-                moveCarousel(-1);
-            }
-        });
+// Обработчик для свайпа
+carouselInner.addEventListener('touchend', function(event) {
+    const touchEndX = event.changedTouches[0].clientX;
+    if (touchStartX > touchEndX) {
+        moveCarousel(1);
+    } else {
+        moveCarousel(-1);
+    }
+});
 
         function toggleSearch() {
             const searchContainer = document.querySelector('.search-container');
