@@ -364,14 +364,21 @@
                                   </a>`;
         });
 
-        let currentIndex = 0;
+         let currentIndex = 0;
+        const items = document.querySelectorAll('.carousel-item');
+        const totalItems = items.length;
+        const carouselInner = document.getElementById('carouselInner');
         const itemsToShow = 2;
 
         function moveCarousel(direction) {
-            const items = document.querySelectorAll('.carousel-item');
-            currentIndex = (currentIndex + direction + items.length) % items.length;
+            currentIndex += direction;
+            if (currentIndex >= totalItems) {
+                currentIndex = 0;
+            } else if (currentIndex < 0) {
+                currentIndex = totalItems - 1;
+            }
             const offset = -(currentIndex * (100 / itemsToShow));
-            document.getElementById('carouselInner').style.transform = `translateX(${offset}%)`;
+            carouselInner.style.transform = `translateX(${offset}%)`;
         }
 
         function autoMoveCarousel() {
@@ -382,11 +389,11 @@
 
         let touchStartX = 0;
 
-        document.querySelector('.carousel').addEventListener('touchstart', function(event) {
+        carouselInner.addEventListener('touchstart', function(event) {
             touchStartX = event.touches[0].clientX;
         });
 
-        document.querySelector('.carousel').addEventListener('touchend', function(event) {
+        carouselInner.addEventListener('touchend', function(event) {
             const touchEndX = event.changedTouches[0].clientX;
             if (touchStartX > touchEndX) {
                 moveCarousel(1);
