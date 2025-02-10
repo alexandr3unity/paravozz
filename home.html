@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
-        /* Основные стили для body */
         body {
             margin: 0;
             font-family: Arial, sans-serif;
@@ -21,15 +20,13 @@
             align-items: center;
         }
 
-        /* Контейнер для колеса */
         .wheel-container {
             position: relative;
             width: 300px;
             height: 300px;
-            margin: 50px auto;
+            margin: 50px auto 100px;
         }
 
-        /* Само колесо */
         .wheel {
             width: 100%;
             height: 100%;
@@ -40,8 +37,7 @@
             box-shadow: 0 0 20px rgba(0,0,0,0.3);
         }
 
-        /* Сегменты колеса */
-       .segment {
+        .segment {
             position: absolute;
             width: 50%;
             height: 50%;
@@ -67,7 +63,7 @@
             text-align: center;
             padding: 5px;
         }
-        /* Кнопка запуска */
+
         .spin-button {
             position: absolute;
             top: 50%;
@@ -83,31 +79,88 @@
             cursor: pointer;
             box-shadow: 0 0 15px rgba(0,0,0,0.3);
             transition: transform 0.2s;
+            z-index: 2;
         }
 
         .spin-button:hover {
             transform: translate(-50%, -50%) scale(1.1);
         }
 
-        /* Панель с кнопками */
         .bottom-panel {
-            /* предыдущие стили без изменений */
-            /* ... */
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #808080;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            z-index: 1000;
+        }
+
+        .bottom-panel a {
+            text-decoration: none;
+        }
+
+        .bottom-panel button {
+            color: #808080;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            font-size: 0.8em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: transparent;
+        }
+
+        .bottom-panel button:hover {
+            background-color: #666666;
+            color: white;
+        }
+
+        .bottom-panel button img {
+            width: 25px;
+            height: 25px;
         }
     </style>
 </head>
 
 <body>
-    <!-- Контейнер для колеса фортуны -->
     <div class="wheel-container">
-        <div class="wheel" id="wheel">
-            <!-- Сегменты будут добавлены через JavaScript -->
-        </div>
+        <div class="wheel" id="wheel"></div>
         <button class="spin-button" id="spinButton">Крутить!</button>
     </div>
 
-    <!-- Нижняя панель с кнопками -->
-    <!-- ... (без изменений) -->
+    <div class="bottom-panel">
+        <a href="home.html">
+            <button>
+                <img src="imej/Ico/discount.png" > 
+            </button>
+        </a>
+        <a href="search.html">
+            <button>
+                <img src="imej/Ico/about-us.png" > 
+            </button>
+        </a>
+        <a href="index.html">
+            <button>
+                <img src="imej/Ico/home.png" > 
+            </button>
+        </a>
+        <a href="cart.html">
+            <button>
+                <img src="imej/Ico/cart.png" >
+            </button>
+        </a>
+        <a href="cart.html">
+            <button>
+                <img src="imej/Ico/star.png" > 
+            </button>
+        </a>
+    </div>
 
     <script>
         const prizes = [
@@ -129,7 +182,6 @@
         const spinButton = document.getElementById('spinButton');
         let isSpinning = false;
 
-        // Создание сегментов колеса
         function createSegments() {
             const angle = 360 / prizes.length;
             prizes.forEach((prize, index) => {
@@ -146,7 +198,6 @@
             });
         }
 
-        // Выбор случайного приза с учетом вероятности
         function getRandomPrize() {
             const total = prizes.reduce((acc, prize) => acc + prize.probability, 0);
             let random = Math.random() * total;
@@ -157,17 +208,17 @@
             }
         }
 
-        // Запуск вращения
         function spin() {
             if(isSpinning) return;
             isSpinning = true;
             
             const prize = getRandomPrize();
             const prizeIndex = prizes.indexOf(prize);
-            const extraSpins = 5; // Дополнительные полные обороты
-            const angle = (prizeIndex * (360 / prizes.length)) + (360 * extraSpins);
+            const extraSpins = 5;
+            const targetAngle = (prizeIndex * (360 / prizes.length)) + (360 * extraSpins);
+            const currentRotation = parseInt(wheel.style.transform.replace(/[^0-9]/g, '')) || 0;
             
-            wheel.style.transform = `rotate(${angle}deg)`;
+            wheel.style.transform = `rotate(${currentRotation + targetAngle}deg)`;
             
             setTimeout(() => {
                 isSpinning = false;
@@ -175,7 +226,6 @@
             }, 5000);
         }
 
-        // Инициализация
         createSegments();
         spinButton.addEventListener('click', spin);
     </script>
