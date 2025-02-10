@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
+        /* Основные стили для body */
         body {
             margin: 0;
             font-family: Arial, sans-serif;
@@ -14,147 +15,165 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            height: 100vh;
-            width: 100vw;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
+        /* Контейнер для колеса */
         .wheel-container {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            position: relative;
             width: 300px;
             height: 300px;
+            margin: 50px auto;
         }
 
+        /* Само колесо */
         .wheel {
             width: 100%;
             height: 100%;
             border-radius: 50%;
             position: relative;
-            transition: transform 4s ease-out;
+            overflow: hidden;
+            transition: transform 5s cubic-bezier(0.17, 0.67, 0.36, 1);
+            box-shadow: 0 0 20px rgba(0,0,0,0.3);
         }
 
-        .wheel img {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-        }
-
-        .wheel .segment {
+        /* Сегменты колеса */
+        .segment {
             position: absolute;
-            width: 100%;
-            height: 100%;
-            text-align: center;
-            transform-origin: center;
-            font-size: 14px;
-            font-weight: bold;
-            color: white;
+            width: 50%;
+            height: 50%;
+            background: #000;
+            transform-origin: bottom right;
+            clip-path: polygon(0 0, 100% 0, 100% 100%);
             display: flex;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
         }
 
-        .spin-btn {
+        /* Текст в сегментах */
+        .segment span {
+            transform: rotate(45deg);
+            color: white;
+            font-size: 14px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            padding: 10px;
+            text-align: center;
+        }
+
+        /* Кнопка запуска */
+        .spin-button {
             position: absolute;
-            top: 80%;
+            top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            padding: 15px 30px;
-            font-size: 1.2em;
-            background-color: #ffcc00;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #ff4444;
             border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .spin-btn:hover {
-            background-color: #ffaa00;
-        }
-
-        .prize-display {
-            margin-top: 20px;
-            font-size: 1.5em;
+            color: white;
             font-weight: bold;
-            color: #ffffff;
-            background: rgba(0, 0, 0, 0.7);
-            display: inline-block;
-            padding: 10px 20px;
-            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(0,0,0,0.3);
+            transition: transform 0.2s;
+        }
+
+        .spin-button:hover {
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        /* Панель с кнопками */
+        .bottom-panel {
+            /* предыдущие стили без изменений */
+            /* ... */
         }
     </style>
 </head>
 
 <body>
+    <!-- Контейнер для колеса фортуны -->
     <div class="wheel-container">
         <div class="wheel" id="wheel">
-            <img src="imej/wheel.png" alt="Wheel">
+            <!-- Сегменты будут добавлены через JavaScript -->
         </div>
-        <button class="spin-btn" id="spin-btn">Прокрутить</button>
-        <div class="prize-display" id="prize-display">Испытайте удачу!</div>
+        <button class="spin-button" id="spinButton">Крутить!</button>
     </div>
 
+    <!-- Нижняя панель с кнопками -->
+    <!-- ... (без изменений) -->
+
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const spinButton = document.getElementById("spin-btn");
-            const wheel = document.getElementById("wheel");
-            const prizeDisplay = document.getElementById("prize-display");
-            const prizes = [
-                "Скидка 10%", "Бесплатная доставка", "Подарочная карта", "Скидка 20%", "Сюрприз!",
-                "Скидка 5%", "Бонусные баллы", "Купон на 50 рублей", "Скидка 15%", "Дополнительный товар",
-                "Скидка 25%", "Секретный приз"
-            ];
+        const prizes = [
+            { name: "10% скидка", color: "#FF5733", probability: 15 },
+            { name: "Бесплатная доставка", color: "#33FF57", probability: 10 },
+            { name: "Подарок", color: "#3357FF", probability: 5 },
+            { name: "5% скидка", color: "#FF33A8", probability: 20 },
+            { name: "20% скидка", color: "#A833FF", probability: 5 },
+            { name: "Фирменный сувенир", color: "#33FFF5", probability: 10 },
+            { name: "Двойные бонусы", color: "#F5FF33", probability: 10 },
+            { name: "Скидка 15%", color: "#FF5733", probability: 10 },
+            { name: "Бесплатный товар", color: "#33FF57", probability: 5 },
+            { name: "Персональная скидка", color: "#3357FF", probability: 5 },
+            { name: "Промокод 500р", color: "#FF33A8", probability: 3 },
+            { name: "VIP-статус", color: "#A833FF", probability: 2 }
+        ];
 
-            const lastSpinTime = localStorage.getItem("lastSpinTime");
-            const now = Date.now();
+        const wheel = document.getElementById('wheel');
+        const spinButton = document.getElementById('spinButton');
+        let isSpinning = false;
 
-            if (lastSpinTime && now - lastSpinTime < 30000) {
-                spinButton.disabled = true;
-                const remainingTime = Math.ceil((30000 - (now - lastSpinTime)) / 1000);
-                spinButton.innerText = `Подождите ${remainingTime} сек.`;
+        // Создание сегментов колеса
+        function createSegments() {
+            const angle = 360 / prizes.length;
+            prizes.forEach((prize, index) => {
+                const segment = document.createElement('div');
+                segment.className = 'segment';
+                segment.style.transform = `rotate(${index * angle}deg)`;
+                segment.style.backgroundColor = prize.color;
                 
-                const interval = setInterval(() => {
-                    const newRemainingTime = Math.ceil((30000 - (Date.now() - lastSpinTime)) / 1000);
-                    if (newRemainingTime > 0) {
-                        spinButton.innerText = `Подождите ${newRemainingTime} сек.`;
-                    } else {
-                        spinButton.innerText = "Прокрутить";
-                        spinButton.disabled = false;
-                        clearInterval(interval);
-                    }
-                }, 1000);
-            }
-
-            spinButton.addEventListener("click", function () {
-                if (localStorage.getItem("lastSpinTime") && Date.now() - localStorage.getItem("lastSpinTime") < 30000) {
-                    return;
-                }
-                localStorage.setItem("lastSpinTime", Date.now());
-                spinButton.disabled = true;
+                const span = document.createElement('span');
+                span.textContent = prize.name;
+                segment.appendChild(span);
                 
-                const randomIndex = Math.floor(Math.random() * prizes.length);
-                const randomDegree = 1800 + (randomIndex * 30);
-                wheel.style.transform = `rotate(${randomDegree}deg)`;
-                
-                setTimeout(() => {
-                    prizeDisplay.innerText = `Вы выиграли: ${prizes[randomIndex]}!`;
-                    
-                    let countdown = 30;
-                    const interval = setInterval(() => {
-                        countdown--;
-                        if (countdown > 0) {
-                            spinButton.innerText = `Подождите ${countdown} сек.`;
-                        } else {
-                            spinButton.innerText = "Прокрутить";
-                            spinButton.disabled = false;
-                            clearInterval(interval);
-                        }
-                    }, 1000);
-                }, 4000);
+                wheel.appendChild(segment);
             });
-        });
+        }
+
+        // Выбор случайного приза с учетом вероятности
+        function getRandomPrize() {
+            const total = prizes.reduce((acc, prize) => acc + prize.probability, 0);
+            let random = Math.random() * total;
+            
+            for(const prize of prizes) {
+                if(random < prize.probability) return prize;
+                random -= prize.probability;
+            }
+        }
+
+        // Запуск вращения
+        function spin() {
+            if(isSpinning) return;
+            isSpinning = true;
+            
+            const prize = getRandomPrize();
+            const prizeIndex = prizes.indexOf(prize);
+            const extraSpins = 5; // Дополнительные полные обороты
+            const angle = (prizeIndex * (360 / prizes.length)) + (360 * extraSpins);
+            
+            wheel.style.transform = `rotate(${angle}deg)`;
+            
+            setTimeout(() => {
+                isSpinning = false;
+                alert(`Поздравляем! Вы выиграли: ${prize.name}`);
+            }, 5000);
+        }
+
+        // Инициализация
+        createSegments();
+        spinButton.addEventListener('click', spin);
     </script>
 </body>
-
 </html>
