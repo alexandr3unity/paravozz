@@ -41,6 +41,20 @@
             border-radius: 50%;
         }
 
+        .wheel .segment {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transform-origin: center;
+            font-size: 14px;
+            font-weight: bold;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
         .spin-btn {
             position: absolute;
             top: 80%;
@@ -69,42 +83,6 @@
             padding: 10px 20px;
             border-radius: 10px;
         }
-
-        .bottom-panel {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: #808080;
-            display: flex;
-            justify-content: space-around;
-            padding: 10px 0;
-            z-index: 1000;
-        }
-
-        .bottom-panel a {
-            text-decoration: none;
-        }
-
-        .bottom-panel button {
-            color: #808080;
-            border: none;
-            border-radius: 5px;
-            padding: 10px 15px;
-            font-size: 0.8em;
-            cursor: pointer;
-            background-color: transparent;
-        }
-
-        .bottom-panel button:hover {
-            background-color: #666666;
-            color: white;
-        }
-
-        .bottom-panel button img {
-            width: 25px;
-            height: 25px;
-        }
     </style>
 </head>
 
@@ -115,14 +93,6 @@
         </div>
         <button class="spin-btn" id="spin-btn">Прокрутить</button>
         <div class="prize-display" id="prize-display">Испытайте удачу!</div>
-    </div>
-
-    <div class="bottom-panel">
-        <a href="home.html"><button><img src="imej/Ico/discount.png"></button></a>
-        <a href="search.html"><button><img src="imej/Ico/about-us.png"></button></a>
-        <a href="index.html"><button><img src="imej/Ico/home.png"></button></a>
-        <a href="cart.html"><button><img src="imej/Ico/cart.png"></button></a>
-        <a href="cart.html"><button><img src="imej/Ico/star.png"></button></a>
     </div>
 
     <script>
@@ -136,27 +106,51 @@
                 "Скидка 25%", "Секретный приз"
             ];
 
-            const today = new Date().toDateString();
-            const lastSpin = localStorage.getItem("lastSpinDate");
+            const lastSpinTime = localStorage.getItem("lastSpinTime");
+            const now = Date.now();
 
-            if (lastSpin === today) {
+            if (lastSpinTime && now - lastSpinTime < 30000) {
                 spinButton.disabled = true;
-                spinButton.innerText = "Вы уже крутили сегодня";
+                const remainingTime = Math.ceil((30000 - (now - lastSpinTime)) / 1000);
+                spinButton.innerText = `Подождите ${remainingTime} сек.`;
+                
+                const interval = setInterval(() => {
+                    const newRemainingTime = Math.ceil((30000 - (Date.now() - lastSpinTime)) / 1000);
+                    if (newRemainingTime > 0) {
+                        spinButton.innerText = `Подождите ${newRemainingTime} сек.`;
+                    } else {
+                        spinButton.innerText = "Прокрутить";
+                        spinButton.disabled = false;
+                        clearInterval(interval);
+                    }
+                }, 1000);
             }
 
             spinButton.addEventListener("click", function () {
-                if (localStorage.getItem("lastSpinDate") === today) {
+                if (localStorage.getItem("lastSpinTime") && Date.now() - localStorage.getItem("lastSpinTime") < 30000) {
                     return;
                 }
+                localStorage.setItem("lastSpinTime", Date.now());
+                spinButton.disabled = true;
+                
                 const randomIndex = Math.floor(Math.random() * prizes.length);
                 const randomDegree = 1800 + (randomIndex * 30);
                 wheel.style.transform = `rotate(${randomDegree}deg)`;
                 
                 setTimeout(() => {
                     prizeDisplay.innerText = `Вы выиграли: ${prizes[randomIndex]}!`;
-                    localStorage.setItem("lastSpinDate", today);
-                    spinButton.disabled = true;
-                    spinButton.innerText = "Вы уже крутили сегодня";
+                    
+                    let countdown = 30;
+                    const interval = setInterval(() => {
+                        countdown--;
+                        if (countdown > 0) {
+                            spinButton.innerText = `Подождите ${countdown} сек.`;
+                        } else {
+                            spinButton.innerText = "Прокрутить";
+                            spinButton.disabled = false;
+                            clearInterval(interval);
+                        }
+                    }, 1000);
                 }, 4000);
             });
         });
