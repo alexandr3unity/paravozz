@@ -70,18 +70,18 @@
         }
 
         /* Стили для рамки подкатегорий */
-        .subcategory-container {
-            border: 2px solid #232323; /* Серый цвет рамки */
-            border-radius: 8px;
-            margin: 10px; /* Отступы 10 пикселей */
-            text-align: left; /* Выравнивание текста влево */
-            background-color: rgba(35, 35, 35, 0.8);
-            width: calc(100% - 20px); /* Ширина на 20px меньше полной ширины для отступов */
-            box-sizing: border-box; /* Учитываем рамку и отступы в ширине */
-            display: flex; /* Используем Flexbox для выравнивания */
-            align-items: center; /* Вертикальное выравнивание по центру */
-            position: relative; /* Для позиционирования наложенного текста */
-        }
+       .subcategory-container {
+    border: 2px solid #232323;
+    border-radius: 8px;
+    margin: 10px;
+    text-align: left;
+    background-color: rgba(35, 35, 35, 0.8);
+    width: calc(100% - 20px);
+    box-sizing: border-box;
+    display: flex;
+    align-items: center; /* Выравниваем контент по вертикали */
+    position: relative;
+}
 
         .logo {
             width: auto;
@@ -89,23 +89,23 @@
             margin-bottom: 1px;
         }
 
-        .subcategory {
-            border: none; /* Убираем рамку у подкатегорий */
-            padding: 10px;
-            transition: box-shadow 0.3s, transform 0.3s;
-            cursor: pointer;
-            flex-grow: 1; /* Позволяем тексту занимать оставшееся пространство */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+       .subcategory {
+    border: none;
+    padding: 10px;
+    transition: box-shadow 0.3s, transform 0.3s;
+    cursor: pointer;
+    display: flex;
+    align-items: center; /* Центрируем содержимое по вертикали */
+    justify-content: flex-start; /* Картинка слева, текст справа */
+    flex-grow: 1;
+}
 
-        .subcategory img {
-            width: 45%; /* Ширина изображения */
-            height: auto; /* Автоматическая высота для сохранения пропорций */
-            margin: 0;
-            padding: 0;
-        }
+       .subcategory img {
+    width: 100px; /* Ширина изображения */
+    height: 100px; /* Высота изображения для квадратной формы */
+    margin-right: 15px; /* Отступ между картинкой и текстом */
+    object-fit: cover; /* Убираем искажения */
+}
 
         .subcategory:hover {
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -119,18 +119,18 @@
             padding: 20px;
         }
 
-        .subcategory-title {
-            text-align: center;
-            font-weight: bold;
-            color: white;
-            margin-top: 10px;
-        }
-
-        .subcategory-description {
-            text-align: center;
-            margin-top: 10px;
-            color: rgba(255, 255, 255, 0.7); /* Полу-прозрачный текст */
-        }
+       .subcategory-title {
+    text-align: left;
+    font-weight: bold;
+    color: white;
+    margin: 0;
+    padding-left: 10px; /* Немного отступим текст от картинки */
+}
+       .subcategory-description {
+    text-align: left;
+    margin-top: 5px;
+    color: rgba(255, 255, 255, 0.7);
+}
 
         .back-button {
             background-color: #4CAF50;
