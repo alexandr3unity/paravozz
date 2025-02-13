@@ -70,19 +70,20 @@
         }
 
         /* Стили для рамки подкатегорий */
-       .subcategory-container {
+      .subcategory-container {
     text-decoration: none;
-    border: 2px solid #232323;
+    border: 2px solid #232323; /* одинаковая рамка для всех */
     border-radius: 8px;
-    margin: 10px;
+    margin: 2%; /* Уменьшаем маргин в процентах для гибкости */
     text-align: center;
     background-color: rgba(35, 35, 35, 0.8);
-    padding: 10px;
+    padding: 2%; /* Используем проценты для padding */
     display: flex;
     flex-direction: column;
     align-items: center;
     position: relative;
-    width: 100%; /* Устанавливаем ширину в 100% */
+    width: 95%; /* Ширина контейнера в процентах */
+    max-width: 300px; /* Ограничиваем максимальную ширину */
     box-sizing: border-box; /* Чтобы отступы и границы учитывались в общей ширине */
 }
 
@@ -94,21 +95,23 @@
 
        .subcategory {
     border: none;
-    padding: 10px;
+    padding: 3%; /* Используем проценты для padding */
     transition: box-shadow 0.3s, transform 0.3s;
     cursor: pointer;
     display: flex;
     align-items: center; /* Центрируем содержимое по вертикали */
     justify-content: flex-start; /* Картинка слева, текст справа */
     flex-grow: 1;
+    width: 100%; /* Растягиваем подкатегорию на всю ширину контейнера */
 }
 
-       .subcategory img {
-    width: 100px; /* Ширина изображения */
-    height: 100px; /* Высота изображения для квадратной формы */
-    margin-right: 15px; /* Отступ между картинкой и текстом */
+      .subcategory img {
+    width: 25%; /* Устанавливаем изображение в процентах от ширины контейнера */
+    height: auto; /* Высота будет пропорциональна ширине */
+    margin-right: 5%; /* Отступ между картинкой и текстом в процентах */
     object-fit: cover; /* Убираем искажения */
 }
+
 
         .subcategory:hover {
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -127,12 +130,17 @@
     font-weight: bold;
     color: white;
     margin: 0;
-    padding-left: 10px; /* Немного отступим текст от картинки */
+    padding-left: 10%; /* Немного отступим текст от картинки */
 }
-       .subcategory-description {
+      .subcategory-description {
     text-align: left;
-    margin-top: 5px;
+    margin-top: 5%;
     color: rgba(255, 255, 255, 0.7);
+}
+
+        .subcategory:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
 }
 
         .back-button {
