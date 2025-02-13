@@ -70,19 +70,18 @@
         }
 
         /* Стили для рамки подкатегорий */
-        .subcategory-container {
-            text-decoration: none;
-            border: 2px solid #232323;
-            border-radius: 8px;
-            margin: 10px;
-            text-align: center;
-            background-color: rgba(35, 35, 35, 0.8);
-            padding: 10px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            position: relative;
-        }
+       .subcategory-container {
+    border: 2px solid #232323;
+    border-radius: 8px;
+    margin: 0 auto; /* Центрируем контейнер по горизонтали */
+    text-align: left;
+    background-color: rgba(35, 35, 35, 0.8);
+    width: 96%; /* Ширина контейнера составляет 96% от ширины страницы */
+    box-sizing: border-box; /* Учитываем отступы и рамку в ширине */
+    display: flex;
+    align-items: center;
+    position: relative;
+}
 
         .logo {
             width: auto;
