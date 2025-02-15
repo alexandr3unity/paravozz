@@ -140,16 +140,18 @@
             }
         }
 
-        function login() {
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            let users = JSON.parse(localStorage.getItem('users')) || {};
-            if (users[email] && users[email] === password) {
-                alert('Вход выполнен успешно!');
-            } else {
-                alert('Неверный email или пароль!');
-            }
-        }
+      function login() {
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    let users = JSON.parse(localStorage.getItem('users')) || {};
+    if (users[email] && users[email] === password) {
+        alert('Вход выполнен успешно!');
+        // Переход на новую страницу после успешного входа
+        window.location.href = 'akk1.html'; // Замените 'newPage.html' на нужную вам страницу
+    } else {
+        alert('Неверный email или пароль!');
+    }
+}
     </script>
 </body>
 </html>
