@@ -303,22 +303,24 @@
 }
 
 .category-button {
-    padding: 10px 15px; /* Уменьшаем отступы для мобильных устройств */
+    padding: 10px 15px; /* Отступы внутри кнопки */
     background-color: rgba(128, 128, 128, 0.7); /* Серый цвет с прозрачностью 70% */
     color: white;
     text-decoration: none;
     border-radius: 5px;
-    font-size: 0.9em; /* Уменьшаем размер шрифта для мобильных устройств */
+    font-size: 0.9em; /* Размер шрифта */
     transition: background-color 0.3s ease;
     border: 1px solid rgba(255, 255, 255, 0.3); /* Белая полупрозрачная рамка */
     display: flex;
-    align-items: center;
+    align-items: center; /* Центрируем содержимое по вертикали */
+    justify-content: center; /* Центрируем содержимое по горизонтали */
     gap: 8px; /* Расстояние между иконкой и текстом */
     white-space: nowrap; /* Запрещаем перенос текста внутри кнопки */
     flex: 1 1 auto; /* Кнопки растягиваются и сжимаются по необходимости */
     min-width: 120px; /* Минимальная ширина кнопки */
     text-align: center; /* Центрируем текст внутри кнопки */
     box-sizing: border-box; /* Учитываем padding в общей ширине */
+    height: 40px; /* Фиксированная высота кнопки */
 }
 
 .category-button:hover {
@@ -334,6 +336,7 @@
         font-size: 0.8em; /* Уменьшаем размер шрифта для очень маленьких экранов */
         padding: 8px 12px; /* Уменьшаем отступы */
         min-width: 100px; /* Уменьшаем минимальную ширину */
+        height: 35px; /* Уменьшаем высоту для мобильных устройств */
     }
 }
         
