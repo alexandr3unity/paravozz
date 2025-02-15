@@ -1,293 +1,297 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Корзина</title>
-    <style>
-        body {
-            color: white;
-            background-image: url('imej/fon.jpg');
-            background-size: auto;
-            background-position: center;
-            background-repeat: repeat;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Корзина</title>
+  <style>
+    body {
+      color: white;
+      background-image: url('imej/fon.jpg');
+      background-size: auto;
+      background-position: center;
+      background-repeat: repeat;
+    }
 
-        .bottom-panel {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: #808080;
-            display: flex;
-            justify-content: space-around;
-            padding: 10px 0;
-            z-index: 1000;
-        }
+    .bottom-panel {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: #808080;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+      z-index: 1000;
+    }
 
-        .bottom-panel a {
-            text-decoration: none;
-        }
+    .bottom-panel a {
+      text-decoration: none;
+    }
 
-        .bottom-panel button {
-            color: #808080;
-            border: none;
-            border-radius: 5px;
-            padding: 10px 15px;
-            font-size: 0.8em;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: transparent;
-        }
+    .bottom-panel button {
+      color: #808080;
+      border: none;
+      border-radius: 5px;
+      padding: 10px 15px;
+      font-size: 0.8em;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: transparent;
+    }
 
-        .bottom-panel button:hover {
-            background-color: #666666;
-            color: white;
-        }
+    .bottom-panel button:hover {
+      background-color: #666666;
+      color: white;
+    }
 
-        .bottom-panel button img {
-            width: 25px;
-            height: 25px;
-        }
+    .bottom-panel button img {
+      width: 25px;
+      height: 25px;
+    }
 
-        .button {
-            width: 100%;
-            padding: 10px;
-            font-size: 16px;
-            text-align: center;
-            cursor: pointer;
-            border-radius: 5px;
-            border: none;
-            margin-top: 10px;
-        }
+    .button {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      text-align: center;
+      cursor: pointer;
+      border-radius: 5px;
+      border: none;
+      margin-top: 10px;
+    }
 
-        .pay-button {
-            background-color: #28a745;
-            color: white;
-        }
+    .pay-button {
+      background-color: #28a745;
+      color: white;
+    }
 
-        .pay-button:hover {
-            background-color: #218838;
-        }
+    .pay-button:hover {
+      background-color: #218838;
+    }
 
-        .return-button {
-            background-color: #007bff;
-            color: white;
-            margin-bottom: 80px;
-        }
+    .return-button {
+      background-color: #007bff;
+      color: white;
+      margin-bottom: 80px;
+    }
 
-        .return-button:hover {
-            background-color: #0056b3;
-        }
+    .return-button:hover {
+      background-color: #0056b3;
+    }
 
-        .place-select, .time-select {
-            width: 100%;
-            padding: 10px;
-            font-size: 16px;
-            margin-top: 10px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
+    .place-select, .time-select {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      margin-top: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
 
-        .time-select {
-            display: none;
-        }
-    </style>
+    .time-select {
+      display: none;
+    }
+  </style>
 </head>
 <body>
-    <h1 style="text-align: center">Ваша корзина</h1>
-    <div class="cart-container">
-        <!-- Корзина будет заполняться динамически -->
-    </div>
+  <h1 style="text-align: center">Ваша корзина</h1>
+  <div class="cart-container">
+    <!-- Корзина будет заполняться динамически -->
+  </div>
 
-    <p style="text-align: center"><strong>Итого:</strong> <span id="total-price">0</span> руб.</p>
+  <p style="text-align: center"><strong>Итого:</strong> <span id="total-price">0</span> руб.</p>
 
-    <!-- Выбор места и времени -->
-    <select class="place-select" id="place-select" onchange="updateTimeSlots()">
-        <option value="">Выберите место</option>
-        <option value="Тц Трио">Тц Трио</option>
-        <option value="Тц Марко">Тц Марко </option>
-        <option value="Тц Green">Тц Green</option>
-        <option value="Зеленая гура">Зеленая гура</option>
-        <option value="Ратуша">Ратуша</option>
-        <option value="Мак">Мак</option>
-    </select>
+  <!-- Выбор места и времени -->
+  <select class="place-select" id="place-select" onchange="updateTimeSlots()">
+    <option value="">Выберите место</option>
+    <option value="Тц Трио">Тц Трио</option>
+    <option value="Тц Марко">Тц Марко</option>
+    <option value="Тц Green">Тц Green</option>
+    <option value="Зеленая гура">Зеленая гура</option>
+    <option value="Ратуша">Ратуша</option>
+    <option value="Мак">Мак</option>
+  </select>
 
-    <select class="time-select" id="time-select">
-        <option value="">Сначала выберите место</option>
-    </select>
+  <select class="time-select" id="time-select">
+    <option value="">Сначала выберите место</option>
+  </select>
 
-    <!-- Кнопки оформления -->
-    <button type="button" class="pay-button button" onclick="checkout()">Перейти к оплате</button>
-    <button type="button" class="return-button button" onclick="window.location.href='https://alexandr3unity.github.io/paravozz/'">Возврат к покупкам</button>
+  <!-- Поле ввода Telegram ника -->
+  <input type="text" id="telegram-nickname" placeholder="Введите ваш Telegram ник" style="width: 100%; padding: 10px; margin-top: 10px; border-radius: 5px; border: 1px solid #ccc;">
 
-    <!-- Нижняя панель -->
-    <div class="bottom-panel">
-        <a href="home.html">
-            <button>
-                <img src="imej/Ico/discount.png"> 
-            </button>
-        </a>
-        <a href="search.html">
-            <button>
-                <img src="imej/Ico/about-us.png"> 
-            </button>
-        </a>
-        <a href="index.html">
-            <button>
-                <img src="imej/Ico/home.png"> 
-            </button>
-        </a>
-        <a href="cart.html">
-            <button>
-                <img src="imej/Ico/cart.png">
-            </button>
-        </a>
-        <a href="cart.html">
-            <button>
-                <img src="imej/Ico/star.png"> 
-            </button>
-        </a>
-    </div>
+  <!-- Кнопки оформления -->
+  <button type="button" class="pay-button button" onclick="checkout()">Перейти к оплате</button>
+  <button type="button" class="return-button button" onclick="window.location.href='https://alexandr3unity.github.io/paravozz/'">Возврат к покупкам</button>
 
-    <script>
-        // Объект с доступным временем для мест
-        const timeSlots = {
-            "Тц Трио": ["10:00", "12:00", "14:00", "16:00"],
-            "Мак": ["11:00", "13:00", "15:00", "17:00"],
-            "Тц Green": ["09:00", "11:30", "14:30"],
-            "Зеленая гура": ["10:30", "13:30", "16:30"],
-            "Ратуша": ["08:00", "12:00", "15:00"],
-            "Тц Марко": ["09:30", "12:30", "17:00"]
-        };
+  <!-- Нижняя панель -->
+  <div class="bottom-panel">
+    <a href="home.html">
+      <button>
+        <img src="imej/Ico/discount.png"> 
+      </button>
+    </a>
+    <a href="search.html">
+      <button>
+        <img src="imej/Ico/about-us.png"> 
+      </button>
+    </a>
+    <a href="index.html">
+      <button>
+        <img src="imej/Ico/home.png"> 
+      </button>
+    </a>
+    <a href="cart.html">
+      <button>
+        <img src="imej/Ico/cart.png">
+      </button>
+    </a>
+    <a href="cart.html">
+      <button>
+        <img src="imej/Ico/star.png"> 
+      </button>
+    </a>
+  </div>
 
-        // Инициализация корзины
-        function loadCart() {
-            const cart = JSON.parse(localStorage.getItem('cart')) || [];
-            const cartContainer = document.querySelector('.cart-container');
-            let totalPrice = 0;
+  <script>
+    // Объект с доступным временем для мест
+    const timeSlots = {
+      "Тц Трио": ["10:00", "12:00", "14:00", "16:00"],
+      "Мак": ["11:00", "13:00", "15:00", "17:00"],
+      "Тц Green": ["09:00", "11:30", "14:30"],
+      "Зеленая гура": ["10:30", "13:30", "16:30"],
+      "Ратуша": ["08:00", "12:00", "15:00"],
+      "Тц Марко": ["09:30", "12:30", "17:00"]
+    };
 
-            cartContainer.innerHTML = '';
-            cart.forEach(item => {
-                totalPrice += item.price * item.quantity;
-                cartContainer.innerHTML += `
-                    <div class="cart-item">
-                        <h2>${item.name}</h2>
-                        <p><strong>Цена:</strong> ${item.price} руб.</p>
-                        <p><strong>Количество:</strong>
-                            <button class="quantity-btn" onclick="changeQuantity('${item.name}', 'decrease')">-</button>
-                            <span>${item.quantity}</span>
-                            <button class="quantity-btn" onclick="changeQuantity('${item.name}', 'increase')">+</button>
-                        </p>
-                        <p><strong>Сумма:</strong> ${item.price * item.quantity} руб.</p>
-                        <button onclick="removeFromCart('${item.name}')">Удалить</button>
-                    </div>
-                `;
-            });
-            document.getElementById('total-price').textContent = totalPrice;
-        }
+    // Инициализация корзины
+    function loadCart() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const cartContainer = document.querySelector('.cart-container');
+      let totalPrice = 0;
 
-        // Обновление временных слотов
-        function updateTimeSlots() {
-            const placeSelect = document.getElementById('place-select');
-            const timeSelect = document.getElementById('time-select');
-            const selectedPlace = placeSelect.value;
+      cartContainer.innerHTML = '';
+      cart.forEach(item => {
+        totalPrice += item.price * item.quantity;
+        cartContainer.innerHTML += `
+          <div class="cart-item">
+            <h2>${item.name}</h2>
+            <p><strong>Цена:</strong> ${item.price} руб.</p>
+            <p><strong>Количество:</strong>
+              <button class="quantity-btn" onclick="changeQuantity('${item.name}', 'decrease')">-</button>
+              <span>${item.quantity}</span>
+              <button class="quantity-btn" onclick="changeQuantity('${item.name}', 'increase')">+</button>
+            </p>
+            <p><strong>Сумма:</strong> ${item.price * item.quantity} руб.</p>
+            <button onclick="removeFromCart('${item.name}')">Удалить</button>
+          </div>
+        `;
+      });
+      document.getElementById('total-price').textContent = totalPrice;
+    }
 
-            timeSelect.innerHTML = '<option value="">Выберите время</option>';
-            timeSelect.style.display = 'block';
-            timeSelect.disabled = true;
+    // Обновление временных слотов
+    function updateTimeSlots() {
+      const placeSelect = document.getElementById('place-select');
+      const timeSelect = document.getElementById('time-select');
+      const selectedPlace = placeSelect.value;
 
-            if (selectedPlace && timeSlots[selectedPlace]) {
-                timeSlots[selectedPlace].forEach(time => {
-                    timeSelect.innerHTML += `<option value="${time}">${time}</option>`;
-                });
-                timeSelect.disabled = false;
-            }
-        }
+      timeSelect.innerHTML = '<option value="">Выберите время</option>';
+      timeSelect.style.display = 'block';
+      timeSelect.disabled = true;
 
-        // Удаление товара
-        function removeFromCart(name) {
-            let cart = JSON.parse(localStorage.getItem('cart')) || [];
-            cart = cart.filter(item => item.name !== name);
-            localStorage.setItem('cart', JSON.stringify(cart));
-            loadCart();
-        }
+      if (selectedPlace && timeSlots[selectedPlace]) {
+        timeSlots[selectedPlace].forEach(time => {
+          timeSelect.innerHTML += `<option value="${time}">${time}</option>`;
+        });
+        timeSelect.disabled = false;
+      }
+    }
 
-        // Оформление заказа
-     function checkout() {
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    
-    // Проверка на пустую корзину
-    if (cart.length === 0) {
+    // Удаление товара
+    function removeFromCart(name) {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart = cart.filter(item => item.name !== name);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      loadCart();
+    }
+
+    // Оформление заказа
+    function checkout() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+      // Проверка на пустую корзину
+      if (cart.length === 0) {
         alert('Ваша корзина пуста. Добавьте товары перед оформлением заказа.');
         return;
-    }
-    
-    // Расчёт общей суммы заказа
-    const totalAmount = cart.reduce((total, item) => total + item.price * item.quantity, 0);
-    if (totalAmount === 0) {
+      }
+
+      // Расчёт общей суммы заказа
+      const totalAmount = cart.reduce((total, item) => total + item.price * item.quantity, 0);
+      if (totalAmount === 0) {
         alert('Сумма заказа равна нулю. Добавьте товары, чтобы оформить заказ.');
         return;
-    }
-    
-    const selectedPlace = document.getElementById('place-select').value;
-    const selectedTime = document.getElementById('time-select').value;
-    
-    if (!selectedPlace) {
+      }
+
+      const selectedPlace = document.getElementById('place-select').value;
+      const selectedTime = document.getElementById('time-select').value;
+
+      if (!selectedPlace) {
         alert('Пожалуйста, выберите место перед оформлением заказа.');
         return;
-    }
-    
-    if (!selectedTime) {
+      }
+
+      if (!selectedTime) {
         alert('Пожалуйста, выберите время доставки.');
         return;
-    }
-    
-    // Получение информации о пользователе Telegram
-    let username = 'не указан';
-    try {
+      }
+
+      // Получение информации о пользователе Telegram
+      let username = 'не указан';
+      try {
         if (window.Telegram && window.Telegram.WebApp) {
-            const user = window.Telegram.WebApp.initDataUnsafe.user;
-            if (user && user.username) {
-                username = '@' + user.username;
-            } else if (user && (user.first_name || user.last_name)) {
-                username = [user.first_name, user.last_name].filter(Boolean).join(' ');
-            }
+          const user = window.Telegram.WebApp.initDataUnsafe.user;
+          if (user && user.username) {
+            username = '@' + user.username;
+          } else if (user && (user.first_name || user.last_name)) {
+            username = [user.first_name, user.last_name].filter(Boolean).join(' ');
+          }
         }
-    } catch (e) {
+      } catch (e) {
         console.error('Ошибка при получении информации о пользователе Telegram:', e);
-    }
-    
-    // Получаем данные профиля из localStorage по текущему пользователю
-    const currentUserEmail = localStorage.getItem('currentUser');
-    console.log("currentUserEmail:", currentUserEmail);
-    let profileInfo = '';
-    if (currentUserEmail) {
+      }
+
+      // Если пользователь ввёл свой Telegram ник, используем его
+      const telegramNicknameInput = document.getElementById('telegram-nickname').value.trim();
+      if (telegramNicknameInput) {
+        username = telegramNicknameInput;
+      }
+
+      // Получаем данные профиля из localStorage по текущему пользователю
+      const currentUserEmail = localStorage.getItem('currentUser');
+      console.log("currentUserEmail:", currentUserEmail);
+      let profileInfo = '';
+      if (currentUserEmail) {
         let users = JSON.parse(localStorage.getItem('users')) || {};
         console.log("Данные пользователя:", users[currentUserEmail]);
         if (users[currentUserEmail] && users[currentUserEmail].profile) {
-            const profile = users[currentUserEmail].profile;
-            profileInfo = `\n\nДанные профиля:\nИмя: ${profile.name || 'Не указано'}\nTelegram: ${profile.telegram || 'Не указан'}\nВозраст: ${profile.age || 'Не указан'}`;
+          const profile = users[currentUserEmail].profile;
+          profileInfo = `\n\nДанные профиля:\nИмя: ${profile.name || 'Не указано'}\nTelegram: ${profile.telegram || 'Не указан'}\nВозраст: ${profile.age || 'Не указан'}`;
+        } else {
+          profileInfo = "\n\nДанные профиля отсутствуют";
         }
-        // Проверка наличия авторизованного пользователя
-  if (!localStorage.getItem('currentUser')) {
-    window.location.href = 'akk.html';
-  }
-  else {
-            profileInfo = "\n\nДанные профиля отсутствуют";
-        }
-    } else {
+      } else {
         profileInfo = "\n\nПользователь не авторизован";
-    }
-    
-    const orderId = Math.floor(Math.random() * 1000000);
-    const paymentDate = new Date().toLocaleDateString();
-    
-    // Сохраняем данные заказа (при необходимости)
-    localStorage.setItem('payment', JSON.stringify({
+      }
+
+      const orderId = Math.floor(Math.random() * 1000000);
+      const paymentDate = new Date().toLocaleDateString();
+
+      // Сохраняем данные заказа (при необходимости)
+      localStorage.setItem('payment', JSON.stringify({
         cart,
         totalAmount,
         orderId,
@@ -295,47 +299,47 @@
         selectedPlace,
         selectedTime,
         username
-    }));
-    
-    // Формирование сообщения для Telegram с данными заказа и профиля
-    let message = `Новый заказ!\n\nНомер: ${orderId}\nДата: ${paymentDate}\nПользователь: ${username}${profileInfo}\nМесто: ${selectedPlace}\nВремя: ${selectedTime}\n\nТовары:`;
-    cart.forEach(item => {
+      }));
+
+      // Формирование сообщения для Telegram с данными заказа и профиля
+      let message = `Новый заказ!\n\nНомер: ${orderId}\nДата: ${paymentDate}\nПользователь: ${username}${profileInfo}\nМесто: ${selectedPlace}\nВремя: ${selectedTime}\n\nТовары:`;
+      cart.forEach(item => {
         message += `\n- ${item.name} (x${item.quantity}) - ${item.price * item.quantity} руб.`;
-    });
-    message += `\n\nИтого: ${totalAmount} руб.`;
-    
-    // Отправка сообщения в Telegram
-    const token = '7791735203:AAFC1TzcCpkgjrvFASLyG5Vhw6X-gVEoHLg';
-    const chatId = '771803609';
-    const url = `https://api.telegram.org/bot${token}/sendMessage`;
-    
-    fetch(url, {
+      });
+      message += `\n\nИтого: ${totalAmount} руб.`;
+
+      // Отправка сообщения в Telegram
+      const token = '7791735203:AAFC1TzcCpkgjrvFASLyG5Vhw6X-gVEoHLg';
+      const chatId = '771803609';
+      const url = `https://api.telegram.org/bot${token}/sendMessage`;
+
+      fetch(url, {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            chat_id: chatId,
-            text: message
+          chat_id: chatId,
+          text: message
         })
-    })
-    .then(response => response.json())
-    .then(data => {
+      })
+      .then(response => response.json())
+      .then(data => {
         if (data.ok) {
-            localStorage.removeItem('cart');
-            window.location.href = 'https://alexandr3unity.github.io/paravozz/payment_success';
+          localStorage.removeItem('cart');
+          window.location.href = 'https://alexandr3unity.github.io/paravozz/payment_success';
         } else {
-            alert('Ошибка при оформлении заказа');
+          alert('Ошибка при оформлении заказа');
         }
-    })
-    .catch(error => {
+      })
+      .catch(error => {
         console.error('Ошибка:', error);
         alert('Произошла ошибка при отправке заказа');
-    });
-}
+      });
+    }
 
-        // Загрузка корзины при открытии страницы
-        loadCart();
-    </script>
+    // Загрузка корзины при открытии страницы
+    loadCart();
+  </script>
 </body>
 </html>
