@@ -90,10 +90,10 @@
 <body>
     <div class="form-container">
         <h2>Вход / Регистрация</h2>
-        <input type="text" placeholder="Введите email">
-        <input type="password" placeholder="Введите пароль">
-        <button>Войти</button>
-        <button>Зарегистрироваться</button>
+        <input type="text" id="email" placeholder="Введите email">
+        <input type="password" id="password" placeholder="Введите пароль">
+        <button onclick="login()">Войти</button>
+        <button onclick="register()">Зарегистрироваться</button>
     </div>
     <div class="bottom-panel">
         <a href="home.html">
@@ -122,5 +122,34 @@
             </button>
         </a>
     </div>
+    <script>
+        function register() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            if (!email || !password) {
+                alert('Заполните все поля!');
+                return;
+            }
+            let users = JSON.parse(localStorage.getItem('users')) || {};
+            if (users[email]) {
+                alert('Пользователь уже зарегистрирован!');
+            } else {
+                users[email] = password;
+                localStorage.setItem('users', JSON.stringify(users));
+                alert('Регистрация успешна! Теперь вы можете войти.');
+            }
+        }
+
+        function login() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            let users = JSON.parse(localStorage.getItem('users')) || {};
+            if (users[email] && users[email] === password) {
+                alert('Вход выполнен успешно!');
+            } else {
+                alert('Неверный email или пароль!');
+            }
+        }
+    </script>
 </body>
 </html>
