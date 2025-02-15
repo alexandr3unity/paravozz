@@ -288,6 +288,33 @@
             width: 25px; /* Увеличены иконки */
             height: 25px;
         }
+
+
+
+        .category-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Расстояние между кнопками */
+    margin: 20px 0; /* Отступ сверху и снизу */
+}
+
+.category-button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+.category-button:hover {
+    background-color: #45a049;
+}
+
+
+
+        
     </style>
 </head>
 
@@ -343,6 +370,12 @@
             </button>
         </a>
     </div>
+
+
+    <div class="category-buttons">
+    <a href="https://alexandr3unity.github.io/paravozz/liquids" class="category-button">Перейти к жидкостям</a>
+    <a href="https://alexandr3unity.github.io/paravozz/devices" class="category-button">Перейти к устройствам</a>
+</div>
 
     <script>
         const categories = document.querySelectorAll('.category');
