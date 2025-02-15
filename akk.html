@@ -143,27 +143,27 @@
     <div class="bottom-panel">
         <a href="home.html">
             <button>
-                <img src="imej/Ico/discount.png">
+                <img src="imej/Ico/discount.png" alt="discount">
             </button>
         </a>
         <a href="search.html">
             <button>
-                <img src="imej/Ico/about-us.png">
+                <img src="imej/Ico/about-us.png" alt="about-us">
             </button>
         </a>
         <a href="index.html">
             <button>
-                <img src="imej/Ico/home.png">
+                <img src="imej/Ico/home.png" alt="home">
             </button>
         </a>
         <a href="cart.html">
             <button>
-                <img src="imej/Ico/cart.png">
+                <img src="imej/Ico/cart.png" alt="cart">
             </button>
         </a>
         <a href="cart.html">
             <button>
-                <img src="imej/Ico/star.png">
+                <img src="imej/Ico/star.png" alt="star">
             </button>
         </a>
     </div>
@@ -187,25 +187,25 @@
         }
 
         function login() {
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
-        let users = JSON.parse(localStorage.getItem('users')) || {};
-        if (users[email] && users[email].password === password) {
-            alert('Вход выполнен успешно!');
-            // Сохраняем email текущего пользователя
-            localStorage.setItem('currentUser', email);
-            // Скрыть форму входа и регистрации
-            document.getElementById('login-register-form').style.display = 'none';
-            // Загрузить данные профиля
-            loadProfile(email);
-        } else {
-            alert('Неверный email или пароль!');
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            let users = JSON.parse(localStorage.getItem('users')) || {};
+            if (users[email] && users[email].password === password) {
+                alert('Вход выполнен успешно!');
+                // Сохраняем email текущего пользователя
+                localStorage.setItem('currentUser', email);
+                // Скрыть форму входа и регистрации
+                document.getElementById('login-register-form').style.display = 'none';
+                // Загрузить данные профиля
+                loadProfile(email);
+            } else {
+                alert('Неверный email или пароль!');
+            }
         }
-    }
 
         function loadProfile(email) {
             let users = JSON.parse(localStorage.getItem('users')) || {};
-            const profileData = users[email].profile;
+            const profileData = users[email].profile || {};
 
             // Показываем данные профиля
             document.getElementById('profile').style.display = 'block';
@@ -222,7 +222,8 @@
 
             // Заполнить поля редактирования текущими данными
             let users = JSON.parse(localStorage.getItem('users')) || {};
-            const profileData = users[document.getElementById('email').value].profile;
+            const currentUser = localStorage.getItem('currentUser');
+            const profileData = users[currentUser].profile || {};
             document.getElementById('edit-name').value = profileData.name || '';
             document.getElementById('edit-telegram').value = profileData.telegram || '';
             document.getElementById('edit-age').value = profileData.age || '';
@@ -232,28 +233,41 @@
             const name = document.getElementById('edit-name').value;
             const telegram = document.getElementById('edit-telegram').value;
             const age = document.getElementById('edit-age').value;
-            const photo = document.getElementById('edit-photo').files[0];
+            const photoInput = document.getElementById('edit-photo');
+            const photo = photoInput.files[0];
 
-            // Загрузка фотографии
-            const reader = new FileReader();
-            reader.onload = function(event) {
-                let users = JSON.parse(localStorage.getItem('users')) || {};
-                const email = document.getElementById('email').value;
+            let users = JSON.parse(localStorage.getItem('users')) || {};
+            const email = localStorage.getItem('currentUser');
+
+            if (photo) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    users[email].profile = {
+                        name: name,
+                        telegram: telegram,
+                        age: age,
+                        photo: event.target.result
+                    };
+                    localStorage.setItem('users', JSON.stringify(users));
+                    alert('Данные сохранены!');
+                    loadProfile(email);
+                    document.getElementById('edit-profile').style.display = 'none';
+                };
+                reader.readAsDataURL(photo);
+            } else {
+                // Если фото не выбрано, оставляем существующее (если оно было)
+                const existingPhoto = users[email].profile ? users[email].profile.photo : '';
                 users[email].profile = {
                     name: name,
                     telegram: telegram,
                     age: age,
-                    photo: event.target.result
+                    photo: existingPhoto
                 };
                 localStorage.setItem('users', JSON.stringify(users));
                 alert('Данные сохранены!');
-
-                // Обновить профиль
                 loadProfile(email);
-                // Скрыть форму редактирования
                 document.getElementById('edit-profile').style.display = 'none';
-            };
-            reader.readAsDataURL(photo);
+            }
         }
 
         function backToProfile() {
