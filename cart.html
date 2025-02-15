@@ -120,9 +120,6 @@
     <option value="">Сначала выберите место</option>
   </select>
 
-  <!-- Поле ввода Telegram ника -->
-  <input type="text" id="telegram-nickname" placeholder="Введите ваш Telegram ник" style="width: 100%; padding: 10px; margin-top: 10px; border-radius: 5px; border: 1px solid #ccc;">
-
   <!-- Кнопки оформления -->
   <button type="button" class="pay-button button" onclick="checkout()">Перейти к оплате</button>
   <button type="button" class="return-button button" onclick="window.location.href='https://alexandr3unity.github.io/paravozz/'">Возврат к покупкам</button>
@@ -221,9 +218,6 @@
 
     // Оформление заказа
     function checkout() {
-      // Если поле ввода Telegram ника в фокусе, убираем фокус, чтобы закрыть клавиатуру
-      document.getElementById('telegram-nickname').blur();
-
       const cart = JSON.parse(localStorage.getItem('cart')) || [];
 
       // Проверка на пустую корзину
@@ -252,7 +246,7 @@
         return;
       }
 
-      // Получение информации о пользователе Telegram
+      // Получение информации о пользователе Telegram (если доступно)
       let username = 'не указан';
       try {
         if (window.Telegram && window.Telegram.WebApp) {
@@ -265,12 +259,6 @@
         }
       } catch (e) {
         console.error('Ошибка при получении информации о пользователе Telegram:', e);
-      }
-
-      // Если пользователь ввёл свой Telegram ник, используем его
-      const telegramNicknameInput = document.getElementById('telegram-nickname').value.trim();
-      if (telegramNicknameInput) {
-        username = telegramNicknameInput;
       }
 
       // Получаем данные профиля из localStorage по текущему пользователю
@@ -340,14 +328,6 @@
         alert('Произошла ошибка при отправке заказа');
       });
     }
-
-    // Событие для закрытия клавиатуры при нажатии Enter в поле ввода Telegram ника
-    document.getElementById('telegram-nickname').addEventListener('keydown', function(event) {
-      if (event.key === 'Enter') {
-        event.preventDefault();
-        this.blur();
-      }
-    });
 
     // Загрузка корзины при открытии страницы
     loadCart();
