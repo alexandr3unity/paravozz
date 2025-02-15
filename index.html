@@ -293,10 +293,12 @@
 
   .category-buttons {
     display: flex;
-    justify-content: center;
-    gap: 15px; /* Уменьшим расстояние между кнопками */
+    justify-content: center; /* Центрируем кнопки по горизонтали */
+    align-items: center; /* Центрируем кнопки по вертикали */
+    gap: 15px; /* Расстояние между кнопками */
     margin: 20px 0;
-    flex-wrap: wrap; /* Если кнопки не помещаются, они переносятся на новую строку */
+    flex-wrap: nowrap; /* Запрещаем перенос кнопок на новую строку */
+    width: 100%; /* Занимаем всю ширину */
 }
 
 .category-button {
@@ -311,6 +313,7 @@
     display: flex;
     align-items: center;
     gap: 8px; /* Расстояние между иконкой и текстом */
+    white-space: nowrap; /* Запрещаем перенос текста внутри кнопки */
 }
 
 .category-button:hover {
