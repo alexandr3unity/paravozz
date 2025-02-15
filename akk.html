@@ -108,6 +108,23 @@
             width: 300px;
             text-align: center;
         }
+
+
+
+        .fade-out {
+        opacity: 0;
+        transform: scale(0.95);
+        transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .fade-in {
+        opacity: 1;
+        transform: scale(1);
+        transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+
+
+        
     </style>
 </head>
 <body>
@@ -210,9 +227,9 @@
             // Показываем данные профиля
             document.getElementById('profile').style.display = 'block';
             document.getElementById('profile-photo').src = profileData.photo || '';
-            document.getElementById('profile-name').innerText = `Имя: ${profileData.name || 'Не указано'}`;
-            document.getElementById('profile-telegram').innerText = `Никнейм Telegram: ${profileData.telegram || 'Не указан'}`;
-            document.getElementById('profile-age').innerText = `Возраст: ${profileData.age || 'Не указан'}`;
+            document.getElementById('profile-name').innerText = Имя: ${profileData.name || 'Не указано'};
+            document.getElementById('profile-telegram').innerText = Никнейм Telegram: ${profileData.telegram || 'Не указан'};
+            document.getElementById('profile-age').innerText = Возраст: ${profileData.age || 'Не указан'};
         }
 
         function editProfile() {
@@ -276,6 +293,45 @@
             // Показать профиль
             document.getElementById('profile').style.display = 'block';
         }
+
+
+         function hideWithAnimation(elementId) {
+        const element = document.getElementById(elementId);
+        if (element) {
+            element.classList.remove('fade-in');
+            element.classList.add('fade-out');
+            setTimeout(() => {
+                element.style.display = 'none';
+            }, 500);
+        }
+    }
+
+    function showWithAnimation(elementId) {
+        const element = document.getElementById(elementId);
+        if (element) {
+            element.style.display = 'block';
+            setTimeout(() => {
+                element.classList.remove('fade-out');
+                element.classList.add('fade-in');
+            }, 10);
+        }
+    }
+
+    function login() {
+        hideWithAnimation('login-register-form');
+        setTimeout(() => showWithAnimation('profile'), 500);
+    }
+
+    function editProfile() {
+        hideWithAnimation('profile');
+        setTimeout(() => showWithAnimation('edit-profile'), 500);
+    }
+
+    function backToProfile() {
+        hideWithAnimation('edit-profile');
+        setTimeout(() => showWithAnimation('profile'), 500);
+    }
     </script>
 </body>
 </html>
+
