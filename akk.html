@@ -187,19 +187,21 @@
         }
 
         function login() {
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            let users = JSON.parse(localStorage.getItem('users')) || {};
-            if (users[email] && users[email].password === password) {
-                alert('Вход выполнен успешно!');
-                // Скрыть форму входа и регистрации
-                document.getElementById('login-register-form').style.display = 'none';
-                // Загрузить данные профиля
-                loadProfile(email);
-            } else {
-                alert('Неверный email или пароль!');
-            }
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        let users = JSON.parse(localStorage.getItem('users')) || {};
+        if (users[email] && users[email].password === password) {
+            alert('Вход выполнен успешно!');
+            // Сохраняем email текущего пользователя
+            localStorage.setItem('currentUser', email);
+            // Скрыть форму входа и регистрации
+            document.getElementById('login-register-form').style.display = 'none';
+            // Загрузить данные профиля
+            loadProfile(email);
+        } else {
+            alert('Неверный email или пароль!');
         }
+    }
 
         function loadProfile(email) {
             let users = JSON.parse(localStorage.getItem('users')) || {};
