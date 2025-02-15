@@ -223,33 +223,61 @@
             document.getElementById('edit-age').value = profileData.age || '';
         }
 
-        function saveProfile() {
-            const name = document.getElementById('edit-name').value;
-            const telegram = document.getElementById('edit-telegram').value;
-            const age = document.getElementById('edit-age').value;
-            const photo = document.getElementById('edit-photo').files[0];
+       function saveProfile() {
+    const name = document.getElementById('edit-name').value;
+    const telegram = document.getElementById('edit-telegram').value;
+    const age = document.getElementById('edit-age').value;
+    const photo = document.getElementById('edit-photo').files[0];
 
-            // Загрузка фотографии
-            const reader = new FileReader();
-            reader.onload = function(event) {
-                let users = JSON.parse(localStorage.getItem('users')) || {};
-                const email = document.getElementById('email').value;
-                users[email].profile = {
-                    name: name,
-                    telegram: telegram,
-                    age: age,
-                    photo: event.target.result
-                };
-                localStorage.setItem('users', JSON.stringify(users));
-                alert('Данные сохранены!');
+    // Загрузка фотографии
+    const reader = new FileReader();
+    reader.onload = function(event) {
+        let users = JSON.parse(localStorage.getItem('users')) || {};
+        const email = document.getElementById('email').value;
+        users[email].profile = {
+            name: name,
+            telegram: telegram,
+            age: age,
+            photo: event.target.result
+        };
+        localStorage.setItem('users', JSON.stringify(users));
+        alert('Данные сохранены!');
 
-                // Обновить профиль
-                loadProfile(email);
-                // Скрыть форму редактирования
-                document.getElementById('edit-profile').style.display = 'none';
-            };
-            reader.readAsDataURL(photo);
-        }
+        // Обновить профиль
+        loadProfile(email);
+        // Скрыть форму редактирования
+        document.getElementById('edit-profile').style.display = 'none';
+    };
+    reader.readAsDataURL(photo);
+}
+function saveProfile() {
+    const name = document.getElementById('edit-name').value;
+    const telegram = document.getElementById('edit-telegram').value;
+    const age = document.getElementById('edit-age').value;
+    const photo = document.getElementById('edit-photo').files[0];
+
+    // Загрузка фотографии
+    const reader = new FileReader();
+    reader.onload = function(event) {
+        let users = JSON.parse(localStorage.getItem('users')) || {};
+        const email = document.getElementById('email').value;
+        users[email].profile = {
+            name: name,
+            telegram: telegram,
+            age: age,
+            photo: event.target.result
+        };
+        localStorage.setItem('users', JSON.stringify(users));
+        alert('Данные сохранены!');
+
+        // Обновить профиль
+        loadProfile(email);
+        // Скрыть форму редактирования
+        document.getElementById('edit-profile').style.display = 'none';
+    };
+    reader.readAsDataURL(photo);
+}
+
     </script>
 </body>
 </html>
