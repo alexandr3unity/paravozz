@@ -217,101 +217,111 @@
         }
 
         // Оформление заказа
-        function checkout() {
-            const cart = JSON.parse(localStorage.getItem('cart')) || [];
-            
-            // Проверка на пустую корзину
-            if (cart.length === 0) {
-                alert('Ваша корзина пуста. Добавьте товары перед оформлением заказа.');
-                return;
-            }
-            
-            // Расчёт общей суммы заказа
-            const totalAmount = cart.reduce((total, item) => total + item.price * item.quantity, 0);
-            if (totalAmount === 0) {
-                alert('Сумма заказа равна нулю. Добавьте товары, чтобы оформить заказ.');
-                return;
-            }
-            
-            const selectedPlace = document.getElementById('place-select').value;
-            const selectedTime = document.getElementById('time-select').value;
-
-            if (!selectedPlace) {
-                alert('Пожалуйста, выберите место перед оформлением заказа.');
-                return;
-            }
-
-            if (!selectedTime) {
-                alert('Пожалуйста, выберите время доставки.');
-                return;
-            }
-
-            // Получение информации о пользователе Telegram
-            let username = 'не указан';
-            try {
-                if (window.Telegram && window.Telegram.WebApp) {
-                    const user = window.Telegram.WebApp.initDataUnsafe.user;
-                    if (user && user.username) {
-                        username = '@' + user.username;
-                    } else if (user && (user.first_name || user.last_name)) {
-                        username = [user.first_name, user.last_name].filter(Boolean).join(' ');
-                    }
-                }
-            } catch (e) {
-                console.error('Ошибка при получении информации о пользователе Telegram:', e);
-            }
-
-            const orderId = Math.floor(Math.random() * 1000000);
-            const paymentDate = new Date().toLocaleDateString();
-
-            // Сохранение данных заказа
-            localStorage.setItem('payment', JSON.stringify({
-                cart,
-                totalAmount,
-                orderId,
-                paymentDate,
-                selectedPlace,
-                selectedTime,
-                username
-            }));
-
-            // Формирование сообщения для Telegram
-            let message = `Новый заказ!\n\nНомер: ${orderId}\nДата: ${paymentDate}\nПользователь: ${username}\nМесто: ${selectedPlace}\nВремя: ${selectedTime}\n\nТовары:`;
-            cart.forEach(item => {
-                message += `\n- ${item.name} (x${item.quantity}) - ${item.price * item.quantity} руб.`;
-            });
-            message += `\n\nИтого: ${totalAmount} руб.`;
-
-            // Отправка в Telegram
-            const token = '7791735203:AAFC1TzcCpkgjrvFASLyG5Vhw6X-gVEoHLg';
-            const chatId = '771803609';
-            const url = `https://api.telegram.org/bot${token}/sendMessage`;
-
-            fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    chat_id: chatId,
-                    text: message
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.ok) {
-                    localStorage.removeItem('cart');
-                    window.location.href = 'https://alexandr3unity.github.io/paravozz/payment_success';
-                } else {
-                    alert('Ошибка при оформлении заказа');
-                }
-            })
-            .catch(error => {
-                console.error('Ошибка:', error);
-                alert('Произошла ошибка при отправке заказа');
-            });
+       function checkout() {
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        
+        // Проверка на пустую корзину
+        if (cart.length === 0) {
+            alert('Ваша корзина пуста. Добавьте товары перед оформлением заказа.');
+            return;
         }
-
+        
+        // Расчёт общей суммы заказа
+        const totalAmount = cart.reduce((total, item) => total + item.price * item.quantity, 0);
+        if (totalAmount === 0) {
+            alert('Сумма заказа равна нулю. Добавьте товары, чтобы оформить заказ.');
+            return;
+        }
+        
+        const selectedPlace = document.getElementById('place-select').value;
+        const selectedTime = document.getElementById('time-select').value;
+        
+        if (!selectedPlace) {
+            alert('Пожалуйста, выберите место перед оформлением заказа.');
+            return;
+        }
+        
+        if (!selectedTime) {
+            alert('Пожалуйста, выберите время доставки.');
+            return;
+        }
+        
+        // Получение информации о пользователе Telegram
+        let username = 'не указан';
+        try {
+            if (window.Telegram && window.Telegram.WebApp) {
+                const user = window.Telegram.WebApp.initDataUnsafe.user;
+                if (user && user.username) {
+                    username = '@' + user.username;
+                } else if (user && (user.first_name || user.last_name)) {
+                    username = [user.first_name, user.last_name].filter(Boolean).join(' ');
+                }
+            }
+        } catch (e) {
+            console.error('Ошибка при получении информации о пользователе Telegram:', e);
+        }
+        
+        // Получаем данные профиля из localStorage по текущему пользователю
+        const currentUserEmail = localStorage.getItem('currentUser');
+        let profileInfo = '';
+        if (currentUserEmail) {
+            let users = JSON.parse(localStorage.getItem('users')) || {};
+            if (users[currentUserEmail] && users[currentUserEmail].profile) {
+                const profile = users[currentUserEmail].profile;
+                profileInfo = `\n\nДанные профиля:\nИмя: ${profile.name || 'Не указано'}\nTelegram: ${profile.telegram || 'Не указан'}\nВозраст: ${profile.age || 'Не указан'}`;
+            }
+        }
+        
+        const orderId = Math.floor(Math.random() * 1000000);
+        const paymentDate = new Date().toLocaleDateString();
+        
+        // Сохраняем данные заказа (при необходимости)
+        localStorage.setItem('payment', JSON.stringify({
+            cart,
+            totalAmount,
+            orderId,
+            paymentDate,
+            selectedPlace,
+            selectedTime,
+            username
+        }));
+        
+        // Формирование сообщения для Telegram с данными заказа и профиля
+        let message = `Новый заказ!\n\nНомер: ${orderId}\nДата: ${paymentDate}\nПользователь: ${username}${profileInfo}\nМесто: ${selectedPlace}\nВремя: ${selectedTime}\n\nТовары:`;
+        cart.forEach(item => {
+            message += `\n- ${item.name} (x${item.quantity}) - ${item.price * item.quantity} руб.`;
+        });
+        message += `\n\nИтого: ${totalAmount} руб.`;
+        
+        // Отправка сообщения в Telegram
+        const token = '7791735203:AAFC1TzcCpkgjrvFASLyG5Vhw6X-gVEoHLg';
+        const chatId = '771803609';
+        const url = `https://api.telegram.org/bot${token}/sendMessage`;
+        
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                chat_id: chatId,
+                text: message
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.ok) {
+                localStorage.removeItem('cart');
+                window.location.href = 'https://alexandr3unity.github.io/paravozz/payment_success';
+            } else {
+                alert('Ошибка при оформлении заказа');
+            }
+        })
+        .catch(error => {
+            console.error('Ошибка:', error);
+            alert('Произошла ошибка при отправке заказа');
+        });
+    }
         // Загрузка корзины при открытии страницы
         loadCart();
     </script>
