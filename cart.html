@@ -218,6 +218,13 @@
 
     // Оформление заказа
     function checkout() {
+      // Проверка авторизации: если пользователь не авторизован, перенаправляем на akk.html
+      const currentUserEmail = localStorage.getItem('currentUser');
+      if (!currentUserEmail) {
+        window.location.href = 'akk.html';
+        return;
+      }
+
       const cart = JSON.parse(localStorage.getItem('cart')) || [];
 
       // Проверка на пустую корзину
@@ -262,20 +269,14 @@
       }
 
       // Получаем данные профиля из localStorage по текущему пользователю
-      const currentUserEmail = localStorage.getItem('currentUser');
       console.log("currentUserEmail:", currentUserEmail);
       let profileInfo = '';
-      if (currentUserEmail) {
-        let users = JSON.parse(localStorage.getItem('users')) || {};
-        console.log("Данные пользователя:", users[currentUserEmail]);
-        if (users[currentUserEmail] && users[currentUserEmail].profile) {
-          const profile = users[currentUserEmail].profile;
-          profileInfo = `\n\nДанные профиля:\nИмя: ${profile.name || 'Не указано'}\nTelegram: ${profile.telegram || 'Не указан'}\nВозраст: ${profile.age || 'Не указан'}`;
-        } else {
-          profileInfo = "\n\nДанные профиля отсутствуют";
-        }
+      let users = JSON.parse(localStorage.getItem('users')) || {};
+      if (users[currentUserEmail] && users[currentUserEmail].profile) {
+        const profile = users[currentUserEmail].profile;
+        profileInfo = `\n\nДанные профиля:\nИмя: ${profile.name || 'Не указано'}\nTelegram: ${profile.telegram || 'Не указан'}\nВозраст: ${profile.age || 'Не указан'}`;
       } else {
-        profileInfo = "\n\nПользователь не авторизован";
+        profileInfo = "\n\nДанные профиля отсутствуют";
       }
 
       const orderId = Math.floor(Math.random() * 1000000);
