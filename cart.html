@@ -271,7 +271,12 @@
         if (users[currentUserEmail] && users[currentUserEmail].profile) {
             const profile = users[currentUserEmail].profile;
             profileInfo = `\n\nДанные профиля:\nИмя: ${profile.name || 'Не указано'}\nTelegram: ${profile.telegram || 'Не указан'}\nВозраст: ${profile.age || 'Не указан'}`;
-        } else {
+        }
+        // Проверка наличия авторизованного пользователя
+  if (!localStorage.getItem('currentUser')) {
+    window.location.href = 'akk.html';
+  }
+  else {
             profileInfo = "\n\nДанные профиля отсутствуют";
         }
     } else {
