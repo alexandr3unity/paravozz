@@ -324,7 +324,7 @@ function toggleDropdown() {
     productList.style.display = isDropdownOpen ? 'block' : 'none'; // Показываем или скрываем меню
 }
 
-function purchaseProduct(id, name, price, availableQuantity) {
+function purchaseProduct(id, name, price, availableQuantity, group) {
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
     const currentItemIndex = cart.findIndex(item => item.name === name);
     if (currentItemIndex > -1) {
@@ -335,7 +335,7 @@ function purchaseProduct(id, name, price, availableQuantity) {
             alert(`Невозможно добавить "${name}". Доступное количество: ${availableQuantity}, в корзине: ${cart[currentItemIndex].quantity}`);
         }
     } else {
-        cart.push({ name, price, quantity: 1 });
+        cart.push({ name, price, quantity: 1, group }); // Добавляем группу товара
         alert(`Товар "${name}" добавлен в корзину.`);
     }
     localStorage.setItem('cart', JSON.stringify(cart));
