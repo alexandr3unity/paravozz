@@ -99,10 +99,19 @@
             border-radius: 50%;
             object-fit: cover;
         }
+        .edit-profile-container {
+            display: none;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
-    <div class="form-container">
+    <div class="form-container" id="login-register-form">
         <h2>Вход / Регистрация</h2>
         <input type="text" id="email" placeholder="Введите email">
         <input type="password" id="password" placeholder="Введите пароль">
@@ -116,6 +125,16 @@
         <p id="profile-name"></p>
         <p id="profile-telegram"></p>
         <p id="profile-age"></p>
+        <button onclick="editProfile()">Редактировать</button>
+    </div>
+
+    <div class="edit-profile-container" id="edit-profile" style="display: none;">
+        <h2>Редактировать профиль</h2>
+        <input type="text" id="edit-name" placeholder="Имя">
+        <input type="text" id="edit-telegram" placeholder="Никнейм Telegram">
+        <input type="number" id="edit-age" placeholder="Возраст">
+        <input type="file" id="edit-photo" accept="image/*">
+        <button onclick="saveProfile()">Сохранить</button>
     </div>
 
     <div class="bottom-panel">
@@ -170,6 +189,8 @@
             let users = JSON.parse(localStorage.getItem('users')) || {};
             if (users[email] && users[email].password === password) {
                 alert('Вход выполнен успешно!');
+                // Скрыть форму входа и регистрации
+                document.getElementById('login-register-form').style.display = 'none';
                 // Загрузить данные профиля
                 loadProfile(email);
             } else {
@@ -187,6 +208,47 @@
             document.getElementById('profile-name').innerText = `Имя: ${profileData.name || 'Не указано'}`;
             document.getElementById('profile-telegram').innerText = `Никнейм Telegram: ${profileData.telegram || 'Не указан'}`;
             document.getElementById('profile-age').innerText = `Возраст: ${profileData.age || 'Не указан'}`;
+        }
+
+        function editProfile() {
+            // Скрыть профиль и показать форму редактирования
+            document.getElementById('profile').style.display = 'none';
+            document.getElementById('edit-profile').style.display = 'block';
+
+            // Заполнить поля редактирования текущими данными
+            let users = JSON.parse(localStorage.getItem('users')) || {};
+            const profileData = users[document.getElementById('email').value].profile;
+            document.getElementById('edit-name').value = profileData.name || '';
+            document.getElementById('edit-telegram').value = profileData.telegram || '';
+            document.getElementById('edit-age').value = profileData.age || '';
+        }
+
+        function saveProfile() {
+            const name = document.getElementById('edit-name').value;
+            const telegram = document.getElementById('edit-telegram').value;
+            const age = document.getElementById('edit-age').value;
+            const photo = document.getElementById('edit-photo').files[0];
+
+            // Загрузка фотографии
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                let users = JSON.parse(localStorage.getItem('users')) || {};
+                const email = document.getElementById('email').value;
+                users[email].profile = {
+                    name: name,
+                    telegram: telegram,
+                    age: age,
+                    photo: event.target.result
+                };
+                localStorage.setItem('users', JSON.stringify(users));
+                alert('Данные сохранены!');
+
+                // Обновить профиль
+                loadProfile(email);
+                // Скрыть форму редактирования
+                document.getElementById('edit-profile').style.display = 'none';
+            };
+            reader.readAsDataURL(photo);
         }
     </script>
 </body>
