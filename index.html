@@ -290,33 +290,35 @@
         }
 
 
-
-  .category-buttons {
+.category-buttons {
     display: flex;
     justify-content: center; /* Центрируем кнопки по горизонтали */
     align-items: center; /* Центрируем кнопки по вертикали */
-    gap: 15px; /* Расстояние между кнопками */
+    gap: 10px; /* Расстояние между кнопками */
     margin: 20px 0;
-    flex-wrap: nowrap; /* Запрещаем перенос кнопок на новую строку */
-    width: 100%; /* Занимаем всю ширину */
-      
+    flex-wrap: wrap; /* Разрешаем перенос кнопок на новую строку, если они не помещаются */
+    padding: 0 10px; /* Добавляем отступы по бокам, чтобы кнопки не прилипали к краям */
+    max-width: 100%; /* Ограничиваем ширину контейнера */
+    box-sizing: border-box; /* Учитываем padding в общей ширине */
 }
 
 .category-button {
-    padding: 10px 20px;
+    padding: 10px 15px; /* Уменьшаем отступы для мобильных устройств */
     background-color: rgba(128, 128, 128, 0.7); /* Серый цвет с прозрачностью 70% */
     color: white;
     text-decoration: none;
     border-radius: 5px;
-    font-size: 1em;
+    font-size: 0.9em; /* Уменьшаем размер шрифта для мобильных устройств */
     transition: background-color 0.3s ease;
     border: 1px solid rgba(255, 255, 255, 0.3); /* Белая полупрозрачная рамка */
     display: flex;
     align-items: center;
     gap: 8px; /* Расстояние между иконкой и текстом */
     white-space: nowrap; /* Запрещаем перенос текста внутри кнопки */
-    flex: 1; /* Равномерное распределение ширины */
+    flex: 1 1 auto; /* Кнопки растягиваются и сжимаются по необходимости */
+    min-width: 120px; /* Минимальная ширина кнопки */
     text-align: center; /* Центрируем текст внутри кнопки */
+    box-sizing: border-box; /* Учитываем padding в общей ширине */
 }
 
 .category-button:hover {
@@ -324,7 +326,15 @@
 }
 
 .category-button i {
-    font-size: 1.2em; /* Размер иконки */
+    font-size: 1em; /* Размер иконки */
+}
+
+@media (max-width: 480px) {
+    .category-button {
+        font-size: 0.8em; /* Уменьшаем размер шрифта для очень маленьких экранов */
+        padding: 8px 12px; /* Уменьшаем отступы */
+        min-width: 100px; /* Уменьшаем минимальную ширину */
+    }
 }
         
     </style>
