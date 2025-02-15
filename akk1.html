@@ -92,6 +92,7 @@
 <body>
     <div class="form-container">
         <h2>Добавьте свою информацию</h2>
+        <input type="email" id="email" placeholder="Введите email" required>
         <input type="file" id="photo" accept="image/*" onchange="previewImage()">
         <img id="profile-photo" src="" alt="Фото" style="display:none;">
         <input type="text" id="name" placeholder="Введите имя">
@@ -147,12 +148,13 @@
         }
 
         function saveProfile() {
+            const email = document.getElementById('email').value;
             const photo = document.getElementById('profile-photo').src;
             const name = document.getElementById('name').value;
             const telegram = document.getElementById('telegram').value;
             const age = document.getElementById('age').value;
 
-            if (!name || !telegram || !age) {
+            if (!email || !name || !telegram || !age) {
                 alert('Заполните все поля!');
                 return;
             }
@@ -164,7 +166,8 @@
                 age
             };
 
-            localStorage.setItem('profile', JSON.stringify(profileData));
+            // Сохраняем профиль по email
+            localStorage.setItem(email, JSON.stringify(profileData));
             alert('Профиль сохранён!');
         }
     </script>
