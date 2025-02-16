@@ -219,11 +219,11 @@
     // Оформление заказа
     function checkout() {
       // Проверка авторизации: если пользователь не авторизован, перенаправляем на akk.html
-      const currentUserEmail = localStorage.getItem('currentUser');
-      if (!currentUserEmail) {
-        window.location.href = 'akk.html';
-        return;
-      }
+     // const currentUserEmail = localStorage.getItem('currentUser');
+     // if (!currentUserEmail) {
+       // window.location.href = 'akk.html';
+        //return;
+      //}
 
       const cart = JSON.parse(localStorage.getItem('cart')) || [];
 
