@@ -254,19 +254,29 @@
       }
 
       // Получение информации о пользователе Telegram (если доступно)
-      let username = 'не указан';
-      try {
-        if (window.Telegram && window.Telegram.WebApp) {
-          const user = window.Telegram.WebApp.initDataUnsafe.user;
-          if (user && user.username) {
-            username = '@' + user.username;
-          } else if (user && (user.first_name || user.last_name)) {
-            username = [user.first_name, user.last_name].filter(Boolean).join(' ');
-          }
-        }
-      } catch (e) {
-        console.error('Ошибка при получении информации о пользователе Telegram:', e);
+     let username = 'не указан';
+
+try {
+  if (window.Telegram && window.Telegram.WebApp) {
+    const user = window.Telegram.WebApp.initDataUnsafe?.user;
+
+    if (user) {
+      if (user.username) {
+        username = '@' + user.username;
+      } else if (user.first_name || user.last_name) {
+        username = [user.first_name, user.last_name].filter(Boolean).join(' ');
       }
+    } else {
+      console.warn('Пользовательские данные недоступны.');
+    }
+  } else {
+    console.warn('Telegram WebApp не инициализирован.');
+  }
+} catch (e) {
+  console.error('Ошибка при получении информации о пользователе Telegram:', e);
+}
+
+console.log('Определённый username:', username);
 
       // Получаем данные профиля из localStorage по текущему пользователю
       console.log("currentUserEmail:", currentUserEmail);
@@ -301,29 +311,7 @@
       message += `\n\nИтого: ${totalAmount} руб.`;
 
 
-      let username = 'не указан';
-
-try {
-  if (window.Telegram && window.Telegram.WebApp) {
-    const user = window.Telegram.WebApp.initDataUnsafe?.user;
-
-    if (user) {
-      if (user.username) {
-        username = '@' + user.username;
-      } else if (user.first_name || user.last_name) {
-        username = [user.first_name, user.last_name].filter(Boolean).join(' ');
-      }
-    } else {
-      console.warn('Пользовательские данные недоступны.');
-    }
-  } else {
-    console.warn('Telegram WebApp не инициализирован.');
-  }
-} catch (e) {
-  console.error('Ошибка при получении информации о пользователе Telegram:', e);
-}
-
-console.log('Определённый username:', username);
+     
 
       // Отправка сообщения в Telegram
       const token = '7791735203:AAFC1TzcCpkgjrvFASLyG5Vhw6X-gVEoHLg';
