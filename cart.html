@@ -281,15 +281,15 @@ console.log('Определённый username:', username);
       console.log(username)
 
       // Получаем данные профиля из localStorage по текущему пользователю
-      console.log("currentUserEmail:", currentUserEmail);
-      let profileInfo = '';
-      let users = JSON.parse(localStorage.getItem('users')) || {};
-      if (users[currentUserEmail] && users[currentUserEmail].profile) {
-        const profile = users[currentUserEmail].profile;
-        profileInfo = `\n\nДанные профиля:\nИмя: ${profile.name || 'Не указано'}\nTelegram: ${profile.telegram || 'Не указан'}\nВозраст: ${profile.age || 'Не указан'}`;
-      } else {
-        profileInfo = "\n\nДанные профиля отсутствуют";
-      }
+     // console.log("currentUserEmail:", currentUserEmail);
+      //let profileInfo = '';
+      //let users = JSON.parse(localStorage.getItem('users')) || {};
+      //if (users[currentUserEmail] && users[currentUserEmail].profile) {
+        //const profile = users[currentUserEmail].profile;
+        //profileInfo = `\n\nДанные профиля:\nИмя: ${profile.name || 'Не указано'}\nTelegram: ${profile.telegram || 'Не указан'}\nВозраст: ${profile.age || 'Не указан'}`;
+      //} else {
+        //profileInfo = "\n\nДанные профиля отсутствуют";
+      //}
 
       const orderId = Math.floor(Math.random() * 1000000);
       const paymentDate = new Date().toLocaleDateString();
